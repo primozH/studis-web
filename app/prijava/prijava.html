@@ -1,0 +1,28 @@
+
+<div class="panel panel-primary" style="height:80vh; width:50vw; margin:0 auto;">
+	<div class="row">
+		<div class="col-sm-6">
+			<h3>VPIS V STUDIS</h3>
+		</div>
+		<div class="col-sm-6">
+			<img src="http://lkrv.fri.uni-lj.si/fri_logo.jpg" alt="fri-uni-logo" width="150" height="70">	
+		</div>
+	</div>
+
+	<br><br>
+
+	<div class="form-group">
+		<input ng-model="elektronska_posta" placeholder="email" type="text" class="form-control">
+	</div>
+	<div class="form-group">
+		<input ng-model="geslo" placeholder="geslo" type="password" class="form-control">
+	</div>
+	<button class="btn btn-success btn-block" ng-click="login_funkcija()">LOGIN</button><br>
+
+	<div ng-show="pokazi_napako_login" class="alert alert-danger">
+		<p ng-bind="login_status"></p>
+	</div>
+
+	<button class="btn btn-danger btn-block" ng-click="pozabljeno_geslo()">pozabljeno geslo</button>
+</div>
+

@@ -5,6 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.student',
   'myApp.referentka',
+  'myApp.prijava',
   'myApp.version'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
