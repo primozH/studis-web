@@ -1,0 +1,36 @@
+<p>To je stran za referentko</p><hr>
+
+<h3>Poišči študenta glede na vpisno številko:</h3>
+<div class="input-group">
+   <input ng-model="vpisna_isci" type="text" class="form-control" placeholder="vpisna številka">
+   <span class="input-group-btn">
+        <button class="btn btn-info" ng-click=isci_po_vpisni()>Išči po vpisni</button>
+   </span>
+</div>
+
+<div>{{status_iskanje}}</div>
+
+<div ng-show="prikazi_rezultat_iskanja">
+	<div class="container">
+	  <h3 align="center">rezultati iskanja</h3>
+	    <div class="form-group">
+	      <label style=" display: block; text-align: center;">Ime: </label>
+	      <input class="d-inline form-control" ng-bind="iskanje_ime" readonly></input>
+
+	      <label style=" display: block; text-align: center;">Priimek: </label>
+	      <input class="d-inline form-control" ng-bind="iskanje_priimek" readonly></input>
+
+	      <label style=" display: block; text-align: center;">Vpisna: </label>
+	      <input class="d-inline form-control" ng-bind="iskanje_vpisna" readonly></input>	      
+	    </div>
+	</div>
+
+	<br><br><hr>
+	<form>
+	  <div class="form-group">
+		<h3>Uvoz podatkov o študentih(prikaže besedilo tekstovne datoteke)</h3>
+	    <input type="file" on-read-file="showContent($fileContent)" />
+	  </div>
+	</form>
+	<textarea ng-bind="prikaz_datoteke"></textarea>
+</div>
