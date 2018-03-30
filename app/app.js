@@ -1,14 +1,22 @@
-'use strict';
+(function() {
+    /* global angular */
+    var app = angular.module('studis', ['ngRoute']);
 
-// Declare app level module which depends on views, and components
-angular.module('myApp', [
-  'ngRoute',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+    app.config(function($routeProvider, $locationProvider) {
+        $routeProvider
+            .when('/search', {
+                templateUrl: "/search/search.html",
+                controller: "searchCtrl",
+                controllerAs: "vm"
+            })
+            .when('/profile/:uniId', {
+                templateUrl: "/profile/profile.html",
+                controller: "profileCtrl",
+                controllerAs: "vm"
+            })
+            .otherwise({redirectTo: '/'});
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+        $locationProvider.html5Mode(true);
+    });
+
+})();
