@@ -13,6 +13,15 @@ angular.module('myApp.prijava', ['ngRoute'])
 	'$scope', '$http', '$window',
 	function($scope, $http, $window) {
 
+
+	//dobi ip clienta, ki ga pošljem pri vsakem poskusu prijave
+	var url = "//freegeoip.net/json/";
+	$http.get(url).then(function(response) {
+		console.log(response.data.ip);
+		$scope.moj_ip = response.data.ip;
+	});
+
+
 	$scope.login_funkcija = function() {
     //alert($scope.elektronska_posta + $scope.geslo);
 	    if (!$scope.elektronska_posta || !$scope.geslo) {

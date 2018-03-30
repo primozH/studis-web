@@ -35,8 +35,8 @@ angular.module('myApp.referentka', ['ngRoute'])
 	$scope.prikazi_rezultat_iskanja = true;
 
 	$scope.isci_po_vpisni = function() {
-		$http.get('http://localhost:8080/api/v1/student/' + $scope.vpisna_isci).then(function(response) { 
-	      if (response.data.length > 0) {
+		/*$http.get('http://localhost:8080/api/v1/student/1').then(function(response) { 
+	      /*if (response.data.length > 0) {
 	      	//pokaze rezultate iskanja po vpisni stevilki
 	      	//nevem zdejle cisto tocno kaj dobim v responsu, mislm ktere podatke o studentu?, bom popravla
 	        $prikazi_rezultat_iskanja = true;
@@ -47,12 +47,13 @@ angular.module('myApp.referentka', ['ngRoute'])
 	      else {
 	      	$scope.status_iskanje = "ne najdem študenta";        
 	      }
-	    });
+	    }*/
+
 	};
 
 
 	$scope.showContent = function($fileContent){
-        $scope.prikaz_datoteke = $fileContent;
-    };
+    $scope.prikaz_datoteke = $fileContent;
+  };
   	
 }]);
