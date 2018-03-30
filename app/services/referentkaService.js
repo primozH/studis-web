@@ -1,5 +1,5 @@
 angular.module('referentkaService', [])
-.service('refe', ['$http', '$window', function($http, $window) {
+.service('refe', ['$http', function($http) {
     
     this.service_iskanje_vpisna = function(vpisna) {
         return $http.get('http://localhost:8080/api/v1/student?filter=vpisnaStevilka:EQ:' + vpisna).then(function(response) {
