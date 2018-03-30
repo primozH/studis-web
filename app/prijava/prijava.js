@@ -1,37 +1,19 @@
 'use strict';
 
-angular.module('myApp.prijava', ['ngRoute'])
+var app = angular.module('myApp.prijava', ['ngRoute']);
 
-.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/prijava', {
     templateUrl: 'prijava/prijava.html',
     controller: 'PrijavaCtrl'
   });
-}])
-
-.controller('PrijavaCtrl', [
-	'$scope', '$http', '$window',
-	function($scope, $http, $window) {
+}]);
 
 
-	//dobi ip clienta, ki ga pošljem pri vsakem poskusu prijave
-	var url = "//freegeoip.net/json/";
-	$http.get(url).then(function(response) {
-		console.log(response.data.ip);
-		$scope.moj_ip = response.data.ip;
-	});
-
-
-	$scope.login_funkcija = function() {
-    //alert($scope.elektronska_posta + $scope.geslo);
-	    if (!$scope.elektronska_posta || !$scope.geslo) {
-	      $scope.pokazi_napako_login = true;
-	      $scope.login_status = "prosim vnesi ime in geslo za logiranje v sistem";
-	      return;
-	    }
-	    
-	    $http.post('http://localhost:8080/api/v1/prijava/preveriPrijavo',
-	     {elektronska_posta: $scope.elektronska_posta, geslo: $scope.geslo}).then(function(response) {
+app.service('auth', ['$http', '$window', function($http, $window) {
+    this.service_login = function(email, geslo) {
+        $http.post('http://localhost:8080/api/v1/prijava/preveriPrijavo',
+	     {email: email, geslo: geslo}).then(function(response) {
 	     //to bo za popravit glede na to kaj bom iz backenda točno dobila    
 	      /*if (response.data.status == "200") {
 	        $window.localStorage['myApp.prijava'] = response.data.token;
@@ -45,18 +27,50 @@ angular.module('myApp.prijava', ['ngRoute'])
 	        $scope.pokazi_napako_login = true;
 	      }//*/
 	    });
-	  };
+    }
 
-	    $scope.logoutFunkcija = function() {
-		    $window.localStorage.removeItem('myApp.prijava');
-		    $scope.vpisanStudent = false;
-		}
+    this.service_pridobi_clientip = function() {
+    	return $http.get('//freegeoip.net/json/?callback=').then(function(response) {
+			return response.data.ip;
+		});
+    }
 
-	  $scope.pozabljeno_geslo = function() {
-	  	$http.get('http://localhost:8080/api/v1/prijava/posljiGesloNaMail').then(function(response) {      
+    this.service_geslo_reset = function() {
+    	$http.get('http://localhost:8080/api/v1/prijava/posljiGesloNaMail').then(function(response) {      
 
 	    });
-	  }
+    }
+}]);
+
+app.controller('PrijavaCtrl', [
+	'$scope', '$http', '$window', 'auth',
+	function($scope, $http, $window, auth) {
+
+	//dobi ip clienta, ki ga pošljem pri vsakem poskusu prijave
+	auth.service_pridobi_clientip().then(function(val){
+		$scope.moj_ip = val;
+	});
+
+	$scope.login_funkcija = function() {
+    //alert($scope.elektronska_posta + $scope.geslo);
+	    if (!$scope.elektronska_posta || !$scope.geslo) {
+	      $scope.pokazi_napako_login = true;
+	      $scope.login_status = "prosim vnesi ime in geslo za logiranje v sistem";
+	      return;
+	    }
+	    auth.service_login( $scope.elektronska_posta, $scope.geslo);
+	    
+	    
+	};
+
+    $scope.logoutFunkcija = function() {
+	    $window.localStorage.removeItem('myApp.prijava');
+	    $scope.vpisanStudent = false;
+	}
+
+	$scope.pozabljeno_geslo = function() {
+		auth.service_geslo_reset();
+	}
 
 
 }]);
