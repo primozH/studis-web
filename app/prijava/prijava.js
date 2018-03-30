@@ -26,9 +26,7 @@ app.controller('PrijavaCtrl', [
 	      $scope.login_status = "prosim vnesi ime in geslo za logiranje v sistem";
 	      return;
 	    }
-	    auth.service_login( $scope.elektronska_posta, $scope.geslo);
-	    
-	    
+	    auth.service_login( $scope.elektronska_posta, $scope.geslo);	    
 	};
 
     $scope.logoutFunkcija = function() {

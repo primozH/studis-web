@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.referentka', ['ngRoute'])
+angular.module('myApp.referentka', ['ngRoute', 'referentkaService'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/referentka', {
@@ -29,8 +29,7 @@ angular.module('myApp.referentka', ['ngRoute'])
   };
 })
 
-.controller('ReferentkaCtrl', ['$scope', '$http', function($scope, $http) {
-	//to bo v resnici false na začetku, zdej sm dala na true sam zato da se vidi forma prikaza rezultatov
+.controller('ReferentkaCtrl', ['$scope', '$http', 'refe', function($scope, $http, refe) {
 	//uporablja se pr ng-show
 	$scope.prikazi_rezultat_iskanja = false;
 
@@ -46,39 +45,37 @@ angular.module('myApp.referentka', ['ngRoute'])
       return;
     }
 
-    $http.get('http://localhost:8080/api/v1/student?filter=vpisnaStevilka:EQ:' + $scope.vpisna_isci).then(function(response) {
-      if (response.data.length > 0) {
+    refe.service_iskanje_vpisna($scope.vpisna_isci).then(function(vrnjenSeznam){
+      if (vrnjenSeznam.length > 0) {
         $scope.status_iskanje = "";
         $scope.prikazi_rezultat_iskanja = true;
-        $scope.studenti = response.data;
+        $scope.studenti = vrnjenSeznam;
       }
       else {
         $scope.prikazi_rezultat_iskanja = false;
         $scope.status_iskanje = "ne najdem tega študenta";
-      }      
-
+      }
     });
 	};
 
   $scope.isci_po_zacetnicah = function() {
+    //tale regex morm razširt da bo še č/š/ž-je sprejel pr iskanju
     if (!$scope.zac1_isci.match(/[a-z]/i) || !$scope.zac2_isci.match(/[a-z]/i)) {
       $scope.prikazi_rezultat_iskanja = false;
       $scope.status_iskanje = "za začetnici imena in priimka prosim vnesi črki [a-zA-Z]";
       return;
     }
 
-    $http.get('http://localhost:8080/api/v1/student?filter=priimek:LIKEIC:'+$scope.zac2_isci+'%%20ime:LIKEIC:'+$scope.zac1_isci+'%'
-).then(function(response) {
-      if (response.data.length > 0) {
+    refe.service_iskanje_zacetnice($scope.zac1_isci, $scope.zac2_isci).then(function(vrnjenSeznam){
+      if (vrnjenSeznam.length > 0) {
         $scope.status_iskanje = "";
         $scope.prikazi_rezultat_iskanja = true;
-        $scope.studenti = response.data;
+        $scope.studenti = vrnjenSeznam;
       }
       else {
         $scope.prikazi_rezultat_iskanja = false;
         $scope.status_iskanje = "ne najdem tega študenta";
-      }      
-
+      }   
     });
   }
 
