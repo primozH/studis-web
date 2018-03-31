@@ -2,13 +2,13 @@
 <div class="container">
     <form class="form-horizontal" action="">
         <fieldset>
-            <legend>Študent</legend>
+            <legend>{{vm.student.ime}} {{vm.student.priimek}}</legend>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="vpisna">
                     Vpisna številka
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="neki" name="vpisna" id="vpisna" readonly>
+                    <input type="text" class="form-control" value="{{vm.student.vpisnaStevilka}}" name="vpisna" id="vpisna" readonly>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                     Ime
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="neki" name="ime" id="ime" readonly>
+                    <input type="text" class="form-control" value="{{vm.student.ime}}" name="ime" id="ime" readonly>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     Priimek
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="neki" name="priimek" id="priimek" readonly>
+                    <input type="text" class="form-control" value="{{vm.student.priimek}}" name="priimek" id="priimek" readonly>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                     Naslov stalnega prebivališča
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="neki" name="naslov_stalni" id="naslov_stalni" readonly>
+                    <input type="text" class="form-control" value="{{vm.student.naslovStalno}}" name="naslov_stalni" id="naslov_stalni" readonly>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
                     Naslov za prejemanje pošte
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="neki" name="naslov_posta" id="naslov_posta" readonly>
+                    <input type="text" class="form-control" value="{{vm.student.naslovZacasno ? vm.student.naslovZacasno : vm.student.naslovStalno}}" name="naslov_posta" id="naslov_posta" readonly>
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                     Telefonska številka
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="neki" name="telefon" id="telefon" readonly>
+                    <input type="text" class="form-control" value="{{vm.student.telefonskaStevilka}}" name="telefon" id="telefon" readonly>
                 </div>
             </div>
 
@@ -62,11 +62,11 @@
                     Naslov elektronske pošte
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="neki" name="email" id="email" readonly>
+                    <input type="text" class="form-control" value="{{vm.student.email}}" name="email" id="email" readonly>
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-hide=true>
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

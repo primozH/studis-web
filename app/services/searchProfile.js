@@ -1,23 +1,35 @@
-(function(){
-/* global angular */
 
     var searchProfile = function($http){
+
+        function isNumber(n) {
+            return !isNaN(parseFloat(n)) && !isNaN(n - 0)
+        }
+
         var getSearchRes = function (query) {
-            return {"resLength":15, "results":[{"uniId": "63150111", "firstName":"Janez", "lastName":"Novak"}, {"uniId": "63150999", "firstName":"Miha", "lastName":"Vidmar"}]};
+            var res = null;
+            if(isNumber(query)){
+                res = $htpp.get("http://localhost:8080/api/v1/student?limit=10&offset=0&order=vpisnaStevilka&where=vpisnaStevilka:LIKEIC:%" + query + "%");
+            }
+            else{
+                res = $http.get("http://localhost:8080/api/v1/student?limit=10&offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:%" + query + "%");
+            }
+
+            console.log(res);
+            return res;
         };
 
-        var student = null;
-        var setStudent = function(st){
-            student = st;
-        };
+        // var student = null;
+        // var setStudent = function(st){
+        //     student = st;
+        // };
 
-        var getStudent = function(){
-            return student;
+        var getStudent = function(vpisnaStevilka){
+            return $http.get("http://localhost:8080/api/v1/student?where=vpisnaStevilka:EQ:" + vpisnaStevilka );
         };
 
         return{
             getSearchRes: getSearchRes,
-            setStudent: setStudent,
+            //setStudent: setStudent,
             getStudent: getStudent
         };
     };
@@ -26,4 +38,3 @@
         .module('studis')
         .service('searchProfile', searchProfile);
 
-})();

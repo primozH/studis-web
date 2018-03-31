@@ -1,13 +1,13 @@
 <h1>Search</h1>
-<form class="searchBar" action="">
-    <input type="text" placeholder="Search.." name="search" ng-model="query">
-    <button ng-click="vm.executeSearch(query)" type="submit"><i class="fa fa-search"></i></button>
+<form class="searchBar">
+    <input type="text" placeholder="Search" name="search" ng-model="query">
+    <button ng-click="vm.executeSearch(query)"><i class="fa fa-search"></i></button>
 </form>
 <table class="table table-hover">
-    <tr ng-repeat="x in vm.searchRes.results" ng-click="vm.openProfile(x.uniId)">
-        <td>{{ x.uniId }}</td>
-        <td>{{ x.firstName }}</td>
-        <td>{{ x.lastName }}</td>
+    <tr ng-repeat="x in vm.searchRes" ng-click="vm.openProfile(x.vpisnaStevilka)">
+        <td>{{ x.vpisnaStevilka }}</td>
+        <td>{{ x.ime }}</td>
+        <td>{{ x.priimek }}</td>
     </tr>
 </table>
 
