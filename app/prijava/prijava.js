@@ -13,11 +13,7 @@ app.config(['$routeProvider', function($routeProvider) {
 app.controller('PrijavaCtrl', [
 	'$scope', '$http', '$window', 'auth',
 	function($scope, $http, $window, auth) {
-
-	//dobi ip clienta, ki ga pošljem pri vsakem poskusu prijave
-	auth.service_pridobi_clientip().then(function(val){
-		$scope.moj_ip = val;
-	});
+	$scope.klik_pozabljeno = false;
 
 	$scope.jeVpisan = function() {
 	    if($window.localStorage['myApp.prijava']) return true;
@@ -35,7 +31,7 @@ app.controller('PrijavaCtrl', [
 	$scope.login_funkcija = function() {
 	    if (!$scope.email || !$scope.geslo) {
 	      $scope.pokazi_napako_login = true;
-	      $scope.login_status = "prosim vnesi ime in geslo za logiranje v sistem";
+	      $scope.login_status = "prosim vnesi email in geslo za logiranje v sistem";
 	      return;
 	    }
 	    auth.service_login($scope.email, $scope.geslo).success(function(response){
@@ -43,17 +39,17 @@ app.controller('PrijavaCtrl', [
     		$window.localStorage['myApp.prijava'] = zeton;
 
       		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
-      			$window.location.href = 'http://localhost:8000/#!/student';
+      			$window.location.href = '/#!/student';
       		}
 
       		else if ($scope.trenutni_logirani_uporabnik().tip == "Referentka") {
-      			$window.location.href = 'http://localhost:8000/#!/referentka';
+      			$window.location.href = '/#!/referentka';
       		}
 
 	    }).error(function(err, status) {
 	    	$scope.pokazi_napako_login = true;
 	    	if (status == 401) $scope.login_status = "napačno geslo";
-	    	if (status == 500) $scope.login_status = "napačen email";
+	    	if (status == 404) $scope.login_status = "napačen email";
 	    });
 	};
 
@@ -63,8 +59,17 @@ app.controller('PrijavaCtrl', [
 	}
 
 	$scope.pozabljeno_geslo = function() {
-		auth.service_geslo_reset();
+		$scope.klik_pozabljeno = true;
 	}
 
+	$scope.poslji_geslo = function() {
+		auth.service_geslo_reset($scope.pozabljeno_email).success(function(response){
+			$scope.status_pozabljeno_geslo = "geslo ponastavljeno, pojdi na studis.info.info@gmail.com/studis123"
+	    }).error(function(err, status) {
+	    	$scope.status_pozabljeno_geslo = "e-maila ni v bazi";
+	    });
+
+
+	}
 
 }]);

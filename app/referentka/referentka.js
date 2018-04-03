@@ -82,6 +82,7 @@ angular.module('myApp.referentka', ['ngRoute', 'referentkaService'])
 
 	$scope.showContent = function($fileContent){
     $scope.prikaz_datoteke = $fileContent;
+    //alert($fileContent);
   };
   	
 }]);

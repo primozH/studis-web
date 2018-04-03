@@ -8,15 +8,13 @@ angular.module('prijavaService', [])
         });
     }
 
-    this.service_pridobi_clientip = function() {
-    	return $http.get('//freegeoip.net/json/?callback=').then(function(response) {
-			return response.data.ip;
-		});
-    }
 
-    this.service_geslo_reset = function() {
-    	$http.get('http://localhost:8080/api/v1/prijava/posljiGesloNaMail').then(function(response) {      
-
-	    });
+    this.service_geslo_reset = function(email2) {
+    	return $http.post('http://localhost:8080/api/v1/avtorizacija/pozabljeno-geslo',
+            {email: email2}).success(function(response) {      
+                return 200;
+	    }).error(function (err, status) {
+            return 404;        
+        });
     }
 }]);
