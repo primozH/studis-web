@@ -64,7 +64,7 @@ app.controller('PrijavaCtrl', [
 
 	$scope.poslji_geslo = function() {
 		auth.service_geslo_reset($scope.pozabljeno_email).success(function(response){
-			$scope.status_pozabljeno_geslo = "geslo ponastavljeno, pojdi na studis.info.info@gmail.com/studis123"
+			$scope.status_pozabljeno_geslo = "geslo ponastavljeno"
 	    }).error(function(err, status) {
 	    	$scope.status_pozabljeno_geslo = "e-maila ni v bazi";
 	    });
