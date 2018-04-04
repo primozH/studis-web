@@ -12,7 +12,7 @@
 	<br><br>
 
 	<div class="form-group">
-		<input ng-model="elektronska_posta" placeholder="email" type="text" class="form-control">
+		<input ng-model="email" placeholder="email" type="email" class="form-control">
 	</div>
 	<div class="form-group">
 		<input ng-model="geslo" placeholder="geslo" type="password" class="form-control">
@@ -23,6 +23,15 @@
 		<p ng-bind="login_status"></p>
 	</div>
 
-	<button class="btn btn-danger btn-block" ng-click="pozabljeno_geslo()">pozabljeno geslo?</button>
+	<button class="btn btn-danger btn-block" ng-click="pozabljeno_geslo()">pozabljeno geslo?</button><br>
+
+	<div ng-show="klik_pozabljeno">
+		<input ng-model="pozabljeno_email" type="email" class="form-control" placeholder="vnesi svoj email">
+		<button class="btn btn-primary btn-block" ng-click="poslji_geslo()">pošlji novo geslo(moment je za počakat)</button>
+		<p ng-bind="status_pozabljeno_geslo"></p>
+	</div>
+
+
+	
 </div>
 

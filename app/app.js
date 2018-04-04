@@ -13,6 +13,18 @@
                 controller: "profileCtrl",
                 controllerAs: "vm"
             })
+            .when('/prijava', {
+            templateUrl: 'prijava/prijava.html',
+            controller: 'PrijavaCtrl'
+            })
+            .when('/referentka', {
+                templateUrl: 'referentka/referentka.html',
+                controller: 'ReferentkaCtrl'
+            })
+            .when('/student', {
+                templateUrl: 'student/student.html',
+                controller: 'StudentCtrl'
+            })
             .otherwise({redirectTo: '/'});
 
     });

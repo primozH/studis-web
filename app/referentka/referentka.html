@@ -1,31 +1,4 @@
-<p>To je stran za referentko</p><hr>
-
-<h3>Poišči študenta glede na vpisno številko:</h3>
-<div class="input-group">
-   <input ng-model="vpisna_isci" type="text" class="form-control" placeholder="vpisna številka">
-   <span class="input-group-btn">
-        <button class="btn btn-info" ng-click=isci_po_vpisni()>Išči po vpisni</button>
-   </span>
-</div>
-
-<div>{{status_iskanje}}</div>
-
-<div ng-show="prikazi_rezultat_iskanja">
-	<div class="container">
-	  <h3 align="center">rezultati iskanja</h3>
-	    <div class="form-group">
-	      <label style=" display: block; text-align: center;">Ime: </label>
-	      <input class="d-inline form-control" ng-bind="iskanje_ime" readonly></input>
-
-	      <label style=" display: block; text-align: center;">Priimek: </label>
-	      <input class="d-inline form-control" ng-bind="iskanje_priimek" readonly></input>
-
-	      <label style=" display: block; text-align: center;">Vpisna: </label>
-	      <input class="d-inline form-control" ng-bind="iskanje_vpisna" readonly></input>	      
-	    </div>
-	</div>
-
-	<br><br><hr>
+<div>
 	<form>
 	  <div class="form-group">
 		<h3>Uvoz podatkov o študentih(prikaže besedilo tekstovne datoteke)</h3>
@@ -34,3 +7,52 @@
 	</form>
 	<textarea ng-bind="prikaz_datoteke"></textarea>
 </div>
+<hr><br>
+
+<h3>Poišči študenta glede na vpisno številko:</h3>
+<div class="row">
+   <div class="col-sm-8">
+    	<input ng-model="vpisna_isci" class="form-control" placeholder="vpisna številka" maxlength="8">
+    </div>
+    <div class="col-sm-4">
+    	<button class="btn btn-info btn-block" ng-click=isci_po_vpisni()>Išči po vpisni</button>
+    </div>
+
+
+
+</div><br><br>
+
+<h3>Poišči študenta glede na začetno črko imena in priimka:</h3>
+<div class="row">
+    <div class="col-sm-4">
+    	<input ng-model="zac1_isci" class="form-control" placeholder="začetnica imena" maxlength="1">
+    </div>
+    <div class="col-sm-4">
+    	<input ng-model="zac2_isci" class="form-control" placeholder="začetnica priimka" maxlength="1">
+    </div>
+    <div class="col-sm-4">
+    	<button class="btn btn-info btn-block" ng-click=isci_po_zacetnicah()>Išči po začetnicah</button>
+    </div>
+</div>
+
+<br>
+<div>{{status_iskanje}}</div>
+
+<div ng-show="prikazi_rezultat_iskanja">
+	<div class="container">
+	  <h3 align="center">rezultati iskanja</h3>
+	    
+	    <div ng-repeat = "student in studenti" class="form-group">
+			<label class="form-control">Vpisna: {{student.vpisnaStevilka}}</label>
+			<label class="form-control">Ime: {{student.ime}}</label>
+			<label class="form-control">Priimek: {{student.priimek}}</label>
+			<label class="form-control">Stalno bivališče: {{student.naslovStalno}}</label>
+			<label class="form-control">Naslov za pošto: {{student.naslovZacasno}}</label>
+			<label class="form-control">Telefon: {{student.telefonskaStevilka}}</label>
+			<label class="form-control">Email: {{student.email}}</label>
+			<br><br>	           
+	    </div>
+	</div>
+	
+</div>
+
