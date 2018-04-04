@@ -8,10 +8,10 @@
         var getSearchRes = function (query) {
             var res = Promise.resolve();
             if(isNumber(query)){
-                res = $htpp.get("http://localhost:8080/api/v1/student?limit=20&offset=0&order=vpisnaStevilka&where=vpisnaStevilka:LIKEIC:" + query + "%");
+                res = $http.get("http://localhost:8080/api/v1/student?offset=0&order=vpisnaStevilka&where=vpisnaStevilka:LIKEIC:" + query + "%");
             }
             else if(!/[^a-z]/i.test(query)){
-                res = $http.get("http://localhost:8080/api/v1/student?limit=20&offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:" + query + "%");
+                res = $http.get("http://localhost:8080/api/v1/student?offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:" + query + "%");
             }
 
             console.log(res);
