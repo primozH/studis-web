@@ -1,4 +1,4 @@
-angular.module('referentkaService', [])
+angular.module('studis')
 .service('refe', ['$http', function($http) {
     
     this.service_iskanje_vpisna = function(vpisna) {

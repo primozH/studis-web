@@ -1,16 +1,12 @@
 'use strict';
 
-angular.module('myApp.referentka', ['ngRoute', 'referentkaService'])
+//angular.module('myApp.referentka', ['ngRoute', 'referentkaService'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/referentka', {
-    templateUrl: 'referentka/referentka.html',
-    controller: 'ReferentkaCtrl'
-  });
-}])
-
+angular
+    .module('studis')
+    .controller('ReferentkaCtrl', ReferentkaCtrl);
  
-.directive('onReadFile', function ($parse) {
+angular.module('studis').directive('onReadFile', function ($parse) {
   return {
     restrict: 'A',
     scope: false,
@@ -29,7 +25,7 @@ angular.module('myApp.referentka', ['ngRoute', 'referentkaService'])
   };
 })
 
-.controller('ReferentkaCtrl', ['$scope', '$http', 'refe', function($scope, $http, refe) {
+function ReferentkaCtrl($scope, $http, refe) {
 	//uporablja se pr ng-show
 	$scope.prikazi_rezultat_iskanja = false;
 
@@ -85,4 +81,4 @@ angular.module('myApp.referentka', ['ngRoute', 'referentkaService'])
     //alert($fileContent);
   };
   	
-}]);
+};

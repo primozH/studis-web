@@ -1,4 +1,4 @@
-angular.module('prijavaService', [])
+angular.module('studis')
 .service('auth', ['$http', '$window', function($http, $window) {
     this.service_login = function(email, geslo) {
         return $http.post('http://localhost:8080/api/v1/avtorizacija/prijava',

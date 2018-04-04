@@ -1,28 +1,23 @@
 'use strict';
 
-var app = angular.module('myApp.prijava', ['ngRoute', 'prijavaService']);
-
-app.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/prijava', {
-    templateUrl: 'prijava/prijava.html',
-    controller: 'PrijavaCtrl'
-  });
-}]);
+//var app = angular.module('studis', ['ngRoute', 'prijavaService']);
 
 
-app.controller('PrijavaCtrl', [
-	'$scope', '$http', '$window', 'auth',
-	function($scope, $http, $window, auth) {
+angular
+    .module('studis')
+    .controller('PrijavaCtrl', PrijavaCtrl);
+
+	function PrijavaCtrl($scope, $http, $window, auth) {
 	$scope.klik_pozabljeno = false;
 
 	$scope.jeVpisan = function() {
-	    if($window.localStorage['myApp.prijava']) return true;
+	    if($window.localStorage['studis']) return true;
 	    return false;
 	}
 
 	$scope.trenutni_logirani_uporabnik = function() {
 		if ($scope.jeVpisan()) {
-	      var zeton = $window.localStorage['myApp.prijava'];
+	      var zeton = $window.localStorage['studis'];
 	      return JSON.parse($window.atob(zeton.split('.')[1]));
 	    }
 	    else return null;
@@ -36,14 +31,14 @@ app.controller('PrijavaCtrl', [
 	    }
 	    auth.service_login($scope.email, $scope.geslo).success(function(response){
     		var zeton = response.access_token;
-    		$window.localStorage['myApp.prijava'] = zeton;
+    		$window.localStorage['studis'] = zeton;
 
       		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
-      			$window.location.href = '/#!/student';
+      			$window.location.href = '/#/student';
       		}
 
       		else if ($scope.trenutni_logirani_uporabnik().tip == "Referentka") {
-      			$window.location.href = '/#!/referentka';
+      			$window.location.href = '/#/referentka';
       		}
 
 	    }).error(function(err, status) {
@@ -54,7 +49,7 @@ app.controller('PrijavaCtrl', [
 	};
 
     $scope.logoutFunkcija = function() {
-	    $window.localStorage.removeItem('myApp.prijava');
+	    $window.localStorage.removeItem('studis');
 	    $scope.vpisanStudent = false;
 	}
 
@@ -72,4 +67,4 @@ app.controller('PrijavaCtrl', [
 
 	}
 
-}]);
+};
