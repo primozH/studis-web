@@ -6,12 +6,12 @@
         }
 
         var getSearchRes = function (query) {
-            var res = null;
+            var res = Promise.resolve();
             if(isNumber(query)){
-                res = $htpp.get("http://localhost:8080/api/v1/student?limit=10&offset=0&order=vpisnaStevilka&where=vpisnaStevilka:LIKEIC:%" + query + "%");
+                res = $htpp.get("http://localhost:8080/api/v1/student?limit=20&offset=0&order=vpisnaStevilka&where=vpisnaStevilka:LIKEIC:" + query + "%");
             }
-            else{
-                res = $http.get("http://localhost:8080/api/v1/student?limit=10&offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:%" + query + "%");
+            else if(!/[^a-z]/i.test(query)){
+                res = $http.get("http://localhost:8080/api/v1/student?limit=20&offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:" + query + "%");
             }
 
             console.log(res);
