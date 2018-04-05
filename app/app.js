@@ -25,6 +25,6 @@
                 templateUrl: 'student/student.html',
                 controller: 'StudentCtrl'
             })
-            .otherwise({redirectTo: '/'});
+            .otherwise({redirectTo: '/prijava'});
 
     });
