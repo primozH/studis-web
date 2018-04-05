@@ -5,7 +5,10 @@
   </div>
   <ul class="nav navbar-nav">
     <li class="active"><a href="/#/student">Domov</a></li>
-    <li><a ng-click="logout()">Log out</a></li>
+    
+
+    <li ng-show="vpisan"><a ng-click="logout()">Log out</a></li>
+    <li ng-hide="vpisan"><a href="#/prijava"">Log in</a></li>
   </ul>
 </div>
 </nav>
@@ -14,8 +17,3 @@
 
 <p>Pozdravljen študent</p>
 <p>Tvoj uid je: {{id_studenta}}</p>
-
-
-<div ng-hide="vpisan">
-	<a href="#/prijava" class="btn btn-info" role="button">login</a>
-</div>
