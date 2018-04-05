@@ -25,9 +25,10 @@ angular.module('studis').directive('onReadFile', function ($parse) {
   };
 })
 
-function ReferentkaCtrl($scope, $http, refe) {
+function ReferentkaCtrl($scope, $http, $window, refe) {
 	//uporablja se pr ng-show
 	$scope.prikazi_rezultat_iskanja = false;
+  var vsebina_datoteke = null;
 
 	$scope.isci_po_vpisni = function() {
     if ($scope.vpisna_isci.match(/^[0-9]+$/) === null) {
@@ -75,10 +76,17 @@ function ReferentkaCtrl($scope, $http, refe) {
     });
   }
 
+  $scope.logout = function() {
+    $window.localStorage.removeItem('studis');
+    $window.location.reload();
+    $window.location.href = '/#/prijava';
+  }
+
 
 	$scope.showContent = function($fileContent){
     $scope.prikaz_datoteke = $fileContent;
-    //alert($fileContent);
+    //vsebino datoteke rabim v drugi funkciji za upload na server
+    vsebina_datoteke = $fileContent;
   };
   	
 };
