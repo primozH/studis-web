@@ -76,9 +76,20 @@ function ReferentkaCtrl($scope, $http, refe) {
   }
 
 
-	$scope.showContent = function($fileContent){
+  $scope.showContent = function($fileContent){
     $scope.prikaz_datoteke = $fileContent;
     //alert($fileContent);
+  };
+
+  $scope.uvoz_podatkov = function() {
+        var fd = new FormData();
+        fd.append("file", document.getElementById('file').files[0]);
+
+        refe.service_uvoz_podatkov(fd).success(function(response) {
+
+        }).error(function(err, status) {
+
+        });
   };
   	
 };

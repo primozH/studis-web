@@ -1,11 +1,19 @@
 <div>
+	<center>
 	<form>
 	  <div class="form-group">
 		<h3>Uvoz podatkov o študentih(prikaže besedilo tekstovne datoteke)</h3>
 	    <input type="file" on-read-file="showContent($fileContent)" />
 	  </div>
 	</form>
-	<textarea ng-bind="prikaz_datoteke"></textarea>
+	<textarea ng-model="prikazTextarea" ng-bind="prikaz_datoteke"></textarea>
+	<button class="btn btn-success btn-block" style="width:150px;" ng-click="uvoz_podatkov()">
+		Uvozi podatke
+	</button>
+	<button class="btn btn-success btn-block" style="width:150px;" ng-click="prikazi_rezultate()">
+		Prikaži rezultate
+	</button>
+	</center>
 </div>
 <hr><br>
 
