@@ -24,12 +24,12 @@ angular
 	}
 
 	$scope.login_funkcija = function() {
-	    if (!$scope.email || !$scope.geslo) {
+	    if (!$scope.uporabnisko_ime || !$scope.geslo) {
 	      $scope.pokazi_napako_login = true;
-	      $scope.login_status = "prosim vnesi email in geslo za logiranje v sistem";
+	      $scope.login_status = "Prosim vnesite uporabniško ime in geslo za logiranje v sistem";
 	      return;
 	    }
-	    auth.service_login($scope.email, $scope.geslo).success(function(response){
+	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).success(function(response){
     		var zeton = response.access_token;
     		$window.localStorage['studis'] = zeton;
 
@@ -43,8 +43,8 @@ angular
 
 	    }).error(function(err, status) {
 	    	$scope.pokazi_napako_login = true;
-	    	if (status == 401) $scope.login_status = "napačno geslo";
-	    	if (status == 404) $scope.login_status = "napačen email";
+	    	if (status == 401) $scope.login_status = "Napačno geslo";
+	    	if (status == 404) $scope.login_status = "Napačno uporabniško ime";
 	    });
 	};
 
