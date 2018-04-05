@@ -89,4 +89,9 @@ function ReferentkaCtrl($scope, $http, $window, refe) {
     vsebina_datoteke = $fileContent;
   };
   	
+  $scope.uvoz_podatkov = function(){
+    //POST: kandidat/nalozi
+  };
+
+
 };
