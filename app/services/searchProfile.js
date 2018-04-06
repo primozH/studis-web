@@ -6,14 +6,14 @@
         }
 
         var getSearchRes = function (query) {
-            var res = Promise.resolve();
-            if(isNumber(query)){
-                res = $http.get("http://localhost:8080/api/v1/student?offset=0&order=vpisnaStevilka&where=vpisnaStevilka:LIKEIC:" + query + "%");
-            }
-            else if(!/[^a-z]/i.test(query)){
-                res = $http.get("http://localhost:8080/api/v1/student?offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:" + query + "%");
-            }
-
+            //var res = Promise.resolve();
+            // if(isNumber(query)){
+            //     res = $http.get("http://localhost:8080/api/v1/student?offset=0&order=vpisnaStevilka&where=vpisnaStevilka:LIKE:" + query + "%");
+            // }
+            // else if(!/[^a-z]/i.test(query)){
+            //     res = $http.get("http://localhost:8080/api/v1/student?offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:" + query + "%");
+            // }
+            var res = $http.get("http://localhost:8080/api/v1/student?filter=" + query);
             console.log(res);
             return res;
         };
@@ -24,7 +24,7 @@
         // };
 
         var getStudent = function(vpisnaStevilka){
-            return $http.get("http://localhost:8080/api/v1/student?where=vpisnaStevilka:EQ:" + vpisnaStevilka );
+            return $http.get("http://localhost:8080/api/v1/student?filter=" + vpisnaStevilka );
         };
 
         return{

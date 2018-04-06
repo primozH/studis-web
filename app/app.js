@@ -3,12 +3,12 @@
 
     app.config(function($routeProvider) {
         $routeProvider
-            .when('/search', {
+            .when('/iskanje', {
                 templateUrl: "/search/search.html",
                 controller: "searchCtrl",
                 controllerAs: "vm"
             })
-            .when('/profile/:vpisnaStevilka', {
+            .when('/profil/:vpisnaStevilka', {
                 templateUrl: "/profile/profile.html",
                 controller: "profileCtrl",
                 controllerAs: "vm"
