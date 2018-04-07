@@ -15,14 +15,22 @@
 <div>
 	<form>
 	  <div class="form-group">
-		<h3>Uvoz podatkov o študentih(prikaže besedilo tekstovne datoteke)</h3>
-	    <input type="file" on-read-file="showContent($fileContent)" file-model="myFile"/>
+		<h3 align="center">Uvoz podatkov o študentih</h3>
+
+
+    <label class="btn btn-info  btn-block btn-file">
+        Izberi datoteko
+        <input type="file" on-read-file="showContent($fileContent)" file-model="myFile" style="display: none;"/>
+    </label>
+
+
+    
 	  </div>
 	</form>
 	<textarea ng-bind="prikaz_datoteke" rows="6" class="form-control" readonly></textarea>
   <button class="btn btn-info  btn-block" ng-click="uploadFile()">uvozi kandidate</button>
   <br>
-  <p>{{error_uvoz}}</p>
+  <p align="center">{{error_uvoz}}</p>
   <br><br>
 
 

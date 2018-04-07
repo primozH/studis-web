@@ -61,7 +61,7 @@ function SkrbnikCtrl($scope, $http, $window) {
       $scope.error_uvoz = "Izberi datoteko za uvoz";
       return;
     }
-    $scope.uvozeni_zapisi_naslov = true;
+    
     
 
 
@@ -72,10 +72,12 @@ function SkrbnikCtrl($scope, $http, $window) {
         headers: {'Content-Type': undefined}
     })
     .success(function(response){
-      console.log(response);
+      $scope.error_uvoz = "uspešno uvoženi podatki"
+      $scope.uvozeni_zapisi_naslov = true;
       $scope.vrnjeni_zapisi = response;
     })
-    .error(function(){
+    .error(function(err){
+      $scope.error_uvoz = "prišlo je do napake pri uvozu"
     });
 
 
