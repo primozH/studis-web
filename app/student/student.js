@@ -29,15 +29,13 @@ function StudentCtrl($scope, $window, $http, studen) {
 	    else return null;
 	}
 
-	$scope.vpisan = trenutni_logirani_uporabnik();
-	if ($scope.vpisan == null)
-		$scope.id_studenta = "/ (ker nisi vpisan)";
-	else 
-		$scope.id_studenta = $scope.vpisan.uid;
+	var vpisan = trenutni_logirani_uporabnik();
+	if (vpisan.tip === 'Kandidat') {
+		console.log("jaz sem kandidat");
+		$scope.kandidat = true;
+	}
 
-
-
-    studen.service_profil($scope.vpisan.uid).success(function(response){
+    studen.service_profil(vpisan.uid).success(function(response){
     	$scope.vpisna_studenta = response.vpisnaStevilka;
     	$scope.ime_studenta = response.ime;
     	$scope.priimek_studenta = response.priimek;

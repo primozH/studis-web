@@ -7,19 +7,20 @@
     <li class="active"><a href="/#/student">Domov</a></li>
     
 
-    <li ng-show="vpisan"><a ng-click="logout()">Log out</a></li>
-    <li ng-hide="vpisan"><a href="#/prijava"">Log in</a></li>
+    <li><a ng-click="logout()">Log out</a></li>
   </ul>
 </div>
 </nav>
 
 
 
-<p>Pozdravljen študent</p>
+<p ng-hide="kandidat">Pozdravljen študent</p>
+
+<p ng-show="kandidat">Pozdravljen kandidat,<br> zaenkrat še ni vnešenih tvojih podatkov</p>
 
 <legend>{{ime_studenta}} {{priimek_studenta}}</legend>
 
 {{vpisna_studenta}}
 
 <br><br>
-<button ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
+<button ng-hide="kandidat" ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
