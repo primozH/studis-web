@@ -1,7 +1,15 @@
 
     var app = angular.module('studis', ['ngRoute']);
 
-    app.config(function($routeProvider) {
+    app.config(function($routeProvider, $windowProvider) {
+        //preverim kater tip uporabnika je vpisan, da mu dovolim dostop samo do njegove strani
+        var $window = $windowProvider.$get();
+
+        var zeton = $window.localStorage['studis'];
+        var tip_vpisan_uporabnik = false;
+        if (zeton)
+            tip_vpisan_uporabnik = JSON.parse($window.atob(zeton.split('.')[1]));
+
         $routeProvider
             .when('/iskanje', {
                 templateUrl: "/search/search.html",
@@ -19,7 +27,17 @@
             })
             .when('/referentka', {
                 templateUrl: 'referentka/referentka.html',
-                controller: 'ReferentkaCtrl'
+                controller: 'ReferentkaCtrl',
+                resolve: {
+                    function(){
+                        if (!tip_vpisan_uporabnik || !tip_vpisan_uporabnik.tip == "Referent") {
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+
+                    }
+                }
+                
             })
             .when('/student', {
                 templateUrl: 'student/student.html',

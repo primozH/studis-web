@@ -6,9 +6,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="/#/referentka">Domov</a></li>
         
-        <!--manjka še v kontrolerju preverit kdaj je referenkta vpisana-->
-        <li ng-show="vpisan"><a ng-click="logout()">Log out</a></li>
-    	<li ng-hide="vpisan"><a href="#/prijava"">Log in</a></li>
+        <li><a ng-click="logout()">Log out</a></li>
       </ul>
     </div>
   </nav>
@@ -19,6 +17,7 @@
 	  <div class="form-group">
 		<h3>Uvoz podatkov o študentih(prikaže besedilo tekstovne datoteke)</h3>
 	    <input type="file" on-read-file="showContent($fileContent)" />
+      <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
 	  </div>
 	</form>
 	<textarea ng-bind="prikaz_datoteke" rows="10" class="form-control" readonly></textarea>

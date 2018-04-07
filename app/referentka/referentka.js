@@ -23,7 +23,7 @@ angular.module('studis').directive('onReadFile', function ($parse) {
       });
     }
   };
-})
+})//*/
 
 function ReferentkaCtrl($scope, $http, $window, refe) {
 	//uporablja se pr ng-show
@@ -89,9 +89,36 @@ function ReferentkaCtrl($scope, $http, $window, refe) {
     vsebina_datoteke = $fileContent;
   };
   	
-  $scope.uvoz_podatkov = function(){
+  $scope.uvoz_podatkov = function(file){
     //POST: kandidat/nalozi
+
+
+    var formData = new FormData();
+    formData.append('file', file);
+    $http.post('http://localhost:8080/api/v1/kandidat/nalozi', formData, {
+       transformRequest: angular.identity,
+       headers: {'Content-Type': undefined}
+    }).then(function (response) {
+       console.log("uspešno");
+    }); //*/
   };
+
+  $scope.uploadFile = function(files) {
+    var fd = new FormData();
+    //Take the first selected file
+    fd.append("file", files[0]);
+
+    $http.post('http://localhost:8080/api/v1/kandidat/nalozi', fd, {
+        withCredentials: true,
+        headers: {'Content-Type': undefined },
+        transformRequest: angular.identity
+    }).success(function(response) {
+          console.log(response);
+      }).error(function (err, status) {
+            console.log("neuspešnooo");       
+        });
+
+};
 
 
 };

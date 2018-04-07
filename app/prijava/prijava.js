@@ -1,8 +1,5 @@
 'use strict';
 
-//var app = angular.module('studis', ['ngRoute', 'prijavaService']);
-
-
 angular
     .module('studis')
     .controller('PrijavaCtrl', PrijavaCtrl);
@@ -31,13 +28,14 @@ angular
 	    }
 	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).success(function(response){
     		var zeton = response.access_token;
+    		console.log(zeton);
     		$window.localStorage['studis'] = zeton;
 
       		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
       			$window.location.href = '/#/student';
       		}
 
-      		else if ($scope.trenutni_logirani_uporabnik().tip == "Referentka") {
+      		else if ($scope.trenutni_logirani_uporabnik().tip == "Referent") {
       			$window.location.href = '/#/referentka';
       		}
 
