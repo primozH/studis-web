@@ -29,6 +29,7 @@ angular
 	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).success(function(response){
     		var zeton = response.access_token;
     		console.log(zeton);
+    		console.log(JSON.parse($window.atob(zeton.split('.')[1])).tip);
     		$window.localStorage['studis'] = zeton;
 
       		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
@@ -36,6 +37,7 @@ angular
       		}
 
       		else if ($scope.trenutni_logirani_uporabnik().tip == "Referent") {
+      			$window.localStorage.setItem("tip", "Referent");
       			$window.location.href = '/#/referentka';
       		}
 

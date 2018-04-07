@@ -10,6 +10,8 @@
         if (zeton)
             tip_vpisan_uporabnik = JSON.parse($window.atob(zeton.split('.')[1]));
 
+
+
         $routeProvider
             .when('/iskanje', {
                 templateUrl: "/search/search.html",
@@ -28,10 +30,13 @@
             .when('/referentka', {
                 templateUrl: 'referentka/referentka.html',
                 controller: 'ReferentkaCtrl',
-                /*resolve: {
+                resolve: {
                     function(){
-                        if (!tip_vpisan_uporabnik || !tip_vpisan_uporabnik.tip == "Referent") {
+                        if (!$window.localStorage.getItem("tip") || !$window.localStorage.getItem("tip") === "Referent")  {
+                            console.log("Vpiši se kot referentka, drgač nemoreš do /referentka");
                             $window.location.href = '/#/prijava';
+                            //$window.location.reload();
+
                             return;
                         }
 

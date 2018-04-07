@@ -78,6 +78,7 @@ function ReferentkaCtrl($scope, $http, $window, refe) {
 
   $scope.logout = function() {
     $window.localStorage.removeItem('studis');
+    $window.localStorage.removeItem("tip");
     $window.location.reload();
     $window.location.href = '/#/prijava';
   }
