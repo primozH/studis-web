@@ -31,7 +31,6 @@ function StudentCtrl($scope, $window, $http, studen) {
 
 	var vpisan = trenutni_logirani_uporabnik();
 	if (vpisan.tip === 'Kandidat') {
-		console.log("jaz sem kandidat");
 		$scope.kandidat = true;
 	}
 
@@ -44,7 +43,7 @@ function StudentCtrl($scope, $window, $http, studen) {
     });
 
     $scope.prikazi_moj_profil = function() {
-    	$window.location.href = '/#/profil/'+$scope.vpisna_studenta;//+$scope.vpisna_studenta;
+    	$window.location.href = '/#/profil/'+$scope.vpisna_studenta;
     }
 	
 };

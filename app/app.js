@@ -73,6 +73,20 @@
                     }
                 }                
             })
+            .when('/vpisnilist', {
+                templateUrl: 'vpisniList/vpisniList.html',
+                controller: 'VpisniListCtrl',
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat"))  {
+                            console.log("Vpiši se kot kandidat, drgač nemoreš do /vpisnilist");
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+                    }
+                }      
+                          
+            })
             .otherwise({redirectTo: '/prijava'});
 
     });

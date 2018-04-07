@@ -5,8 +5,6 @@
   </div>
   <ul class="nav navbar-nav">
     <li class="active"><a href="/#/student">Domov</a></li>
-    
-
     <li><a ng-click="logout()">Log out</a></li>
   </ul>
 </div>
@@ -16,7 +14,7 @@
 
 <p ng-hide="kandidat">Pozdravljen študent</p>
 
-<p ng-show="kandidat">Pozdravljen kandidat,<br> zaenkrat še ni vnešenih tvojih podatkov</p>
+<p ng-show="kandidat">Pozdravljen kandidat<br></p>
 
 <legend>{{ime_studenta}} {{priimek_studenta}}</legend>
 
@@ -24,3 +22,4 @@
 
 <br><br>
 <button ng-hide="kandidat" ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
+<a ng-show="kandidat" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>

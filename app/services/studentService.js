@@ -17,6 +17,14 @@ angular.module('studis')
         });
     }
 
+    this.service_kandidat = function(uid) {
+        return $http.get("http://localhost:8080/api/v1/kandidat/" + uid).success(function(response) {
+            return response;
+        }).error(function (err, status) {
+            return null;        
+        });
+    }
+
 
     
 }]);
