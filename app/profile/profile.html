@@ -77,12 +77,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>pripravljeno</td>
-                    <td>za</td>
-                    <td>ng-repeat</td>
-                    <td>sadggsd</td>
-                    <td>sdgasdg</td>
+                <tr ng-repeat="x in vm.vpisi">
+                    <td>2017/2018</td>
+                    <td>{{x.letnik.letnik}}</td>
+                    <td>{{x.studijskiProgram.naziv}}</td>
+                    <td>{{x.vrstaVpisa.vrstaVpisa}}</td>
+                    <td>{{x.nacinStudija.opis}}</td>
                 </tr>
                 </tbody>
             </table>

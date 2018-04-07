@@ -15,7 +15,7 @@
             $window.localStorage.removeItem("tip");
             $window.location.reload();
             $window.location.href = '/#/prijava';
-        }
+        };
         //za header
 
         vm.executeSearch = function(query){
