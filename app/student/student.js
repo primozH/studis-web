@@ -12,7 +12,9 @@ function StudentCtrl($scope, $window, $http, studen) {
 
 	$scope.logout = function() {
 		$window.localStorage.removeItem('studis');
-		$window.location.href = '/#/prijava';
+	    $window.localStorage.removeItem("tip");
+	    $window.location.reload();
+	    $window.location.href = '/#/prijava';
 	}
 	var jeVpisan = function() {
 	    if($window.localStorage['studis']) return true;

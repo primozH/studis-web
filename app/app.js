@@ -32,21 +32,27 @@
                 controller: 'ReferentkaCtrl',
                 resolve: {
                     function(){
-                        if (!$window.localStorage.getItem("tip") || !$window.localStorage.getItem("tip") === "Referent")  {
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
                             console.log("Vpiši se kot referentka, drgač nemoreš do /referentka");
                             $window.location.href = '/#/prijava';
-                            //$window.location.reload();
-
                             return;
                         }
-
                     }
-                } //*/
-                
+                }                
             })
             .when('/student', {
                 templateUrl: 'student/student.html',
-                controller: 'StudentCtrl'
+                controller: 'StudentCtrl',
+                resolve: {
+                    function(){
+                        console.log($window.localStorage.getItem("tip"));
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student"))  {
+                            console.log("Vpiši se kot student, drgač nemoreš do /student");
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+                    }
+                } 
             })
             .otherwise({redirectTo: '/prijava'});
 

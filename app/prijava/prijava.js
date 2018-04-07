@@ -28,11 +28,12 @@ angular
 	    }
 	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).success(function(response){
     		var zeton = response.access_token;
-    		console.log(zeton);
-    		console.log(JSON.parse($window.atob(zeton.split('.')[1])).tip);
+    		//console.log(zeton);
+    		//console.log(JSON.parse($window.atob(zeton.split('.')[1])).tip);
     		$window.localStorage['studis'] = zeton;
 
       		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
+      			$window.localStorage.setItem("tip", "Student");
       			$window.location.href = '/#/student';
       		}
 
