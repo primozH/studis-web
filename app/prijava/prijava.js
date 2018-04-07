@@ -27,20 +27,27 @@ angular
 	      return;
 	    }
 	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).success(function(response){
-    		var zeton = response.access_token;
-    		//console.log(zeton);
-    		//console.log(JSON.parse($window.atob(zeton.split('.')[1])).tip);
-    		$window.localStorage['studis'] = zeton;
+    		$window.localStorage['studis'] = response.access_token;
+
+    		console.log(response.access_token);
 
       		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
       			$window.localStorage.setItem("tip", "Student");
       			$window.location.href = '/#/student';
       		}
-
       		else if ($scope.trenutni_logirani_uporabnik().tip == "Referent") {
       			$window.localStorage.setItem("tip", "Referent");
       			$window.location.href = '/#/referentka';
       		}
+      		else if ($scope.trenutni_logirani_uporabnik().tip == "Skrbnik") {
+      			$window.localStorage.setItem("tip", "Skrbnik");
+      			$window.location.href = '/#/skrbnik';
+      		}
+      		else if ($scope.trenutni_logirani_uporabnik().tip == "Ucitelj") {
+      			$window.localStorage.setItem("tip", "Ucitelj");
+      			$window.location.href = '/#/ucitelj';
+      		}
+
 
 	    }).error(function(err, status) {
 	    	$scope.pokazi_napako_login = true;

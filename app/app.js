@@ -2,14 +2,7 @@
     var app = angular.module('studis', ['ngRoute']);
 
     app.config(function($routeProvider, $windowProvider) {
-        //preverim kater tip uporabnika je vpisan, da mu dovolim dostop samo do njegove strani
         var $window = $windowProvider.$get();
-
-        var zeton = $window.localStorage['studis'];
-        var tip_vpisan_uporabnik = false;
-        if (zeton)
-            tip_vpisan_uporabnik = JSON.parse($window.atob(zeton.split('.')[1]));
-
 
 
         $routeProvider
@@ -53,6 +46,32 @@
                         }
                     }
                 } 
+            })
+            .when('/skrbnik', {
+                templateUrl: 'skrbnik/skrbnik.html',
+                controller: 'SkrbnikCtrl',
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Skrbnik"))  {
+                            console.log("Vpiši se kot skrbnik, drgač nemoreš do /skrbnik");
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+                    }
+                }                
+            })
+            .when('/ucitelj', {
+                templateUrl: 'ucitelj/ucitelj.html',
+                controller: 'UciteljCtrl',
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Ucitelj"))  {
+                            console.log("Vpiši se kot ucitelj, drgač nemoreš do /ucitelj");
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+                    }
+                }                
             })
             .otherwise({redirectTo: '/prijava'});
 
