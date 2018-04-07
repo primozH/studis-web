@@ -1,0 +1,29 @@
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">STUDIS</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/#/referentka">Domov</a></li>
+        
+        <li><a ng-click="logout()">Log out</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+<div>
+  jaz, skrbnik
+
+	<form>
+	  <div class="form-group">
+		<h3>Uvoz podatkov o študentih(prikaže besedilo tekstovne datoteke)</h3>
+	    <input type="file" on-read-file="showContent($fileContent)" />
+	  </div>
+	</form>
+	<textarea ng-bind="prikaz_datoteke" rows="10" class="form-control" readonly></textarea>
+	<button class="btn btn-info  btn-block" ng-click=uvoz_podatkov()>uvozi</button>
+</div>
+<hr><br>
+
+

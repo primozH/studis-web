@@ -3,8 +3,20 @@
         .module('studis')
         .controller('searchCtrl', searchCtrl);
 
-    function searchCtrl($location, searchProfile, $scope){
+    function searchCtrl($location, searchProfile, $scope, $window){
         var vm = this;
+
+        //za header
+        $scope.tip_referentka = $window.localStorage.getItem("tip") === "Referent";
+        $scope.tip_ucitelj = $window.localStorage.getItem("tip") === "Ucitelj";
+
+        $scope.logout = function() {
+            $window.localStorage.removeItem('studis');
+            $window.localStorage.removeItem("tip");
+            $window.location.reload();
+            $window.location.href = '/#/prijava';
+        };
+        //za header
 
         vm.executeSearch = function(query){
             searchProfile.getSearchRes(query)

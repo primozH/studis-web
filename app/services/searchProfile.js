@@ -27,7 +27,12 @@
             return $http.get("http://localhost:8080/api/v1/student?filter=" + vpisnaStevilka );
         };
 
+        var getVpis = function(id){
+            return $http.get("http://localhost:8080/api/v1/student/" + id + "/vpis");
+        };
+
         return{
+            getVpis: getVpis,
             getSearchRes: getSearchRes,
             //setStudent: setStudent,
             getStudent: getStudent

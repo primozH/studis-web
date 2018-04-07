@@ -1,3 +1,21 @@
+<!-- header-->
+<nav class="navbar navbar-inverse">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <a class="navbar-brand">STUDIS</a>
+  </div>
+  <ul class="nav navbar-nav">
+    <li ng-show={{tip_referentka}} class="active"><a href="/#/referentka">Domov</a></li>
+    <li ng-show={{tip_ucitelj}} class="active"><a href="/#/ucitelj">Domov</a></li>    
+    <li ng-show={{tip_referentka}}><a ng-click="logout()">Log out</a></li>
+    <li ng-show={{tip_ucitelj}}><a ng-click="logout()">Log out</a></li>
+  </ul>
+</div>
+</nav>
+<!-- header-->
+
+
+
 <h2>Iskanje študenta</h2>
 <form class="searchBar">
     <input type="text" name="search" ng-model="query">
@@ -12,6 +30,8 @@
         <th scope="col">Vpisna številka</th>
         <th scope="col">Ime</th>
         <th scope="col">Priimek</th>
+        <th scope="col">E-pošta</th>
+        <th scope="col">Telefon</th>
     </tr>
     </thead>
     <tbody>
@@ -19,6 +39,8 @@
         <td>{{ x.vpisnaStevilka }}</td>
         <td>{{ x.ime }}</td>
         <td>{{ x.priimek }}</td>
+        <td>{{x.email}}</td>
+        <td>{{x.telefonskaStevilka}}</td>
     </tr>
     </tbody>
 </table>
