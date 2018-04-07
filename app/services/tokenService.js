@@ -1,20 +1,24 @@
 
 var tokenService = function($http){
 
-    var getToken = function(query){
-        return {"leto":2008, "letnik":2, "nacin":3, "oblika":"neki", "prostaIzbira":false,
-            "studijskiProgram":"neki", "studijskoLeto":"2017/2018", "vrstaVpisa":"neki"};
+    var getToken = function(id, vrstaVpisa){
+        return $http.get("http://localhost:8080/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
     };
 
-    var deleteToken = function(){
+    var deleteToken = function(id, vrstaVpisa){
+        return $http.delete("localhost:8080/api/v1/zeton?student=" + id + "&vrsta-vpisa=" + vrstaVpisa);
+    };
 
+    var updateToken = function(id){
+        return $http.put("http://localhost:8080/api/v1/zeton/" + id);
     };
 
     var getTokens = function(){
-
+        return $http.get("http://localhost:8080/api/v1/zeton");
     };
 
     return{
+        updateToken: updateToken,
         getToken: getToken,
         getTokens: getTokens,
         deleteToken: deleteToken

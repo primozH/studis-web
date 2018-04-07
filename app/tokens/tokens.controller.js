@@ -6,7 +6,19 @@ angular
 function tokensCtrl(tokenService, $location){
     var vm = this;
 
-    vm.openToken = function(vpisnaStevilka){
-        $location.path("/zeton/" + vpisnaStevilka);
+    tokenService.getTokens()
+        .then(
+            function success(response){
+                vm.tokens = response.data;
+                console.log("response in tokens controller:");
+                console.log(vm.tokens);
+            },
+            function error(error){
+                console.log(error);
+            }
+        );
+
+    vm.openToken = function(id, vrstaVpisa){
+        $location.path("/zeton/" + id + "/" + vrstaVpisa);
     };
 }

@@ -10,13 +10,13 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-click="vm.openToken(63150001)">
-        <td>63150001</td>
-        <td>aa</td>
-        <td>bb</td>
-        <td>cc</td>
-        <td>dd</td>
-        <td>ee</td>
+    <tr ng-click="vm.openToken(x.student.id, x.vrstaVpisa.sifraVpisa)" ng-repeat="x in vm.tokens">
+        <td>{{x.student.vpisnaStevilka}}</td>
+        <td>{{x.studijskiProgram.naziv}}</td>
+        <td>{{x.letnik.letnik}}</td>
+        <td>{{x.vrstaVpisa.vrstaVpisa}}</td>
+        <td>{{x.nacinStudija.opis}}</td>
+        <td>{{x.oblikaStudija.opis}}</td>
     </tr>
     </tbody>
 </table>

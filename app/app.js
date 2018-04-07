@@ -73,7 +73,7 @@
                     }
                 }                
             })
-            .when('/zeton/:vpisnaStevilka', {
+            .when('/zeton/:id/:vrstaVpisa', {
                 templateUrl: 'token/token.html',
                 controller: 'tokenCtrl',
                 controllerAs: "vm"

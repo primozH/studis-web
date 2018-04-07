@@ -7,7 +7,7 @@
                     Študijski program
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.studijskiProgram}} name="program" id="program">
+                    <input type="text" class="form-control" value={{vm.token.studijskiProgram.naziv}} name="program" id="program">
                 </div>
             </div>
 
@@ -16,7 +16,7 @@
                     Letnik
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.letnik}} name="letnik" id="letnik">
+                    <input type="text" class="form-control" value={{vm.token.letnik.letnik}} name="letnik" id="letnik">
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
                     Vrsta vpisa
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.vrstaVpisa}} name="vrsta_vpisa" id="vrsta_vpisa">
+                    <input type="text" class="form-control" value={{vm.token.vrstaVpisa.vrstaVpisa}} name="vrsta_vpisa" id="vrsta_vpisa">
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                     Način študija
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="" name="nacin_studija" id="nacin_studija">
+                    <input type="text" class="form-control" value={{vm.token.nacinStudija.opis}} name="nacin_studija" id="nacin_studija">
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                     Oblika študija
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="" name="oblika_studija" id="oblika_studija">
+                    <input type="text" class="form-control" value={{vm.token.oblikaStudija.opis}} name="oblika_studija" id="oblika_studija">
                 </div>
             </div>
 
