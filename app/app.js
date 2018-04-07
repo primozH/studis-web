@@ -25,6 +25,16 @@
                 templateUrl: 'student/student.html',
                 controller: 'StudentCtrl'
             })
+            .when('/zeton/:vpisnaStevilka', {
+                templateUrl: 'token/token.html',
+                controller: 'tokenCtrl',
+                controllerAs: "vm"
+            })
+            .when('/zetoni', {
+                templateUrl: 'tokens/tokens.html',
+                controller: 'tokensCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
     });

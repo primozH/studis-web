@@ -1,0 +1,68 @@
+<div class="container">
+    <form class="form-horizontal" action="">
+        <fieldset>
+            <legend>Urejanje žetona za vpis</legend>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="program">
+                    Študijski program
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value={{vm.token.studijskiProgram}} name="program" id="program">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="letnik">
+                    Letnik
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value={{vm.token.letnik}} name="letnik" id="letnik">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="vrsta_vpisa">
+                    Vrsta vpisa
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value={{vm.token.vrstaVpisa}} name="vrsta_vpisa" id="vrsta_vpisa">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="nacin_studija">
+                    Način študija
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="" name="nacin_studija" id="nacin_studija">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="oblika_studija">
+                    Oblika študija
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="" name="oblika_studija" id="oblika_studija">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="pravica">
+                    Pravica do proste izbire predmetov
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="" name="pravica" id="pravica">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Shrani</button>
+                    <button class="btn btn-danger">Izbriši</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
