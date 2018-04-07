@@ -48,6 +48,13 @@ angular
       			$window.location.href = '/#/ucitelj';
       		}
 
+      		//nism čist ziher kam naj bi ob prvem vpisu preusmerla kandidata,
+      		//a na /kandidat? (zbrisi ta komentar ko se bomo zmenil na slacku)
+      		else if ($scope.trenutni_logirani_uporabnik().tip == "Kandidat") {
+      			$window.localStorage.setItem("tip", "Kandidat");
+      			$window.location.href = '/#/student';
+      		}
+
 
 	    }).error(function(err, status) {
 	    	$scope.pokazi_napako_login = true;

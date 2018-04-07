@@ -39,7 +39,7 @@
                 resolve: {
                     function(){
                         console.log($window.localStorage.getItem("tip"));
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student"))  {
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student" || $window.localStorage.getItem("tip") === "Kandidat"))  {
                             console.log("Vpiši se kot student, drgač nemoreš do /student");
                             $window.location.href = '/#/prijava';
                             return;

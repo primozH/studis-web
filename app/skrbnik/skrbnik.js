@@ -60,9 +60,7 @@ function SkrbnikCtrl($scope, $http, $window) {
     if (!file) {
       $scope.error_uvoz = "Izberi datoteko za uvoz";
       return;
-    }
-    
-    
+    }   
 
 
     var fd = new FormData();
@@ -79,9 +77,6 @@ function SkrbnikCtrl($scope, $http, $window) {
     .error(function(err){
       $scope.error_uvoz = "prišlo je do napake pri uvozu"
     });
-
-
-
   };
 
 
