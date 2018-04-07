@@ -28,7 +28,7 @@
             .when('/referentka', {
                 templateUrl: 'referentka/referentka.html',
                 controller: 'ReferentkaCtrl',
-                resolve: {
+                /*resolve: {
                     function(){
                         if (!tip_vpisan_uporabnik || !tip_vpisan_uporabnik.tip == "Referent") {
                             $window.location.href = '/#/prijava';
@@ -36,7 +36,7 @@
                         }
 
                     }
-                }
+                } //*/
                 
             })
             .when('/student', {
