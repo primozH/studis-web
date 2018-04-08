@@ -59,6 +59,7 @@ angular
 	    }).error(function(err, status) {
 	    	$scope.pokazi_napako_login = true;
 	    	if (status == 401) $scope.login_status = "Napačno geslo";
+	    	if (status == 403) $scope.login_status = "Žal, nimate dostopa do našega sistema nadaljnih " + data.preostalCas + " sekund"
 	    	if (status == 404) $scope.login_status = "Napačno uporabniško ime";
 	    });
 	};
