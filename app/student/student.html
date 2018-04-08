@@ -19,8 +19,9 @@ ni lihk nujno mogoče delati nove strani-->
 <div align="center">
 <!--V primeru da dostopa tip=Kandidat-->
 <div ng-show="kandidat">
-<p ng-show="kandidat">Pozdravljen kandidat<br></p>
-<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist/1" class="btn btn-info" role="button">Vpisni list</a>
+<h3 ng-show="kandidat">Pozdravljen kandidat</h3><br>
+<p align="center">Veseli smo da ste se odločili za študij na naši fakulteti, lepo vas vabimo da izpolnite vpisni list in zaključite vpis. Po potrditvi vpisa v študentskem referatu boste prejeli obvestilo.</p><br>
+<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist/1" class="btn btn-info btn-block" role="button">Vpisni list</a>
 </div>
 
 
@@ -28,7 +29,7 @@ ni lihk nujno mogoče delati nove strani-->
 
 <!--V primeru da dostopa tip=Student-->
 <div ng-hide="kandidat">
-<p>Pozdravljen študent</p>
+<h3>Pozdravljen študent</h3><br>
 
 <legend>{{ime_studenta}} {{priimek_studenta}}</legend>
 {{vpisna_studenta}}
@@ -38,8 +39,8 @@ ni lihk nujno mogoče delati nove strani-->
 
 
 <br><br><br>ŽETONI ZA VPIS:<br><br>
-<a ng-show="ima_zeton_1" href="/#/vpisnilist/1" class="btn btn-info" role="button">Vpisni list</a><br><br>
-<a ng-show="ima_zeton_2" href="/#/vpisnilist/2" class="btn btn-info" role="button">Vpisni list</a>
+<a ng-show="ima_zeton_1" href="/#/vpisnilist/1" class="btn btn-info btn-block" role="button">Vpisni list</a><br><br>
+<a ng-show="ima_zeton_2" href="/#/vpisnilist/2" class="btn btn-info btn-block" role="button">Vpisni list</a>
 
 
 <br><br>Tale izpis je samo za referenco(vsebina mojega žetona, lahko ma največ 2 naenkrat(ponavljanje, vpis))
