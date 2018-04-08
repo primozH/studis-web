@@ -16,11 +16,11 @@ mogoče bi blo boljše nardit posebno stran za kandidata, ampak uresnici ima zae
 ni lihk nujno mogoče delati nove strani-->
 
 
-
+<div align="center">
 <!--V primeru da dostopa tip=Kandidat-->
 <div ng-show="kandidat">
 <p ng-show="kandidat">Pozdravljen kandidat<br></p>
-<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist/1" class="btn btn-info" role="button">Vpisni list</a>
 </div>
 
 
@@ -38,12 +38,14 @@ ni lihk nujno mogoče delati nove strani-->
 
 
 <br><br><br>ŽETONI ZA VPIS:<br><br>
-<a ng-show="ima_zeton_1" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
-<a ng-show="ima_zeton_2" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+<a ng-show="ima_zeton_1" href="/#/vpisnilist/1" class="btn btn-info" role="button">Vpisni list</a><br><br>
+<a ng-show="ima_zeton_2" href="/#/vpisnilist/2" class="btn btn-info" role="button">Vpisni list</a>
 
 
 <br><br>Tale izpis je samo za referenco(vsebina mojega žetona, lahko ma največ 2 naenkrat(ponavljanje, vpis))
 <p>{{student_zeton_1}}</p>
 <p>{{student_zeton_2}}</p>
+
+</div>
 
 </div>

@@ -46,18 +46,25 @@ function StudentCtrl($scope, $window, $http, studen) {
     	$window.location.href = '/#/profil/'+$scope.vpisna_studenta;
     }
 
-    //preverjamo če ima žeton
+    //preverjamo če ima žeton(in koliko, enega ali dva - lahko ima možnost ponavljanja in vpisa hkrati npr.)
     studen.service_zeton(vpisan.uid).success(function(response){
-    	if (response.length > 0) {
-    		$scope.student_zeton_1 = response[0];
-            $scope.student_zeton_2 = response[1];
-    		$scope.ima_zeton = true;
-
-    		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist
-    		$window.localStorage.setItem("zeton", "ima");
-    	}
-    	else
+        if (response.length == 0)
     		$scope.student_zeton = "trenutno nimaš na voljo nobenega žetona za vpis";
+
+        if (response.length > 0) {
+            $scope.student_zeton_1 = response[0];
+            $scope.ima_zeton_1 = true;
+            //ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist/1
+            $window.localStorage.setItem("zeton", "ima1");
+
+            //če ima več kot 1 žeton
+            if (response.length > 1) {
+                $scope.student_zeton_2 = response[1];
+                $scope.ima_zeton_2 = true;
+                $window.localStorage.setItem("zeton", "ima2");
+            }
+        }
+        
     }).error(function(err, status) {
     	console.log("napaka pri service_zeton");
     });

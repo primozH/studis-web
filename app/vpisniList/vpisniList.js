@@ -4,7 +4,7 @@ angular
     .module('studis')
     .controller('VpisniListCtrl', VpisniListCtrl);
 
-function VpisniListCtrl($scope, $window, studen){
+function VpisniListCtrl($scope, $window, $routeParams, studen){
     $scope.logout = function() {
         $window.localStorage.removeItem('studis');
         $window.localStorage.removeItem("tip");
@@ -40,16 +40,17 @@ function VpisniListCtrl($scope, $window, studen){
     //v primeru da do vpisnega lista dostopa študent z žetonom
     else if (trenutni_logirani_uporabnik().tip === "Student") {
         studen.service_student(trenutni_logirani_uporabnik().uid).success(function(response){
-            $scope.vl_vpisna = response[0].student.vpisnaStevilka;
-            $scope.vl_ime = response[0].student.ime;
-            $scope.vl_priimek = response[0].student.priimek;
-            $scope.vl_email = response[0].student.email;
-            $scope.vl_telefonska = response[0].student.telefonskaStevilka;
+            var id = $routeParams.id - 1; //id vpisnega lista /vpisnilist/:id (možno je 1 ali 2)
+            $scope.vl_vpisna = response[id].student.vpisnaStevilka;
+            $scope.vl_ime = response[id].student.ime;
+            $scope.vl_priimek = response[id].student.priimek;
+            $scope.vl_email = response[id].student.email;
+            $scope.vl_telefonska = response[id].student.telefonskaStevilka;
 
-            $scope.vl_letnik = response[0].letnik.letnik;
-            $scope.vl_program_naziv = response[0].studijskiProgram.naziv;
-            $scope.vl_vrsta_vpisa = response[0].vrstaVpisa.vrstaVpisa;
-            $scope.vl_nacin_studija = response[0].nacinStudija.opis;
+            $scope.vl_letnik = response[id].letnik.letnik;
+            $scope.vl_program_naziv = response[id].studijskiProgram.naziv;
+            $scope.vl_vrsta_vpisa = response[id].vrstaVpisa.vrstaVpisa;
+            $scope.vl_nacin_studija = response[id].nacinStudija.opis;
             
         }).error(function(err, status) {
             console.log("napaka pri service_kandidat");

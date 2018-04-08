@@ -73,12 +73,13 @@
                     }
                 }                
             })
-            .when('/vpisnilist', {
+            .when('/vpisnilist/:id', {
                 templateUrl: 'vpisniList/vpisniList.html',
                 controller: 'VpisniListCtrl',
                 resolve: {
                     function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima"))  {
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima1"
+                            || $window.localStorage.getItem("zeton") === "ima2"))  {
                             console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilist");
                             $window.location.href = '/#/prijava';
                             return;
