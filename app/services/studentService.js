@@ -17,8 +17,26 @@ angular.module('studis')
         });
     }
 
+    this.service_zeton = function(uid) {
+        return $http.get("http://localhost:8080/api/v1/zeton/" + uid).success(function(response) {
+            return response;
+        }).error(function (err, status) {
+            return null;        
+        });
+    }
+
+    //dobi podatke o kandidatu, za vpisni list
     this.service_kandidat = function(uid) {
         return $http.get("http://localhost:8080/api/v1/kandidat/" + uid).success(function(response) {
+            return response;
+        }).error(function (err, status) {
+            return null;        
+        });
+    }
+
+    //dobi podatke iz študentovega zetona, za vpisni list
+    this.service_student = function(uid) {
+        return $http.get("http://localhost:8080/api/v1/zeton/" + uid).success(function(response) {
             return response;
         }).error(function (err, status) {
             return null;        

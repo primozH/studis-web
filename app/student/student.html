@@ -22,4 +22,11 @@
 
 <br><br>
 <button ng-hide="kandidat" ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
-<a ng-show="kandidat" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+
+<div ng-hide="kandidat">
+	<br><br>
+	ŽETON:
+	<br>
+	<p>{{student_zeton}}</p>
+</div>
