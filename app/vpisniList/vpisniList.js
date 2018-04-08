@@ -40,7 +40,6 @@ function VpisniListCtrl($scope, $window, studen){
     //v primeru da do vpisnega lista dostopa študent z žetonom
     else if (trenutni_logirani_uporabnik().tip === "Student") {
         studen.service_student(trenutni_logirani_uporabnik().uid).success(function(response){
-            console.log(response);
             $scope.vl_vpisna = response[0].student.vpisnaStevilka;
             $scope.vl_ime = response[0].student.ime;
             $scope.vl_priimek = response[0].student.priimek;

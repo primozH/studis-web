@@ -11,22 +11,39 @@
 </nav>
 
 
+<!--Mal je tukej problem ker zdej do te strani dostopata tip=Student in tip=Kandidat, 
+mogoče bi blo boljše nardit posebno stran za kandidata, ampak uresnici ima zaenkrat samo vpisni list,
+ni lihk nujno mogoče delati nove strani-->
 
-<p ng-hide="kandidat">Pozdravljen študent</p>
 
+
+<!--V primeru da dostopa tip=Kandidat-->
+<div ng-show="kandidat">
 <p ng-show="kandidat">Pozdravljen kandidat<br></p>
+<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+</div>
+
+
+
+
+<!--V primeru da dostopa tip=Student-->
+<div ng-hide="kandidat">
+<p>Pozdravljen študent</p>
 
 <legend>{{ime_studenta}} {{priimek_studenta}}</legend>
-
 {{vpisna_studenta}}
 
-<br><br>
-<button ng-hide="kandidat" ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
-<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
 
-<div ng-hide="kandidat">
-	<br><br>
-	ŽETON:
-	<br>
-	<p>{{student_zeton}}</p>
+<button ng-hide="kandidat" ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
+
+
+<br><br><br>ŽETONI ZA VPIS:<br><br>
+<a ng-show="ima_zeton_1" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+<a ng-show="ima_zeton_2" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+
+
+<br><br>Tale izpis je samo za referenco(vsebina mojega žetona, lahko ma največ 2 naenkrat(ponavljanje, vpis))
+<p>{{student_zeton_1}}</p>
+<p>{{student_zeton_2}}</p>
+
 </div>

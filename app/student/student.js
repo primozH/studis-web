@@ -14,13 +14,10 @@ function StudentCtrl($scope, $window, $http, studen) {
 	    $window.localStorage.removeItem("zeton");
 	    $window.location.href = '/#/prijava';
 	}
-	var jeVpisan = function() {
-	    if($window.localStorage['studis']) return true;
-	    return false;
-	}
 
 	var trenutni_logirani_uporabnik = function() {
-		if (jeVpisan()) {
+        //vpisan uporabnik ima localStorage[studis] == true
+		if ($window.localStorage['studis']) {
 	      var zeton = $window.localStorage['studis'];
 	      return JSON.parse($window.atob(zeton.split('.')[1]));
 	    }
@@ -28,18 +25,21 @@ function StudentCtrl($scope, $window, $http, studen) {
 	}
 
 	var vpisan = trenutni_logirani_uporabnik();
-	if (vpisan.tip === 'Kandidat') {
+	//v primeru da je kandidat (ne študent z žetonom)
+    if (vpisan.tip === 'Kandidat') {
 		$scope.kandidat = true;
 	}
 
-	//ime priimek in vpisna številka na /student
-    studen.service_profil(vpisan.uid).success(function(response){
-    	$scope.vpisna_studenta = response.vpisnaStevilka;
-    	$scope.ime_studenta = response.ime;
-    	$scope.priimek_studenta = response.priimek;
-    }).error(function(err, status) {
-    	console.log("napaka pri service_profil");
-    });
+	//ime priimek in vpisna številka na /student, študentu določi podatke
+    if (vpisan.tip === 'Student') {
+        studen.service_profil(vpisan.uid).success(function(response){
+        	$scope.vpisna_studenta = response.vpisnaStevilka;
+        	$scope.ime_studenta = response.ime;
+        	$scope.priimek_studenta = response.priimek;
+        }).error(function(err, status) {
+        	console.log("napaka pri service_profil");
+        });
+    }
 
     //prikaže podrobnejši profil na /profil/{vpisnaStevilka}
     $scope.prikazi_moj_profil = function() {
@@ -49,7 +49,8 @@ function StudentCtrl($scope, $window, $http, studen) {
     //preverjamo če ima žeton
     studen.service_zeton(vpisan.uid).success(function(response){
     	if (response.length > 0) {
-    		$scope.student_zeton = response;
+    		$scope.student_zeton_1 = response[0];
+            $scope.student_zeton_2 = response[1];
     		$scope.ima_zeton = true;
 
     		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist
