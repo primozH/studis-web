@@ -52,7 +52,7 @@ function StudentCtrl($scope, $window, $http, studen) {
     		$scope.student_zeton = response;
     		$scope.ima_zeton = true;
 
-    		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist
+    		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist 
     		$window.localStorage.setItem("zeton", "ima");
     	}
     	else
