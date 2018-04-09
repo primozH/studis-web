@@ -6,10 +6,10 @@ var tokenService = function($http){
     };
 
     var deleteToken = function(id, vrstaVpisa){
-        return $http.delete("localhost:8080/api/v1/zeton?student=" + id + "&vrsta-vpisa=" + vrstaVpisa);
+        return $http.delete("http://localhost:8080/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
     };
 
-    var updateToken = function(id){
+    var putToken = function(id){
         return $http.put("http://localhost:8080/api/v1/zeton/" + id);
     };
 
@@ -17,8 +17,13 @@ var tokenService = function($http){
         return $http.get("http://localhost:8080/api/v1/zeton");
     };
 
+    var postToken = function(id){
+        return $http.post("http://localhost:8080/api/v1/zeton/" + id);
+    };
+
     return{
-        updateToken: updateToken,
+        postToken: postToken,
+        putToken: putToken,
         getToken: getToken,
         getTokens: getTokens,
         deleteToken: deleteToken

@@ -1,5 +1,5 @@
 
-    var app = angular.module('studis', ['ngRoute']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap']);
 
     app.config(function($routeProvider, $windowProvider) {
         var $window = $windowProvider.$get();
