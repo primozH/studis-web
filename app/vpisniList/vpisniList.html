@@ -12,7 +12,6 @@
 
 
 <h2 align="center">VPISNI LIST</h2>
-
 <div class="container">
     <form class="form-horizontal" action="">
         <fieldset>
@@ -38,16 +37,16 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-2">Emšo</label>
+                <label class="control-label col-sm-2">Datum rojstva</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_emso">
+                    <input type="date" id="date" class="form-control" min="1920-01-01" max="2010-04-30" ng-model="vl_rojstvo" ng-change="primerjaj_rojstvo_emso()">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-sm-2">Datum rojstva</label>
+                <label class="control-label col-sm-2">Emšo</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_emso">
+                    <input type="text" class="form-control" ng-model="vl_emso" ng-change="primerjaj_emso_rojstvo()">
                 </div>
             </div>
 
