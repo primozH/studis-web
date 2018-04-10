@@ -30,42 +30,56 @@ function StudentCtrl($scope, $window, $http, studen) {
 	var vpisan = trenutni_logirani_uporabnik();
 	if (vpisan.tip === 'Kandidat') {
 		$scope.kandidat = true;
+
+        studen.service_kandidat(vpisan.uid).then(function(response){
+            $scope.vpisna_kandidata = response.data.vpisnaStevilka;
+            $scope.ime_kandidata = response.data.ime;
+            $scope.priimek_kandidata = response.data.priimek;
+            $scope.vpisni_list1 = response.data.studijskiProgram.naziv;
+        }).catch(function(err, status) {
+            console.log("napaka pri service_profil");
+        });
+
+
 	}
 
-	//ime priimek in vpisna številka na /student
-    studen.service_profil(vpisan.uid).then(function(response){
-    	$scope.vpisna_studenta = response.data.vpisnaStevilka;
-    	$scope.ime_studenta = response.data.ime;
-    	$scope.priimek_studenta = response.data.priimek;
-    }).catch(function(err, status) {
-    	console.log("napaka pri service_profil");
-    });
+    if (vpisan.tip == 'Student') {
+        studen.service_profil(vpisan.uid).then(function(response){
+        	$scope.vpisna_studenta = response.data.vpisnaStevilka;
+        	$scope.ime_studenta = response.data.ime;
+        	$scope.priimek_studenta = response.data.priimek;
+        }).catch(function(err, status) {
+        	console.log("napaka pri service_profil");
+        });
+
+        //preverjamo če ima žeton
+        studen.service_zeton(vpisan.uid).then(function(response){
+            if (response.data.length > 0) {
+                $scope.student_zeton1 = response.data[0];
+                $scope.ima_zeton1 = true;
+                $scope.vpisni_list1 = response.data[0].vrstaVpisa.vrstaVpisa;
+                //ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist/1
+                $window.localStorage.setItem("zeton", "ima1");
+                //ker ima lahko več kot 1 žeton
+                if (response.data.length > 1) {
+                    $scope.student_zeton2 = response.data[1];
+                    $scope.ima_zeton2 = true;
+                    $scope.vpisni_list2 = response.data[1].vrstaVpisa.vrstaVpisa;
+                    $window.localStorage.setItem("zeton", "ima2");
+                }
+            }
+            else
+                $scope.student_zeton = "trenutno nimaš na voljo nobenega žetona za vpis";
+        }).catch(function(err, status) {
+            console.log("napaka pri service_zeton");
+        });
+    }
+
+
 
     //prikaže podrobnejši profil na /profil/{vpisnaStevilka}
     $scope.prikazi_moj_profil = function() {
     	$window.location.href = '/#/profil/'+$scope.vpisna_studenta;
     }
-
-    //preverjamo če ima žeton
-    studen.service_zeton(vpisan.uid).then(function(response){
-    	if (response.data.length > 0) {
-    		$scope.student_zeton1 = response.data[0];
-    		$scope.ima_zeton1 = true;
-            $scope.vpisni_list1 = response.data[0].vrstaVpisa.vrstaVpisa;
-    		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist/1
-    		$window.localStorage.setItem("zeton", "ima1");
-            //ker ima lahko več kot 1 žeton
-            if (response.data.length > 1) {
-                $scope.student_zeton2 = response.data[1];
-                $scope.ima_zeton2 = true;
-                $scope.vpisni_list2 = response.data[1].vrstaVpisa.vrstaVpisa;
-                $window.localStorage.setItem("zeton", "ima2");
-            }
-    	}
-    	else
-    		$scope.student_zeton = "trenutno nimaš na voljo nobenega žetona za vpis";
-    }).catch(function(err, status) {
-    	console.log("napaka pri service_zeton");
-    });
 	
 };
