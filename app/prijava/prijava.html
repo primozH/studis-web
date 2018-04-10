@@ -31,7 +31,9 @@
 	<button class="btn btn-success btn-block" ng-click="login_funkcija()">LOGIN</button><br>
 
 	<div ng-show="pokazi_napako_login" class="alert alert-danger">
-		<p ng-bind="login_status"></p>
+		<p ng-bind="login_status" style="display:inline-block"></p>
+        <div id="counter" style="display:none"></div>
+        <div id="seconds" style="display:none">sekund</div>
 	</div>
 
 	<button class="btn btn-danger btn-block" ng-click="pozabljeno_geslo()">Pozabljeno geslo?</button><br>
