@@ -15,28 +15,7 @@
 <div class="container">
     <form class="form-horizontal" action="">
         <fieldset>
-            <br><b>PODATKI O VPISU:</b><hr>
-             <!--<table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">Študijsko leto</th>
-                    <th scope="col">Letnik</th>
-                    <th scope="col">Študijski program</th>
-                    <th scope="col">Vrsta vpisa</th>
-                    <th scope="col">Način študija</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>2017/2018</td>
-                    <td>{{vl_letnik}}</td>
-                    <td>{{vl_program_naziv}}</td>
-                    <td>{{vl_vrsta_vpisa}}</td>
-                    <td>{{vl_nacin_studija}}</td>
-                </tr>
-                </tbody>
-            </table> -->
-
+            <br><br><h4 align="right">PODATKI O VPISU:</h4><hr>
             <div class="form-group">
                 <label class="control-label col-sm-2">Študijsko leto</label>
                 <div class="col-sm-10">
@@ -70,7 +49,7 @@
 
 
 
-            <br><br><b>OSEBNI PODATKI:</b><hr>
+            <br><br><h4 align="right">OSEBNI PODATKI:</h4><hr>
             <div class="form-group">
                 <label class="control-label col-sm-2">Vpisna številka</label>
                 <div class="col-sm-10">
@@ -91,78 +70,131 @@
                     <input samo-crke type="text" ng-model="vl_priimek" ng-trim="false" class="form-control">
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-2">Datum rojstva</label>
-                <div class="col-sm-10">
-                    <input type="date" id="date" class="form-control" min="1920-01-01" max="2010-04-30" ng-model="vl_rojstvo" ng-change="primerjaj_rojstvo_emso()">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-2">Emšo</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="vl_emso" ng-change="primerjaj_emso_rojstvo()">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-2">Naslov stalnega prebivališča</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_naslov_stalno">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-2">Naslov za prejemanje pošte</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_naslov_zacasno">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-sm-2">Pošta</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_posta">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Občina</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_obcina">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Država</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_drzava">
-                </div>
-            </div>
-
             <div class="form-group">
                 <label class="control-label col-sm-2">Telefonska številka</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-value="vl_telefonska">
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-sm-2">Email</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-value="vl_email">
                 </div>
             </div>
-
-           
-
+            <hr><div class="form-group">
+                <label class="control-label col-sm-2">Datum rojstva</label>
+                <div class="col-sm-10">
+                    <input type="date" id="date" class="form-control" min="1920-01-01" max="2010-04-30" ng-model="vl_rojstvo" ng-change="primerjaj_rojstvo_emso()">
+                </div>
+            </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <label class="control-label col-sm-2">Emšo</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="vl_emso" ng-change="primerjaj_emso_rojstvo()" maxlength="13">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Davčna</label>
+                <div class="col-sm-10">
+                <input type="number" class="form-control" ng-model="vl_davcna" max="99999999">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Spol</label>
+                <div class="col-sm-10">
+                    <select class="form-control" ng-model="spol" ng-value="zenski">
+                      <option value="zenski">ženski</option>
+                      <option value="moski">moški</option>
+                    </select>
+
                 </div>
             </div>
 
-            <b>PODATKI O IZBIRNIH PREDMETIH:</b><hr>
 
+            <hr><div class="form-group">
+                <label class="control-label col-sm-2">Država rojstva</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="vl_drzava_rojstva">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Kraj rojstva</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="vl_kraj_rojstva">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Občina rojstva</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="vl_obcina_rojstva">
+                </div>
+            </div>
+
+
+
+
+            <!---->
+            <hr><div class="form-group">
+                <label class="control-label col-sm-2">Stalni Naslov</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_naslov_stalno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Država</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_drzava_stalno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Pošta</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_posta_stalno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Občina</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_obcina_stalno">
+                </div>
+            </div>
+            
+            <!---->
+            <hr><div class="form-group">
+                <label class="control-label col-sm-2">Začasni Naslov</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_naslov_stalno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Država</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_drzava_stalno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Pošta</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_posta_stalno">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Občina</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_obcina_stalno">
+                </div>
+            </div>
+            
+            <!---->
+
+            
+
+
+            <b>PODATKI O IZBIRNIH PREDMETIH:</b><hr><br>
+
+
+            <button type="submit" class="btn btn-primary btn-block">Oddaj vpisni list</button>
 
         </fieldset>
     </form>

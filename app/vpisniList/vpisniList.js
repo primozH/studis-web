@@ -20,28 +20,29 @@ angular
 
 
 function VpisniListCtrl($scope, $window, $routeParams, studen){
-    $scope.vl_rojstvo = new Date(1996, 1, 1); //year month(0=januar) day
+    //$scope.vl_rojstvo = new Date(1996, 1, 1); //year month(0=januar) day
 
     //zamenja char v stringu
     function setCharAt(str,index,chr) {
         if(index > str.length-1) return str;
-        return str.substr(0,index) + chr + str.substr(index+1);
-    }
+        return str.substring(0,index) + chr + str.substring(index+1);
+    } //*/
     
     $scope.primerjaj_rojstvo_emso = function() {
         var rojstvo = document.getElementById("date").value;
         var emso = $scope.vl_emso;
         if (emso == null) emso = "00000000"; //če je biu emšo prej prazen
+        if (emso.length < 13) 
         
-        emso = setCharAt(emso, 0, rojstvo.charAt(8));//dan rojstva
+        emso = setCharAt(emso, 0, '1');//dan rojstva
         emso = setCharAt(emso, 1, rojstvo.charAt(9));
         emso = setCharAt(emso, 2, rojstvo.charAt(5));//mesec rojstva
         emso = setCharAt(emso, 3, rojstvo.charAt(6));
         emso = setCharAt(emso, 4, rojstvo.charAt(0));//leto rojstva
         emso = setCharAt(emso, 5, rojstvo.charAt(1));
         emso = setCharAt(emso, 6, rojstvo.charAt(2));
-        emso = setCharAt(emso, 7, rojstvo.charAt(3));
-        $scope.vl_emso = emso;
+        emso = setCharAt(emso, 7, rojstvo.charAt(3));  //*/
+        $scope.vl_emso = emso; 
     }
     $scope.primerjaj_emso_rojstvo = function() {
         var emso = $scope.vl_emso;
