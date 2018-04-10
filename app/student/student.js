@@ -5,8 +5,7 @@ angular
     .module('studis')
     .controller('StudentCtrl', StudentCtrl);
 
-function StudentCtrl($scope, $window, $http, studen) {
-	
+function StudentCtrl($scope, $window, $http, studen) {	
 
 	$scope.logout = function() {
 		$window.localStorage.removeItem('studis');
@@ -14,13 +13,9 @@ function StudentCtrl($scope, $window, $http, studen) {
 	    $window.localStorage.removeItem("zeton");
 	    $window.location.href = '/#/prijava';
 	}
-	var jeVpisan = function() {
-	    if($window.localStorage['studis']) return true;
-	    return false;
-	}
 
 	var trenutni_logirani_uporabnik = function() {
-		if (jeVpisan()) {
+		if ($window.localStorage['studis']) {
 	      var zeton = $window.localStorage['studis'];
 	      return JSON.parse($window.atob(zeton.split('.')[1]));
 	    }
@@ -32,18 +27,17 @@ function StudentCtrl($scope, $window, $http, studen) {
 		$scope.kandidat = true;
 
         studen.service_kandidat(vpisan.uid).then(function(response){
+            console.log(response);
             $scope.vpisna_kandidata = response.data.vpisnaStevilka;
             $scope.ime_kandidata = response.data.ime;
             $scope.priimek_kandidata = response.data.priimek;
             $scope.vpisni_list1 = response.data.studijskiProgram.naziv;
         }).catch(function(err, status) {
-            console.log("napaka pri service_profil");
+            console.log("napaka pri service_kandidat");
         });
-
-
 	}
 
-    if (vpisan.tip == 'Student') {
+    else if (vpisan.tip == 'Student') {
         studen.service_profil(vpisan.uid).then(function(response){
         	$scope.vpisna_studenta = response.data.vpisnaStevilka;
         	$scope.ime_studenta = response.data.ime;

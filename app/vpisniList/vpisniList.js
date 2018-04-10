@@ -2,7 +2,24 @@
 /* global angular */
 angular
     .module('studis')
-    .controller('VpisniListCtrl', VpisniListCtrl);
+    .controller('VpisniListCtrl', VpisniListCtrl)
+    .directive('samoCrke', function() {
+      return {
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModelCtrl) {
+          function fromUser(text) {
+            var transformedInput = text.replace(/[^a-zA-ZčČšŠžŽđĐćĆ]/g, '');
+            if(transformedInput !== text) {
+                ngModelCtrl.$setViewValue(transformedInput);
+                ngModelCtrl.$render();
+            }
+            return transformedInput; 
+          }
+          ngModelCtrl.$parsers.push(fromUser);
+        }
+      }; 
+});
+
 
 function VpisniListCtrl($scope, $window, $routeParams, studen){
     $scope.logout = function() {
@@ -27,8 +44,10 @@ function VpisniListCtrl($scope, $window, $routeParams, studen){
             $scope.vl_vpisna = response.data.vpisnaStevilka;
             $scope.vl_ime = response.data.ime;
             $scope.vl_priimek = response.data.priimek;
+            $scope.vl_email = response.data.email;
 
             $scope.vl_letnik = "1."; //kandidat se mnde vedno vpiše v prvi letnik
+            $scope.vl_vrsta_vpisa = "Prvi vpis v letnik"; //mnde konstantno?
             $scope.vl_program_naziv = response.data.studijskiProgram.naziv;
             
         }).catch(function(err, status) {
