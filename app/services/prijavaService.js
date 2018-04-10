@@ -4,7 +4,8 @@ angular.module('studis')
         return $http.post('http://localhost:8080/api/v1/avtorizacija/prijava',
 	     {uporabniskoIme: uporabnisko_ime, geslo: geslo}).then(function(response) {
      		return response.data;
-	    }).catch(function (err, status) {
+	    }).catch(function (err) {
+            return err.status;
         });
     }
 

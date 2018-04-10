@@ -26,45 +26,46 @@ angular
 	      $scope.login_status = "Prosim vnesite uporabniško ime in geslo za logiranje v sistem";
 	      return;
 	    }
-	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).then(function(response){
-        console.log(response);
-    		$window.localStorage['studis'] = response.access_token;
+	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).then(function(response){        
+        //če prijava ni uspešna
+        if (response.access_token === undefined) {
+          $scope.pokazi_napako_login = true;
+          if (response == 401) $scope.login_status = "Napačno geslo";
+          if (response == 403 && document.getElementById("counter").style.display === "none"){
+                  $scope.login_status = "Žal, nimate dostopa do našega sistema nadaljnih ";
+                  start(err.preostalCas);
+              }
+          if (response == 404) $scope.login_status = "Napačno uporabniško ime";
+        }
 
-    		console.log(response.access_token);
+        //v primeru da prijava je uspešna (dobimo token nazaj)
+    		else {
+          $window.localStorage['studis'] = response.access_token;
 
-      		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
-      			$window.localStorage.setItem("tip", "Student");
-      			$window.location.href = '/#/student';
-      		}
-      		else if ($scope.trenutni_logirani_uporabnik().tip == "Referent") {
-      			$window.localStorage.setItem("tip", "Referent");
-      			$window.location.href = '/#/referentka';
-      		}
-      		else if ($scope.trenutni_logirani_uporabnik().tip == "Skrbnik") {
-      			$window.localStorage.setItem("tip", "Skrbnik");
-      			$window.location.href = '/#/skrbnik';
-      		}
-      		else if ($scope.trenutni_logirani_uporabnik().tip == "Ucitelj") {
-      			$window.localStorage.setItem("tip", "Ucitelj");
-      			$window.location.href = '/#/ucitelj';
-      		}
+        		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
+        			$window.localStorage.setItem("tip", "Student");
+        			$window.location.href = '/#/student';
+        		}
+        		else if ($scope.trenutni_logirani_uporabnik().tip == "Referent") {
+        			$window.localStorage.setItem("tip", "Referent");
+        			$window.location.href = '/#/referentka';
+        		}
+        		else if ($scope.trenutni_logirani_uporabnik().tip == "Skrbnik") {
+        			$window.localStorage.setItem("tip", "Skrbnik");
+        			$window.location.href = '/#/skrbnik';
+        		}
+        		else if ($scope.trenutni_logirani_uporabnik().tip == "Ucitelj") {
+        			$window.localStorage.setItem("tip", "Ucitelj");
+        			$window.location.href = '/#/ucitelj';
+        		}
+        		else if ($scope.trenutni_logirani_uporabnik().tip == "Kandidat") {
+        			$window.localStorage.setItem("tip", "Kandidat");
+        			$window.location.href = '/#/student';
+        		}
+        }
 
-      		//nism čist ziher kam naj bi ob prvem vpisu preusmerla kandidata,
-      		//a na /kandidat? (zbrisi ta komentar ko se bomo zmenil na slacku)
-      		else if ($scope.trenutni_logirani_uporabnik().tip == "Kandidat") {
-      			$window.localStorage.setItem("tip", "Kandidat");
-      			$window.location.href = '/#/student';
-      		}
-
-
-	    }).catch(function(err, status) {
-	    	$scope.pokazi_napako_login = true;
-	    	if (status == 401) $scope.login_status = "Napačno geslo";
-	    	if (status == 403 && document.getElementById("counter").style.display === "none"){
-                $scope.login_status = "Žal, nimate dostopa do našega sistema nadaljnih ";
-                start(err.preostalCas);
-            }
-	    	if (status == 404) $scope.login_status = "Napačno uporabniško ime";
+	    }).catch(function(error) {
+	    	
 	    });
 	};
 
