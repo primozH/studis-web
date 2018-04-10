@@ -34,7 +34,6 @@ function StudentCtrl($scope, $window, $http, studen) {
 
 	//ime priimek in vpisna številka na /student
     studen.service_profil(vpisan.uid).then(function(response){
-        console.log(response);
     	$scope.vpisna_studenta = response.data.vpisnaStevilka;
     	$scope.ime_studenta = response.data.ime;
     	$scope.priimek_studenta = response.data.priimek;
@@ -50,11 +49,18 @@ function StudentCtrl($scope, $window, $http, studen) {
     //preverjamo če ima žeton
     studen.service_zeton(vpisan.uid).then(function(response){
     	if (response.data.length > 0) {
-    		$scope.student_zeton = response.data;
-    		$scope.ima_zeton = true;
-
-    		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist 
-    		$window.localStorage.setItem("zeton", "ima");
+    		$scope.student_zeton1 = response.data[0];
+    		$scope.ima_zeton1 = true;
+            $scope.vpisni_list1 = response.data[0].vrstaVpisa.vrstaVpisa;
+    		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist/1
+    		$window.localStorage.setItem("zeton", "ima1");
+            //ker ima lahko več kot 1 žeton
+            if (response.data.length > 1) {
+                $scope.student_zeton2 = response.data[1];
+                $scope.ima_zeton2 = true;
+                $scope.vpisni_list2 = response.data[1].vrstaVpisa.vrstaVpisa;
+                $window.localStorage.setItem("zeton", "ima2");
+            }
     	}
     	else
     		$scope.student_zeton = "trenutno nimaš na voljo nobenega žetona za vpis";

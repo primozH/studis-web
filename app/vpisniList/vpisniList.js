@@ -4,7 +4,7 @@ angular
     .module('studis')
     .controller('VpisniListCtrl', VpisniListCtrl);
 
-function VpisniListCtrl($scope, $window, studen){
+function VpisniListCtrl($scope, $window, $routeParams, studen){
     $scope.logout = function() {
         $window.localStorage.removeItem('studis');
         $window.localStorage.removeItem("tip");
@@ -24,7 +24,6 @@ function VpisniListCtrl($scope, $window, studen){
     //v primeru da do vpisnega lista dostopa kandidat
     if (trenutni_logirani_uporabnik().tip === "Kandidat") {
         studen.service_kandidat(trenutni_logirani_uporabnik().uid).then(function(response){
-            console.log(response);
             $scope.vl_vpisna = response.data.vpisnaStevilka;
             $scope.vl_ime = response.data.ime;
             $scope.vl_priimek = response.data.priimek;
@@ -40,17 +39,17 @@ function VpisniListCtrl($scope, $window, studen){
     //v primeru da do vpisnega lista dostopa študent z žetonom
     else if (trenutni_logirani_uporabnik().tip === "Student") {
         studen.service_student(trenutni_logirani_uporabnik().uid).then(function(response){
-            console.log(response);
-            $scope.vl_vpisna = response.data[0].student.vpisnaStevilka;
-            $scope.vl_ime = response.data[0].student.ime;
-            $scope.vl_priimek = response.data[0].student.priimek;
-            $scope.vl_email = response.data[0].student.email;
-            $scope.vl_telefonska = response.data[0].student.telefonskaStevilka;
+            var id = $routeParams.id-1; //1 ali 2, odvisno do kterega vpisnega lista dostopamo
+            $scope.vl_vpisna = response.data[id].student.vpisnaStevilka;
+            $scope.vl_ime = response.data[id].student.ime;
+            $scope.vl_priimek = response.data[id].student.priimek;
+            $scope.vl_email = response.data[id].student.email;
+            $scope.vl_telefonska = response.data[id].student.telefonskaStevilka;
 
-            $scope.vl_letnik = response.data[0].letnik.letnik;
-            $scope.vl_program_naziv = response.data[0].studijskiProgram.naziv;
-            $scope.vl_vrsta_vpisa = response.data[0].vrstaVpisa.vrstaVpisa;
-            $scope.vl_nacin_studija = response.data[0].nacinStudija.opis;//*/
+            $scope.vl_letnik = response.data[id].letnik.letnik;
+            $scope.vl_program_naziv = response.data[id].studijskiProgram.naziv;
+            $scope.vl_vrsta_vpisa = response.data[id].vrstaVpisa.vrstaVpisa;
+            $scope.vl_nacin_studija = response.data[id].nacinStudija.opis;//*/
             
         }).catch(function(err, status) {
             console.log("napaka pri service_kandidat");
