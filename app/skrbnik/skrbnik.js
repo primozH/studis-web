@@ -41,7 +41,9 @@ angular.module('studis').directive('fileModel', ['$parse', function ($parse) {
 
 
 function SkrbnikCtrl($scope, $http, $window) {
-  var vsebina_datoteke = null;	
+  var vsebina_datoteke = null;
+  //prikaže neuspešno uvožene
+  $scope.napaka_uvozeni_zapisi = false;
 
   $scope.logout = function() {
     $window.localStorage.removeItem('studis');
@@ -60,8 +62,7 @@ function SkrbnikCtrl($scope, $http, $window) {
     if (!file) {
       $scope.error_uvoz = "Izberi datoteko za uvoz";
       return;
-    }   
-
+    }
 
     var fd = new FormData();
     fd.append('file', file);
@@ -70,9 +71,10 @@ function SkrbnikCtrl($scope, $http, $window) {
         headers: {'Content-Type': undefined}
     })
     .then(function(response){
+      console.log(response);
       $scope.error_uvoz = "uspešno uvoženi podatki"
       $scope.uvozeni_zapisi_naslov = true;
-      $scope.vrnjeni_zapisi = response;
+      $scope.vrnjeni_zapisi = response.data;
     })
     .catch(function(err){
       $scope.error_uvoz = "prišlo je do napake pri uvozu"

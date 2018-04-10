@@ -26,22 +26,22 @@ angular
 	      $scope.login_status = "Prosim vnesite uporabniško ime in geslo za logiranje v sistem";
 	      return;
 	    }
-	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).then(function(response){        
+	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).then(function(response){
+        console.log(response);       
         //če prijava ni uspešna
         if (response.access_token === undefined) {
           $scope.pokazi_napako_login = true;
-          if (response == 401) $scope.login_status = "Napačno geslo";
-          if (response == 403 && document.getElementById("counter").style.display === "none"){
+          if (response.status == 401) $scope.login_status = "Napačno geslo";
+          if (response.status == 403 && document.getElementById("counter").style.display === "none"){
                   $scope.login_status = "Žal, nimate dostopa do našega sistema nadaljnih ";
-                  start(err.preostalCas);
+                  start(response.data.preostalCas);
               }
-          if (response == 404) $scope.login_status = "Napačno uporabniško ime";
+          if (response.status == 404) $scope.login_status = "Napačno uporabniško ime";
         }
 
         //v primeru da prijava je uspešna (dobimo token nazaj)
-    		else {
+    	else {
           $window.localStorage['studis'] = response.access_token;
-
         		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
         			$window.localStorage.setItem("tip", "Student");
         			$window.location.href = '/#/student';
@@ -64,8 +64,7 @@ angular
         		}
         }
 
-	    }).catch(function(error) {
-	    	
+	    }).catch(function(error) {	    	
 	    });
 	};
 
@@ -112,8 +111,6 @@ angular
 	    }).catch(function(err, status) {
 	    	$scope.status_pozabljeno_geslo = "e-maila ni v bazi";
 	    });
-
-
 	}
 
 };

@@ -5,7 +5,7 @@ angular.module('studis')
 	     {uporabniskoIme: uporabnisko_ime, geslo: geslo}).then(function(response) {
      		return response.data;
 	    }).catch(function (err) {
-            return err.status;
+            return err;
         });
     }
 

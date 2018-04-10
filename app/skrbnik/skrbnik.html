@@ -34,8 +34,8 @@
   <br><br>
 
 
-  <h3 ng-show="uvozeni_zapisi_naslov">Podatki o uvoženih zapisih</h3>
-  <p ng-repeat="zapis in vrnjeni_zapisi" readonly>
+  <h3 align="center" ng-show="uvozeni_zapisi_naslov">Podatki o uvoženih zapisih</h3>
+  <p align="center" ng-repeat="zapis in vrnjeni_zapisi" readonly>
   id: {{zapis.id}}
   ime: {{zapis.ime}}
   priimek: {{zapis.priimek}}
@@ -44,7 +44,10 @@
   študijski program: {{zapis.studijskiProgram.naziv}}
   geslo: {{zapis.gesloPlain}}
   </p>
+  <br><br>
 
+  <h3 align="center" ng-show="napaka_uvozeni_zapisi">Podatki o neuspelih uvoženih zapisih</h3>
+  <textarea ng-bind="prikaz_datoteke" rows="6" class="form-control" ng-show="napaka_uvozeni_zapisi"readonly></textarea>
 
 
 </div>
