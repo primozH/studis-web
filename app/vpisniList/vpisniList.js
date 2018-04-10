@@ -12,10 +12,8 @@ angular
             if(transformedInput !== text) {
                 ngModelCtrl.$setViewValue(transformedInput);
                 ngModelCtrl.$render();
-            }
-            return transformedInput; 
-          }
-          ngModelCtrl.$parsers.push(fromUser);
+            } return transformedInput; 
+          } ngModelCtrl.$parsers.push(fromUser);
         }
       }; 
 });
