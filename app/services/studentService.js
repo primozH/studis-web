@@ -43,6 +43,16 @@ angular.module('studis')
         });
     }
 
+    //dobi podatke o predmetniku, za vpisni list
+    this.service_predmetnik = function(zeton) {
+        return $http.post("http://localhost:8080/api/v1/predmetnik/", zeton).then(function(response) {
+            console.log("response = " + response);
+            return response;
+        }).catch(function (err, status) {
+            return null;
+        });
+    }
+
 
     
 }]);

@@ -98,8 +98,34 @@ function VpisniListCtrl($scope, $window, $routeParams, studen){
             $scope.vl_letnik = response.data[id].letnik.letnik;
             $scope.vl_program_naziv = response.data[id].studijskiProgram.naziv;
             $scope.vl_vrsta_vpisa = response.data[id].vrstaVpisa.vrstaVpisa;
-            $scope.vl_nacin_studija = response.data[id].nacinStudija.opis;//*/
-            
+            $scope.vl_nacin_studija = response.data[id].nacinStudija.opis.replace(/\b\w/g, l => l.toUpperCase());//*/
+
+            studen.service_predmetnik(response.data[id]).then(function(response) {
+                console.log("successss");
+                var jsonTxt = '{ "predmet" : [' +
+                           '{"ucitelj":"John",' +
+                           '"ime_predmeta":"Matematika" ,' +
+                           '"krediti":"6"} ,' +
+                           '{"ucitelj":"Mtevz",' +
+                           '"ime_predmeta":"Fizika" ,' +
+                           '"krediti":"5" }]}';
+                var json = JSON.parse(jsonTxt);
+                var skupnoStKt = 0;
+                for (var i = 0; i < json.length; i++) {
+                    var html =      "<tr>"
+                                +       "<td>" + json.predmet[i].ucitelj + "</td>"
+                                +       "<td>" + json.predmet[i].ime_predmeta + "</td>"
+                                +       "<td>" + json.predmet[i].krediti + "</td>"
+                                +   "</td>"
+                                ;
+                    console.log("tml = " + html);
+                    $(html).appendTo($("#predmetnik_table"));
+                }
+                $scope.vl_skupno_st_kt = skupnoStKt;
+
+            }).catch(function(err, status) {
+                console.log("napaka pri service_predmet");
+            });
         }).catch(function(err, status) {
             console.log("napaka pri service_kandidat");
         });
