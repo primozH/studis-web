@@ -26,7 +26,8 @@ angular
 	      $scope.login_status = "Prosim vnesite uporabniško ime in geslo za logiranje v sistem";
 	      return;
 	    }
-	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).success(function(response){
+	    auth.service_login($scope.uporabnisko_ime, $scope.geslo).then(function(response){
+        console.log(response);
     		$window.localStorage['studis'] = response.access_token;
 
     		console.log(response.access_token);
@@ -56,7 +57,7 @@ angular
       		}
 
 
-	    }).error(function(err, status) {
+	    }).catch(function(err, status) {
 	    	$scope.pokazi_napako_login = true;
 	    	if (status == 401) $scope.login_status = "Napačno geslo";
 	    	if (status == 403 && document.getElementById("counter").style.display === "none"){
@@ -105,9 +106,9 @@ angular
 	}
 
 	$scope.poslji_geslo = function() {
-		auth.service_geslo_reset($scope.pozabljeno_email).success(function(response){
+		auth.service_geslo_reset($scope.pozabljeno_email).then(function(response){
 			$scope.status_pozabljeno_geslo = "geslo ponastavljeno"
-	    }).error(function(err, status) {
+	    }).catch(function(err, status) {
 	    	$scope.status_pozabljeno_geslo = "e-maila ni v bazi";
 	    });
 

@@ -69,12 +69,12 @@ function SkrbnikCtrl($scope, $http, $window) {
         transformRequest: angular.identity,
         headers: {'Content-Type': undefined}
     })
-    .success(function(response){
+    .then(function(response){
       $scope.error_uvoz = "uspešno uvoženi podatki"
       $scope.uvozeni_zapisi_naslov = true;
       $scope.vrnjeni_zapisi = response;
     })
-    .error(function(err){
+    .catch(function(err){
       $scope.error_uvoz = "prišlo je do napake pri uvozu"
     });
   };

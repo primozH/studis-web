@@ -33,11 +33,12 @@ function StudentCtrl($scope, $window, $http, studen) {
 	}
 
 	//ime priimek in vpisna številka na /student
-    studen.service_profil(vpisan.uid).success(function(response){
-    	$scope.vpisna_studenta = response.vpisnaStevilka;
-    	$scope.ime_studenta = response.ime;
-    	$scope.priimek_studenta = response.priimek;
-    }).error(function(err, status) {
+    studen.service_profil(vpisan.uid).then(function(response){
+        console.log(response);
+    	$scope.vpisna_studenta = response.data.vpisnaStevilka;
+    	$scope.ime_studenta = response.data.ime;
+    	$scope.priimek_studenta = response.data.priimek;
+    }).catch(function(err, status) {
     	console.log("napaka pri service_profil");
     });
 
@@ -47,9 +48,9 @@ function StudentCtrl($scope, $window, $http, studen) {
     }
 
     //preverjamo če ima žeton
-    studen.service_zeton(vpisan.uid).success(function(response){
-    	if (response.length > 0) {
-    		$scope.student_zeton = response;
+    studen.service_zeton(vpisan.uid).then(function(response){
+    	if (response.data.length > 0) {
+    		$scope.student_zeton = response.data;
     		$scope.ima_zeton = true;
 
     		//ta vrstica nastavi da studentu dovolimo dostop do /vpisnilist 
@@ -57,7 +58,7 @@ function StudentCtrl($scope, $window, $http, studen) {
     	}
     	else
     		$scope.student_zeton = "trenutno nimaš na voljo nobenega žetona za vpis";
-    }).error(function(err, status) {
+    }).catch(function(err, status) {
     	console.log("napaka pri service_zeton");
     });
 	
