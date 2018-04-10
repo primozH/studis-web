@@ -48,13 +48,52 @@ angular
       			$window.location.href = '/#/ucitelj';
       		}
 
+      		//nism čist ziher kam naj bi ob prvem vpisu preusmerla kandidata,
+      		//a na /kandidat? (zbrisi ta komentar ko se bomo zmenil na slacku)
+      		else if ($scope.trenutni_logirani_uporabnik().tip == "Kandidat") {
+      			$window.localStorage.setItem("tip", "Kandidat");
+      			$window.location.href = '/#/student';
+      		}
+
 
 	    }).error(function(err, status) {
 	    	$scope.pokazi_napako_login = true;
 	    	if (status == 401) $scope.login_status = "Napačno geslo";
+	    	if (status == 403 && document.getElementById("counter").style.display === "none"){
+                $scope.login_status = "Žal, nimate dostopa do našega sistema nadaljnih ";
+                start(err.preostalCas);
+            }
 	    	if (status == 404) $scope.login_status = "Napačno uporabniško ime";
 	    });
 	};
+
+	function countdown(timerId, timeToCount){
+        var now = new Date().getTime();
+        var i = document.getElementById('counter');
+        var s = document.getElementById('seconds');
+        i.innerHTML = Math.floor((timeToCount - now)/1000);
+        if (parseInt(i.innerHTML)<= 0) {
+            clearInterval(timerId);
+            i.style.display = 'none';
+            s.style.display = 'none';
+            $('#inputField').prop('disabled', false);
+            $scope.$apply(function () {
+                $scope.pokazi_napako_login = false;
+            });
+        }
+    }
+    function start(preostaliCas){
+        var i = document.getElementById('counter');
+        i.style.display = 'inline-block';
+        i.innerHTML = preostaliCas;
+        var s = document.getElementById('seconds');
+        s.style.display = 'inline-block';
+        var timeToCount = new Date().getTime() + 1000 * preostaliCas;
+        var timerId = setInterval(function(){
+            countdown(timerId, timeToCount);
+        },1000);
+    }
+
 
     $scope.logoutFunkcija = function() {
 	    $window.localStorage.removeItem('studis');

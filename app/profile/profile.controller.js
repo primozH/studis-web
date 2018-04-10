@@ -7,7 +7,6 @@
 
     function profileCtrl(searchProfile, $routeParams){
         vm = this;
-        console.log($routeParams);
         searchProfile.getStudent($routeParams.vpisnaStevilka)
             .then(
                 function success(response){
@@ -34,10 +33,6 @@
                     console.log(error);
                 }
             );
-        //vm.student = searchProfile.getStudent($routeParams.vpisnaStevilka);
-        console.log(vm.student);
-
-
     }
 
 })();

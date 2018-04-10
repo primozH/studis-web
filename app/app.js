@@ -4,7 +4,6 @@
     app.config(function($routeProvider, $windowProvider) {
         var $window = $windowProvider.$get();
 
-
         $routeProvider
             .when('/iskanje', {
                 templateUrl: "/search/search.html",
@@ -26,9 +25,8 @@
                 resolve: {
                     function(){
                         if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referentka, drgač nemoreš do /referentka");
+                            console.log("Vpiši se kot referentka, drugače nemoreš do /referentka");
                             $window.location.href = '/#/prijava';
-                            return;
                         }
                     }
                 }                
@@ -39,10 +37,9 @@
                 resolve: {
                     function(){
                         console.log($window.localStorage.getItem("tip"));
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student"))  {
-                            console.log("Vpiši se kot student, drgač nemoreš do /student");
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student" || $window.localStorage.getItem("tip") === "Kandidat"))  {
+                            console.log("Vpiši se kot student, drugače nemoreš do /student");
                             $window.location.href = '/#/prijava';
-                            return;
                         }
                     }
                 } 
@@ -53,9 +50,8 @@
                 resolve: {
                     function(){
                         if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Skrbnik"))  {
-                            console.log("Vpiši se kot skrbnik, drgač nemoreš do /skrbnik");
+                            console.log("Vpiši se kot skrbnik, drugače nemoreš do /skrbnik");
                             $window.location.href = '/#/prijava';
-                            return;
                         }
                     }
                 }                
@@ -66,9 +62,20 @@
                 resolve: {
                     function(){
                         if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Ucitelj"))  {
-                            console.log("Vpiši se kot ucitelj, drgač nemoreš do /ucitelj");
+                            console.log("Vpiši se kot ucitelj, drugače nemoreš do /ucitelj");
                             $window.location.href = '/#/prijava';
-                            return;
+                        }
+                    }
+                }
+            })
+            .when('/vpisnilist', {
+                templateUrl: 'vpisniList/vpisniList.html',
+                controller: 'VpisniListCtrl',
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima"))  {
+                            console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilist");
+                            $window.location.href = '/#/prijava';
                         }
                     }
                 }                

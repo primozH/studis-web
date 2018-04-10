@@ -23,7 +23,24 @@ angular.module('studis').directive('onReadFile', function ($parse) {
   };
 })
 
-function SkrbnikCtrl($scope, $http, $window, refe) {
+angular.module('studis').directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+
+function SkrbnikCtrl($scope, $http, $window) {
   var vsebina_datoteke = null;	
 
   $scope.logout = function() {
@@ -38,16 +55,29 @@ function SkrbnikCtrl($scope, $http, $window, refe) {
     vsebina_datoteke = $fileContent;
   };
   	
-  /*$scope.uvoz_podatkov = function(file){
-    var formData = new FormData();
-    formData.append('file', file);
-    $http.post('http://localhost:8080/api/v1/kandidat/nalozi', formData, {
-       transformRequest: angular.identity,
-       headers: {'Content-Type': undefined}
-    }).then(function (response) {
-       console.log("uspešno");
+  $scope.uploadFile = function(){
+    var file = $scope.myFile;
+    if (!file) {
+      $scope.error_uvoz = "Izberi datoteko za uvoz";
+      return;
+    }   
+
+
+    var fd = new FormData();
+    fd.append('file', file);
+    $http.post('http://localhost:8080/api/v1/kandidat/nalozi', fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+    })
+    .success(function(response){
+      $scope.error_uvoz = "uspešno uvoženi podatki"
+      $scope.uvozeni_zapisi_naslov = true;
+      $scope.vrnjeni_zapisi = response;
+    })
+    .error(function(err){
+      $scope.error_uvoz = "prišlo je do napake pri uvozu"
     });
-  }; //*/
+  };
 
 
 };

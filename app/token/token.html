@@ -1,13 +1,20 @@
 <div class="container">
     <form class="form-horizontal" action="">
         <fieldset>
-            <legend>Urejanje žetona za vpis</legend>
+            <legend>Urejanje vpisnega žetona za {{vm.token.student.ime}} {{vm.token.student.priimek}} - {{vm.token.student.vpisnaStevilka}}</legend>
             <div class="form-group">
                 <label class="control-label col-sm-2" for="program">
                     Študijski program
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.studijskiProgram.naziv}} name="program" id="program">
+                    <select class="selectpicker" id="program" name="studijskiProgram">
+                        <option value="1000407">Računalništvo in matematika UNI-1.st</option>
+                        <option value="1000471">Računalništvo in matematika MAG 2.st</option>
+                        <option value="1000468">Računalništvo in informatika UNI-1.st</option>
+                        <option value="1000470">Računalništvo in informatika VS-1.st</option>
+                        <option value="1000474">Računalništvo in informatika DR-3.st</option>
+                    </select>
+                    <!--<input type="text" class="form-control" value={{vm.token.studijskiProgram.naziv}} name="program" id="program">-->
                 </div>
             </div>
 
@@ -16,7 +23,12 @@
                     Letnik
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.letnik.letnik}} name="letnik" id="letnik">
+                    <select id="letnik" name="letnik">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    <!--<input type="text" class="form-control" value={{vm.token.letnik.letnik}} name="letnik" id="letnik">-->
                 </div>
             </div>
 
@@ -25,7 +37,17 @@
                     Vrsta vpisa
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.vrstaVpisa.vrstaVpisa}} name="vrsta_vpisa" id="vrsta_vpisa">
+                    <select id="vrsta_vpisa" name="vrstaVpisa">
+                        <option value="1">Prvi vpis v letnik/dodatno leto</option>
+                        <option value="2">Ponavljanje letnika</option>
+                        <option value="3">Nadaljevanje letnika</option>
+                        <option value="4">Podaljšanje statusa študenta</option>
+                        <option value="5">Vpis po merilih za prehode v višji letnik</option>
+                        <option value="6">Vpis v semester skupnega št. programa</option>
+                        <option value="7">Vpis po merilih za prehode v isti letnik</option>
+                        <option value="98">Vpis za zaključek</option>
+                    </select>
+                    <!--<input type="text" class="form-control" value={{vm.token.vrstaVpisa.vrstaVpisa}} name="vrsta_vpisa" id="vrsta_vpisa">-->
                 </div>
             </div>
 
@@ -34,7 +56,11 @@
                     Način študija
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.nacinStudija.opis}} name="nacin_studija" id="nacin_studija">
+                    <select id="nacin_studija" name="nacinStudija">
+                        <option value="1">redni</option>
+                        <option value="2">izredni</option>
+                    </select>
+                    <!--<input type="text" class="form-control" value={{vm.token.nacinStudija.opis}} name="nacin_studija" id="nacin_studija">-->
                 </div>
             </div>
 
@@ -43,23 +69,28 @@
                     Oblika študija
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value={{vm.token.oblikaStudija.opis}} name="oblika_studija" id="oblika_studija">
+                    <select id="oblika_studija" name="oblikaStudija">
+                        <option value="1">na lokaciji</option>
+                        <option value="2">na daljavo</option>
+                        <option value="3">e-študij</option>
+                    </select>
+                    <!--<input type="text" class="form-control" value={{vm.token.oblikaStudija.opis}} name="oblika_studija" id="oblika_studija">-->
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-show="vm.token.letnik.letnik==3">
                 <label class="control-label col-sm-2">
                     Pravica do proste izbire predmetov
                 </label>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="prostaIzbira" id="prostaIzbiraDa" value="Da">
+                        <input class="form-check-input" type="radio" name="prostaIzbira" id="prostaIzbiraDa" value="true">
                         <label class="form-check-label" for="prostaIzbiraDa">
                             Da
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="prostaIzbira" id="prostaIzbiraNe" value="Ne">
+                        <input class="form-check-input" type="radio" name="prostaIzbira" id="prostaIzbiraNe" value="false">
                         <label class="form-check-label" for="prostaIzbiraNe">
                             Ne
                         </label>

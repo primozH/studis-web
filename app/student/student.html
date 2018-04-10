@@ -5,22 +5,28 @@
   </div>
   <ul class="nav navbar-nav">
     <li class="active"><a href="/#/student">Domov</a></li>
-    
-
-    <li ng-show="vpisan"><a ng-click="logout()">Log out</a></li>
-    <li ng-hide="vpisan"><a href="#/prijava"">Log in</a></li>
+    <li><a ng-click="logout()">Log out</a></li>
   </ul>
 </div>
 </nav>
 
 
 
-<p>Pozdravljen študent</p>
-<!--<p>Tvoj uid je: {{id_studenta}}</p>-->
+<p ng-hide="kandidat">Pozdravljen študent</p>
+
+<p ng-show="kandidat">Pozdravljen kandidat<br></p>
 
 <legend>{{ime_studenta}} {{priimek_studenta}}</legend>
 
 {{vpisna_studenta}}
 
 <br><br>
-<button ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
+<button ng-hide="kandidat" ng-click="prikazi_moj_profil()" class="btn">Moj profil</button>
+<a ng-show="kandidat||ima_zeton" href="/#/vpisnilist" class="btn btn-info" role="button">Vpisni list</a>
+
+<div ng-hide="kandidat">
+	<br><br>
+	ŽETON:
+	<br>
+	<p>{{student_zeton}}</p>
+</div>

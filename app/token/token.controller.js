@@ -15,6 +15,13 @@ function tokenCtrl(tokenService, $routeParams, $location){
                 else
                     $("#prostaIzbiraNe").prop("checked", true);
 
+                document.getElementById('program').value = vm.token.studijskiProgram.sifraEVS;
+                document.getElementById('letnik').value = vm.token.letnik.letnik;
+                document.getElementById('vrsta_vpisa').value = vm.token.vrstaVpisa.sifraVpisa;
+                document.getElementById('nacin_studija').value = vm.token.nacinStudija.sifra;
+                document.getElementById('oblika_studija').value = vm.token.oblikaStudija.sifra;
+
+
                 console.log(vm.token);
             },
             function error(error){
