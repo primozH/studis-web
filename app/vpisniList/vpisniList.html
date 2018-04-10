@@ -15,6 +15,62 @@
 <div class="container">
     <form class="form-horizontal" action="">
         <fieldset>
+            <br><b>PODATKI O VPISU:</b><hr>
+             <!--<table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Študijsko leto</th>
+                    <th scope="col">Letnik</th>
+                    <th scope="col">Študijski program</th>
+                    <th scope="col">Vrsta vpisa</th>
+                    <th scope="col">Način študija</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2017/2018</td>
+                    <td>{{vl_letnik}}</td>
+                    <td>{{vl_program_naziv}}</td>
+                    <td>{{vl_vrsta_vpisa}}</td>
+                    <td>{{vl_nacin_studija}}</td>
+                </tr>
+                </tbody>
+            </table> -->
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Študijsko leto</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="2017/2018" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Letnik</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_letnik" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Študijski program</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_program_naziv" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Vrsta vpisa</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_vrsta_vpisa" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Način študija</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-value="vl_nacin_studija" readonly>
+                </div>
+            </div>
+
+
+
+            <br><br><b>OSEBNI PODATKI:</b><hr>
             <div class="form-group">
                 <label class="control-label col-sm-2">Vpisna številka</label>
                 <div class="col-sm-10">
@@ -97,32 +153,15 @@
                 </div>
             </div>
 
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">Študijsko leto</th>
-                    <th scope="col">Letnik</th>
-                    <th scope="col">Študijski program</th>
-                    <th scope="col">Vrsta vpisa</th>
-                    <th scope="col">Način študija</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>2017/2018</td>
-                    <td>{{vl_letnik}}</td>
-                    <td>{{vl_program_naziv}}</td>
-                    <td>{{vl_vrsta_vpisa}}</td>
-                    <td>{{vl_nacin_studija}}</td>
-                </tr>
-                </tbody>
-            </table>
+           
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
+
+            <b>PODATKI O IZBIRNIH PREDMETIH:</b><hr>
 
 
         </fieldset>

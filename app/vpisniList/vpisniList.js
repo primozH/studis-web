@@ -48,8 +48,7 @@ function VpisniListCtrl($scope, $window, $routeParams, studen){
         var leto = emso.substring(4,8);
         var mesec = (parseInt(emso.substring(2,4))-1);
         var dan = emso.substring(0,2);
-        $scope.vl_rojstvo = new Date(leto, mesec, dan);
-        
+        $scope.vl_rojstvo = new Date(leto, mesec, dan);        
     }
 
 
