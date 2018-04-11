@@ -5,8 +5,16 @@
         .module('studis')
         .controller('profileCtrl', profileCtrl);
 
-    function profileCtrl(searchProfile, $routeParams){
+    function profileCtrl(searchProfile, $routeParams, $scope, $window){
         vm = this;
+        
+        $scope.logout = function() {
+            $window.localStorage.removeItem('studis');
+            $window.localStorage.removeItem("tip");
+            $window.localStorage.removeItem("zeton");
+            $window.location.href = '/#/prijava';
+        }
+
         searchProfile.getStudent($routeParams.vpisnaStevilka)
             .then(
                 function success(response){

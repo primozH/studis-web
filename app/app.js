@@ -88,6 +88,20 @@
                 }      
                           
             })
+            .when('/zeton_uredi/:id', {
+                templateUrl: 'zeton/zeton.html',
+                controller: 'ZetonCtrl',
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
+                            console.log("Vpiši se kot referentka, drugače nemoreš do /zeton_uredi");
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+                    }
+                }      
+                          
+            })
             .otherwise({redirectTo: '/prijava'});
 
     });

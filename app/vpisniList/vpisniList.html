@@ -85,28 +85,26 @@
             <hr><div class="form-group">
                 <label class="control-label col-sm-2">Datum rojstva</label>
                 <div class="col-sm-10">
-                    <input type="date" id="date" class="form-control" min="1920-01-01" max="2010-04-30" ng-model="vl_rojstvo" ng-change="primerjaj_rojstvo_emso()">
+                    <input type="date" id="date" class="form-control" min="1920-01-01" max="2010-01-01" ng-model="vl_rojstvo" ng-change="primerjaj_rojstvo_emso()">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Emšo</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="vl_emso" ng-change="primerjaj_emso_rojstvo()" maxlength="13">
+                    <input samo-stevilke type="text" class="form-control" ng-model="vl_emso" ng-change="primerjaj_emso_rojstvo()" maxlength="13" minlength="13">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Davčna</label>
                 <div class="col-sm-10">
-                <input type="number" class="form-control" ng-model="vl_davcna" max="99999999">
+                <input samo-stevilke type="text" class="form-control" ng-model="vl_davcna" maxlength="8" minlength="8">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Spol</label>
                 <div class="col-sm-10">
-                    <select class="form-control" ng-model="spol" ng-value="zenski">
-                      <option value="zenski">ženski</option>
-                      <option value="moski">moški</option>
-                    </select>
+                    <select ng-options="spol as spol.ime for spol in spoli" class="form-control"
+                    ng-model="vl_spol" ng-change="primerjaj_spol_emso()"></select>
 
                 </div>
             </div>
@@ -115,19 +113,19 @@
             <hr><div class="form-group">
                 <label class="control-label col-sm-2">Država rojstva</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="vl_drzava_rojstva">
+                    <select ng-options="drzava as drzava for drzava in drzave" class="form-control" ng-model="vl_drzava_rojstva"></select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Kraj rojstva</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="vl_kraj_rojstva">
+                    <input samo-crke type="text" class="form-control" ng-model="vl_kraj_rojstva">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Občina rojstva</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="vl_obcina_rojstva">
+                    <select ng-options="obcina as obcina.ime for obcina in obcine" class="form-control" ng-model="vl_obcina_rojstva"></select>
                 </div>
             </div>
 
@@ -144,19 +142,19 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Država</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_drzava_stalno">
+                    <select ng-options="drzava as drzava for drzava in drzave" class="form-control" ng-model="vl_drzava_stalno"></select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Pošta</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_posta_stalno">
+                    <input samo-stevilke type="text" class="form-control" ng-model="vl_posta_stalno" maxlength="4">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Občina</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_obcina_stalno">
+                    <select ng-options="obcina as obcina.ime for obcina in obcine" class="form-control" ng-model="vl_obcina_stalno"></select>
                 </div>
             </div>
             
@@ -170,19 +168,19 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Država</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_drzava_stalno">
+                    <select ng-options="drzava as drzava for drzava in drzave" class="form-control" ng-model="vl_drzava_zacasno"></select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Pošta</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_posta_stalno">
+                    <input samo-stevilke type="text" class="form-control" ng-model="vl_posta_stalno">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Občina</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_obcina_stalno">
+                    <select ng-options="obcina as obcina.ime for obcina in obcine" class="form-control" ng-model="vl_obcina_zacasno"></select>
                 </div>
             </div>
             
@@ -191,8 +189,8 @@
             
 
 
-            <b>PODATKI O IZBIRNIH PREDMETIH:</b><hr><br>
-
+            <br><br><h4 align="right">PREDMETNIK:</h4><hr>
+            
 
             <button type="submit" class="btn btn-primary btn-block">Oddaj vpisni list</button>
 
