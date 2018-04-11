@@ -1,5 +1,5 @@
 <div class="container">
-    <form class="form-horizontal">
+    <form class="form-horizontal" ng-submit="vm.updateToken()" id="tokenForm">
         <fieldset>
             <legend>Urejanje vpisnega žetona za {{vm.token.student.ime}} {{vm.token.student.priimek}} - {{vm.token.student.vpisnaStevilka}}</legend>
             <div class="form-group">

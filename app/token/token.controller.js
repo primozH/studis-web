@@ -43,8 +43,38 @@ function tokenCtrl(tokenService, $routeParams, $location){
             );
     };
 
-    /*vm.updateToken = function(e){
-        console.log(e);
-    };*/
+    vm.updateToken = function(){
+        // var loginForm = $('#tokenForm').serializeArray();
+        // var loginFormObject = {};
+        // $.each(loginForm,
+        //     function(i, v) {
+        //         loginFormObject[v.name] = v.value;
+        //     });
+        // loginFormObject["student"] = vm.token.student.id;
+        // console.log(loginFormObject);
+        // console.log(document.getElementById('program').value);
+        var form = {
+            "vrstaVpisa":{
+                "sifraVpisa": document.getElementById('program').value
+            },
+            "student":{
+                "id": vm.token.student.id
+            },
+            "studijskiProgram":{
+                "sifraEVS": document.getElementById('program').value
+            },
+            "letnik":{
+                "letnik": document.getElementById('program').value
+            },
+            "nacinStudija":{
+                "sifra": document.getElementById('program').value
+            },
+            "oblikaStudija":{
+                "sifra": document.getElementById('program').value
+            }
+        };
+        console.log(form);
+
+    };
 
 }
