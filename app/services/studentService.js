@@ -44,5 +44,13 @@ angular.module('studis')
     }
 
 
-    
+    this.service_predmeti = function (zeton) {
+        return $http.post("http://localhost:8080/api/v1/predmetnik/", zeton).then(function(response) {
+            console.log('ok');
+            return response;
+        }).catch(function (err, status) {
+            console.log("null");
+            return null;
+        });
+    }
 }]);

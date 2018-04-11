@@ -81,6 +81,19 @@
                     }
                 }                
             })
+            .when('/vpisnilistpredmetnik/:id', {
+                templateUrl: 'vpisniList/vpisnilistpredmetnik.html',
+                controller: 'VpisniListCtrl',
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima1"
+                            || $window.localStorage.getItem("zeton") === "ima2"))  {
+                            console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilistpredmetnik");
+                            $window.location.href = '/#/prijava';
+                        }
+                    }
+                }
+            })
             .when('/zeton/:id/:vrstaVpisa', {
                 templateUrl: 'token/token.html',
                 controller: 'tokenCtrl',
