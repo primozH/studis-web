@@ -87,6 +87,11 @@ function SkrbnikCtrl($scope, $http, $window) {
     .then(function(response){
       console.log(response);
       console.log("preneseni podatki");
+
+      var data = response.data,
+      blob = new Blob([data], { type: 'text/plain' }),
+      url = $window.URL || $window.webkitURL;
+      $scope.fileUrl = url.createObjectURL(blob);
     })
     .catch(function(err){
       $scope.error_uvoz = "prišlo je do napake pri prenesi_nespesne"
