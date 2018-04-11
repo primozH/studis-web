@@ -1,141 +1,69 @@
+(function() {
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap']);
-
-    app.config(function($routeProvider, $windowProvider) {
-        var $window = $windowProvider.$get();
-
+    function settings($routeProvider, $locationProvider) {
         $routeProvider
+            .when('/prijava', {
+                templateUrl: 'login/login.template.html',
+                controller: 'loginCtrl',
+                controllerAs: 'vm'
+            })
+            .when('/student', {
+                templateUrl: 'student/dashboard/student.dashboard.template.html',
+                controller: 'studentCtrl',
+                controllerAs: 'vm'
+            })
+            .when('/student/:id/vpis', {
+                templateUrl: 'student/enrollment/student-data/student.data.template.html',
+                controller: 'vpisniList1Ctrl',
+                controllerAs: 'vm'
+            })
+            .when('/student/:id/vpis/predmetnik', {
+                templateUrl: 'student/enrollment/curriculum/curriculum.controller.html',
+                controller: 'VpisniListCtrl'
+            })
             .when('/iskanje', {
-                templateUrl: "/search/search.html",
+                templateUrl: "shared/controllers/search/search.html",
                 controller: "searchCtrl",
                 controllerAs: "vm"
             })
-            .when('/profil/:vpisnaStevilka', {
-                templateUrl: "/profile/profile.html",
+            .when('/profil/:id', {
+                templateUrl: "student/profile/profile.html",
                 controller: "profileCtrl",
                 controllerAs: "vm"
             })
-            .when('/prijava', {
-            templateUrl: 'prijava/prijava.html',
-            controller: 'PrijavaCtrl'
-            })
-            .when('/referentka', {
-                templateUrl: 'referentka/referentka.html',
+            .when('/referent', {
+                templateUrl: 'referent/referentka.html',
                 controller: 'ReferentkaCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referentka, drugače nemoreš do /referentka");
-                            $window.location.href = '/#/prijava';
-                        }
-                    }
-                }                
-            })
-            .when('/student', {
-                templateUrl: 'student/student.html',
-                controller: 'StudentCtrl',
-                resolve: {
-                    function(){
-                        console.log($window.localStorage.getItem("tip"));
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student" || $window.localStorage.getItem("tip") === "Kandidat"))  {
-                            console.log("Vpiši se kot student, drugače nemoreš do /student");
-                            $window.location.href = '/#/prijava';
-                        }
-                    }
-                } 
+                controllerAs: "vm"
             })
             .when('/skrbnik', {
-                templateUrl: 'skrbnik/skrbnik.html',
+                templateUrl: 'admin/skrbnik.template.html',
                 controller: 'SkrbnikCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Skrbnik"))  {
-                            console.log("Vpiši se kot skrbnik, drugače nemoreš do /skrbnik");
-                            $window.location.href = '/#/prijava';
-                        }
-                    }
-                }                
+                controllerAs: "vm"
             })
             .when('/ucitelj', {
-                templateUrl: 'ucitelj/ucitelj.html',
+                templateUrl: 'teacher/ucitelj.html',
                 controller: 'UciteljCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Ucitelj"))  {
-                            console.log("Vpiši se kot ucitelj, drugače nemoreš do /ucitelj");
-                            $window.location.href = '/#/prijava';
-                        }
-                    }
-                }
-            })
-            .when('/vpisnilist/:id', {
-                templateUrl: 'vpisniList/vpisniList.html',
-                controller: 'VpisniListCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima1" 
-                            || $window.localStorage.getItem("zeton") === "ima2"))  {
-                            console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilist");
-                            $window.location.href = '/#/prijava';
-                        }
-                    }
-                }                
-            })
-            .when('/vpisnilistpredmetnik/:id', {
-                templateUrl: 'vpisniList/vpisniListPredmetnik.html',
-                controller: 'VpisniListCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima1"
-                            || $window.localStorage.getItem("zeton") === "ima2"))  {
-                            console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilistpredmetnik");
-                            $window.location.href = '/#/prijava';
-                        }
-                    }
-                }
+                controllerAs: "vm"
             })
             .when('/zeton/:id/:vrstaVpisa', {
                 templateUrl: 'token/token.html',
                 controller: 'tokenCtrl',
-                controllerAs: "vm",
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referentka, drugače nemoreš do /zeton");
-                            $window.location.href = '/#/prijava';
-                            return;
-                        }
-                    }
-                }
+                controllerAs: "vm"
             })
-            .when('/zetoni', {
-                templateUrl: 'tokens/tokens.html',
+            .when('/zeton', {
+                templateUrl: 'token/list-tokens/tokens.template.html',
                 controller: 'tokensCtrl',
-                controllerAs: "vm",
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referentka, drugače nemoreš do /zetoni");
-                            $window.location.href = '/#/prijava';
-                            return;
-                        }
-                    }
-                }
-            })
-            .when('/zeton_uredi/:id', {
-                templateUrl: 'zeton/zeton.html',
-                controller: 'ZetonCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referentka, drugače nemoreš do /zeton_uredi");
-                            $window.location.href = '/#/prijava';
-                            return;
-                        }
-                    }
-                }      
-                          
+                controllerAs: "vm"
             })
             .otherwise({redirectTo: '/prijava'});
 
-    });
+        $locationProvider.hashPrefix('');
+    }
+
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
+
+    app.config(["$routeProvider", "$locationProvider", settings]);
+})();
+
+

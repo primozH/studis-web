@@ -1,0 +1,21 @@
+<navigation></navigation>
+
+<!--Prijavljen je student-->
+<div ng-hide="kandidat" class="row">
+  <div class="col-md-2"></div>
+  <div align="center"  class="col-md-8">
+    <div ng-show="vm.zetoni">
+      <div class="alert alert-info" ng-repeat="zeton in vm.zetoni">
+        <span>Imaš neizkoriščen žeton za vpis. <strong>
+          <a class="alert-link" ng-click="vm.useToken(zeton.vrstaVpisa.sifra)">{{zeton.vrstaVpisa.vrstaVpisa}}!</a>
+        </strong></span>
+      </div>
+    </div>
+
+    <legend>{{vm.student.ime}} {{vm.student.priimek}} ({{vm.student.vpisnaStevilka}})</legend>
+
+  <div>
+  <div class="col-md-2"></div>
+  </div>
+  </div>
+</div>
