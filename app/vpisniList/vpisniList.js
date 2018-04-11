@@ -99,7 +99,6 @@ function VpisniListCtrl($scope, $window, $routeParams, studen){
             $scope.vl_program_naziv = response.data[id].studijskiProgram.naziv;
             $scope.vl_vrsta_vpisa = response.data[id].vrstaVpisa.vrstaVpisa;
             $scope.vl_nacin_studija = response.data[id].nacinStudija.opis.replace(/\b\w/g, l => l.toUpperCase());//*/
-
             studen.service_predmetnik(response.data[id]).then(function(response) {
                 console.log("successss");
                 var jsonTxt = '{ "predmet" : [' +
@@ -131,7 +130,13 @@ function VpisniListCtrl($scope, $window, $routeParams, studen){
         });
     }
 
-
+    var preveri_osebne_podatke_in_zamenjaj_formo = function() {
+        console.log("inside");
+        console.log($("#id_osebni_podatki").val);
+        $("#id_osebni_podatki").attr('id').hide();
+        $("#id_predmetnik").attr('id').show();
+        $("#nazaj").attr('id').show();
+    }
 
 }
 

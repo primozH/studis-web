@@ -14,7 +14,7 @@
 <h2 align="center">VPISNI LIST</h2>
 <div class="container">
     <form class="form-horizontal" action="">
-        <fieldset>
+        <fieldset id="id_osebni_podatki">
 
             <br><br><b>OSEBNI PODATKI:</b><hr>
             <div class="form-group">
@@ -113,18 +113,23 @@
                     <input type="text" class="form-control" ng-value="vl_posta">
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2">Občina</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-value="vl_obcina">
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="control-label col-sm-2">Država</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-value="vl_drzava">
                 </div>
             </div>
+
+        </fieldset>
+        <fieldset id="id_predmetnik" style="display: none;">
 
             <br><b>PODATKI O VPISU:</b><hr>
 
@@ -184,15 +189,18 @@
                 </tr>
            </table>
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
-
-
-
         </fieldset>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" ng-click="preveri_osebne_podatke_in_zamenjaj_formo()">Submit</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-20">
+                <button id="nazaj" style="display: none;" class="btn btn-primary">Nazaj</button>
+            </div>
+        </div>
     </form>
 </div>
 
