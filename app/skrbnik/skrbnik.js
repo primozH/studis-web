@@ -81,5 +81,18 @@ function SkrbnikCtrl($scope, $http, $window) {
     });
   };
 
+  $scope.prenesi_nespesne = function(){
+    console.log("prenasam neuspesne");
+    $http.get('http://localhost:8080/api/v1/kandidat/neuspesni')
+    .then(function(response){
+      console.log(response);
+      console.log("preneseni podatki");
+    })
+    .catch(function(err){
+      $scope.error_uvoz = "prišlo je do napake pri prenesi_nespesne"
+    });
+
+  };
+
 
 };
