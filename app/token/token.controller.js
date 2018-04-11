@@ -43,4 +43,8 @@ function tokenCtrl(tokenService, $routeParams, $location){
             );
     };
 
+    /*vm.updateToken = function(e){
+        console.log(e);
+    };*/
+
 }
