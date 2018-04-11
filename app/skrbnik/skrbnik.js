@@ -37,6 +37,8 @@ angular.module('studis').directive('fileModel', ['$parse', function ($parse) {
             });
         }
     };
+}]).config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
 }]);
 
 
@@ -98,6 +100,14 @@ function SkrbnikCtrl($scope, $http, $window) {
     });
 
   };
+
+
+  /*var data = 'some data here...',
+    blob = new Blob([data], { type: 'text/plain' }),
+    url = $window.URL || $window.webkitURL;
+    $scope.fileUrl = url.createObjectURL(blob);//*/
+
+
 
 
 };
