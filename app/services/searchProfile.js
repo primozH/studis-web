@@ -13,7 +13,7 @@
             // else if(!/[^a-z]/i.test(query)){
             //     res = $http.get("http://localhost:8080/api/v1/student?offset=0&order=vpisnaStevilka&where=priimek:LIKEIC:" + query + "%");
             // }
-            var res = $http.get("http://localhost:8080/api/v1/student?filter=" + query);
+            var res = $http.get("/api/v1/student?filter=" + query);
             console.log(res);
             return res;
         };
@@ -24,11 +24,11 @@
         // };
 
         var getStudent = function(vpisnaStevilka){
-            return $http.get("http://localhost:8080/api/v1/student?filter=" + vpisnaStevilka );
+            return $http.get("/api/v1/student?filter=" + vpisnaStevilka );
         };
 
         var getVpis = function(id){
-            return $http.get("http://localhost:8080/api/v1/student/" + id + "/vpis");
+            return $http.get("/api/v1/student/" + id + "/vpis");
         };
 
         return{

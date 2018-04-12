@@ -37,10 +37,17 @@ angular.module('studis').directive('fileModel', ['$parse', function ($parse) {
             });
         }
     };
+}]).config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(|blob|):/);
 }]);
 
 
 function SkrbnikCtrl($scope, $http, $window) {
+  
+
+
+
+
   var vsebina_datoteke = null;
   //prikaže neuspešno uvožene
   $scope.napaka_uvozeni_zapisi = false;
@@ -55,9 +62,12 @@ function SkrbnikCtrl($scope, $http, $window) {
 	$scope.showContent = function($fileContent){
     $scope.prikaz_datoteke = $fileContent;
     vsebina_datoteke = $fileContent;
+
+    $scope.dovoliUvoz = true;
   };
   	
   $scope.uploadFile = function(){
+    $scope.error_uvoz = "nalaganje poteka..."
     var file = $scope.myFile;
     if (!file) {
       $scope.error_uvoz = "Izberi datoteko za uvoz";
@@ -66,7 +76,7 @@ function SkrbnikCtrl($scope, $http, $window) {
 
     var fd = new FormData();
     fd.append('file', file);
-    $http.post('http://localhost:8080/api/v1/kandidat/nalozi', fd, {
+    $http.post('/api/v1/kandidat/nalozi', fd, {
         transformRequest: angular.identity,
         headers: {'Content-Type': undefined}
     })
@@ -75,11 +85,37 @@ function SkrbnikCtrl($scope, $http, $window) {
       $scope.error_uvoz = "uspešno uvoženi podatki"
       $scope.uvozeni_zapisi_naslov = true;
       $scope.vrnjeni_zapisi = response.data;
+
+
+      $scope.steviloUvozenih = response.data.length;
+      $scope.trenutnaStran = 1;
+      $scope.zapisovNaStran = 5;
+      $scope.$watch("trenutnaStran", function() {
+        nastaviStranZapise($scope.trenutnaStran);
+      });
+
+      function nastaviStranZapise(page) {
+        var pagedData = response.data.slice(
+          (page - 1) * $scope.zapisovNaStran,
+          page * $scope.zapisovNaStran
+        );
+        $scope.aZapisi = pagedData;
+      }
+
+
+        //prikaz neuspešnih
+        $http.get('/api/v1/kandidat/neuspesni')
+        .then(function(response){
+          $scope.neuspesni_fajl = response.data;
+          
+        })
+        .catch(function(err){
+          $scope.error_uvoz = "prišlo je do napake pri prenosu neuspešnih";
+        });
     })
     .catch(function(err){
       $scope.error_uvoz = "prišlo je do napake pri uvozu"
     });
+
   };
-
-
 };

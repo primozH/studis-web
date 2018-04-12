@@ -5,7 +5,7 @@ angular
     .controller('ReferentkaCtrl', ReferentkaCtrl);
  
 
-function ReferentkaCtrl($scope, $http, $window, refe) {
+function ReferentkaCtrl($scope, $http, $window, refe, $location) {
   var vsebina_datoteke = null;	
 
   $scope.logout = function() {
@@ -17,7 +17,8 @@ function ReferentkaCtrl($scope, $http, $window, refe) {
 
 
   $scope.prikazi_zetone = function() {
-  	$scope.pogled_zetoni = true;
+      $location.path("/zetoni");
+  	/*$scope.pogled_zetoni = true;
 
   	$http.get('http://localhost:8080/api/v1/zeton')
     .then(function(response){
@@ -26,7 +27,7 @@ function ReferentkaCtrl($scope, $http, $window, refe) {
     })
     .catch(function(err){
       $scope.error_zetoni = "prišlo je do napake pri prikazi_zetone";
-    });
+    });*/
   }
 
   $scope.zbrisi_zeton = function(zeton) {

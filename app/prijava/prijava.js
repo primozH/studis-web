@@ -4,7 +4,7 @@ angular
     .module('studis')
     .controller('PrijavaCtrl', PrijavaCtrl);
 
-function PrijavaCtrl($scope, $http, $window, $location, auth) {
+	function PrijavaCtrl($scope, $http, $window, auth, $location) {
 	$scope.klik_pozabljeno = false;
 
 	$scope.jeVpisan = function() {
@@ -44,11 +44,11 @@ function PrijavaCtrl($scope, $http, $window, $location, auth) {
           $window.localStorage['studis'] = response.access_token;
         		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
         			$window.localStorage.setItem("tip", "Student");
-        			$location.path("/student");
+                    $location.path("/student");
         		}
         		else if ($scope.trenutni_logirani_uporabnik().tip == "Referent") {
         			$window.localStorage.setItem("tip", "Referent");
-					$location.path("/referent");
+        			$location.path("/referentka");
         		}
         		else if ($scope.trenutni_logirani_uporabnik().tip == "Skrbnik") {
         			$window.localStorage.setItem("tip", "Skrbnik");
@@ -60,7 +60,7 @@ function PrijavaCtrl($scope, $http, $window, $location, auth) {
         		}
         		else if ($scope.trenutni_logirani_uporabnik().tip == "Kandidat") {
         			$window.localStorage.setItem("tip", "Kandidat");
-        			$location.path("/kandidat");
+        			$location.path("/student");
         		}
         }
 

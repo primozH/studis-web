@@ -1,12 +1,5 @@
 
-    var app = angular.module('studis', ['ngRoute']);
-
-    var roles = {
-        skrbnik: "Skrbnik",
-        ucitelj: "Ucitelj",
-        student: "Student",
-        referent: "Referent"
-    }
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap']);
 
     app.config(function($routeProvider, $windowProvider) {
         var $window = $windowProvider.$get();
@@ -32,8 +25,11 @@
                 templateUrl: 'referentka/referentka.html',
                 controller: 'ReferentkaCtrl',
                 resolve: {
-                    'auth' : function(AuthService){
-                        return AuthService.authenticate(roles.referent);
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
+                            console.log("Vpiši se kot referentka, drugače nemoreš do /referentka");
+                            $window.location.href = '/#/prijava';
+                        }
                     }
                 }                
             })
@@ -41,8 +37,12 @@
                 templateUrl: 'student/student.html',
                 controller: 'StudentCtrl',
                 resolve: {
-                    'auth': function(AuthService) {
-                        return AuthService.authenticate(roles.student);
+                    function(){
+                        console.log($window.localStorage.getItem("tip"));
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student" || $window.localStorage.getItem("tip") === "Kandidat"))  {
+                            console.log("Vpiši se kot student, drugače nemoreš do /student");
+                            $window.location.href = '/#/prijava';
+                        }
                     }
                 } 
             })
@@ -54,7 +54,6 @@
                         if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Skrbnik"))  {
                             console.log("Vpiši se kot skrbnik, drugače nemoreš do /skrbnik");
                             $window.location.href = '/#/prijava';
-                            return;
                         }
                     }
                 }                
@@ -67,10 +66,9 @@
                         if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Ucitelj"))  {
                             console.log("Vpiši se kot ucitelj, drugače nemoreš do /ucitelj");
                             $window.location.href = '/#/prijava';
-                            return;
                         }
                     }
-                }                
+                }
             })
             .when('/vpisnilist/:id', {
                 templateUrl: 'vpisniList/vpisniList.html',
@@ -81,11 +79,32 @@
                             || $window.localStorage.getItem("zeton") === "ima2"))  {
                             console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilist");
                             $window.location.href = '/#/prijava';
-                            return;
                         }
                     }
-                }      
-                          
+                }
+            })
+            .when('/vpisnilistpredmetnik/:id', {
+                templateUrl: 'vpisniList/vpisnilistpredmetnik.html',
+                controller: 'VpisniListCtrl',
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima1"
+                            || $window.localStorage.getItem("zeton") === "ima2"))  {
+                            console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilistpredmetnik");
+                            $window.location.href = '/#/prijava';
+                        }
+                    }
+                }
+            })
+            .when('/zeton/:id/:vrstaVpisa', {
+                templateUrl: 'token/token.html',
+                controller: 'tokenCtrl',
+                controllerAs: "vm"
+            })
+            .when('/zetoni', {
+                templateUrl: 'tokens/tokens.html',
+                controller: 'tokensCtrl',
+                controllerAs: "vm"
             })
             .when('/zeton_uredi/:id', {
                 templateUrl: 'zeton/zeton.html',
@@ -103,25 +122,4 @@
             })
             .otherwise({redirectTo: '/prijava'});
 
-    }).run(function ($rootScope, $location) {
-        $rootScope.$on('$routeChangeError', function(event, current, previous, rejection){
-            if(rejection === 'Not Authenticated'){
-                $location.path('/prijava');
-            }
-        })
-    }).factory('AuthService', function($q, auth) {
-        return {
-            authenticate: function(role){
-                var isAuthenticated = false;
-                var userRole = auth.currentUser.tip;
-                if (userRole == role)
-                    isAuthenticated = true;
-
-                if (isAuthenticated){
-                    return true;
-                } else {
-                    return $q.reject("Not Authenticated");
-                }
-            }
-        }
     });
