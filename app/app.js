@@ -1,6 +1,13 @@
 
     var app = angular.module('studis', ['ngRoute']);
 
+    var roles = {
+        skrbnik: "Skrbnik",
+        ucitelj: "Ucitelj",
+        student: "Student",
+        referent: "Referent"
+    }
+
     app.config(function($routeProvider, $windowProvider) {
         var $window = $windowProvider.$get();
 
@@ -25,12 +32,8 @@
                 templateUrl: 'referentka/referentka.html',
                 controller: 'ReferentkaCtrl',
                 resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referentka, drugače nemoreš do /referentka");
-                            $window.location.href = '/#/prijava';
-                            return;
-                        }
+                    'auth' : function(AuthService){
+                        return AuthService.authenticate(roles.referent);
                     }
                 }                
             })
@@ -38,13 +41,8 @@
                 templateUrl: 'student/student.html',
                 controller: 'StudentCtrl',
                 resolve: {
-                    function(){
-                        console.log($window.localStorage.getItem("tip"));
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Student" || $window.localStorage.getItem("tip") === "Kandidat"))  {
-                            console.log("Vpiši se kot student, drugače nemoreš do /student");
-                            $window.location.href = '/#/prijava';
-                            return;
-                        }
+                    'auth': function(AuthService) {
+                        return AuthService.authenticate(roles.student);
                     }
                 } 
             })
@@ -105,4 +103,25 @@
             })
             .otherwise({redirectTo: '/prijava'});
 
+    }).run(function ($rootScope, $location) {
+        $rootScope.$on('$routeChangeError', function(event, current, previous, rejection){
+            if(rejection === 'Not Authenticated'){
+                $location.path('/prijava');
+            }
+        })
+    }).factory('AuthService', function($q, auth) {
+        return {
+            authenticate: function(role){
+                var isAuthenticated = false;
+                var userRole = auth.currentUser.tip;
+                if (userRole == role)
+                    isAuthenticated = true;
+
+                if (isAuthenticated){
+                    return true;
+                } else {
+                    return $q.reject("Not Authenticated");
+                }
+            }
+        }
     });
