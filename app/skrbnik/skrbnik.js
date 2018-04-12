@@ -68,7 +68,7 @@ function SkrbnikCtrl($scope, $http, $window) {
 
     var fd = new FormData();
     fd.append('file', file);
-    $http.post('http://localhost:8080/api/v1/kandidat/nalozi', fd, {
+    $http.post('/api/v1/kandidat/nalozi', fd, {
         transformRequest: angular.identity,
         headers: {'Content-Type': undefined}
     })
@@ -85,7 +85,7 @@ function SkrbnikCtrl($scope, $http, $window) {
 
   $scope.prenesi_nespesne = function(){
     console.log("prenasam neuspesne");
-    $http.get('http://localhost:8080/api/v1/kandidat/neuspesni')
+    $http.get('/api/v1/kandidat/neuspesni')
     .then(function(response){
       console.log(response);
       console.log("preneseni podatki");

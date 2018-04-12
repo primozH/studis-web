@@ -1,7 +1,7 @@
 angular.module('studis')
 .service('auth', ['$http', '$window', function($http, $window) {
     this.service_login = function(uporabnisko_ime, geslo) {
-        return $http.post('http://localhost:8080/api/v1/avtorizacija/prijava',
+        return $http.post('/api/v1/avtorizacija/prijava',
 	     {uporabniskoIme: uporabnisko_ime, geslo: geslo}).then(function(response) {
      		return response.data;
 	    }).catch(function (err) {
@@ -11,7 +11,7 @@ angular.module('studis')
 
 
     this.service_geslo_reset = function(email2) {
-    	return $http.post('http://localhost:8080/api/v1/avtorizacija/pozabljeno-geslo',
+    	return $http.post('/api/v1/avtorizacija/pozabljeno-geslo',
             {email: email2}).then(function(response) {
                 return 200;
 	    }).catch(function (err, status) {
