@@ -16,7 +16,7 @@ function tokenCtrl(tokenService, $routeParams, $location){
                 if(vm.token.izkoriscen){
                     $(':button').prop('disabled', true);
                     $('select').prop('disabled', true);
-                    $('radio').prop('disabled', true);
+                    $("input[type=radio]").prop('disabled', true);
                 }
 
                 /*
