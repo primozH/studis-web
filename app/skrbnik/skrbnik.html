@@ -4,7 +4,7 @@
         <a class="navbar-brand">STUDIS</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/#/referentka">Domov</a></li>
+        <li class="active"><a href="/#/skrbnik">Domov</a></li>
         
         <li><a ng-click="logout()">Log out</a></li>
       </ul>
@@ -13,43 +13,66 @@
 
 
 <div>
-  <h3>Pozdravljen skrbnik</h3>
-	<form>
-	  <div class="form-group">
-		<h3 align="center">Uvoz podatkov o študentih</h3>
+  <div class="row">
+    <div class="col-md-2"></div>
+
+    <div align="center" class="col-md-8">
+      <h3 align="center">Pozdravljen skrbnik</h3><hr>
+        <form>
+          <div class="form-group">
+          <h3 align="center">Uvoz podatkov o študentih</h3>
 
 
-    <label class="btn btn-info  btn-block btn-file">
-        Izberi datoteko
-        <input type="file" on-read-file="showContent($fileContent)" file-model="myFile" style="display: none;"/>
-    </label>
+          <label class="btn btn-info  btn-block btn-file">Izberi datoteko
+          <input type="file" on-read-file="showContent($fileContent)" file-model="myFile" style="display: none;"/>
+          </label>    
+          </div>
+        </form>
 
 
-    
-	  </div>
-	</form>
-	<textarea ng-bind="prikaz_datoteke" rows="6" class="form-control" readonly></textarea>
-  <button class="btn btn-info  btn-block" ng-click="uploadFile()">uvozi kandidate</button>
-  <br>
-  <p align="center">{{error_uvoz}}</p>
-  <br><br>
+        <textarea ng-bind="prikaz_datoteke" rows="8" class="form-control" readonly></textarea>
+        <button ng-show="dovoliUvoz" class="btn btn-info  btn-block" ng-click="uploadFile()">uvozi kandidate</button>
+        <br>
+        <p align="center">{{error_uvoz}}</p>
+        <br><br>
+
+        <div ng-show="uvozeni_zapisi_naslov">
+          <h3 align="center">Podatki o uvoženih zapisih</h3>
+          <table id="mytable" class="table table-striped">
+          <tbody>
+            <tr ng-repeat="zapis in aZapisi">
+              <th>
+                <div>
+                  {{zapis.ime}} {{zapis.priimek}} (id: {{zapis.id}})<br>
+                  uporabniško ime: {{zapis.uporabniskoIme}}<br>
+                  vpisna številka: {{zapis.vpisnaStevilka}}<br>
+                  študijski program: {{zapis.studijskiProgram.naziv}}<br>
+                  geslo: {{zapis.gesloPlain}}<br>
+                </div>
+              </th>
+            </tr>
+          </tbody>
+          </table>
+          <uib-pagination total-items="steviloUvozenih" ng-model="trenutnaStran" items-per-page="itemsPerPage"></uib-pagination>
+        </div>
 
 
-  <h3 align="center" ng-show="uvozeni_zapisi_naslov">Podatki o uvoženih zapisih</h3>
-  <p align="center" ng-repeat="zapis in vrnjeni_zapisi" readonly>
-  id: {{zapis.id}}
-  ime: {{zapis.ime}}
-  priimek: {{zapis.priimek}}
-  uporabniško ime: {{zapis.uporabniskoIme}}
-  vpisna številka: {{zapis.vpisnaStevilka}}
-  študijski program: {{zapis.studijskiProgram.naziv}}
-  geslo: {{zapis.gesloPlain}}
-  </p>
-  <br><br>
+      <div ng-show="uvozeni_zapisi_naslov">
+        <h3 align="center">Podatki o neuspešno uvoženih zapisih</h3>
+        <textarea ng-bind="neuspesni_fajl" rows="6" class="form-control" readonly></textarea>
+      </div>
 
-  <h3 align="center" ng-show="uvozeni_zapisi_naslov">Podatki o neuspelih uvoženih zapisih</h3>
-  <button  class="btn btn-info  btn-block" ng-click="prenesi_nespesne()">prenesi datoteko</button>
-  <a ng-href="{{fileUrl}}" download="file.txt">download</a>
+
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+
+
+
+
+
 
 
 

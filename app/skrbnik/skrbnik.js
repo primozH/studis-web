@@ -43,6 +43,11 @@ angular.module('studis').directive('fileModel', ['$parse', function ($parse) {
 
 
 function SkrbnikCtrl($scope, $http, $window) {
+  
+
+
+
+
   var vsebina_datoteke = null;
   //prikaže neuspešno uvožene
   $scope.napaka_uvozeni_zapisi = false;
@@ -57,9 +62,12 @@ function SkrbnikCtrl($scope, $http, $window) {
 	$scope.showContent = function($fileContent){
     $scope.prikaz_datoteke = $fileContent;
     vsebina_datoteke = $fileContent;
+
+    $scope.dovoliUvoz = true;
   };
   	
   $scope.uploadFile = function(){
+    $scope.error_uvoz = "nalaganje poteka..."
     var file = $scope.myFile;
     if (!file) {
       $scope.error_uvoz = "Izberi datoteko za uvoz";
@@ -77,37 +85,40 @@ function SkrbnikCtrl($scope, $http, $window) {
       $scope.error_uvoz = "uspešno uvoženi podatki"
       $scope.uvozeni_zapisi_naslov = true;
       $scope.vrnjeni_zapisi = response.data;
+
+
+      $scope.steviloUvozenih = response.data.length;
+      $scope.trenutnaStran = 1;
+      $scope.itemsPerPage = 5;
+      $scope.$watch("trenutnaStran", function() {
+        setPagingData($scope.trenutnaStran);
+      });
+
+      function setPagingData(page) {
+        var pagedData = response.data.slice(
+          (page - 1) * $scope.itemsPerPage,
+          page * $scope.itemsPerPage
+        );
+        $scope.aZapisi = pagedData;
+      }
+
+
+
+
+
+        //prikaz neuspešnih
+        $http.get('/api/v1/kandidat/neuspesni')
+        .then(function(response){
+          $scope.neuspesni_fajl = response.data;
+          
+        })
+        .catch(function(err){
+          $scope.error_uvoz = "prišlo je do napake pri prenosu neuspešnih";
+        });
     })
     .catch(function(err){
       $scope.error_uvoz = "prišlo je do napake pri uvozu"
     });
-  };
-
-  $scope.prenesi_nespesne = function(){
-    console.log("prenasam neuspesne");
-    $http.get('/api/v1/kandidat/neuspesni')
-    .then(function(response){
-      console.log(response);
-      console.log("preneseni podatki");
-
-      var data = response.data,
-      blob = new Blob([data], { type: 'text/plain' }),
-      url = $window.URL || $window.webkitURL;
-      $scope.fileUrl = url.createObjectURL(blob);
-    })
-    .catch(function(err){
-      $scope.error_uvoz = "prišlo je do napake pri prenesi_nespesne"
-    });
 
   };
-
-
-  /*var data = 'some data here...',
-    blob = new Blob([data], { type: 'text/plain' }),
-    url = $window.URL || $window.webkitURL;
-    $scope.fileUrl = url.createObjectURL(blob);//*/
-
-
-
-
 };
