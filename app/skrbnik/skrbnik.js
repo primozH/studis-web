@@ -89,21 +89,18 @@ function SkrbnikCtrl($scope, $http, $window) {
 
       $scope.steviloUvozenih = response.data.length;
       $scope.trenutnaStran = 1;
-      $scope.itemsPerPage = 5;
+      $scope.zapisovNaStran = 5;
       $scope.$watch("trenutnaStran", function() {
-        setPagingData($scope.trenutnaStran);
+        nastaviStranZapise($scope.trenutnaStran);
       });
 
-      function setPagingData(page) {
+      function nastaviStranZapise(page) {
         var pagedData = response.data.slice(
-          (page - 1) * $scope.itemsPerPage,
-          page * $scope.itemsPerPage
+          (page - 1) * $scope.zapisovNaStran,
+          page * $scope.zapisovNaStran
         );
         $scope.aZapisi = pagedData;
       }
-
-
-
 
 
         //prikaz neuspešnih
