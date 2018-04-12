@@ -45,21 +45,54 @@ function VpisniListCtrl($scope, $window, $routeParams, vpislist, studen){
       return newDate.getFullYear() + "-" +('0' + (newDate.getMonth() + 1)).slice(-2)+"-"+('0' + newDate.getDate()).slice(-2);
     }
     
+    //če država ni slovenija nastavi pošto/občino na -1
+    $scope.sprememba_drzava_rojstva = function() {
+        if ($scope.vl_drzava_rojstva.ime != 'Slovenija') {
+            $scope.skrij_obcinaposta_rojstva = true;
+            $scope.vl_obcina_rojstva = -1;
+        } else $scope.skrij_obcinaposta_rojstva = false;
+    }
+    $scope.sprememba_drzava_stalno = function() {
+        if ($scope.vl_drzava_stalno.ime != 'Slovenija') {
+            $scope.skrij_obcinaposta_stalno = true;
+            $scope.vl_obcina_stalno = -1;
+            $scope.vl_posta_stalno = -1;
+
+        } else $scope.skrij_obcinaposta_stalno = false;
+    }
+    $scope.sprememba_drzava_zacasno = function() {
+        if ($scope.vl_drzava_zacasno.ime != 'Slovenija') {
+            $scope.skrij_obcinaposta_zacasno = true;
+            $scope.vl_obcina_zacasno = -1;
+            $scope.vl_posta_zacasno = -1;
+        } else $scope.skrij_obcinaposta_zacasno = false;
+    }
+
     $scope.potrdi_osebne_podatke = function() {
-        vpislist.service_osebni_podatki(31, $scope.vl_ime, $scope.vl_priimek, $scope.vl_emso, 
+        if (!$scope.vl_ime || !$scope.vl_priimek || !$scope.vl_emso || !$scope.vl_davcna || !$scope.vl_rojstvo || //!$scope.vl_spol || !$scope.vl_telefonska ||
+            !$scope.vl_email || !$scope.vl_drzava_rojstva || !$scope.vl_kraj_rojstva || 
+            !$scope.vl_drzava_stalno || !$scope.vl_naslov_stalno) {
+            $scope.napaka_vpisnilist = "prosim dopolni obrazec";
+            return;
+        }
+        $scope.napaka_vpisnilist = "";
+
+        vpislist.service_osebni_podatki(
+            JSON.parse($window.atob($window.localStorage['studis'].split('.')[1])).uid,
+            $scope.vl_ime, $scope.vl_priimek, $scope.vl_emso, 
             $scope.vl_davcna, formatDate($scope.vl_rojstvo),$scope.vl_spol.code, $scope.vl_telefonska,
-            $scope.vl_drzava_rojstva.ime, $scope.vl_kraj_rojstva,$scope.vl_obcina_rojstva.ime,
+            $scope.vl_email, $scope.vl_drzava_rojstva.ime, $scope.vl_kraj_rojstva,$scope.vl_obcina_rojstva.ime,
             $scope.vl_drzava_stalno.code, $scope.vl_posta_stalno.code, $scope.vl_obcina_stalno.code,
-            $scope.vl_naslov_stalno
-
-
-            ).then(function(response){
+            $scope.vl_naslov_stalno).then(function(response){
+            
             console.log(response);
+            if (response.data.message) $scope.napaka_vpisnilist = response.data.message;
+
         }).catch(function(err, status) {
+            $scope.napaka_vpisnilist = err;
             console.log("napaka pri service_kandidat");
         });
 
-        console.log();
     }
 
 

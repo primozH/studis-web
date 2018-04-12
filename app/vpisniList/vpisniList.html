@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Vpisna številka</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_vpisna" readonly>
+                    <input type="text" class="form-control" ng-model="vl_vpisna" readonly>
                 </div>
             </div>
             <div class="form-group">
@@ -43,19 +43,19 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Email</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_email"  >
+                    <input type="text" class="form-control" ng-model="vl_email" required>
                 </div>
             </div>
             <hr><div class="form-group">
                 <label class="control-label col-sm-2">Datum rojstva</label>
                 <div class="col-sm-10">
-                    <input type="date" id="date" class="form-control" min="1920-01-01" max="2010-01-01" ng-model="vl_rojstvo" ng-change="primerjaj_rojstvo_emso()"  >
+                    <input type="date" id="date" class="form-control" min="1920-01-01" max="2010-01-01" ng-model="vl_rojstvo" ng-change="primerjaj_rojstvo_emso()">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Emšo</label>
                 <div class="col-sm-10">
-                    <input samo-stevilke type="text" class="form-control" ng-model="vl_emso" ng-change="primerjaj_emso_rojstvo()" maxlength="13" minlength="13">
+                    <input samo-stevilke type="text" class="form-control" ng-model="vl_emso" ng-change="primerjaj_emso_rojstvo()" maxlength="13" minlength="13" required>
                 </div>
             </div>
             <div class="form-group">
@@ -68,13 +68,13 @@
                 <label class="control-label col-sm-2">Spol</label>
                 <div class="col-sm-10">
                     <select ng-options="spol as spol.ime for spol in spoli" class="form-control"
-                    ng-model="vl_spol"><option></option></select>
+                    ng-model="vl_spol" required><option></option></select>
                 </div>
             </div>
             <hr><div class="form-group">
                 <label class="control-label col-sm-2">Država rojstva</label>
                 <div class="col-sm-10">
-                    <select ng-options="drzava as drzava.ime for drzava in drzave" class="form-control" ng-model="vl_drzava_rojstva" required><option></option></select>
+                    <select ng-options="drzava as drzava.ime for drzava in drzave" class="form-control" ng-model="vl_drzava_rojstva" ng-change="sprememba_drzava_rojstva()" required><option></option></select>
                 </div>
             </div>
             <div class="form-group">
@@ -83,32 +83,32 @@
                     <input samo-crke type="text" class="form-control" ng-model="vl_kraj_rojstva" required>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-hide="skrij_obcinaposta_rojstva">
                 <label class="control-label col-sm-2">Občina rojstva</label>
                 <div class="col-sm-10">
-                    <select ng-options="obcina as obcina.ime for obcina in obcine" class="form-control" ng-model="vl_obcina_rojstva" required><option></option></select>
+                    <select ng-options="obcina as obcina.ime for obcina in obcine" class="form-control" ng-model="vl_obcina_rojstva"><option></option></select>
                 </div>
             </div>
             <!---->
             <hr><div class="form-group">
                 <label class="control-label col-sm-2">Stalni Naslov</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-value="vl_naslov_stalno"  >
+                    <input type="text" class="form-control" ng-model="vl_naslov_stalno" required>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">Država</label>
                 <div class="col-sm-10">
-                    <select ng-options="drzava as drzava.ime for drzava in drzave" class="form-control" ng-model="vl_drzava_stalno" required><option></option></select>
+                    <select ng-options="drzava as drzava.ime for drzava in drzave" class="form-control" ng-model="vl_drzava_stalno" ng-change="sprememba_drzava_stalno()" required><option></option></select>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-hide="skrij_obcinaposta_stalno">
                 <label class="control-label col-sm-2">Pošta</label>
                 <div class="col-sm-10">
-                    <select ng-options="posta as posta.ime for posta in poste" class="form-control" ng-model="vl_posta_stalno" required><option></option></select>
+                    <select ng-options="posta as posta.ime for posta in poste" class="form-control" ng-model="vl_posta_stalno"><option></option></select>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-hide="skrij_obcinaposta_stalno">
                 <label class="control-label col-sm-2">Občina</label>
                 <div class="col-sm-10">
                     <select ng-options="obcina as obcina.ime for obcina in obcine" class="form-control" ng-model="vl_obcina_stalno"><option></option></select>
@@ -124,23 +124,23 @@
             <div class="form-group">
                 <label class="control-label col-sm-2">Država</label>
                 <div class="col-sm-10">
-                    <select ng-options="drzava as drzava.ime for drzava in drzave" class="form-control" ng-model="vl_drzava_zacasno"><option></option></select>
+                    <select ng-options="drzava as drzava.ime for drzava in drzave" class="form-control" ng-model="vl_drzava_zacasno" ng-change="sprememba_drzava_zacasno()"><option></option></select>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-hide="skrij_obcinaposta_zacasno">
                 <label class="control-label col-sm-2">Pošta</label>
                 <div class="col-sm-10">
                     <select ng-options="posta as posta.code for posta in poste" class="form-control" ng-model="vl_posta_zacasno"><option></option></select>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-hide="skrij_obcinaposta_zacasno">
                 <label class="control-label col-sm-2">Občina</label>
                 <div class="col-sm-10">
                     <select ng-options="obcina as obcina.ime for obcina in obcine" class="form-control" ng-model="vl_obcina_zacasno"><option></option></select>
                 </div>
             </div>            
             <!--href="/#/vpisnilistpredmetnik/1"-->
-
+            <p align="center">{{napaka_vpisnilist}}</p>
            <button type="submit" class="btn btn-primary btn-block" ng-click="potrdi_osebne_podatke()">Naprej</button>
 
         </fieldset>

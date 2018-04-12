@@ -1,7 +1,7 @@
 angular.module('studis')
 .service('vpislist', ['$http', '$window', function($http, $window) {
     this.service_osebni_podatki = function(id, ime, priimek, emso, davcnaStevilka, rojstvo, spol,
-    telefonska, drzavaRojstva, krajRojstva, obcinaRojstva, drzavaStalno, postaStalno, obcinaStalno,
+    telefonska, email, drzavaRojstva, krajRojstva, obcinaRojstva, drzavaStalno, postaStalno, obcinaStalno,
     naslovStalno) {
     	return $http.put("/api/v1/student/" + id, 
             {
@@ -12,6 +12,7 @@ angular.module('studis')
            "davcnaStevilka": davcnaStevilka,
            "datumRojstva": rojstvo,
            "spol": spol,
+           "email": email,
            "telefonskaStevilka": telefonska,
            "drzavaRojstva": drzavaRojstva,
            "krajRojstva": krajRojstva,
@@ -31,7 +32,7 @@ angular.module('studis')
             ).then(function(response) {
             return response;
 	    }).catch(function (err, status) {
-            return null;        
+            return err;        
         });
     }
 }]);
