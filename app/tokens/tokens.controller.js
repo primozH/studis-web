@@ -3,8 +3,14 @@ angular
     .module('studis')
     .controller('tokensCtrl', tokensCtrl);
 
-function tokensCtrl(tokenService, $location, searchProfile){
+function tokensCtrl(tokenService, $location, searchProfile, $timeout){
     var vm = this;
+
+    vm.message = tokenService.getMessage();
+
+    $timeout(function(){
+        vm.message = null;
+    }, 3000);
 
     tokenService.getTokens()
         .then(
