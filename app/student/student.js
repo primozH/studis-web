@@ -11,7 +11,7 @@ function StudentCtrl($scope, $window, $http, studen, $location) {
 		$window.localStorage.removeItem('studis');
 	    $window.localStorage.removeItem("tip");
 	    $window.localStorage.removeItem("zeton");
-        $location.path("/prijava");
+        $location.path("/login");
 	};
 
 	var trenutni_logirani_uporabnik = function() {
@@ -71,9 +71,9 @@ function StudentCtrl($scope, $window, $http, studen, $location) {
 
 
 
-    //prikaže podrobnejši profil na /profil/{vpisnaStevilka}
+    //prikaže podrobnejši profile na /profile/{vpisnaStevilka}
     $scope.prikazi_moj_profil = function() {
-    	$location.path('/profil/'+$scope.vpisna_studenta);
+    	$location.path('/profile/'+$scope.vpisna_studenta);
     }
 	
 };
