@@ -13,8 +13,7 @@
         $scope.logout = function() {
             $window.localStorage.removeItem('studis');
             $window.localStorage.removeItem("tip");
-            $window.location.reload();
-            $window.location.href = '/#/prijava';
+            $location.path("/prijava");
         };
         //za header
 

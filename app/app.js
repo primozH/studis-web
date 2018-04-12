@@ -17,8 +17,9 @@
                 controllerAs: "vm"
             })
             .when('/prijava', {
-            templateUrl: 'prijava/prijava.html',
-            controller: 'PrijavaCtrl'
+                templateUrl: 'prijava/prijava.html',
+                controller: 'loginCtrl',
+                controllerAs: 'vm'
             })
             .when('/referentka', {
                 templateUrl: 'referentka/referentka.html',

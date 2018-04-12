@@ -13,12 +13,12 @@
 	<br><br>
 	<form>
 		<div class="form-group">
-			<input ng-model="uporabnisko_ime" placeholder="Uporabniško ime" type="uporabnisko_ime" class="form-control">
+			<input ng-model="vm.loginData.uporabniskoIme" placeholder="Uporabniško ime" type="text" class="form-control">
 		</div>
 		<div class="form-group">
-			<input ng-model="geslo" placeholder="Geslo" type="password" class="form-control">
+			<input ng-model="vm.loginData.geslo" placeholder="Geslo" type="password" class="form-control">
 		</div>
-		<button type="submit" class="btn btn-success btn-block" ng-click="login_funkcija()">LOGIN</button><br>
+		<button type="submit" class="btn btn-success btn-block" ng-click="vm.login()">LOGIN</button><br>
 	</form>
 
 

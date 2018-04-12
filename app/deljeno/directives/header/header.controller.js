@@ -8,12 +8,12 @@
         headvm.currentUser = auth.currentUser();
 
         headvm.logout = function() {
-
             auth.logout();
             $location.path("/prijava");
             $route.reload();
         }
     };
+
     headerCtrl.$inject = ["$location", "$route", "auth"];
 
     angular

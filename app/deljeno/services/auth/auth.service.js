@@ -17,10 +17,10 @@
         };
 
         var login = function(user) {
-            return $http.post('http://localhost:8080/api/v1/avtorizacija/prijava', user)
+            return $http.post('api/v1/avtorizacija/prijava', user)
                 .then(
                     function success(response) {
-                        saveToken(response.data);
+                        saveToken(response.data["access_token"]);
                     }).catch(function (err) {
                     return err;
                 });
@@ -34,7 +34,6 @@
             var token = getToken();
             if (token) {
                 var tokenData = JSON.parse(b64Utf8(token.split(".")[1]));
-                console.log(tokenData);
                 return true;
             }
         };

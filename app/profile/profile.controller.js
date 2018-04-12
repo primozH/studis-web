@@ -5,7 +5,7 @@
         .module('studis')
         .controller('profileCtrl', profileCtrl);
 
-    function profileCtrl(searchProfile, $routeParams, $scope, $window){
+    function profileCtrl(searchProfile, $routeParams, $scope, $window, $location){
         vm = this;
         
         $scope.logout = function() {

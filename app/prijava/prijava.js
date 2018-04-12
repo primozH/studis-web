@@ -4,7 +4,7 @@ angular
     .module('studis')
     .controller('PrijavaCtrl', PrijavaCtrl);
 
-	function PrijavaCtrl($scope, $http, $window, auth) {
+function PrijavaCtrl($scope, $http, $window, $location, auth) {
 	$scope.klik_pozabljeno = false;
 
 	$scope.jeVpisan = function() {
@@ -44,23 +44,23 @@ angular
           $window.localStorage['studis'] = response.access_token;
         		if ($scope.trenutni_logirani_uporabnik().tip == "Student") {
         			$window.localStorage.setItem("tip", "Student");
-        			$window.location.href = '/#/student';
+        			$location.path("/student");
         		}
         		else if ($scope.trenutni_logirani_uporabnik().tip == "Referent") {
         			$window.localStorage.setItem("tip", "Referent");
-        			$window.location.href = '/#/referentka';
+					$location.path("/referent");
         		}
         		else if ($scope.trenutni_logirani_uporabnik().tip == "Skrbnik") {
         			$window.localStorage.setItem("tip", "Skrbnik");
-        			$window.location.href = '/#/skrbnik';
+        			$location.path("/skrbnik");
         		}
         		else if ($scope.trenutni_logirani_uporabnik().tip == "Ucitelj") {
         			$window.localStorage.setItem("tip", "Ucitelj");
-        			$window.location.href = '/#/ucitelj';
+        			$location.path("/ucitelj");
         		}
         		else if ($scope.trenutni_logirani_uporabnik().tip == "Kandidat") {
         			$window.localStorage.setItem("tip", "Kandidat");
-        			$window.location.href = '/#/student';
+        			$location.path("/kandidat");
         		}
         }
 
