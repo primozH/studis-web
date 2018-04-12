@@ -16,6 +16,7 @@ function tokenCtrl(tokenService, $routeParams, $location){
                 if(vm.token.izkoriscen){
                     $(':button').prop('disabled', true);
                     $('select').prop('disabled', true);
+                    $('radio').prop('disabled', true);
                 }
 
                 /*
@@ -77,7 +78,7 @@ function tokenCtrl(tokenService, $routeParams, $location){
             "oblikaStudija":{
                 "sifra": document.getElementById('oblika_studija').value
             },
-            "prostaIzbira": $("input[name=prostaIzbira]:checked").val() === true
+            "prostaIzbira": $("input[name=prostaIzbira]:checked").val()
         };
         console.log("form data");
         console.log(formData);
