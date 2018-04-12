@@ -9,8 +9,9 @@ var tokenService = function($http){
         return $http.delete("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
     };
 
-    var putToken = function(id){
-        return $http.put("/api/v1/zeton/" + id);
+    var putToken = function(id, vrstaVpisa, data){
+        console.log("sending put request to " + "/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
+        return $http.put("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa, data);
     };
 
     var getTokens = function(){
