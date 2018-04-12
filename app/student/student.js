@@ -5,14 +5,14 @@ angular
     .module('studis')
     .controller('StudentCtrl', StudentCtrl);
 
-function StudentCtrl($scope, $window, $http, studen) {	
+function StudentCtrl($scope, $window, $http, studen, $location) {
 
 	$scope.logout = function() {
 		$window.localStorage.removeItem('studis');
 	    $window.localStorage.removeItem("tip");
 	    $window.localStorage.removeItem("zeton");
-	    $window.location.href = '/#/prijava';
-	}
+        $location.path("/prijava");
+	};
 
 	var trenutni_logirani_uporabnik = function() {
 		if ($window.localStorage['studis']) {
@@ -73,7 +73,7 @@ function StudentCtrl($scope, $window, $http, studen) {
 
     //prikaže podrobnejši profil na /profil/{vpisnaStevilka}
     $scope.prikazi_moj_profil = function() {
-    	$window.location.href = '/#/profil/'+$scope.vpisna_studenta;
+    	$location.path('/profil/'+$scope.vpisna_studenta);
     }
 	
 };
