@@ -13,7 +13,7 @@
 
 
 <div>
-  <h3>Pozdravljena skrbnik</h3>
+  <h3>Pozdravljen skrbnik</h3>
 	<form>
 	  <div class="form-group">
 		<h3 align="center">Uvoz podatkov o študentih</h3>
@@ -48,9 +48,8 @@
   <br><br>
 
   <h3 align="center" ng-show="uvozeni_zapisi_naslov">Podatki o neuspelih uvoženih zapisih</h3>
-  <button ng-show="uvozeni_zapisi_naslov" class="btn btn-info  btn-block" ng-click="prenesi_nespesne()">prenesi datoteko</button>
-
-  <a ng-href="{{ fileUrl }}" download="file.txt">download</a>
+  <button  class="btn btn-info  btn-block" ng-click="prenesi_nespesne()">prenesi datoteko</button>
+  <a ng-href="{{fileUrl}}" download="file.txt">download</a>
 
 
 
