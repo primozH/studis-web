@@ -3,7 +3,7 @@
     var navigation = function() {
         return {
             restrict: "EA",
-            templateUrl: "/deljeno/directives/header.template.html",
+            templateUrl: "/deljeno/directives/header/header.template.html",
             controller: "headerCtrl",
             controllerAs: "headvm"
         };
