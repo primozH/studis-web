@@ -10,7 +10,8 @@ var tokenService = function($http){
     };
 
     var putToken = function(id, vrstaVpisa, data){
-        console.log("sending put request to " + "/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
+        console.log("data to send");
+        console.log(data);;
         return $http.put("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa, data);
     };
 
@@ -22,12 +23,24 @@ var tokenService = function($http){
         return $http.post("/api/v1/zeton/" + id);
     };
 
+    var message = null;
+
+    var getMessage = function(){
+        return message;
+    };
+
+    var setMessage = function(m){
+        message = m;
+    };
+
     return{
         postToken: postToken,
         putToken: putToken,
         getToken: getToken,
         getTokens: getTokens,
-        deleteToken: deleteToken
+        deleteToken: deleteToken,
+        setMessage: setMessage,
+        getMessage: getMessage
     };
 };
 

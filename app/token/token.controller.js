@@ -5,7 +5,6 @@ angular
 
 function tokenCtrl(tokenService, $routeParams, $location){
     var vm = this;
-
     tokenService.getToken($routeParams.id, $routeParams.vrstaVpisa)
         .then(
             function success(response){
@@ -14,6 +13,12 @@ function tokenCtrl(tokenService, $routeParams, $location){
                     $("#prostaIzbiraDa").prop("checked", true);
                 else
                     $("#prostaIzbiraNe").prop("checked", true);
+                if(vm.token.izkoriscen){
+                    $(':button').prop('disabled', true);
+                    $('select').prop('disabled', true);
+                    $("input[type=radio]").prop('disabled', true);
+                }
+
                 /*
                 document.getElementById('program').value = vm.token.studijskiProgram.sifraEVS;
                 document.getElementById('letnik').value = vm.token.letnik.letnik;
@@ -43,10 +48,12 @@ function tokenCtrl(tokenService, $routeParams, $location){
                 function success(response){
                     console.log(response);
                     $('#removeTokenModal').modal('hide');
+                    tokenService.setMessage("Žeton je bil uspešno odstranjen");
                     $location.path("/zetoni");
                 },
                 function error(error){
                     console.log(error);
+                    tokenService.setMessage("Pri brisanju žetona je prišlo do napake");
                 }
             );
     };
@@ -79,10 +86,12 @@ function tokenCtrl(tokenService, $routeParams, $location){
             .then(
                 function success(response){
                     console.log(response);
+                    tokenService.setMessage("Žeton je bil uspešno posodobljen");
                     $location.path("/zetoni");
                 },
                 function error(error){
                     console.log(error);
+                    tokenService.setMessage("Pri posodabljanju žetona je prišlo do napake");
                 }
             );
     };

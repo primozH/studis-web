@@ -3,8 +3,15 @@ angular
     .module('studis')
     .controller('tokensCtrl', tokensCtrl);
 
-function tokensCtrl(tokenService, $location, searchProfile){
+function tokensCtrl(tokenService, $location, searchProfile, $timeout){
     var vm = this;
+
+    vm.message = tokenService.getMessage();
+
+    $timeout(function(){
+        vm.message = null;
+        tokenService.setMessage(null);
+    }, 3000);
 
     tokenService.getTokens()
         .then(
@@ -31,6 +38,7 @@ function tokensCtrl(tokenService, $location, searchProfile){
                     tokenService.postToken(student.id)
                         .then(
                             function success(response){
+                                console.log("create token response");
                                 console.log(response);
                                 $('#createTokenModal').modal('hide');
                                 $location.path("/zeton/" + student.id + "/" + response.data.vrstaVpisa.sifraVpisa);
