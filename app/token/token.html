@@ -119,6 +119,10 @@
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeTokenModal">Izbriši žeton</button>
                 </div>
             </div>
+            <div ng-show="vm.errorMsg" style="display:inline-flex;margin:1%" class="alert alert-danger alert-dismissible">
+                <!--<a style="text-align:center;display:block" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+                <p>{{vm.errorMsg}}</p>
+            </div>
 
             <!-- Modal -->
             <div id="removeTokenModal" class="modal fade">

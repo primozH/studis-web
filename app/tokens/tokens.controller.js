@@ -7,6 +7,7 @@ function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $w
     var vm = this;
 
     vm.message = tokenService.getMessage();
+    vm.errorMsg = null;
 
     $scope.logout = function() {
         $window.localStorage.removeItem('studis');
@@ -52,6 +53,8 @@ function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $w
                             },
                             function error(error){
                                 console.log(error);
+                                $('#createTokenModal').modal('hide');
+                                vm.errorMsg = "Napaka pri kreiranju žetona!";
                             }
                         );
                 },

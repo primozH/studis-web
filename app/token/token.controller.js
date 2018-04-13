@@ -6,6 +6,8 @@ angular
 function tokenCtrl(tokenService, $routeParams, $location, $scope, $window){
     var vm = this;
 
+    vm.errorMsg = null;
+
     $scope.logout = function() {
         $window.localStorage.removeItem('studis');
         $window.localStorage.removeItem("tip");
@@ -99,7 +101,8 @@ function tokenCtrl(tokenService, $routeParams, $location, $scope, $window){
                 },
                 function error(error){
                     console.log(error);
-                    tokenService.setMessage("Pri posodabljanju žetona je prišlo do napake");
+                    vm.errorMsg = "Napaka pri posodabljanju žetona!";
+                    // tokenService.setMessage("Pri posodabljanju žetona je prišlo do napake");
                 }
             );
     };
