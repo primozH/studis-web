@@ -3,10 +3,17 @@ angular
     .module('studis')
     .controller('tokensCtrl', tokensCtrl);
 
-function tokensCtrl(tokenService, $location, searchProfile, $timeout){
+function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $window){
     var vm = this;
 
     vm.message = tokenService.getMessage();
+
+    $scope.logout = function() {
+        $window.localStorage.removeItem('studis');
+        $window.localStorage.removeItem("tip");
+        $window.location.reload();
+        $window.location.href = '/#/prijava';
+    };
 
     $timeout(function(){
         vm.message = null;
