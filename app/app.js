@@ -82,7 +82,7 @@
                 }                
             })
             .when('/vpisnilistpredmetnik/:id', {
-                templateUrl: 'vpisniList/vpisnilistpredmetnik.html',
+                templateUrl: 'vpisniList/vpisniListPredmetnik.html',
                 controller: 'VpisniListCtrl',
                 resolve: {
                     function(){
@@ -97,12 +97,30 @@
             .when('/zeton/:id/:vrstaVpisa', {
                 templateUrl: 'token/token.html',
                 controller: 'tokenCtrl',
-                controllerAs: "vm"
+                controllerAs: "vm",
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
+                            console.log("Vpiši se kot referentka, drugače nemoreš do /zeton");
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+                    }
+                }
             })
             .when('/zetoni', {
                 templateUrl: 'tokens/tokens.html',
                 controller: 'tokensCtrl',
-                controllerAs: "vm"
+                controllerAs: "vm",
+                resolve: {
+                    function(){
+                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
+                            console.log("Vpiši se kot referentka, drugače nemoreš do /zetoni");
+                            $window.location.href = '/#/prijava';
+                            return;
+                        }
+                    }
+                }
             })
             .when('/zeton_uredi/:id', {
                 templateUrl: 'zeton/zeton.html',

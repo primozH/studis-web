@@ -3,8 +3,16 @@ angular
     .module('studis')
     .controller('tokenCtrl', tokenCtrl);
 
-function tokenCtrl(tokenService, $routeParams, $location){
+function tokenCtrl(tokenService, $routeParams, $location, $scope, $window){
     var vm = this;
+
+    $scope.logout = function() {
+        $window.localStorage.removeItem('studis');
+        $window.localStorage.removeItem("tip");
+        $window.location.reload();
+        $window.location.href = '/#/prijava';
+    };
+
     tokenService.getToken($routeParams.id, $routeParams.vrstaVpisa)
         .then(
             function success(response){
