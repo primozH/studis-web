@@ -24,6 +24,7 @@ var tokenService = function($http){
     };
 
     var message = null;
+    var errorMessage = null;
 
     var getMessage = function(){
         return message;
@@ -33,6 +34,14 @@ var tokenService = function($http){
         message = m;
     };
 
+    var getErrorMessage = function(){
+        return errorMessage;
+    };
+
+    var setErrorMessage = function(m){
+        errorMessage = m;
+    };
+
     return{
         postToken: postToken,
         putToken: putToken,
@@ -40,7 +49,9 @@ var tokenService = function($http){
         getTokens: getTokens,
         deleteToken: deleteToken,
         setMessage: setMessage,
-        getMessage: getMessage
+        getMessage: getMessage,
+        getErrorMessage: getErrorMessage,
+        setErrorMessage: setErrorMessage
     };
 };
 

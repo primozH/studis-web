@@ -101,8 +101,7 @@ function tokenCtrl(tokenService, $routeParams, $location, $scope, $window){
                 },
                 function error(error){
                     console.log(error);
-                    vm.errorMsg = "Napaka pri posodabljanju žetona!";
-                    // tokenService.setMessage("Pri posodabljanju žetona je prišlo do napake");
+                    vm.errorMsg = "Pri brisanju žetona je prišlo do napake";
                 }
             );
     };
