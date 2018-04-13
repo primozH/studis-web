@@ -38,7 +38,7 @@
                                 path = "/referent";
                                 break;
                             case "Skrbnik":
-                                path = "/skbnik";
+                                path = "/skrbnik";
                         }
                         $location.path(path);
                     }, function error(error) {
