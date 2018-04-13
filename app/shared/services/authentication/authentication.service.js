@@ -19,9 +19,10 @@
         };
 
         var login = function(user) {
-            return $http.post(apiString + '/avtorizacija/login', user)
+            return $http.post(apiString + '/avtorizacija/prijava', user)
                 .then(
                     function success(response) {
+                        console.log(response);
                         saveToken(response.data["access_token"]);
                     }).catch(function (err) {
                     return err;
@@ -29,6 +30,7 @@
         };
 
         var logout = function() {
+            console.log("Removing token");
             $window.sessionStorage.removeItem("studis-token");
         };
 
@@ -63,7 +65,7 @@
             logout: logout,
             forgotPassword: forgotPassword,
             isLogged: isLogged,
-            currentUser: currentUser,
+            currentUser: currentUser
         };
     }
 

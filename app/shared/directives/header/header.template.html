@@ -14,6 +14,9 @@
                 <li><a href="/referent">Domov</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li ng-show="headvm.isLogged"><a ng-click="headvm.showProfile()">
+                    <span class="glyphicon glyphicon-user">Profil</span>
+                </a></li>
                 <li ng-show="headvm.isLogged"><a href="" ng-click="headvm.logout()">
                     <span class="glyphicon glyphicon-log-out">&nbsp;Odjava</span>
                 </a></li>

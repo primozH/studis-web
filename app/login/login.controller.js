@@ -6,8 +6,8 @@
         var vm = this;
 
         vm.loginData = {
-            username: "",
-            password: ""
+            uporabniskoIme: "",
+            geslo: ""
         };
 
         vm.email = {
@@ -25,19 +25,20 @@
                 .then(
                     function success() {
                         var user = authentication.currentUser().tip;
+                        console.log(user);
                         var path;
                         switch (user) {
                             case "Student":
                                 path = "/student";
                                 break;
                             case "Ucitelj":
-                                path = "/teacher";
+                                path = "/ucitelj";
                                 break;
                             case "Referent":
                                 path = "/referent";
                                 break;
                             case "Skrbnik":
-                                path = "/admin";
+                                path = "/skbnik";
                         }
                         $location.path(path);
                     }, function error(error) {

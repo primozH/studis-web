@@ -1,34 +1,4 @@
-<nav class="navbar navbar-inverse">
-<div class="container-fluid">
-  <div class="navbar-header">
-    <a class="navbar-brand" >STUDIS</a>
-  </div>
-  <ul class="nav navbar-nav">
-    <li class="active"><a href="/#!/student">Domov</a></li>
-    <li><a ng-click="logout()">Odjava</a></li>
-  </ul>
-</div>
-</nav>
-
-
-
-<!--Prijavljen je kandidat-->
-<div ng-show="kandidat" class="row">
-  <div class="col-md-2"></div>
-  <div align="center"  class="col-md-8">
-    <p>Pozdravljen kandidat</p>
-    <legend>{{ime_kandidata}} {{priimek_kandidata}}</legend>
-    {{vpisna_kandidata}}
-
-
-    <br><br>
-    <a href="/#/vpisnilist/1" class="btn btn-info btn-block" role="button">ŽETON: {{vpisni_list1}}</a><br>
-  </div>
-  <div class="col-md-2"></div>
-</div>
-
-
-
+<navigation></navigation>
 
 <!--Prijavljen je student-->
 <div ng-hide="kandidat" class="row">

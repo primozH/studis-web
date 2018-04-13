@@ -1,4 +1,3 @@
-
 form.searchBar input[type=text] {
   padding: 10px;
   font-size: 17px;
@@ -31,4 +30,12 @@ textarea {
     overflow-y: scroll;
     height: 100px;
     resize: none; /* Remove this if you want the user to resize the textarea */
+}
+
+.loginPanel {
+  margin: 50px auto;
+}
+
+.customNavigation {
+  margin-bottom: 50px;
 }

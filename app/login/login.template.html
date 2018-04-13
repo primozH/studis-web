@@ -1,42 +1,50 @@
-<navigation></navigation>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 loginPanel">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3 style="color: darkgrey">Stud<span style="color: deepskyblue">IS</span></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <img src="http://lkrv.fri.uni-lj.si/fri_logo.jpg" alt="fri-uni-logo" width="150" height="70" class="center-block">
+                </div>
+            </div>
+            <div class="row">
+                <form class="form-horizontal">
+                    <div class="col-sm-8 col-sm-offset-2 input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input ng-model="vm.loginData.uporabniskoIme" placeholder="Uporabniško ime" type="text" class="form-control">
+                    </div>
+                    <div class="col-sm-8 col-sm-offset-2 input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input ng-model="vm.loginData.geslo" placeholder="Geslo" type="password" class="form-control">
+                    </div>
 
-<div class="panel panel-primary" style="width:50vw; margin: 100px auto ;">
-	<div class="row">
-		<div class="col-sm-6">
-			<h3>VPIS V STUDIS</h3>
-		</div>
-		<div class="col-sm-6">
-			<img src="http://lkrv.fri.uni-lj.si/fri_logo.jpg" alt="fri-uni-logo" width="150" height="70">	
-		</div>
-	</div>
-
-	<br><br>
-	<form>
-		<div class="form-group">
-			<input ng-model="vm.loginData.username" placeholder="Uporabniško ime" type="text" class="form-control">
-		</div>
-		<div class="form-group">
-			<input ng-model="vm.loginData.password" placeholder="Geslo" type="password" class="form-control">
-		</div>
-		<button type="submit" class="btn btn-success btn-block" ng-click="vm.login()">Prijava</button><br>
-	</form>
-
-
-	<div ng-show="vm.loginErrorMsg" class="alert alert-danger">
-		<p ng-bind="vm.loginErrorMsg" style="display:inline-block"></p>
-        <div id="counter" style="display:none"></div>
-        <div id="seconds" style="display:none">sekund</div>
-	</div>
-
-	<button class="btn btn-danger btn-block" ng-click="vm.forgotPassword()">Pozabljeno geslo?</button><br>
-
-	<div ng-show="vm.forgotPasswordClick">
-		<input ng-model="pozabljeno_email" type="email" class="form-control" placeholder="vnesi svoj email">
-		<button class="btn btn-dark btn-block" ng-click="vm.resetPassword()">Pošlji novo geslo</button>
-		<p ng-bind="vm.forgotPasswordMsg"></p>
-	</div>
+                    <div class="form-group" style="margin: 5px 0 5px 0">
+                        <button type="submit" class="btn btn-success center-block" ng-click="vm.login()">Prijava</button><br>
+                    </div>
+                </form>
+            </div>
 
 
-	
+            <div class="row">
+                <div ng-show="vm.loginErrorMsg" class="alert alert-danger">
+                    <p ng-bind="vm.loginErrorMsg" style="display:inline-block"></p>
+                    <div id="counter" style="display:none"></div>
+                    <div id="seconds" style="display:none">sekund</div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-danger center-block" ng-click="vm.forgotPassword()">Pozabljeno geslo?</button><br>
+                <div ng-show="vm.forgotPasswordClick">
+                    <input ng-model="pozabljeno_email" type="email" class="form-control" placeholder="vnesi svoj email">
+                    <button class="btn btn-dark btn-block" ng-click="vm.resetPassword()">Pošlji novo geslo</button>
+                    <p ng-bind="vm.forgotPasswordMsg"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

@@ -9,9 +9,13 @@
 
         headvm.logout = function() {
             authentication.logout();
-            $location.path("/login");
+            $location.path("/prijava");
             $route.reload();
         };
+
+        headvm.showProfile = function() {
+            $location.path("/profile");
+        }
     };
 
     headerCtrl.$inject = ["$location", "$route", "authentication"];
