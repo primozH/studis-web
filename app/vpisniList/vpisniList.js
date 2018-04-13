@@ -33,7 +33,11 @@ angular
     });
 
 
-function VpisniListCtrl($scope, $window, $routeParams, vpislist, studen){
+function VpisniListCtrl($scope, $window, $routeParams, $location, vpislist, studen){
+    //kter gumb ti pokaže za 2.korak vpisnega lista
+    if ($routeParams.id == 2)
+        $scope.id_zeton_2 = true;
+
     $scope.vl_rojstvo = new Date(1996, 0, 1); //year month(0=januar) day
     $scope.spoli = [ {code: 'ZENSKI', ime: 'ženski'}, {code: 'MOSKI', ime: 'moški'}];
     $scope.drzave = [{code:4,ime:"Afganistan"},{code:8,ime:"Albanija"},{code:10,ime:"Antarktika"},{code:12,ime:"Alžirija"},{code:16,ime:"AmeriškaSamoa"},{code:20,ime:"Andora"},{code:24,ime:"Angola"},{code:28,ime:"AntigvainBarbuda"},{code:31,ime:"Azerbajdžan"},{code:32,ime:"Argenitna"},{code:36,ime:"Avstralija"},{code:40,ime:"Avstrija"},{code:44,ime:"Bahami"},{code:48,ime:"Bahrajn"},{code:50,ime:"Bangladeš"},{code:51,ime:"Armenija"},{code:52,ime:"Barbados"},{code:56,ime:"Belgija"},{code:60,ime:"Bermudi"},{code:64,ime:"Butan"},{code:68,ime:"Bolivija"},{code:70,ime:"BosnainHercegovina"},{code:72,ime:"Bocvana"},{code:74,ime:"Bouvetovotok"},{code:76,ime:"Brazilija"},{code:84,ime:"Belize"},{code:86,ime:"BritanskoozemljevIndijskemoceanu"},{code:90,ime:"Solomonoviotoki"},{code:92,ime:"BritanskiDeviškiotoki"},{code:96,ime:"Brunej"},{code:100,ime:"Bolgarija"},{code:104,ime:"Mjanmar"},{code:108,ime:"Burundi"},{code:112,ime:"Belorusija"},{code:116,ime:"Kambodža"},{code:120,ime:"Kamerun"},{code:124,ime:"Kanada"},{code:132,ime:"Kapverdskiotoki(Zelenortskiotoki)"},{code:136,ime:"Kajmanskiotoki"},{code:140,ime:"Srednjeafriškarepublika"},{code:144,ime:"ŠriLanka"},{code:148,ime:"Čad"},{code:152,ime:"Čile"},{code:156,ime:"Kitajska"},{code:158,ime:"Tajvan"},{code:162,ime:"Božičniotok"},{code:166,ime:"KokosoviinKeelingoviotoki"},{code:170,ime:"Kolumbija"},{code:174,ime:"Komori"},{code:175,ime:"FrancoskaskupnostMejot"},{code:178,ime:"Kongo"},{code:180,ime:"DemokratičnarepublikaKongo"},{code:184,ime:"Cookoviotoki"},{code:188,ime:"Kostarika"},{code:191,ime:"Hrvaška"},{code:192,ime:"Kuba"},{code:196,ime:"Ciper"},{code:203,ime:"Češka"},{code:204,ime:"Benin"},{code:208,ime:"Danska"},{code:212,ime:"Dominika"},{code:214,ime:"Dominikanskarepublika"},{code:218,ime:"Ekvador"},{code:222,ime:"Salvador"},{code:226,ime:"EkvatorialnaGvineja"},{code:231,ime:"Etiopija"},{code:232,ime:"Eritreja"},{code:233,ime:"Estonija"},{code:234,ime:"Falkalndskiotoki"},{code:238,ime:"Ferskiotoki"},{code:239,ime:"JužnaGeorgiainJužniSandwicheviotoki"},{code:242,ime:"Fidži"},{code:246,ime:"Finska"},{code:248,ime:"Alandskiotoki"},{code:250,ime:"Francija"},{code:254,ime:"FrancoskaGvajana"},{code:258,ime:"FrancoskaPolinezija"},{code:260,ime:"Francoskajužnaozemlja"},{code:262,ime:"Džibuti"},{code:266,ime:"Gabon"},{code:268,ime:"Gruzija"},{code:270,ime:"Gambija"},{code:275,ime:"Palestina"},{code:276,ime:"Nemčija"},{code:288,ime:"Gana"},{code:292,ime:"Gibraltar"},{code:296,ime:"Kiribati"},{code:300,ime:"Grčija"},{code:304,ime:"Grenlandija"},{code:308,ime:"Grenada"},{code:312,ime:"Guadeloupe"},{code:316,ime:"Guam"},{code:320,ime:"Gvatemala"},{code:324,ime:"Gvineja"},{code:328,ime:"Gvajana"},{code:332,ime:"Haiti"},{code:334,ime:"OtokHeardinotočjeMcDonald"},{code:336,ime:"Vatikan"},{code:340,ime:"Honduras"},{code:344,ime:"HongKong"},{code:348,ime:"Madžarska"},{code:352,ime:"Islandija"},{code:356,ime:"Indija"},{code:360,ime:"Indonezija"},{code:364,ime:"Iran"},{code:368,ime:"Irak"},{code:372,ime:"Irska"},{code:376,ime:"Izrael"},{code:380,ime:"Italija"},{code:384,ime:"Slonokoščenaobala"},{code:388,ime:"Jamajka"},{code:392,ime:"Japonska"},{code:398,ime:"Kazahstan"},{code:400,ime:"Jordanija"},{code:404,ime:"Kenija"},{code:408,ime:"SevernaKoreja"},{code:410,ime:"JužnaKoreja"},{code:414,ime:"Kuvajt"},{code:417,ime:"Kirgizistan(Kirgizija)"},{code:418,ime:"Laos"},{code:422,ime:"Libanon"},{code:426,ime:"Lesoto"},{code:428,ime:"Latvija"},{code:430,ime:"Liberija"},{code:434,ime:"Libija"},{code:438,ime:"Lihtenštajn"},{code:440,ime:"Litva"},{code:442,ime:"Luksemburg"},{code:446,ime:"Makao"},{code:450,ime:"Madagaskar"},{code:454,ime:"Malavi"},{code:458,ime:"Malezija"},{code:462,ime:"Maldivi"},{code:466,ime:"Mali"},{code:470,ime:"Malta"},{code:474,ime:"Martinik"},{code:478,ime:"Mavretanija"},{code:480,ime:"Mauricius(Moris)"},{code:484,ime:"Mehika"},{code:492,ime:"Monako"},{code:496,ime:"Mongolija"},{code:498,ime:"Moldavija"},{code:499,ime:"ČrnaGora"},{code:500,ime:"Montserat"},{code:504,ime:"Maroko"},{code:508,ime:"Mozambik"},{code:512,ime:"Oman"},{code:516,ime:"Namibija"},{code:520,ime:"Nauru"},{code:524,ime:"Nepal"},{code:528,ime:"Nizozemska"},{code:531,ime:"Kurasao"},{code:533,ime:"Aruba"},{code:534,ime:"Otoksvetega.Martina(Nizozemska)"},{code:535,ime:"OtočjeBonaire,Sv.EustatijinSaba"},{code:540,ime:"NovaKaledonija"},{code:548,ime:"RepublikaVanuatu"},{code:554,ime:"NovaZelandija"},{code:558,ime:"Nikaragva"},{code:562,ime:"Niger"},{code:566,ime:"Nigerija"},{code:570,ime:"Niu"},{code:574,ime:"OtokNorflok"},{code:578,ime:"Norveška"},{code:580,ime:"SeverniMarianskiotoki"},{code:581,ime:"ZDAzunanjiotoki"},{code:583,ime:"Mikronezija"},{code:584,ime:"Maršaloviotoki"},{code:585,ime:"Palau"},{code:586,ime:"Pakistan"},{code:591,ime:"Panama"},{code:598,ime:"PapuaNovaGvineja"},{code:600,ime:"Paragvaj"},{code:604,ime:"Peru"},{code:608,ime:"Filipini"},{code:612,ime:"Pitcairnoviotoki"},{code:616,ime:"Poljska"},{code:620,ime:"Portugalska"},{code:624,ime:"Gvineja-Bissau"},{code:626,ime:"VzhodniTimor"},{code:630,ime:"Portoriko"},{code:634,ime:"Katar"},{code:638,ime:"FrancoskaskupnostReunion"},{code:642,ime:"Romunija"},{code:643,ime:"Ruskafederacija"},{code:646,ime:"Ruanda"},{code:652,ime:"SvetiBartolomej"},{code:654,ime:"SvetaHelena"},{code:659,ime:"SvetiKitsinNevis"},{code:660,ime:"Angvila"},{code:662,ime:"SvetaLucija"},{code:663,ime:"OtoksvetegaMartina"},{code:666,ime:"SvetaPierreinMiquelon"},{code:670,ime:"SvetiVincentinGrenadini"},{code:674,ime:"SanMarino"},{code:678,ime:"SaoTomeinPrincipe"},{code:682,ime:"SavdskaArabija"},{code:686,ime:"Senegal"},{code:688,ime:"Srbija"},{code:690,ime:"Sejšeli"},{code:694,ime:"SieraLeone"},{code:702,ime:"Singapur"},{code:703,ime:"Slovaška"},{code:704,ime:"Vietnam"},{code:705,ime:"Slovenija"},{code:706,ime:"Somalija"},{code:710,ime:"Južnaafrika"},{code:716,ime:"Zimbabve"},{code:724,ime:"Španija"},{code:728,ime:"JužniSudan"},{code:729,ime:"Sudan"},{code:732,ime:"ZahodnaSahara"},{code:740,ime:"Surinam"},{code:744,ime:"SvalbardinJanMajen"},{code:748,ime:"Svazi"},{code:752,ime:"Švedska"},{code:756,ime:"Švica"},{code:760,ime:"Sirija"},{code:762,ime:"Tadžikistan"},{code:764,ime:"Tajska"},{code:768,ime:"Togo"},{code:772,ime:"Tokelau"},{code:776,ime:"Tonga"},{code:780,ime:"TrinidadinTobago"},{code:784,ime:"ZdruženiArabskiEmirati"},{code:788,ime:"Tunizija"},{code:792,ime:"Turčija"},{code:795,ime:"Turkmenistan"},{code:796,ime:"TirškiinKajkoškiotoki"},{code:798,ime:"Tuvalu"},{code:800,ime:"Uganda"},{code:804,ime:"Ukrajina"},{code:807,ime:"Makedonija"},{code:818,ime:"Egipt"},{code:826,ime:"VelikaBritanija"},{code:831,ime:"OtokGuernsey"},{code:832,ime:"OtokJersey"},{code:833,ime:"OtokMan"},{code:834,ime:"Tanzanija"},{code:840,ime:"ZdruženedržaveAmerike"},{code:850,ime:"AmeriškiDeviškiotoki"},{code:854,ime:"BurkinaFaso"},{code:858,ime:"Urugvaj"},{code:860,ime:"Uzbekistan"},{code:862,ime:"Venezuela"},{code:876,ime:"OtočjeValisinFutuna"},{code:882,ime:"Samoa"},{code:887,ime:"Jemen"},{code:894,ime:"Zambija"}];
@@ -86,7 +90,19 @@ function VpisniListCtrl($scope, $window, $routeParams, vpislist, studen){
             $scope.vl_naslov_stalno).then(function(response){
             
             console.log(response);
-            if (response.data.message) $scope.napaka_vpisnilist = response.data.message;
+            if (response.data.message) {
+                $scope.napaka_vpisnilist = response.data.message;
+                return;
+            }
+            //preverim če je vrnilo OK json
+            if (response.status == 200) {
+                console.log("uspešno shranjeni podatki");
+                if ($routeParams.id == 1)
+                    $window.location.href = "/#/vpisnilistpredmetnik/1";
+                else if ($routeParams.id == 2)
+                    $window.location.href = "/#/vpisnilistpredmetnik/2";
+            }   
+
 
         }).catch(function(err, status) {
             $scope.napaka_vpisnilist = err;
@@ -94,10 +110,6 @@ function VpisniListCtrl($scope, $window, $routeParams, vpislist, studen){
         });
 
     }
-
-
-
-
 
 
     //zamenja char v stringu
@@ -157,6 +169,41 @@ function VpisniListCtrl($scope, $window, $routeParams, vpislist, studen){
         else return null;
     }
 
+    var index_najdi_drzavo_rojstva = function(name) {
+        var drzav = $scope.drzave.length;
+        for (var i = 0; i < drzav; i++)
+            if ($scope.drzave[i].ime == name) return i;
+    }
+    var index_najdi_drzavo = function(code) {
+        var drzav = $scope.drzave.length;
+        for (var i = 0; i < drzav; i++) if ($scope.drzave[i].code == code) return i;
+    }
+    var index_najdi_spol = function(ime) {
+        var len = $scope.spoli.length;
+        for (var i = 0; i < len; i++) if ($scope.spoli[i].code == ime) return i;
+    }
+    var index_najdi_obcino_rojstva = function(ime) {
+        var len = $scope.obcine.length;
+        for (var i = 0; i < len; i++) {
+            if ($scope.obcine[i].ime == ime) {
+                return i;
+            }
+        }
+    }
+    var index_najdi_obcino = function(code) {
+        var len = $scope.obcine.length;
+        for (var i = 0; i < len; i++) if ($scope.obcine[i].code == code) return i;
+    }
+    var index_najdi_posto = function(code) {
+        var len = $scope.poste.length;
+        for (var i = 0; i < len; i++) if ($scope.poste[i].code == code) return i;
+    }
+
+
+    var index_najdi = function(ime) {
+        var len = $scope.spoli.length;
+        for (var i = 0; i < len; i++) if ($scope.spoli[i].code == ime) return i;
+    }
     //v primeru da do vpisnega lista dostopa kandidat
     if (trenutni_logirani_uporabnik().tip === "Kandidat") {
         studen.service_kandidat(trenutni_logirani_uporabnik().uid).then(function(response){
@@ -182,13 +229,32 @@ function VpisniListCtrl($scope, $window, $routeParams, vpislist, studen){
             $scope.vl_ime = response.data[id].student.ime;
             $scope.vl_priimek = response.data[id].student.priimek;
             $scope.vl_email = response.data[id].student.email;
+            $scope.vl_emso = response.data[id].student.emso;
+            $scope.vl_rojstvo = new Date(response.data[id].student.datumRojstva);
+            $scope.vl_davcna = response.data[id].student.davcnaStevilka;
+            $scope.vl_spol = $scope.spoli[index_najdi_spol(response.data[id].student.spol)];
             $scope.vl_telefonska = response.data[id].student.telefonskaStevilka;
+            $scope.vl_drzava_rojstva = $scope.drzave[index_najdi_drzavo_rojstva(response.data[id].student.drzavaRojstva)];
+            $scope.vl_obcina_rojstva = $scope.obcine[index_najdi_obcino_rojstva(response.data[id].student.obcinaRojstva)];
+            $scope.vl_kraj_rojstva = response.data[id].student.krajRojstva;
+            $scope.vl_drzava_stalno = $scope.drzave[index_najdi_drzavo(response.data[id].student.drzavaStalno)];
+            $scope.vl_obcina_stalno = $scope.obcine[index_najdi_obcino(response.data[id].student.obcinaStalno)];
+            $scope.vl_posta_stalno = $scope.poste[index_najdi_posto(response.data[id].student.postaStalno)];
+            $scope.vl_naslov_stalno = response.data[id].student.naslovStalno;
+            $scope.vl_drzava_zacasno = $scope.drzave[index_najdi_drzavo(response.data[id].student.drzavaZacasno)];
+            $scope.vl_obcina_zacasno = $scope.obcine[index_najdi_obcino(response.data[id].student.obcinaZacasno)];
+            $scope.vl_posta_zacasno = $scope.poste[index_najdi_posto(response.data[id].student.postaZacasno)];
+            $scope.vl_naslov_zacasno = response.data[id].student.naslovZacasno;
 
             $scope.vl_letnik = response.data[id].letnik.letnik;
             $scope.vl_program_naziv = response.data[id].studijskiProgram.naziv;
             $scope.vl_vrsta_vpisa = response.data[id].vrstaVpisa.vrstaVpisa;
-            $scope.vl_nacin_studija = response.data[id].nacinStudija.opis;//*/
-            
+            $scope.vl_nacin_studija = response.data[id].nacinStudija.opis;
+
+            if ($scope.vl_drzava_rojstva) $scope.sprememba_drzava_rojstva();
+            if ($scope.vl_drzava_stalno) $scope.sprememba_drzava_stalno();
+            if ($scope.vl_drzava_zacasno) $scope.sprememba_drzava_zacasno();
+
         }).catch(function(err, status) {
             console.log("napaka pri service_kandidat");
         });

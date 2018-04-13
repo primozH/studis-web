@@ -82,7 +82,7 @@
                 }                
             })
             .when('/vpisnilistpredmetnik/:id', {
-                templateUrl: 'vpisniList/vpisnilistpredmetnik.html',
+                templateUrl: 'vpisniList/vpisniListPredmetnik.html',
                 controller: 'VpisniListCtrl',
                 resolve: {
                     function(){
