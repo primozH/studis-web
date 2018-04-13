@@ -3,15 +3,23 @@ angular
     .module('studis')
     .controller('tokensCtrl', tokensCtrl);
 
-function tokensCtrl(tokenService, $location, searchProfile, $timeout){
+function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $window){
     var vm = this;
 
     vm.message = tokenService.getMessage();
+    vm.errorMsg = null;
+
+    $scope.logout = function() {
+        $window.localStorage.removeItem('studis');
+        $window.localStorage.removeItem("tip");
+        $window.location.reload();
+        $window.location.href = '/#/prijava';
+    };
 
     $timeout(function(){
         vm.message = null;
         tokenService.setMessage(null);
-    }, 3000);
+    }, 4000);
 
     tokenService.getTokens()
         .then(
@@ -45,6 +53,8 @@ function tokensCtrl(tokenService, $location, searchProfile, $timeout){
                             },
                             function error(error){
                                 console.log(error);
+                                $('#createTokenModal').modal('hide');
+                                vm.errorMsg = "Napaka pri kreiranju žetona!";
                             }
                         );
                 },

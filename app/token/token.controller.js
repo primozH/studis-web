@@ -3,8 +3,18 @@ angular
     .module('studis')
     .controller('tokenCtrl', tokenCtrl);
 
-function tokenCtrl(tokenService, $routeParams, $location){
+function tokenCtrl(tokenService, $routeParams, $location, $scope, $window){
     var vm = this;
+
+    vm.errorMsg = null;
+
+    $scope.logout = function() {
+        $window.localStorage.removeItem('studis');
+        $window.localStorage.removeItem("tip");
+        $window.location.reload();
+        $window.location.href = '/#/prijava';
+    };
+
     tokenService.getToken($routeParams.id, $routeParams.vrstaVpisa)
         .then(
             function success(response){
@@ -91,7 +101,8 @@ function tokenCtrl(tokenService, $routeParams, $location){
                 },
                 function error(error){
                     console.log(error);
-                    tokenService.setMessage("Pri posodabljanju žetona je prišlo do napake");
+                    vm.errorMsg = "Napaka pri posodabljanju žetona!";
+                    // tokenService.setMessage("Pri posodabljanju žetona je prišlo do napake");
                 }
             );
     };
