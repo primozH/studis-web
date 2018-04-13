@@ -11,7 +11,7 @@ function tokensCtrl(tokenService, $location, searchProfile, $timeout){
     $timeout(function(){
         vm.message = null;
         tokenService.setMessage(null);
-    }, 3000);
+    }, 4000);
 
     tokenService.getTokens()
         .then(
