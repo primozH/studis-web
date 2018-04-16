@@ -22,6 +22,9 @@
         // var setStudent = function(st){
         //     student = st;
         // };
+        var getStudentById = function(id){
+            return $http.get("/api/v1/student/" + id);
+        };
 
         var getStudent = function(vpisnaStevilka){
             return $http.get("/api/v1/student?filter=" + vpisnaStevilka );
@@ -32,6 +35,7 @@
         };
 
         return{
+            getStudentById: getStudentById,
             getVpis: getVpis,
             getSearchRes: getSearchRes,
             //setStudent: setStudent,

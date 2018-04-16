@@ -21,59 +21,26 @@
                 controller: "searchCtrl",
                 controllerAs: "vm"
             })
-            .when('/profile/:vpisnaStevilka', {
+            .when('/profil/:vpisnaStevilka', {
                 templateUrl: "/profile/profile.html",
                 controller: "profileCtrl",
                 controllerAs: "vm"
             })
             .when('/referent', {
                 templateUrl: 'referent/referentka.html',
-                controller: 'ReferentkaCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referent, drugače nemoreš do /referent");
-                            $window.location.href = '/#/login';
-                        }
-                    }
-                }
+                controller: 'ReferentkaCtrl'
             })
             .when('/skrbnik', {
                 templateUrl: 'admin/skrbnik.html',
-                controller: 'SkrbnikCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Skrbnik"))  {
-                            console.log("Vpiši se kot admin, drugače nemoreš do /admin");
-                            $window.location.href = '/#/login';
-                        }
-                    }
-                }
+                controller: 'SkrbnikCtrl'
             })
             .when('/teacher', {
                 templateUrl: 'teacher/ucitelj.html',
-                controller: 'UciteljCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Ucitelj"))  {
-                            console.log("Vpiši se kot teacher, drugače nemoreš do /teacher");
-                            $window.location.href = '/#/login';
-                        }
-                    }
-                }
+                controller: 'UciteljCtrl'
             })
             .when('/vpisnilistpredmetnik/:id', {
                 templateUrl: 'student/enrollment/curriculum/curriculum.controller.html',
-                controller: 'VpisniListCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Kandidat" || $window.localStorage.getItem("zeton") === "ima1"
-                            || $window.localStorage.getItem("zeton") === "ima2"))  {
-                            console.log("Vpiši se kot kandidat ali študent z žetonom, drugače nemoreš do /vpisnilistpredmetnik");
-                            $window.location.href = '/#/login';
-                        }
-                    }
-                }
+                controller: 'VpisniListCtrl'
             })
             .when('/zeton/:id/:vrstaVpisa', {
                 templateUrl: 'token/token.html',
@@ -84,20 +51,6 @@
                 templateUrl: 'tokens/tokens.html',
                 controller: 'tokensCtrl',
                 controllerAs: "vm"
-            })
-            .when('/zeton_uredi/:id', {
-                templateUrl: 'zeton/zeton.html',
-                controller: 'ZetonCtrl',
-                resolve: {
-                    function(){
-                        if (!$window.localStorage.getItem("tip") || !($window.localStorage.getItem("tip") === "Referent"))  {
-                            console.log("Vpiši se kot referent, drugače nemoreš do /zeton_uredi");
-                            $window.location.href = '/#/login';
-                            return;
-                        }
-                    }
-                }
-
             })
             .otherwise({redirectTo: '/prijava'});
 

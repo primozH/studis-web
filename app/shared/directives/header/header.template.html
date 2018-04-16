@@ -1,25 +1,48 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse customNavigation">
     <div class="container">
         <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#studisNav"><span class="glyphicon glyphicon-list"></span></button><a class="navbar-brand" href="/">Studis</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#studisNav">
+                <span class="glyphicon glyphicon-list"></span>
+            </button>
+            <a class="navbar-brand" href="">Studis</a>
         </div>
         <div class="collapse navbar-collapse" id="studisNav">
-            <ul ng-show="headvm.currentUser.tip == 'Student'" class="nav navbar-nav">
-                <li><a href="/student">Domov</a></li>
-            </ul>
-            <ul ng-show="headvm.currentUser.tip == 'Ucitelj'" class="nav navbar-nav">
-                <li><a href="/ucitelj">Domov</a></li>
-            </ul>
-            <ul ng-show="headvm.currentUser.tip == 'Referent'" class="nav navbar-nav">
-                <li><a href="/referent">Domov</a></li>
+            <ul class="nav navbar-nav">
+                <!--HOME-->
+                <li ng-show="headvm.currentUser.tip == 'Student'">
+                    <a href="/#/student"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
+                </li>
+                <li ng-show="headvm.currentUser.tip == 'Ucitelj'">
+                    <a href="/#/ucitelj"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
+                </li>
+                <li ng-show="headvm.currentUser.tip == 'Referent'">
+                    <a href="/#/referent"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
+                </li>
+                <li ng-show="headvm.currentUser.tip == 'Skrbnik'">
+                    <a href="/#/skrbnik"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="headvm.isLogged"><a ng-click="headvm.showProfile()">
-                    <span class="glyphicon glyphicon-user">Profil</span>
-                </a></li>
-                <li ng-show="headvm.isLogged"><a href="" ng-click="headvm.logout()">
-                    <span class="glyphicon glyphicon-log-out">&nbsp;Odjava</span>
-                </a></li>
+                <!--PROFILE-->
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showProfile()">
+                    <a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;Profil</a>
+                </li>
+                <!--ENROLMENT-->
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showEnrolmentForm()">
+                    <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Vpisni List</a>
+                </li>
+                <!--SEARCH-->
+                <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                    <a href="/#/iskanje">Iskanje</a>
+                </li>
+                <!--TOKEN-->
+                <li ng-show="headvm.currentUser.tip == 'Referent'">
+                    <a href="/#/zetoni"><span class="fas fa-dot-circle"></span>&nbsp;Žetoni</a>
+                </li>
+                <!--LOG OUT-->
+                <li ng-show="headvm.isLogged" ng-click="headvm.logout()">
+                    <a href="" ><span class="glyphicon glyphicon-log-out">&nbsp;Odjava</span></a>
+                </li>
             </ul>
         </div>
     </div>

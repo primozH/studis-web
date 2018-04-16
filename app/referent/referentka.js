@@ -5,7 +5,7 @@ angular
     .controller('ReferentkaCtrl', ReferentkaCtrl);
  
 
-function ReferentkaCtrl($scope, $http, $window, refe, $location) {
+function ReferentkaCtrl($scope, $http, $window, $location) {
   var vsebina_datoteke = null;	
 
   $scope.logout = function() {
