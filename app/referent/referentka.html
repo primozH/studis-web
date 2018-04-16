@@ -5,21 +5,8 @@
   <div align="center"  class="col-md-8">
   	<h3>Pozdravljena referentka</h3>
     <br><br>
-    <a href="/#!/iskanje" class="btn btn-info btn-block" role="button">Iskanje študentov po vpisni številki/imenu</a><br><br>
-
-    <button class="btn btn-block" ng-click="prikazi_zetone()">Prikaži žetone</button><br><br><br>
-
-
-    <p ng-show="pogled_zetoni" ng-repeat="zeton in zetoni">
-    {{zeton.student.ime}}
-    {{zeton.student.priimek}} (ID: {{zeton.student.id}})<br>
-    Vrsta vpisa: {{zeton.vrstaVpisa.vrstaVpisa}}
-    Šifra vpisa: {{zeton.vrstaVpisa.sifraVpisa}}
-
-    <br><a href="/#/zeton_uredi/{{zeton.student.id}}" class="btn btn-info" role="button" style="width:50%">uredi</a>
-    <button class="btn btn-danger btn-block" ng-click="zbrisi_zeton(zeton)" style="width:50%">zbriši</button><br><br>
-
-    </p>
+    <a href="/#/iskanje" class="btn btn-info btn-block" role="button" ng-click="vm.iskanjeStudentov()">Iskanje študentov po vpisni številki/imenu</a><br><br>
+    <button class="btn btn-block" ng-click="vm.prikaziZetone()">Prikaži žetone</button><br><br><br>
 
   </div>
 

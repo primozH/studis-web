@@ -33,15 +33,15 @@
                 </li>
                 <!--SEARCH-->
                 <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
-                    <a href="/#/iskanje">Iskanje</a>
+                    <a href="/#/iskanje"><span class="glyphicon glyphicon-search"></span>&nbsp;Iskanje</a>
                 </li>
                 <!--TOKEN-->
                 <li ng-show="headvm.currentUser.tip == 'Referent'">
-                    <a href="/#/zetoni"><span class="fas fa-dot-circle"></span>&nbsp;Žetoni</a>
+                    <a href="/#/zeton"><span class="fas fa-dot-circle"></span>&nbsp;Žetoni</a>
                 </li>
                 <!--LOG OUT-->
                 <li ng-show="headvm.isLogged" ng-click="headvm.logout()">
-                    <a href="" ><span class="glyphicon glyphicon-log-out">&nbsp;Odjava</span></a>
+                    <a href="" ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Odjava</a>
                 </li>
             </ul>
         </div>

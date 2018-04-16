@@ -10,7 +10,6 @@
         };
 
         vm.useToken = function() {
-
             $location.path("/student/" + 31 + "/vpis");
         };
     }

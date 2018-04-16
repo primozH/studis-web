@@ -9,13 +9,6 @@ function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $w
     vm.message = tokenService.getMessage();
     vm.errorMsg = null;
 
-    $scope.logout = function() {
-        $window.localStorage.removeItem('studis');
-        $window.localStorage.removeItem("tip");
-        $window.location.reload();
-        $window.location.href = '/#/prijava';
-    };
-
     $timeout(function(){
         vm.message = null;
         tokenService.setMessage(null);
@@ -25,7 +18,7 @@ function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $w
         .then(
             function success(response){
                 vm.tokens = response.data;
-                console.log("response in tokens controller:");
+                console.log("response in list-tokens controller:");
                 console.log(vm.tokens);
             },
             function error(error){

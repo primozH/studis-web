@@ -1,6 +1,6 @@
 (function() {
 
-    function settings($routeProvider, $windowProvider) {
+    function settings($routeProvider, $locationProvider) {
         $routeProvider
             .when('/prijava', {
                 templateUrl: 'login/login.template.html',
@@ -28,15 +28,18 @@
             })
             .when('/referent', {
                 templateUrl: 'referent/referentka.html',
-                controller: 'ReferentkaCtrl'
+                controller: 'ReferentkaCtrl',
+                controllerAs: "vm"
             })
             .when('/skrbnik', {
                 templateUrl: 'admin/skrbnik.html',
-                controller: 'SkrbnikCtrl'
+                controller: 'SkrbnikCtrl',
+                controllerAs: "vm"
             })
-            .when('/teacher', {
+            .when('/ucitelj', {
                 templateUrl: 'teacher/ucitelj.html',
-                controller: 'UciteljCtrl'
+                controller: 'UciteljCtrl',
+                controllerAs: "vm"
             })
             .when('/vpisnilistpredmetnik/:id', {
                 templateUrl: 'student/enrollment/curriculum/curriculum.controller.html',
@@ -47,19 +50,19 @@
                 controller: 'tokenCtrl',
                 controllerAs: "vm"
             })
-            .when('/zetoni', {
-                templateUrl: 'tokens/tokens.html',
+            .when('/zeton', {
+                templateUrl: 'token/list-tokens/tokens.html',
                 controller: 'tokensCtrl',
                 controllerAs: "vm"
             })
             .otherwise({redirectTo: '/prijava'});
 
+        $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
 
-    app.config(["$routeProvider", "$locationProvider", settings])
-
+    app.config(["$routeProvider", "$locationProvider", settings]);
 })();
 
 

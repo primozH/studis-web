@@ -36,6 +36,6 @@
         };
 
         vm.openProfile = function(vpisnaStevilka){
-            $location.path("/profile/" + vpisnaStevilka);
+            $location.path("/profil/" + vpisnaStevilka);
         };
     }
