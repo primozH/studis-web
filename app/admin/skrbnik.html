@@ -9,24 +9,24 @@
           <h3 align="center">Uvoz podatkov o študentih</h3>
 
 
-          <label class="btn btn-info  btn-block btn-file">Izberi datoteko
-          <input type="file" on-read-file="showContent($fileContent)" file-model="myFile" style="display: none;"/>
-          </label>    
+          <label class="btn btn-info btn-file">Izberi datoteko
+          <input type="file" name="file" ngf-select ng-model="vm.file" style="display: none;"/>
+          </label>
+          <label ng-show="vm.file">{{vm.file.name}}</label>
           </div>
+          <button class="btn btn-info" ng-click="vm.uploadFile()">Uvozi kandidate</button>
         </form>
 
 
-        <textarea ng-bind="prikaz_datoteke" rows="8" class="form-control" readonly></textarea>
-        <button ng-show="dovoliUvoz" class="btn btn-info  btn-block" ng-click="uploadFile()">uvozi kandidate</button>
         <br>
-        <p align="center">{{error_uvoz}}</p>
+        <p align="center">{{vm.error_uvoz}}</p>
         <br><br>
 
-        <div ng-show="uvozeni_zapisi_naslov">
+        <div ng-show="vm.uvozeni_zapisi_naslov">
           <h3 align="center">Podatki o uvoženih zapisih</h3>
           <table id="mytable" class="table table-striped">
           <tbody>
-            <tr ng-repeat="zapis in aZapisi">
+            <tr ng-repeat="zapis in vm.aZapisi">
               <th>
                 <div>
                   {{zapis.ime}} {{zapis.priimek}} (id: {{zapis.id}})<br>
@@ -39,13 +39,13 @@
             </tr>
           </tbody>
           </table>
-          <uib-pagination total-items="steviloUvozenih" ng-model="trenutnaStran" items-per-page="zapisovNaStran"></uib-pagination>
+          <uib-pagination total-items="vm.steviloUvozenih" ng-model="vm.trenutnaStran" items-per-page="vm.zapisovNaStran"></uib-pagination>
         </div>
 
 
-      <div ng-show="uvozeni_zapisi_naslov">
+      <div ng-show="vm.uvozeni_zapisi_naslov">
         <h3 align="center">Podatki o neuspešno uvoženih zapisih</h3>
-        <textarea ng-bind="neuspesni_fajl" rows="6" class="form-control" readonly></textarea>
+        <textarea ng-bind="vm.neuspesni_fajl" rows="6" class="form-control" readonly></textarea>
       </div>
 
 

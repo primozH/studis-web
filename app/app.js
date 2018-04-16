@@ -33,11 +33,13 @@
             })
             .when('/skrbnik', {
                 templateUrl: 'admin/skrbnik.html',
-                controller: 'SkrbnikCtrl'
+                controller: 'SkrbnikCtrl',
+                controllerAs: "vm"
             })
             .when('/ucitelj', {
                 templateUrl: 'teacher/ucitelj.html',
-                controller: 'UciteljCtrl'
+                controller: 'UciteljCtrl',
+                controllerAs: "vm"
             })
             .when('/vpisnilistpredmetnik/:id', {
                 templateUrl: 'student/enrollment/curriculum/curriculum.controller.html',
@@ -57,7 +59,7 @@
 
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 
