@@ -17,7 +17,7 @@
                 controller: 'VpisniListCtrl'
             })
             .when('/iskanje', {
-                templateUrl: "/search/search.html",
+                templateUrl: "shared/controllers/search/search.html",
                 controller: "searchCtrl",
                 controllerAs: "vm"
             })

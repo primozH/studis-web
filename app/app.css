@@ -32,10 +32,6 @@ textarea {
     resize: none; /* Remove this if you want the user to resize the textarea */
 }
 
-.loginPanel {
-  margin: 50px auto;
-}
-
 .customNavigation {
   border-radius: 0; !important;
 }
