@@ -6,17 +6,6 @@
     function searchCtrl($location, searchProfile, $scope, $window){
         var vm = this;
 
-        //za header
-        $scope.tip_referentka = $window.localStorage.getItem("tip") === "Referent";
-        $scope.tip_ucitelj = $window.localStorage.getItem("tip") === "Ucitelj";
-
-        $scope.logout = function() {
-            $window.localStorage.removeItem('studis');
-            $window.localStorage.removeItem("tip");
-            $location.path("/login");
-        };
-        //za header
-
         vm.executeSearch = function(query){
             searchProfile.getSearchRes(query)
                 .then(
@@ -35,7 +24,7 @@
             $scope.query = null;
         };
 
-        vm.openProfile = function(vpisnaStevilka){
-            $location.path("/profil/" + vpisnaStevilka);
+        vm.openProfile = function(id){
+            $location.path("/profil/" + id);
         };
     }

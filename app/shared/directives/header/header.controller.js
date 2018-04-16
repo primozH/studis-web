@@ -19,8 +19,7 @@
         };
 
         headvm.showProfile = function() {
-            //searchProfile.getStudentById(headvm.currentUser.id);
-            $location.path("/profile");
+            $location.path("/profile/" + headvm.currentUser.id);
         }
     };
 

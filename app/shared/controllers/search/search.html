@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="x in vm.searchRes" ng-click="vm.openProfile(x.vpisnaStevilka)">
+            <tr ng-repeat="x in vm.searchRes" ng-click="vm.openProfile(x.id)">
                 <td>{{$index + 1}}</td>
                 <td>{{x.vpisnaStevilka }}</td>
                 <td>{{x.ime }}</td>

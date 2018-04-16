@@ -21,7 +21,7 @@
                 controller: "searchCtrl",
                 controllerAs: "vm"
             })
-            .when('/profil/:vpisnaStevilka', {
+            .when('/profil/:id', {
                 templateUrl: "/profile/profile.html",
                 controller: "profileCtrl",
                 controllerAs: "vm"
