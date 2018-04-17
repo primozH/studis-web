@@ -53,7 +53,9 @@
             }
             return $http.get(apiBase + "/obcina")
                 .then(function(response) {
+                    console.log(response.data);
                     municipalities = response.data;
+                    return municipalities;
                 }, function(err) {
                     console.log(err);
                 });

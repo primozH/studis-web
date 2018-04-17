@@ -21,7 +21,7 @@
         };
 
         var updateStudent = function(student) {
-            return $http.put(apiVersion + "/student/" + id, student)
+            return $http.put(apiVersion + "/student/" + student.id, student)
                 .then(function (response) {
                     return response;
                 }).catch(function (err) {
@@ -51,7 +51,8 @@
         return {
             getStudent: getStudent,
             getCandidate: getCandidate,
-            getCurriculum: getCurriculum
+            getCurriculum: getCurriculum,
+            updateStudent: updateStudent
         };
     }
 

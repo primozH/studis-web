@@ -6,16 +6,15 @@
         headvm.isLogged = authentication.isLogged();
 
         headvm.currentUser = authentication.currentUser();
-        console.log("current user");
-        console.log(headvm.currentUser);
+
         headvm.logout = function() {
             authentication.logout();
             $location.path("/prijava");
             $route.reload();
         };
 
-        headvm.showEnrolmentForm = function(){
-            $location.path("/student/" + headvm.currentUser.id + "/vpis");
+        headvm.showIndexForm = function(){
+            $location.path("/student/" + headvm.currentUser.id + "/indeks");
         };
 
         headvm.showProfile = function() {

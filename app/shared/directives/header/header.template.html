@@ -9,17 +9,8 @@
         <div class="collapse navbar-collapse" id="studisNav">
             <ul class="nav navbar-nav">
                 <!--HOME-->
-                <li ng-show="headvm.currentUser.tip == 'Student'">
-                    <a href="/#/student"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
-                </li>
-                <li ng-show="headvm.currentUser.tip == 'Ucitelj'">
-                    <a href="/#/ucitelj"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
-                </li>
-                <li ng-show="headvm.currentUser.tip == 'Referent'">
-                    <a href="/#/referent"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
-                </li>
-                <li ng-show="headvm.currentUser.tip == 'Skrbnik'">
-                    <a href="/#/skrbnik"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
+                <li>
+                    <a ng-href="/#/{{headvm.currentUser.tip.toLowerCase()}}"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -27,9 +18,9 @@
                 <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showProfile()">
                     <a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;Profil</a>
                 </li>
-                <!--ENROLMENT-->
-                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showEnrolmentForm()">
-                    <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Vpisni List</a>
+                <!--INDEX-->
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showIndexForm()">
+                    <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Indeks</a>
                 </li>
                 <!--SEARCH-->
                 <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">

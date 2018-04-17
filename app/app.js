@@ -17,6 +17,10 @@
                 controller: 'vpisniList1Ctrl',
                 controllerAs: 'vm'
             })
+            .when('/student/:id/vpis/predmetnik', {
+                templateUrl: 'student/enrollment/curriculum/curriculum.controller.html',
+                controller: 'VpisniListCtrl'
+            })
             .when('/iskanje', {
                 templateUrl: "shared/controllers/search/search.html",
                 controller: "searchCtrl",
@@ -41,10 +45,6 @@
                 templateUrl: 'teacher/ucitelj.html',
                 controller: 'UciteljCtrl',
                 controllerAs: "vm"
-            })
-            .when('/vpisnilistpredmetnik/:id', {
-                templateUrl: 'student/enrollment/curriculum/curriculum.controller.html',
-                controller: 'VpisniListCtrl'
             })
             .when('/zeton/:id/:vrstaVpisa', {
                 templateUrl: 'token/token.html',
