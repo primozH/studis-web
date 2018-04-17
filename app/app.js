@@ -14,7 +14,8 @@
             })
             .when('/student/:id/vpis', {
                 templateUrl: 'student/enrollment/student-data/student.data.template.html',
-                controller: 'VpisniListCtrl'
+                controller: 'vpisniList1Ctrl',
+                controllerAs: 'vm'
             })
             .when('/iskanje', {
                 templateUrl: "shared/controllers/search/search.html",
@@ -22,7 +23,7 @@
                 controllerAs: "vm"
             })
             .when('/profil/:id', {
-                templateUrl: "/profile/profile.html",
+                templateUrl: "student/profile/profile.html",
                 controller: "profileCtrl",
                 controllerAs: "vm"
             })

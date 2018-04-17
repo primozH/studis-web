@@ -19,7 +19,7 @@
         };
 
         headvm.showProfile = function() {
-            $location.path("/profile/" + headvm.currentUser.id);
+            $location.path("/profil/" + headvm.currentUser.id);
         }
     };
 

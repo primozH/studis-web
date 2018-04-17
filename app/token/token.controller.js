@@ -44,7 +44,7 @@
                         console.log(response);
                         $('#removeTokenModal').modal('hide');
                         tokenService.setMessage("Žeton je bil uspešno odstranjen");
-                        $location.path("/zetoni");
+                        $location.path("/zeton");
                     },
                     function error(error){
                         console.log(error);
@@ -82,7 +82,7 @@
                     function success(response){
                         console.log(response);
                         tokenService.setMessage("Žeton je bil uspešno posodobljen");
-                        $location.path("/zetoni");
+                        $location.path("/zeton");
                     },
                     function error(error){
                         console.log(error);

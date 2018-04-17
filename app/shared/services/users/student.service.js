@@ -3,12 +3,18 @@
     studentService.$inject = ["$http"];
     var apiVersion = "/api/v1";
 
-    function studentService() {
+    function studentService($http) {
 
-        var getStudent = function (id) {
+        var student = null;
+
+        var getStudent = function (id, refresh) {
+            if (student != null && !refresh) {
+                return Promise.resolve(student);
+            }
             return $http.get(apiVersion + "/student/" + id)
                 .then(function success(response) {
-                    return response;
+                    student = response.data;
+                    return student;
                 }).catch(function error(err) {
                     return err;
                 });

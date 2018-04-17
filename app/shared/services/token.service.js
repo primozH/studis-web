@@ -16,7 +16,9 @@
             return $http.put("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa, data);
         };
 
-        var getTokens = function(){
+        var getTokens = function(id){
+            if (id != null)
+                return $http.get("/api/v1/zeton/" + id);
             return $http.get("/api/v1/zeton");
         };
 

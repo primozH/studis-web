@@ -4,22 +4,18 @@
 <div ng-hide="kandidat" class="row">
   <div class="col-md-2"></div>
   <div align="center"  class="col-md-8">
+    <div ng-show="vm.zetoni">
+      <div class="alert alert-info" ng-repeat="zeton in vm.zetoni">
+        <span>Imaš neizkoriščen žeton za vpis. <strong>
+          <a class="alert-link" ng-click="vm.useToken(zeton.vrstaVpisa.sifra)">{{zeton.vrstaVpisa.vrstaVpisa}}!</a>
+        </strong></span>
+      </div>
+    </div>
+
     <p>Pozdravljen študent</p>
-    <legend>{{ime_studenta}} {{priimek_studenta}}</legend>
-    {{vpisna_studenta}}
+    <legend>{{vm.student.ime}} {{vm.student.priimek}}</legend>
+    {{vm.student.vpisnaStevilka}}
 
-
-    <br><br>
-    <button ng-click="prikazi_moj_profil()" class="btn btn-block">Moj profil</button><br><br><br>
-    <a ng-show="ima_zeton1" href="/#/vpisnilist/1" class="btn btn-info btn-block" role="button">ŽETON: {{vpisni_list1}}</a><br>
-    <a ng-show="ima_zeton2" href="/#/vpisnilist/2" class="btn btn-info btn-block" role="button">ŽETON: {{vpisni_list2}}</a>
-
-
-    <!--<br><br>
-    ŽETON(izpis samo za referenco):
-    <br>
-    <p>{{student_zeton1}}</p><br><br><br><br>
-    <p>{{student_zeton2}}</p> -->
   <div>
   <div class="col-md-2"></div>
   </div>

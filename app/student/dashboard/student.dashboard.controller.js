@@ -1,16 +1,29 @@
 (function() {
 
-    studentCtrl.$inject = ["$location"];
+    studentCtrl.$inject = ["$location", "studentService", "authentication", "tokenService"];
     
-    function studentCtrl($window, $http, $location) {
+    function studentCtrl($location, studentService, authentication, tokenService) {
 
         var vm = this;
-        vm.updateProfile = function() {
+        vm.student = null;
+        vm.zetoni = null;
 
-        };
+        studentService.getStudent(authentication.currentUser().id)
+            .then(function (response) {
+                vm.student = response;
+            }, function (err) {
+                console.log(err);
+            });
 
-        vm.useToken = function() {
-            $location.path("/student/" + 31 + "/vpis");
+        tokenService.getTokens(authentication.currentUser().id)
+            .then(function (response) {
+                vm.zetoni = response.data;
+            }, function (err) {
+                console.log(err);
+            });
+
+        vm.useToken = function(sifra) {
+            $location.path("/student/" + vm.student.id + "/vpis");
         };
     }
 
