@@ -8,7 +8,7 @@
         var student = null;
 
         var getStudent = function (id, refresh) {
-            if (student != null && !refresh) {
+            if (student != null && !refresh && student.id == id) {
                 return Promise.resolve(student);
             }
             return $http.get(apiVersion + "/student/" + id)

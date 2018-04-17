@@ -37,7 +37,7 @@
                 controllerAs: "vm"
             })
             .when('/skrbnik', {
-                templateUrl: 'admin/skrbnik.html',
+                templateUrl: 'admin/skrbnik.template.html',
                 controller: 'SkrbnikCtrl',
                 controllerAs: "vm"
             })
