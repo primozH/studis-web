@@ -52,7 +52,7 @@
                 controllerAs: "vm"
             })
             .when('/zeton', {
-                templateUrl: 'token/list-tokens/tokens.html',
+                templateUrl: 'token/list-tokens/tokens.template.html',
                 controller: 'tokensCtrl',
                 controllerAs: "vm"
             })
