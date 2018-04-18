@@ -1,6 +1,8 @@
 (function() {
 
-    var tokenService = function($http){
+    var tokenService = function($http, $window){
+
+        var token;
 
         var getToken = function(id, vrstaVpisa){
             return $http.get("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
@@ -16,10 +18,15 @@
             return $http.put("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa, data);
         };
 
-        var getTokens = function(id){
-            if (id != null)
-                return $http.get("/api/v1/zeton/" + id);
-            return $http.get("/api/v1/zeton");
+        var getTokens = function(id, izkoriscen){
+            var path = "/api/v1/zeton";
+            if (id != null) {
+                path += "/" + id;
+                if (izkoriscen != null) {
+                    path += "?izkoriscen=" + izkoriscen;
+                }
+            }
+            return $http.get(path);
         };
 
         var postToken = function(id){
@@ -36,6 +43,20 @@
             message = m;
         };
 
+        var setSelectedToken = function(token) {
+            $window.sessionStorage["zeton"] = JSON.stringify(token);
+        };
+
+        var getSelectedToken = function() {
+            if ($window.sessionStorage["zeton"])
+                return JSON.parse($window.sessionStorage["zeton"]);
+            return null;
+        };
+
+        var deleteSelectedToken = function() {
+            $window.sessionStorage.removeItem("zeton");
+        };
+
         return{
             postToken: postToken,
             putToken: putToken,
@@ -43,11 +64,14 @@
             getTokens: getTokens,
             deleteToken: deleteToken,
             setMessage: setMessage,
-            getMessage: getMessage
+            getMessage: getMessage,
+            setSelectedToken: setSelectedToken,
+            getSelectedToken: getSelectedToken,
+            deleteSelectedToken: deleteSelectedToken
         };
     };
 
-    tokenService.$inject = ["$http"];
+    tokenService.$inject = ["$http", "$window"];
 
     angular
         .module('studis')

@@ -1,0 +1,102 @@
+<navigation></navigation>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-xs-12 col-md-4">
+
+            <div class="row" ng-show="vm.modulskiPredmeti.length > 0">
+                <h4 class="text-center">Modulski predmeti</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="course-list-item" ng-repeat="predmet in vm.modulskiPredmeti | orderBy : predmet.predmet.naziv"
+                         ng-click="vm.addCourse(predmet, vm.modulskiPredmeti, vm.izbraniModulskiPredmeti)">
+                        {{predmet.predmet.naziv}} ({{predmet.predmet.ects}} ECTS)</div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="vm.strokovniPredmeti.length > 0">
+                <h4 class="text-center">Strokovni predmeti</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="course-list-item" ng-repeat="predmet in vm.strokovniPredmeti | orderBy : predmet.predmet.naziv"
+                         ng-click="vm.addProfCourse(predmet)">
+                        {{predmet.predmet.naziv}} ({{predmet.predmet.ects}} ECTS)</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <h4 class="text-center">Splošni predmeti</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="course-list-item" ng-repeat="predmet in vm.splosniPredmeti | orderBy : predmet.predmet.naziv"
+                         ng-click="vm.addCourse(predmet, vm.splosniPredmeti, vm.izbraniSplosniPredmeti)">
+                        {{predmet.predmet.naziv}} ({{predmet.predmet.ects}} ECTS)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CENTER -->
+        <div class="col-xs-12 col-md-4">
+
+            <div class="row" ng-show="vm.izbraniStrokovniPredmet">
+                <h4 class="text-center">Izbrani strokovni predmeti</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="course-list-item-selected" ng-model="vm.izbraniStrokovniPredmet"
+                         ng-click="vm.removeProfCourse(vm.izbraniStrokovniPredmet)">
+                        <span>{{vm.izbraniStrokovniPredmet.predmet.naziv}} ({{vm.izbraniStrokovniPredmet.predmet.ects}} ECTS)</span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="vm.izbraniModulskiPredmeti.length > 0">
+                <h4 class="text-center">Izbrani modulski predmeti</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="course-list-item-selected" ng-repeat="modul in vm.izbraniModulskiPredmeti"
+                         ng-click="vm.removeCourse(modul, vm.izbraniModulskiPredmeti, vm.modulskiPredmeti)">
+                        <span>{{modul.predmet.naziv}} ({{modul.predmet.ects}} ECTS)</span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" ng-show="vm.izbraniSplosniPredmeti.length > 0">
+                <h4 class="text-center">Izbrani splošni predmeti</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="course-list-item-selected" ng-repeat="splosniPredmet in vm.izbraniSplosniPredmeti"
+                         ng-click="vm.removeCourse(splosniPredmet, vm.izbraniSplosniPredmeti, vm.splosniPredmeti)">
+                        <span>{{splosniPredmet.predmet.naziv}} ({{splosniPredmet.predmet.ects}} ECTS)</span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="col-xs-12 col-md-4">
+
+            <div class="row">
+                <h4 class="text-center">Obvezni predmeti</h4>
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="course-list-item-small" ng-repeat="predmet in vm.obvezniPredmeti">{{predmet.predmet.naziv}}</div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 panel panel-default">
+                    <div>{{vm.token.studijskiProgram.naziv}}</div>
+                    <div>{{vm.token.studijskoLeto.studijskoLeto}}</div>
+                    <div><span class="">{{vm.token.vrstaVpisa.vrstaVpisa}}</span></div>
+                    <div>{{vm.token.letnik.letnik}}. letnik</div>
+                    <div><span class="underlined">Skupaj ECTS: <strong>{{vm.sumECTS}}</strong></span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <button ng-show="vm.sumECTS >= 60" class="btn btn-success" ng-click="vm.enroll()">Potrdi vpis</button>
+                    <div class="alert alert-danger" ng-show="vm.errorMsg">{{vm.errorMsg}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

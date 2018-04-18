@@ -15,14 +15,16 @@
                 console.log(err);
             });
 
-        tokenService.getTokens(authentication.currentUser().id)
+        tokenService.getTokens(authentication.currentUser().id, false)
             .then(function (response) {
+                console.log(response);
                 vm.zetoni = response.data;
             }, function (err) {
                 console.log(err);
             });
 
-        vm.useToken = function(sifra) {
+        vm.useToken = function(zeton) {
+            tokenService.setSelectedToken(zeton);
             $location.path("/student/" + vm.student.id + "/vpis");
         };
     }

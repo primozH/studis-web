@@ -18,8 +18,9 @@
                 controllerAs: 'vm'
             })
             .when('/student/:id/vpis/predmetnik', {
-                templateUrl: 'student/enrollment/curriculum/curriculum.controller.html',
-                controller: 'VpisniListCtrl'
+                templateUrl: 'student/enrollment/curriculum/curriculum.template.html',
+                controller: 'vpisniList2Ctrl',
+                controllerAs: 'vm'
             })
             .when('/iskanje', {
                 templateUrl: "shared/controllers/search/search.html",
@@ -61,7 +62,7 @@
         $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'multipleSelect']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 })();
