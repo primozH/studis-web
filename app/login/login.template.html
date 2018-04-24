@@ -30,18 +30,17 @@
 
 
             <div class="row">
-                <div ng-show="vm.loginErrorMsg" class="alert alert-danger">
-                    <p ng-bind="vm.loginErrorMsg" style="display:inline-block"></p>
-                    <div id="counter" style="display:none"></div>
-                    <div id="seconds" style="display:none">sekund</div>
-                </div>
-            </div>
-            <div class="row">
                 <button class="btn btn-danger center-block" ng-click="vm.forgotPassword()">Pozabljeno geslo?</button><br>
                 <div ng-show="vm.forgotPasswordClick">
                     <input ng-model="pozabljeno_email" type="email" class="form-control" placeholder="vnesi svoj email">
                     <button class="btn btn-dark btn-block" ng-click="vm.resetPassword()">Pošlji novo geslo</button>
                     <p ng-bind="vm.forgotPasswordMsg"></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div ng-show="vm.loginErrorMsg" class="alert alert-danger">
+                    <p style="display:inline-block">{{vm.loginErrorMsg}}. <span ng-show="vm.timeout > 0">Še {{vm.timeout}} sekund</span></p>
                 </div>
             </div>
         </div>

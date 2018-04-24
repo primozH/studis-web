@@ -1,9 +1,10 @@
 (function() {
 
-    loginController.$inject = ["$location", "authentication"];
+    loginController.$inject = ["$location", "authentication", "$interval"];
 
-    function loginController($location, authentication) {
+    function loginController($location, authentication, $interval) {
         var vm = this;
+        var promise;
 
         vm.loginData = {
             uporabniskoIme: "",
@@ -14,11 +15,16 @@
             email: ""
         };
 
+        vm.timeout = 0;
+
         vm.forgotPasswordClick = false;
         vm.loginErrorMsg = null;
 
         vm.login = function() {
             console.log(vm.loginData);
+
+            if (vm.timeout > 0)
+                return;
 
             authentication
                 .login(vm.loginData)
@@ -43,7 +49,16 @@
                         $location.path(path);
                     }, function error(error) {
                         console.log(error);
-                        vm.loginErrorMsg = error.message;
+                        if (error.status == 403) {
+                            vm.timeout = error.data.preostalCas;
+                            promise = $interval(function() {
+                                vm.timeout -= 1;
+                                if (vm.timeout == 0) {
+                                    $interval.cancel(promise);
+                                }
+                            }, 1000);
+                        }
+                        vm.loginErrorMsg = "Neuspešna prijava";
                     }
                 );
         };
@@ -63,7 +78,7 @@
             }).catch(function(err, status) {
                 vm.forgotPasswordMsg = "e-maila ni v bazi";
             });
-        }
+        };
 
         function countdown(timerId, timeToCount){
             var now = new Date().getTime();

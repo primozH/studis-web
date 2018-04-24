@@ -25,7 +25,7 @@
                         console.log(response);
                         saveToken(response.data["access_token"]);
                     }).catch(function (err) {
-                    return err;
+                    throw err;
                 });
         };
 
