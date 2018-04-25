@@ -63,8 +63,9 @@
                 <div class="form-group col-sm-6">
                     <label class="control-label col-sm-2">Spol</label>
                     <div class="col-sm-10">
-                        <select ng-options="spol.naziv for spol in vm.spol track by spol.id" class="form-control"
-                                ng-model="vm.student.spol" required>
+                        <select class="form-control" ng-model="vm.spol" required>
+                            <option value="1" ng-selected="vm.spol == 1">moški</option>
+                            <option value="0" ng-selected="vm.spol == 0">ženski</option>
                         </select>
                     </div>
                 </div>
@@ -193,7 +194,7 @@
                 <div class="col-sm-2 col-sm-offset-8">
                     <button type="submit" class="btn btn-success btn-block" ng-click="vm.save()">Shrani</button>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-2" ng-show="vm.saveSuccess">
                     <button class="btn btn-primary btn-block" ng-click="vm.toCurriculum()">Naprej</button>
                 </div>
             </div>

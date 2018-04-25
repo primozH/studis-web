@@ -4,21 +4,12 @@
 
     function vpisniList1Ctrl($location, studentService, codeListService, $routeParams) {
         var vm = this;
-        vm.spol = [
-            {
-                id: 0,
-                naziv: "ženski"
-            },
-            {
-                id: 1,
-                naziv: "moški"
-            }
-        ];
 
         vm.datumRojstva = null;
 
         vm.save = function() {
             vm.student.datumRojstva = convertDate(vm.datumRojstva);
+            vm.student.spol = vm.spol;
 
             console.log(vm.student);
             studentService.updateStudent(vm.student)
@@ -42,6 +33,10 @@
                 vm.student = response;
                 if (vm.student.datumRojstva) {
                     vm.datumRojstva = new Date(vm.student.datumRojstva);
+                }
+
+                if (vm.student.spol) {
+                    vm.spol = vm.student.spol === "MOSKI" ? 1 : 0;
                 }
                 console.log(vm.student);
             }, function(err) {

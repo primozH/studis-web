@@ -8,47 +8,36 @@
         vm.token = tokenService.getSelectedToken();
         console.log(vm.token);
 
+        vm.freeChoice = vm.token.prostaIzbira;
+        console.log(vm.freeChoice);
+
         vm.strokovniPredmeti = [];
         vm.modulskiPredmeti = [];
         vm.splosniPredmeti = [];
+        vm.izbraniStrokovniPredmeti = [];
         vm.izbraniModulskiPredmeti = [];
         vm.izbraniSplosniPredmeti = [];
         vm.sumECTS = 0;
 
         setCourses();
 
-        vm.addProfCourse = function(course) {
-            var tmp = vm.izbraniStrokovniPredmet;
-            if (tmp != null) {
-                vm.strokovniPredmeti.push(tmp);
-                vm.sumECTS -= tmp.predmet.ects;
-                vm.izbraniStrokovniPredmet = null;
-            }
-            vm.izbraniStrokovniPredmet = course;
-            vm.sumECTS += course.predmet.ects;
-            var index = vm.strokovniPredmeti.indexOf(course);
-            vm.strokovniPredmeti.splice(index, 1);
-        };
-
-        vm.removeProfCourse = function(course) {
-            vm.strokovniPredmeti.push(course);
-            vm.sumECTS -= course.predmet.ects;
-            vm.izbraniStrokovniPredmet = null;
-        };
-
         vm.addCourse = function(course, from, to) {
-            swap(course, from, to);
-            vm.sumECTS += course.predmet.ects;
+            vm.sumECTS += swap(course, from, to, true);
+
+            if (vm.sumECTS > 60) {
+                vm.removeCourse(course, to, from);
+                vm.errorMsg = "Zbrati je potrebno točno 60 kreditnih točk";
+                return;
+            }
         };
 
         vm.removeCourse = function(course, from, to) {
-            swap(course, from, to);
-            vm.sumECTS -= course.predmet.ects;
+            vm.sumECTS -= swap(course, from, to, false);
         };
 
         vm.enroll = function() {
-            if (vm.sumECTS < 60) {
-                vm.errorMsg = "Zbrati je potrebno vsaj 60 kreditnih točk";
+            if (vm.sumECTS != 60) {
+                vm.errorMsg = "Zbrati je potrebno 60 kreditnih točk";
                 return;
             }
             var vpis = {
@@ -56,13 +45,14 @@
             };
 
             if (vm.token.letnik.letnik == 2) {
-                if (vm.izbraniStrokovniPredmet == null) {
-                    vm.errorMsg = "Izbrati je potrebno en strokovni predmet";
+                if (vm.izbraniStrokovniPredmeti.length < 1) {
+                    vm.errorMsg = "Izbrati je potrebno vsaj en strokovni predmet";
                     return;
                 }
-                vpis.strokovniPredmet = {
-                    sifra: vm.izbraniStrokovniPredmet.predmet.sifra
-                };
+                vpis.strokovniPredmeti = [];
+                angular.forEach(vm.izbraniStrokovniPredmeti, function(course) {
+                    vpis.strokovniPredmeti.push({sifra: course.predmet.sifra})
+                });
             }
             if (vm.token.letnik.letnik == 3) {
                 if (vm.izbraniModulskiPredmeti.length < 6) {
@@ -94,10 +84,34 @@
 
 
 
-        function swap(course, from, to) {
-            var index = from.indexOf(course);
-            from.splice(index, 1);
-            to.push(course);
+        function swap(course, from, to, add) {
+            if (course.delPredmetnika.sifra == 4 && !vm.freeChoice
+                && ((vm.izbraniModulskiPredmeti.length < 6) || (vm.izbraniModulskiPredmeti.length >= 6 && !add))) {
+                var module = course.modul;
+                var ects = 0;
+                var courses = [];
+                angular.forEach(from, function(c) {
+                    console.log(c, course);
+                    if (c.modul == module) {
+                        to.push(c);
+                        courses.push(c);
+                        ects += c.predmet.ects;
+                    }
+                });
+
+                angular.forEach(courses, function(c) {
+                    from.splice(from.indexOf(c), 1);
+                });
+
+                return ects;
+
+            } else {
+                var index = from.indexOf(course);
+                from.splice(index, 1);
+                to.push(course);
+
+                return course.predmet.ects;
+            }
         }
 
         function setCourses() {

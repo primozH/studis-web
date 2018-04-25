@@ -18,12 +18,12 @@
                 <h4 class="text-center">Strokovni predmeti</h4>
                 <div class="col-md-10 col-md-offset-1">
                     <div class="course-list-item" ng-repeat="predmet in vm.strokovniPredmeti | orderBy : predmet.predmet.naziv"
-                         ng-click="vm.addProfCourse(predmet)">
+                         ng-click="vm.addCourse(predmet, vm.strokovniPredmeti, vm.izbraniStrokovniPredmeti)">
                         {{predmet.predmet.naziv}} ({{predmet.predmet.ects}} ECTS)</div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="vm.splosniPredmeti.length > 0">
                 <h4 class="text-center">Splošni predmeti</h4>
                 <div class="col-md-10 col-md-offset-1">
                     <div class="course-list-item" ng-repeat="predmet in vm.splosniPredmeti | orderBy : predmet.predmet.naziv"
@@ -36,12 +36,12 @@
         <!-- CENTER -->
         <div class="col-xs-12 col-md-4">
 
-            <div class="row" ng-show="vm.izbraniStrokovniPredmet">
+            <div class="row" ng-show="vm.izbraniStrokovniPredmeti.length > 0">
                 <h4 class="text-center">Izbrani strokovni predmeti</h4>
                 <div class="col-md-10 col-md-offset-1">
-                    <div class="course-list-item-selected" ng-model="vm.izbraniStrokovniPredmet"
-                         ng-click="vm.removeProfCourse(vm.izbraniStrokovniPredmet)">
-                        <span>{{vm.izbraniStrokovniPredmet.predmet.naziv}} ({{vm.izbraniStrokovniPredmet.predmet.ects}} ECTS)</span>
+                    <div class="course-list-item-selected" ng-repeat="predmet in vm.izbraniStrokovniPredmeti"
+                         ng-click="vm.removeCourse(predmet, vm.izbraniStrokovniPredmeti, vm.strokovniPredmeti)">
+                        <span>{{predmet.predmet.naziv}} ({{predmet.predmet.ects}} ECTS)</span>
                         <span class="glyphicon glyphicon-remove"></span>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="col-md-10 col-md-offset-1">
                     <div class="course-list-item-selected" ng-repeat="modul in vm.izbraniModulskiPredmeti"
                          ng-click="vm.removeCourse(modul, vm.izbraniModulskiPredmeti, vm.modulskiPredmeti)">
-                        <span>{{modul.predmet.naziv}} ({{modul.predmet.ects}} ECTS)</span>
+                        <span>{{modul.predmet.naziv}}</span>
                         <span class="glyphicon glyphicon-remove"></span>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <button ng-show="vm.sumECTS >= 60" class="btn btn-success" ng-click="vm.enroll()">Potrdi vpis</button>
+                    <button ng-show="vm.sumECTS == 60" class="btn btn-success" ng-click="vm.enroll()">Potrdi vpis</button>
                     <div class="alert alert-danger" ng-show="vm.errorMsg">{{vm.errorMsg}}</div>
                 </div>
             </div>
