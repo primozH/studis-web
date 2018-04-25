@@ -1,0 +1,40 @@
+<nav class="navbar navbar-inverse customNavigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#studisNav">
+                <span class="glyphicon glyphicon-list"></span>
+            </button>
+            <a class="navbar-brand" href="">Studis</a>
+        </div>
+        <div class="collapse navbar-collapse" id="studisNav">
+            <ul class="nav navbar-nav">
+                <!--HOME-->
+                <li>
+                    <a ng-href="/#/{{headvm.currentUser.tip.toLowerCase()}}"><span class="glyphicon glyphicon-home"></span>&nbsp;Domov</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--PROFILE-->
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showProfile()">
+                    <a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;Profil</a>
+                </li>
+                <!--INDEX-->
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showIndexForm()">
+                    <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Indeks</a>
+                </li>
+                <!--SEARCH-->
+                <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                    <a href="/#/iskanje">Iskanje</a>
+                </li>
+                <!--TOKEN-->
+                <li ng-show="headvm.currentUser.tip == 'Referent'">
+                    <a href="/#/zeton"><span class="fas fa-dot-circle"></span>&nbsp;Žetoni</a>
+                </li>
+                <!--LOG OUT-->
+                <li ng-show="headvm.isLogged" ng-click="headvm.logout()">
+                    <a href="" ><span class="glyphicon glyphicon-log-out">&nbsp;Odjava</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
