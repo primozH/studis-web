@@ -35,3 +35,7 @@ textarea {
 .customNavigation {
   border-radius: 0; !important;
 }
+
+table.examApp td{
+  border:0 !important;
+}
