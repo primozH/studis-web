@@ -4,10 +4,25 @@
 
     function vpisniList1Ctrl($location, studentService, codeListService, $routeParams) {
         var vm = this;
-
         vm.datumRojstva = null;
 
+        //če država ni slovenija, pošto in občino nastavi na null
+        vm.preveriZacasnoDrzavo = function() {
+            if (vm.student.drzavaZacasno.numericnaOznaka != 705) {
+                vm.student.obcinaZacasno = null;
+                vm.student.postaZacasno = null;
+            }
+        }
+        vm.preveriStalnoDrzavo = function() {
+            if (vm.student.drzavaStalno.numericnaOznaka != 705) {
+                vm.student.obcinaStalno = null;
+                vm.student.postaStalno = null;
+            }
+        }    
+
+
         vm.save = function() {
+            vm.errorMsg = false;
             vm.student.datumRojstva = convertDate(vm.datumRojstva);
             vm.student.spol = vm.spol;
 
@@ -79,6 +94,9 @@
 
         return(year+'-' + month + '-'+dt);
     }
+
+    
+
 
     angular
         .module("studis")
