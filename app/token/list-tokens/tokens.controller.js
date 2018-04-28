@@ -3,7 +3,7 @@ angular
     .module('studis')
     .controller('tokensCtrl', tokensCtrl);
 
-function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $window){
+function tokensCtrl(tokenService, $location, searchProfile, izvozService, $timeout, $scope, $window){
     var vm = this;
 
     vm.message = tokenService.getMessage();
@@ -55,5 +55,20 @@ function tokensCtrl(tokenService, $location, searchProfile, $timeout, $scope, $w
                     console.log(error);
                 }
             );
+    };
+
+    vm.izvozi = function(tip) {
+        tableHeader = {"row":["Zaporedna številka","Vpisna številka","Ime","Priimek",
+        "Študijski program","Letnik","Vrsta vpisa","Način študija","Oblika študija"]};
+        tableRows = [];
+
+        console.log(vm.tokens[0]);
+        for (var i = 1; i <= vm.tokens.length; i++) {
+            var temp = vm.tokens[i-1];
+            var trow = {"row":[i,temp.student.vpisnaStevilka,temp.student.ime,temp.student.priimek,temp.studijskiProgram.naziv,
+            temp.letnik.letnik,temp.vrstaVpisa.vrstaVpisa,temp.nacinStudija.opis,temp.oblikaStudija.opis]};
+            tableRows.push(trow);
+        } 
+        izvozService.izvoziCSVPDF(tableHeader, tableRows, tip);
     };
 }
