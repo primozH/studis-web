@@ -57,6 +57,16 @@
                 controller: 'tokensCtrl',
                 controllerAs: "vm"
             })
+            .when('/prijava-na-izpit', {
+                templateUrl: 'exam/exam_application/exam.application.template.html',
+                controller: 'examAppCtrl',
+                controllerAs: "vm"
+            })
+            .when('/novIzpitniRok', {
+                templateUrl: 'exam/exam_creation/exam.creation.template.html',
+                controller: 'examCreationCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');

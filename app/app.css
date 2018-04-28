@@ -35,6 +35,10 @@ textarea {
   border-radius: 0; !important;
 }
 
+table.examApp td{
+  border:0 !important;
+}
+
 .course-list-item {
   border-radius: 5px;
   border: 2px solid #0b7dda;
