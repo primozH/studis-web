@@ -6,12 +6,13 @@
         <h2>Iskanje študenta</h2>
         <b>[po vpisni številki, imenu ali priimku]</b><br><br><br>
         <form class="searchBar">
-            <input type="text" name="search" ng-model="query" class="form-control">
-            <button class="form-control" ng-click="vm.executeSearch(query)"><i class="fa fa-search"></i></button>
+            <input class="form-control" type="text" name="search" ng-model="query">
+            <button class="form-control" ng-click="vm.executeSearch(query)"><span class="glyphicon glyphicon-search"></span></button>
         </form>
         <div ng-show="emptyRes" class="alert alert-danger">
             <p>Ni zadetkov</p>
-        </div>
+        </div><br><br><br>
+
         <table class="table table-hover">
             <thead class="thead-light">
             <tr ng-show="vm.searchRes.length">
@@ -34,6 +35,23 @@
             </tr>
             </tbody>
         </table>
+
+        <div ng-show="izvoz" class="row">
+            <br><br>
+            <div class="col-xs-6 col-lg-6"></div>
+            <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
+            <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
+        </div><br><br>
+
+
+
+        
+
+
+
+
+
+
     </div>
     <div class="col-md-2"></div>
 </div>

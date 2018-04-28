@@ -11,8 +11,7 @@ form.searchBar input[type=text] {
 form.searchBar button {
   float: left;
   width: 20%;
-  padding: 10px;
-  background: #2196F3;
+  background: #337ab7;
   color: white;
   font-size: 17px;
   border: 1px solid grey;

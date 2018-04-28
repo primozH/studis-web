@@ -62,7 +62,7 @@
         $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'FileSaver']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 })();
