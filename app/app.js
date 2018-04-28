@@ -57,12 +57,22 @@
                 controller: 'tokensCtrl',
                 controllerAs: "vm"
             })
+            .when('/prijava-na-izpit', {
+                templateUrl: 'exam/exam_application/exam.application.template.html',
+                controller: 'examAppCtrl',
+                controllerAs: "vm"
+            })
+            .when('/novIzpitniRok', {
+                templateUrl: 'exam/exam_creation/exam.creation.template.html',
+                controller: 'examCreationCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'multipleSelect']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 })();
