@@ -69,6 +69,6 @@ function tokensCtrl(tokenService, $location, searchProfile, izvozService, $timeo
             temp.letnik.letnik,temp.vrstaVpisa.vrstaVpisa,temp.nacinStudija.opis,temp.oblikaStudija.opis]};
             tableRows.push(trow);
         } 
-        izvozService.izvoziCSVPDF(tableHeader, tableRows, tip);
+        izvozService.izvoziCSVPDF("Žetoni", tableHeader, tableRows, tip);
     };
 }

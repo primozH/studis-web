@@ -5,8 +5,10 @@
     function izvozService($http, $window, FileSaver, $sce) {
         var apiBase = "/api/v1";
 
-        var izvoziCSVPDF = function(tableHeader, tableRows, tip) {
-            var podatki = {"documentType": "CSV",    
+        var izvoziCSVPDF = function(ime, tableHeader, tableRows, tip) {
+            var podatki = {
+                    "name": ime,
+                    "documentType": "CSV",    
                     "tableHeader": tableHeader,
                     "tableRows": tableRows};
 
