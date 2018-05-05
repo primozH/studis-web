@@ -30,6 +30,10 @@
                 <li ng-show="headvm.currentUser.tip == 'Referent'">
                     <a href="/#/zeton"><span class="fas fa-dot-circle"></span>&nbsp;Žetoni</a>
                 </li>
+                <!--LIST ENROLLED STUDENTS-->
+                <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                    <a href="/#/seznamVpisanih"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Seznam vpisanih</a>
+                </li>
                 <!--LOG OUT-->
                 <li ng-show="headvm.isLogged" ng-click="headvm.logout()">
                     <a href="" ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Odjava</a>

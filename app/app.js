@@ -67,6 +67,16 @@
                 controller: 'examCreationCtrl',
                 controllerAs: "vm"
             })
+            .when('/seznamVpisanih', {
+                templateUrl: 'shared/controllers/list-students-enrolled/select-subject/select.subject.template.html',
+                controller: 'listEnrolledCtrl',
+                controllerAs: "vm"
+            })
+            .when('/seznamVpisanih/:leto/:sifraPredmeta/:nazivPredmeta', {
+                templateUrl: 'shared/controllers/list-students-enrolled/list-students/list.students.template.html',
+                controller: 'listStudentsCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');

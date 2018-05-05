@@ -1,0 +1,52 @@
+<navigation></navigation>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div align="center"  class="col-md-8">
+    <h3>Seznam vpisanih, izberi leto:</h3>
+    <br><br>
+    <select class="form-control" ng-change="vm.spremembaLeta()" ng-model="vm.leto">
+        <option value="2018">2018/2019</option>
+        <option value="2017">2017/2018</option>
+        <option value="2016">2016/2017</option>
+    </select>
+    <br><br>
+
+
+    <div class="row" ng-show="vm.izbranoLeto">
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Šifra predmeta</th>
+                <th scope="col">Naziv predmeta</th>
+                <th scope="col">Študijsko leto</th>              
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-click="vm.prikaziStudente(vm.leto, x.predmet.sifra, x.predmet.naziv)" 
+                ng-repeat="x in vm.predmeti">
+                <td>{{x.predmet.sifra}}</td>
+                <td>{{x.predmet.naziv}}</td>
+                <td>{{x.studijskoLeto.studijskoLeto}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div ng-show="vm.izvoz" class="row">
+        <br><br>
+        <div class="col-xs-6 col-lg-6"></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="col-md-2"></div>
+</div>
+
+

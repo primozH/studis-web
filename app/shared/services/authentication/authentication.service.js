@@ -61,6 +61,7 @@
         };
 
         return {
+            getToken: getToken,
             login: login,
             logout: logout,
             forgotPassword: forgotPassword,
