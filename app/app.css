@@ -77,3 +77,11 @@ table.examApp td{
   text-decoration: underline;
   font-size: 1.2em;
 }
+
+.bootstrap-select > .btn {
+    height: 30px;
+}
+.small-button{
+    font-size: 13px;
+    padding: 4px 14px;
+}

@@ -2,35 +2,40 @@
 
 <div class="container">
     <div class="row">
-        <table class="table table-hover examApp">
-            <thead class="thead-light">
-            <tr ng-show="vm.searchRes.length">
-                <th scope="col">Predmet</th>
-                <th scope="col">Izvajalec</th>
-                <th scope="col">Datum</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-click="vm.applyForExam()">
-                <td>Programiranje 1</td>
-                <td>Mahnič, Viljan</td>
-                <td>15.06.2018</td>
-                <td>
-                    <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
-                    <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
-                </td>
-            </tr>
-            <tr ng-click="vm.applyForExam()">
-                <td>Programiranje 1</td>
-                <td>Mahnič, Viljan</td>
-                <td>15.06.2018</td>
-                <td>
-                    <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
-                    <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <form>
+            <fieldset>
+                <legend>Razpisani izpitni roki</legend>
+                <table class="table table-hover table-condensed examApp">
+                    <thead class="thead-light">
+                    <tr ng-show="vm.searchRes.length">
+                        <th scope="col">Predmet</th>
+                        <th scope="col">Izvajalec</th>
+                        <th scope="col">Datum</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-click="vm.applyForExam()">
+                        <td>Programiranje 1</td>
+                        <td>Mahnič, Viljan</td>
+                        <td>15.06.2018</td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
+                            <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
+                        </td>
+                    </tr>
+                    <tr ng-click="vm.applyForExam()">
+                        <td>Programiranje 1</td>
+                        <td>Mahnič, Viljan</td>
+                        <td>15.06.2018</td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
+                            <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </form>
     </div>
 </div>
