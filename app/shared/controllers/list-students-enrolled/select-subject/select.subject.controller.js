@@ -13,7 +13,7 @@
             .then(function (response) {
                 vm.predmeti = response;
                 (vm.predmeti).sort(function(a,b){
-                    return a.predmet.naziv.localeCompare(b.predmet.naziv);
+                    return a.predmet.naziv.localeCompare(b.predmet.naziv ,"cs-CS");
                 });
                 if (vm.predmeti.length > 0)
                     vm.izvoz = true;

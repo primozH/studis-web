@@ -13,7 +13,7 @@
         .then(function (response) {
             vm.studenti = response;
             (vm.studenti).sort(function(a,b){
-                return a.priimek.localeCompare(b.priimek);
+                return a.priimek.localeCompare(b.priimek, "cs-CS");
             })
             if (vm.studenti.length > 0)
                 vm.izvoz = true;
