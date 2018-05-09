@@ -1,9 +1,23 @@
 (function() {
 
-    examCreationCtrl.$inject = ["$routeParams", "$location", "examService"];
+    examCreationCtrl.$inject = ["examService", "authentication"];
 
-    function examCreationCtrl($routeParams, $location, examService){
+    function examCreationCtrl(examService, authentication){
         var vm = this;
+
+        vm.subjectSelected = false;
+
+        examService.getAllSubjects()
+            .then(
+                function success(response){
+                    vm.subjects = response.data;
+                    console.log("subjects");
+                    console.log(vm.subjects);
+                },
+                function error(error){
+                    console.log(error);
+                }
+            );
 
         $.fn.datepicker.dates['sl'] = {
             days: ["Nedelja", "Ponedeljek", "Torek", "Sreda", "Četrtek", "Petek", "Sobota"],
@@ -15,9 +29,7 @@
             weekStart: 1
         };
 
-        $('.selectpicker').selectpicker({
-            size: 5
-        });
+        $('.selectpicker').selectpicker();
 
         $("#dateInput").datepicker({
             format: 'dd/mm/yyyy',
@@ -30,11 +42,44 @@
         });
 
         $('.clockpicker').clockpicker({
-            donetext: 'Potrdi'
+            donetext: 'Potrdi',
+            default: ""
         });
 
         vm.createExam = function(){
+           var data = {
+                "prostor": vm.examRoom,
+                "izvajalec": {
+                    "id": authentication.currentUser().id
+                },
+                "datum": $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd'),
+                "cas": $("#timeInput").val()
+            };
+            console.log(data);
+            examService.postExam(vm.predmet, data)
+                .then(
+                    function success(response){
+                        console.log(response);
+                    },
+                    function error(error){
+                        console.log(error);
+                    }
+                )
+        };
 
+        vm.getExamsForSubject = function(){
+            console.log(vm.predmet);
+            examService.getExamsForSubject(vm.predmet)
+                .then(
+                    function success(response){
+                        console.log(response);
+                        vm.exams = response.data;
+                        vm.subjectSelected = true;
+                    },
+                    function error(error){
+                        console.log(error);
+                    }
+                )
         };
     }
 

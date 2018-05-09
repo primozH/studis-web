@@ -9,27 +9,32 @@
                     Predmet
                 </label>
                 <div class="col-sm-10">
-                    <select class="selectpicker" data-width="95%" id="predmet" name="predmet">
-                        <option value="1000407">Programiranje 1</option>
-                        <option value="1000471">Programiranje 2</option>
+                    <select data-width="95%" id="predmet" name="predmet" ng-model="vm.predmet">
+                        <option ng-repeat="x in vm.subjects" value="{{x.predmet.sifra}}">{{x.predmet.naziv}}</option>
                     </select>
                 </div>
             </div>
         </fieldset>
     </form>
 
-    <button type="button" class="btn btn-primary">Izberi predmet</button>
+    <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
 
-    <div>
-        <table class="table table-hover" align="center" id="dateTable">
+    <div ng-show="vm.subjectSelected">
+        <table class="table" align="center" id="dateTable">
             <thead class="thead-light">
             <tr ng-click="vm.enterResults()">
+                <th scope="col">Predmet</th>
+                <th scope="col">Izvajalec</th>
                 <th scope="col">Datum</th>
+                <th scope="col">Prostor</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>20.4.2016</td>
+            <tr ng-repeat="x in vm.exams">
+                <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
+                <td>{{x.izvajanjePredmeta.nosilec1.priimek}}, {{x.izvajanjePredmeta.nosilec1.ime}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>
+                <td>{{x.prostor}}</td>
             </tr>
             </tbody>
         </table>

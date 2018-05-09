@@ -65,7 +65,8 @@
             logout: logout,
             forgotPassword: forgotPassword,
             isLogged: isLogged,
-            currentUser: currentUser
+            currentUser: currentUser,
+            getToken: getToken
         };
     }
 

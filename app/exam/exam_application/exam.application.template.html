@@ -5,36 +5,56 @@
         <form>
             <fieldset>
                 <legend>Razpisani izpitni roki</legend>
-                <table class="table table-hover table-condensed examApp">
-                    <thead class="thead-light">
-                    <tr ng-show="vm.searchRes.length">
+                <table class="table table-hover examApp">
+                    <thead>
+                    <tr>
                         <th scope="col">Predmet</th>
                         <th scope="col">Izvajalec</th>
                         <th scope="col">Datum</th>
+                        <th scope="col">Prostor</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-click="vm.applyForExam()">
-                        <td>Programiranje 1</td>
-                        <td>Mahnič, Viljan</td>
-                        <td>15.06.2018</td>
+                    <tr ng-repeat="x in vm.exams">
+                        <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
+                        <td>{{x.izvajanjePredmeta.nosilec1.priimek}}, {{x.izvajanjePredmeta.nosilec1.ime}}</td>
+                        <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>
+                        <td>{{x.prostor}}</td>
                         <td>
-                            <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
-                            <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
-                        </td>
-                    </tr>
-                    <tr ng-click="vm.applyForExam()">
-                        <td>Programiranje 1</td>
-                        <td>Mahnič, Viljan</td>
-                        <td>15.06.2018</td>
-                        <td>
-                            <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
-                            <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
+                            <button type="button" class="btn btn-xs btn-primary" ng-hide="x.prijavljen"
+                                    ng-click="vm.applyForExam(x.izvajanjePredmeta.predmet.sifra, x.izvajanjePredmeta.studijskoLeto.id, x.datum)">
+                                Prijavi se
+                            </button>
+                            <button type="button" class="btn btn-xs btn-danger" ng-show="x.prijavljen"
+                                    ng-click="vm.cancelExamApplication(x.izvajanjePredmeta.predmet.sifra, x.izvajanjePredmeta.studijskoLeto.id, x.datum)">
+                                Odjavi se
+                            </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <!-- Modal
+                <div id="applyForExamModal" class="modal fade">
+                    <div class="modal-dialog"> -->
+                        <!-- Modal content
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Prijava na izpit</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Ali ste prepričani, da se želite prijaviti na izpit</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" ng-click="vm.removeToken()">Prijavi se</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
             </fieldset>
         </form>
     </div>

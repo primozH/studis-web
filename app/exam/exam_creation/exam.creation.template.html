@@ -9,32 +9,40 @@
                     Predmet
                 </label>
                 <div class="col-sm-10">
-                    <select class="selectpicker" data-width="95%" id="predmet" name="predmet">
-                        <option value="1000407">Programiranje 1</option>
-                        <option value="1000471">Programiranje 2</option>
+                    <select data-width="95%" id="predmet" name="predmet" ng-model="vm.predmet">
+                        <option ng-repeat="x in vm.subjects" value="{{x.predmet.sifra}}">{{x.predmet.naziv}}</option>
                     </select>
                 </div>
             </div>
         </fieldset>
     </form>
 
-    <button type="button" class="btn btn-primary">Izberi predmet</button>
+    <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
 
-    <div>
+    <div ng-show="vm.subjectSelected">
         <table class="table" align="center" id="dateTable">
             <thead class="thead-light">
             <tr>
+                <th scope="col">Predmet</th>
+                <th scope="col">Izvajalec</th>
                 <th scope="col">Datum</th>
+                <th scope="col">Prostor</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>20.4.2016</td>
+            <tr ng-repeat="x in vm.exams">
+                <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
+                <td>{{x.izvajanjePredmeta.nosilec1.priimek}}, {{x.izvajanjePredmeta.nosilec1.ime}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>
+                <td>{{x.prostor}}</td>
             </tr>
             </tbody>
         </table>
 
 
+        <div class="input-group-text">
+            <input type="text" class="form-control" placeholder="prostor" ng-model="vm.examRoom">
+        </div>
         <div id="dateInput" class="input-group date" data-provide="datepicker">
             <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>
             <div class="input-group-addon">
@@ -43,14 +51,14 @@
         </div>
 
         <div class="input-group clockpicker">
-            <input type="text" class="form-control" value="09:30">
+            <input id="timeInput" type="text" class="form-control" value="09:30" >
             <span class="input-group-addon">
                  <span class="glyphicon glyphicon-time"></span>
             </span>
         </div>
 
         <br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTokenModal" data-keyboard="true">Ustvari nov izpitni rok</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.createExam()">Ustvari nov izpitni rok</button>
         <br>
         <div ng-show="vm.message" style="display:inline-flex;margin:1%" class="alert alert-success alert-dismissible">
             <p>{{vm.message}}</p>
