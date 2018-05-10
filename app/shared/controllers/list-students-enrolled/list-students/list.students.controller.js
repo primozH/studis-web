@@ -9,6 +9,8 @@
         vm.predmetSifra = $routeParams.sifraPredmeta;
         vm.leto = $routeParams.leto;
 
+        vm.vrstaVpisa = "redni";
+
         listEnrolledService.seznamStudentov($routeParams.leto, $routeParams.sifraPredmeta)
         .then(function (response) {
             vm.studenti = response;
@@ -27,7 +29,7 @@
 
             for (var i = 1; i <= vm.studenti.length; i++) {
                 var temp = vm.studenti[i-1];
-                var trow = {"row":[i,temp.vpisnaStevilka,temp.priimek,temp.ime,temp.vrstaVpisa]};
+                var trow = {"row":[i,temp.vpisnaStevilka,temp.priimek,temp.ime,"redni"]};
                 tableRows.push(trow);
             }
             izvozService.izvoziCSVPDF("Seznam vpisanih\n"+vm.predmetNaziv+" ("+vm.predmetSifra+") v letu "+vm.leto, tableHeader, tableRows, tip);
