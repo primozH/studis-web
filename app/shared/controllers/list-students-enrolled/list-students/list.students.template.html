@@ -23,10 +23,10 @@
             <tbody>
             <tr ng-repeat="x in vm.studenti">
                 <td>{{$index + 1}}</td>
-                <td>{{x.vpisnaStevilka}}</td>
-                <td>{{x.priimek}}</td>
-                <td>{{x.ime}}</td>
-                <td>{{vm.vrstaVpisa}}</td>
+                <td>{{x.student.vpisnaStevilka}}</td>
+                <td>{{x.student.priimek}}</td>
+                <td>{{x.student.ime}}</td>
+                <td>{{x.nacinStudija.opis}}</td>
             </tr>
             </tbody>
         </table>

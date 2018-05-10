@@ -9,13 +9,13 @@
         vm.predmetSifra = $routeParams.sifraPredmeta;
         vm.leto = $routeParams.leto;
 
-        vm.vrstaVpisa = "redni";
+        
 
         listEnrolledService.seznamStudentov($routeParams.leto, $routeParams.sifraPredmeta)
         .then(function (response) {
             vm.studenti = response;
             (vm.studenti).sort(function(a,b){
-                return a.priimek.localeCompare(b.priimek, "cs-CS");
+                return a.student.priimek.localeCompare(b.student.priimek, "cs-CS");
             })
             if (vm.studenti.length > 0)
                 vm.izvoz = true;
@@ -29,7 +29,7 @@
 
             for (var i = 1; i <= vm.studenti.length; i++) {
                 var temp = vm.studenti[i-1];
-                var trow = {"row":[i,temp.vpisnaStevilka,temp.priimek,temp.ime,"redni"]};
+                var trow = {"row":[i,temp.student.vpisnaStevilka,temp.student.priimek,temp.student.ime,temp.nacinStudija.opis]};
                 tableRows.push(trow);
             }
             izvozService.izvoziCSVPDF("Seznam vpisanih\n"+vm.predmetNaziv+" ("+vm.predmetSifra+") v letu "+vm.leto, tableHeader, tableRows, tip);
