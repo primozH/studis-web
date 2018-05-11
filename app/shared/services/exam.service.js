@@ -12,6 +12,7 @@
         };
 
         var deleteExamApplication = function(data){
+            console.log(data);
             return $http.post("/api/v1/izpit/odjava", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
@@ -35,23 +36,40 @@
             });
         };
 
-        var postExam = function(predmet, data){
+        var postExam = function(data){
             console.log(data);
-            return $http.post("/api/v1/izpit/vnos-roka?predmet=" + predmet + "&studijsko-leto=2018&vnasalec=" + data.izvajalec.id, data, {
+            return $http.post("/api/v1/izpit/vnos-roka", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
 
-        var getAllSubjects = function(){
-            return $http.get("/api/v1/predmet/izvajanje?studijsko-leto=2018", {
+        var getAllSubjects = function(studijskoLeto){
+            return $http.get("/api/v1/predmet/izvajanje?studijsko-leto=" + studijskoLeto, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
 
+        var getAllRegisteredStudents = function(predmet, studijskoLeto, datum){
+            return $http.get("/api/v1/izpit/prijavljeni?predmet=" + predmet + "&studijsko-leto=" + studijskoLeto + "&datum=" + datum, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+        var data = {};
+
+        var getData = function(){
+            return data;
+        };
+
+        var setData = function(newData){
+            data = newData;
+        };
 
         return{
             postExamApplication: postExamApplication,
@@ -59,7 +77,10 @@
             getAvailableExams: getAvailableExams,
             postExam: postExam,
             getExamsForSubject: getExamsForSubject,
-            getAllSubjects: getAllSubjects
+            getAllSubjects: getAllSubjects,
+            getAllRegisteredStudents: getAllRegisteredStudents,
+            getData: getData,
+            setData: setData
         };
     };
 

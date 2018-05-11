@@ -20,9 +20,9 @@
     <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
 
     <div ng-show="vm.subjectSelected">
-        <table class="table" align="center" id="dateTable">
+        <table class="table table-hover" align="center" id="dateTable">
             <thead class="thead-light">
-            <tr ng-click="vm.enterResults()">
+            <tr>
                 <th scope="col">Predmet</th>
                 <th scope="col">Izvajalec</th>
                 <th scope="col">Datum</th>
@@ -30,7 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="x in vm.exams">
+            <tr ng-repeat="x in vm.exams"  ng-click="vm.enterResults(x)">
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajanjePredmeta.nosilec1.priimek}}, {{x.izvajanjePredmeta.nosilec1.ime}}</td>
                 <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>

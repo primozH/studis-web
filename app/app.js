@@ -8,8 +8,8 @@
                 controllerAs: 'vm'
             })
             .when('/student', {
-                templateUrl: 'student/dashboard/student.dashboard.template.html',
-                controller: 'studentCtrl',
+                templateUrl: 'exam/exam_application/exam.application.template.html',
+                controller: 'examAppCtrl',
                 controllerAs: 'vm'
             })
             .when('/student/:id/vpis', {
@@ -72,7 +72,7 @@
                 controller: 'enterResultsSelectCtrl',
                 controllerAs: "vm"
             })
-            .when('/vnosRezultatov/:predmet/:studijskoLeto/:datum', {
+            .when('/vnosRezultatov/:predmet', {
                 templateUrl: 'exam/enter_results/enter.results.table.template.html',
                 controller: 'examCreationCtrl',
                 controllerAs: "vm"

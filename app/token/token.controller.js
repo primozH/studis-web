@@ -84,7 +84,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri brisanju žetona je prišlo do napake";
+                        vm.errorMsg = "Pri posodabljanju žetona je prišlo do napake";
                     }
                 );
         };

@@ -1,8 +1,8 @@
 (function() {
 
-    enterResultsSelectCtrl.$inject = ["$routeParams", "$location", "examService"];
+    enterResultsSelectCtrl.$inject = ["$location", "examService"];
 
-    function enterResultsSelectCtrl($routeParams, $location, examService){
+    function enterResultsSelectCtrl($location, examService){
         var vm = this;
 
         vm.subjectSelected = false;
@@ -38,8 +38,11 @@
                 )
         };
 
-        vm.enterResults = function(){
-
+        vm.enterResults = function(x){
+            console.log("X");
+            console.log(x);
+            examService.setData(x);
+            $location.path("/vnosRezultatov/" + vm.predmet);
         };
     }
 

@@ -1,23 +1,16 @@
 (function() {
 
-    examCreationCtrl.$inject = ["examService", "authentication"];
+    examCreationCtrl.$inject = ["examService", "authentication", "$timeout"];
 
-    function examCreationCtrl(examService, authentication){
+    function examCreationCtrl(examService, authentication, $timeout){
         var vm = this;
 
-        vm.subjectSelected = false;
+        var messageTimer = null;
+        var errorMsgTimer = null;
 
-        examService.getAllSubjects()
-            .then(
-                function success(response){
-                    vm.subjects = response.data;
-                    console.log("subjects");
-                    console.log(vm.subjects);
-                },
-                function error(error){
-                    console.log(error);
-                }
-            );
+        vm.subjectSelected = false;
+        vm.yearSelected = false;
+        vm.currentUser = authentication.currentUser();
 
         $.fn.datepicker.dates['sl'] = {
             days: ["Nedelja", "Ponedeljek", "Torek", "Sreda", "Četrtek", "Petek", "Sobota"],
@@ -29,13 +22,11 @@
             weekStart: 1
         };
 
-        $('.selectpicker').selectpicker();
-
         $("#dateInput").datepicker({
             format: 'dd/mm/yyyy',
             autoclose: true,
             startDate: '+2d',
-            daysOfWeekDisabled:[0],
+            daysOfWeekDisabled:[0,6],
             language: 'sl',
             todayBtn: true,
             todayHighlight: true
@@ -46,30 +37,72 @@
             default: ""
         });
 
-        vm.createExam = function(){
-           var data = {
-                "prostor": vm.examRoom,
-                "izvajalec": {
-                    "id": authentication.currentUser().id
-                },
-                "datum": $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd'),
-                "cas": $("#timeInput").val()
-            };
-            console.log(data);
-            examService.postExam(vm.predmet, data)
+        var messageTimeout = function(){
+            $timeout.cancel(messageTimer);
+            messageTimer = $timeout(function(){
+                vm.message = null;
+            }, 5000);
+        };
+
+        var errorMsgTimeout = function(){
+            $timeout.cancel(errorMsgTimer);
+            errorMsgTimer = $timeout(function(){
+                vm.errorMsg = null;
+            }, 5000);
+        };
+
+        vm.getSubjectsForYear = function(){
+            examService.getAllSubjects(vm.studijskoLeto)
                 .then(
                     function success(response){
-                        console.log(response);
+                        vm.subjects = response.data;
+                        console.log("subjects");
+                        console.log(vm.subjects);
+                        vm.yearSelected = true;
                     },
                     function error(error){
                         console.log(error);
+                    }
+                );
+        };
+
+        vm.createExam = function(){
+            var izvajalec;
+            if(vm.currentUser.tip === 'Ucitelj')
+                izvajalec = vm.currentUser.id;
+            else
+                izvajalec = vm.izvajalec;
+
+            var data = {
+                "prostor": vm.examRoom,
+                "izvajalec": {
+                    "id": izvajalec
+                },
+               "izvajanjePredmeta": {
+                    "predmet": {"sifra": vm.izvajanjePredmeta.predmet.sifra},
+                    "studijskoLeto": {"id":2018}
+               },
+                "datum": $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd'),
+                "cas": $("#timeInput").val() + ":00"
+            };
+            console.log(data);
+            examService.postExam(data)
+                .then(
+                    function success(response){
+                        console.log(response);
+                        vm.message = "Izpitni rok je bil uspešno ustvarjen";
+                        messageTimeout();
+                    },
+                    function error(error){
+                        console.log(error);
+                        vm.errorMsg = "Pri ustvarjanju izpitnega roka je prišlo do napake";
+                        errorMsgTimeout();
                     }
                 )
         };
 
         vm.getExamsForSubject = function(){
-            console.log(vm.predmet);
-            examService.getExamsForSubject(vm.predmet)
+            examService.getExamsForSubject(vm.izvajanjePredmeta.predmet.sifra)
                 .then(
                     function success(response){
                         console.log(response);
