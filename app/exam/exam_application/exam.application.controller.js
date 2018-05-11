@@ -6,6 +6,7 @@
         var vm = this;
         vm.exam = [];
         vm.prijavljen = [];
+        vm.prijavljenDatum = [];
         vm.message = null;
         var messageTimer = null;
         var errorMsgTimer = null;

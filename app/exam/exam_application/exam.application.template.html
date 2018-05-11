@@ -21,13 +21,19 @@
                     <tr ng-repeat="x in vm.exams">
                         <td>{{x.predmet.naziv}}</td>
                         <td>{{x.predmet.sifra}}</td>
-                        <input ng-hide="true" ng-model="vm.prijavljen[$index]" value="{{x.prijavljen}}">
-                        <!--<td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>-->
+                        <td ng-hide="true">
+                            <select ng-model="vm.prijavljen[$index]" name="prijavljen">
+                                <option ng-value="x.prijavljen"></option>
+                            </select>
+                            <select ng-model="vm.prijavljenDatum[$index]" name="datum">
+                                <option value="{{x.datum}}"></option>
+                            </select>
+                                <!--<td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>-->
                         <td>
                             <!--<select ng-model="vm.examDate">
                                 <option value="roki" ng-repeat="roki.datum in x.roki"></option>
                             </select>-->
-                            <select ng-disabled="vm.prijavljen[$index]" ng-options="(rok.datum | date:'dd. MM. y') for rok in x.roki track by rok.predmet.sifra"
+                            <select ng-disabled="vm.prijavljen[$index]" ng-options="(rok.datum | date:'dd. MM. y') for rok in x.roki track by rok.datum"
                                     class="form-control" id="dateInput" ng-model="vm.exam[$index]">
                             </select>
                         </td>
@@ -44,6 +50,7 @@
                             </button>
                         </td>
                     </tr>
+                    </td>
                     </tbody>
                 </table>
 

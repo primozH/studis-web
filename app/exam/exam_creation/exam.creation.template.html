@@ -51,7 +51,7 @@
             <tr ng-repeat="x in vm.exams">
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
-                <td>{{x.izvajanjePredmeta.nosilec1.priimek}}, {{x.izvajanjePredmeta.nosilec1.ime}}</td>
+                <td>{{x.izvajalec.priimek}}, {{x.izvajalec.ime}}</td>
                 <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>
                 <td>{{x.prostor}}</td>
             </tr>
@@ -84,17 +84,11 @@
         <br>
         <button type="button" class="btn btn-primary" ng-click="vm.createExam()">Ustvari nov izpitni rok</button>
         <br>
-        <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success alert-dismissible">
+        <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
             <p>{{vm.message}}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
-        <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger alert-dismissible">
+        <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger">
             <p>{{vm.errorMsg}}</p>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
     </div>
 </div>

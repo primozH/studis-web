@@ -11,6 +11,7 @@
         vm.subjectSelected = false;
         vm.yearSelected = false;
         vm.currentUser = authentication.currentUser();
+        vm.exams = [];
 
         $.fn.datepicker.dates['sl'] = {
             days: ["Nedelja", "Ponedeljek", "Torek", "Sreda", "Četrtek", "Petek", "Sobota"],
@@ -92,6 +93,7 @@
                         console.log(response);
                         vm.message = "Izpitni rok je bil uspešno ustvarjen";
                         messageTimeout();
+                        vm.exams.push(response.data);
                     },
                     function error(error){
                         console.log(error);
@@ -106,7 +108,7 @@
                 .then(
                     function success(response){
                         console.log(response);
-                        vm.exams = response.data;
+                        vm.exams = vm.exams.concat(response.data);
                         vm.subjectSelected = true;
                     },
                     function error(error){
