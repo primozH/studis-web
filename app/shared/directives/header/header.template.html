@@ -34,6 +34,10 @@
                 <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
                     <a href="/#/seznamVpisanih"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Seznam vpisanih</a>
                 </li>
+                <!--EXAM CREATION-->
+                <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                    <a href="/#/novIzpitniRok">Nov izpitni rok</a>
+                </li>
                 <!--LOG OUT-->
                 <li ng-show="headvm.isLogged" ng-click="headvm.logout()">
                     <a href="" ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Odjava</a>

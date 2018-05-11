@@ -1,2 +1,102 @@
 <navigation></navigation>
 
+<div class="container">
+    <form class="form-horizontal">
+        <fieldset>
+            <legend>Ustvarjanje novega izpitnega roka</legend>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="studijskoLeto">
+                    Študijsko leto
+                </label>
+
+                <div class="input-group">
+                    <select class="form-control" id="studijskoLeto" name="studijskoLeto" ng-model="vm.studijskoLeto">
+                        <option value="2015">2015/2016</option>
+                        <option value="2016">2016/2017</option>
+                        <option value="2017">2017/2018</option>
+                        <option value="2018">2018/2019</option>
+                    </select>
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" ng-click="vm.getSubjectsForYear()">Izberi študijsko leto</button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" ng-show="vm.yearSelected">
+                <label class="control-label col-sm-2" for="predmet">
+                    Predmet
+                </label>
+                <div class="input-group">
+                    <select ng-options="(x.predmet.naziv +  ' (' + x.predmet.sifra + ')') for x in vm.subjects track by x.predmet.sifra"
+                            class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta"></select>
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <div ng-show="vm.subjectSelected">
+        <table class="table" align="center" id="dateTable">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Predmet</th>
+                <th scope="col">Šifra predmeta</th>
+                <th scope="col">Izvajalec</th>
+                <th scope="col">Datum</th>
+                <th scope="col">Prostor</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in vm.exams">
+                <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
+                <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
+                <td>{{x.izvajanjePredmeta.nosilec1.priimek}}, {{x.izvajanjePredmeta.nosilec1.ime}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>
+                <td>{{x.prostor}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
+            <option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
+            <option ng-show="vm.izvajanjePredmeta.nosilec2" value="{{vm.izvajanjePredmeta.nosilec2.id}}">{{vm.izvajanjePredmeta.nosilec2.ime}} {{vm.izvajanjePredmeta.nosilec2.priimek}}</option>
+            <option ng-show="vm.izvajanjePredmeta.nosilec3" value="{{vm.izvajanjePredmeta.nosilec3.id}}">{{vm.izvajanjePredmeta.nosilec3.ime}} {{vm.izvajanjePredmeta.nosilec3.priimek}}</option>
+        </select>
+
+        <div class="input-group-text">
+            <input type="text" class="form-control" placeholder="prostor" ng-model="vm.examRoom">
+        </div>
+        <div id="dateInput" class="input-group date" data-provide="datepicker">
+            <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </div>
+        </div>
+
+        <div class="input-group clockpicker">
+            <input id="timeInput" type="text" class="form-control" value="" >
+            <span class="input-group-addon">
+                 <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+
+        <br>
+        <button type="button" class="btn btn-primary" ng-click="vm.createExam()">Ustvari nov izpitni rok</button>
+        <br>
+        <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success alert-dismissible">
+            <p>{{vm.message}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger alert-dismissible">
+            <p>{{vm.errorMsg}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+

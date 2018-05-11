@@ -8,8 +8,8 @@
                 controllerAs: 'vm'
             })
             .when('/student', {
-                templateUrl: 'student/dashboard/student.dashboard.template.html',
-                controller: 'studentCtrl',
+                templateUrl: 'exam/exam_application/exam.application.template.html',
+                controller: 'examAppCtrl',
                 controllerAs: 'vm'
             })
             .when('/student/:id/vpis', {
@@ -64,6 +64,16 @@
             })
             .when('/novIzpitniRok', {
                 templateUrl: 'exam/exam_creation/exam.creation.template.html',
+                controller: 'examCreationCtrl',
+                controllerAs: "vm"
+            })
+            .when('/vnosRezultatov', {
+                templateUrl: 'exam/enter_results/enter.results.select.template.html',
+                controller: 'enterResultsSelectCtrl',
+                controllerAs: "vm"
+            })
+            .when('/vnosRezultatov/:predmet', {
+                templateUrl: 'exam/enter_results/enter.results.table.template.html',
                 controller: 'examCreationCtrl',
                 controllerAs: "vm"
             })

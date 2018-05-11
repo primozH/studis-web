@@ -28,9 +28,7 @@
                     $("form select[name=nacinStudija]").val(vm.token.nacinStudija.sifra).change();
                     $("form select[name=oblikaStudija]").val(vm.token.oblikaStudija.sifra).change();
 
-                    $('.selectpicker').selectpicker({
-                        size: 5
-                    });
+                    $('.selectpicker').selectpicker();
                 },
                 function error(error){
                     console.log(error);
@@ -86,7 +84,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri brisanju žetona je prišlo do napake";
+                        vm.errorMsg = "Pri posodabljanju žetona je prišlo do napake";
                     }
                 );
         };

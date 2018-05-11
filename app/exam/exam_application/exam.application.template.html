@@ -2,35 +2,85 @@
 
 <div class="container">
     <div class="row">
-        <table class="table table-hover examApp">
-            <thead class="thead-light">
-            <tr ng-show="vm.searchRes.length">
-                <th scope="col">Predmet</th>
-                <th scope="col">Izvajalec</th>
-                <th scope="col">Datum</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-click="vm.applyForExam()">
-                <td>Programiranje 1</td>
-                <td>Mahnič, Viljan</td>
-                <td>15.06.2018</td>
-                <td>
-                    <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
-                    <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
-                </td>
-            </tr>
-            <tr ng-click="vm.applyForExam()">
-                <td>Programiranje 1</td>
-                <td>Mahnič, Viljan</td>
-                <td>15.06.2018</td>
-                <td>
-                    <button type="button" class="btn btn-xs btn-primary">Prijavi se</button>
-                    <button type="button" class="btn btn-xs btn-danger">Odjavi se</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <form>
+            <fieldset>
+                <legend>Razpisani izpitni roki</legend>
+                <div style="height: 70vh;overflow-y:scroll">
+                <table class="table table-hover table-condensed examApp">
+                    <thead>
+                    <tr>
+                        <th scope="col">Predmet</th>
+                        <th scope="col">Šifra predmeta</th>
+                        <th scope="col">Datum</th>
+                        <th scope="col">Izvajalec</th>
+                        <th scope="col">Prostor</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="x in vm.exams">
+                        <td>{{x.predmet.naziv}}</td>
+                        <td>{{x.predmet.sifra}}</td>
+                        <input ng-hide="true" ng-model="vm.prijavljen[$index]" value="{{x.prijavljen}}">
+                        <!--<td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>-->
+                        <td>
+                            <!--<select ng-model="vm.examDate">
+                                <option value="roki" ng-repeat="roki.datum in x.roki"></option>
+                            </select>-->
+                            <select ng-disabled="vm.prijavljen[$index]" ng-options="(rok.datum | date:'dd. MM. y') for rok in x.roki track by rok.predmet.sifra"
+                                    class="form-control" id="dateInput" ng-model="vm.exam[$index]">
+                            </select>
+                        </td>
+                        <td>{{vm.exam[$index].izvajalec.priimek}} {{vm.exam[$index].izvajalec.ime}}</td>
+                        <td>{{vm.exam[$index].prostor}}</td>
+                        <td>
+                            <button type="button" class="btn btn-xs btn-primary" ng-hide="x.prijavljen"
+                                    ng-click="vm.applyForExam(x.predmet.sifra, vm.exam[$index].izvajanjePredmeta.studijskoLeto.id, vm.exam[$index].datum, $index)">
+                                Prijavi se
+                            </button>
+                            <button type="button" class="btn btn-xs btn-danger" ng-show="x.prijavljen"
+                                    ng-click="vm.cancelExamApplication(x.predmet.sifra, vm.exam[$index].izvajanjePredmeta.studijskoLeto.id, vm.exam[$index].datum, $index)">
+                                Odjavi se
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!-- Modal
+                <div id="applyForExamModal" class="modal fade">
+                    <div class="modal-dialog"> -->
+                        <!-- Modal content
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Prijava na izpit</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Ali ste prepričani, da se želite prijaviti na izpit</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" ng-click="vm.removeToken()">Prijavi se</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                </div>
+            </fieldset>
+        </form>
+        <br>
+        <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success alert-dismissible">
+            <p>{{vm.message}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger alert-dismissible">
+            <p>{{vm.errorMsg}}</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 </div>
