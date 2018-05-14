@@ -52,14 +52,14 @@
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
                 <td>{{x.izvajalec.priimek}}, {{x.izvajalec.ime}}</td>
-                <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas}}</td>
                 <td>{{x.prostor}}</td>
             </tr>
             </tbody>
         </table>
 
         <select ng-hide="vm.currentUser.tip == 'Ucitelj'" class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
-            <option value="" selected disabled hidden>Izberi izvajalca</option>
+            <option value="" selected disabled>---Izberi izvajalca---</option>
             <option ng-repeat="x in vm.nosilci track by $index" ng-show="x.id" value="{{x.id}}">{{x.ime}} {{x.priimek}}</option>
             <!--<option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec2" value="{{vm.izvajanjePredmeta.nosilec2.id}}">{{vm.izvajanjePredmeta.nosilec2.ime}} {{vm.izvajanjePredmeta.nosilec2.priimek}}</option>
