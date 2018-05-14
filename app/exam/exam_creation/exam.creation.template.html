@@ -59,9 +59,12 @@
         </table>
 
         <select ng-hide="vm.currentUser.tip == 'Ucitelj'" class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
-            <option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
+            <option value="" selected disabled hidden>Izberi izvajalca</option>
+            <option ng-repeat="x in vm.nosilci track by $index" ng-show="x.id" value="{{x.id}}">{{x.ime}} {{x.priimek}}</option>
+            <!--<option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec2" value="{{vm.izvajanjePredmeta.nosilec2.id}}">{{vm.izvajanjePredmeta.nosilec2.ime}} {{vm.izvajanjePredmeta.nosilec2.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec3" value="{{vm.izvajanjePredmeta.nosilec3.id}}">{{vm.izvajanjePredmeta.nosilec3.ime}} {{vm.izvajanjePredmeta.nosilec3.priimek}}</option>
+            -->
         </select>
 
         <div class="input-group-text">

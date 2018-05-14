@@ -104,11 +104,15 @@
         };
 
         vm.getExamsForSubject = function(){
+            vm.exams = [];
             examService.getExamsForSubject(vm.izvajanjePredmeta.predmet.sifra)
                 .then(
                     function success(response){
                         console.log(response);
-                        vm.exams = vm.exams.concat(response.data);
+                        if(response.status !== 204){
+                            vm.exams = vm.exams.concat(response.data);
+                        }
+                        vm.nosilci = [vm.izvajanjePredmeta.nosilec1, vm.izvajanjePredmeta.nosilec2, vm.izvajanjePredmeta.nosilec3];
                         vm.subjectSelected = true;
                     },
                     function error(error){
