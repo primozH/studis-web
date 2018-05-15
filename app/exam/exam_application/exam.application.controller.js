@@ -5,8 +5,7 @@
     function examAppCtrl(examService, authentication, $timeout){
         var vm = this;
         vm.exam = [];
-        vm.prijavljen = [];
-        vm.prijavljenDatum = [];
+        vm.prijavljenId = [];
         vm.message = null;
         var messageTimer = null;
         var errorMsgTimer = null;
@@ -30,6 +29,18 @@
                 function success(response){
                     console.log(response);
                     vm.exams = response.data;
+                    angular.forEach(vm.exams, function(exam, key) {
+                       var prijavljenRok = exam.prijavljenId;
+                       console.log(exam);
+                       if (prijavljenRok != null) {
+                           angular.forEach(exam.roki, function(rok) {
+                               console.log(rok);
+                               if (rok.id == prijavljenRok) {
+                                   vm.exam[key] = rok;
+                               }
+                           })
+                       }
+                    });
                 },
                 function error(error){
                     console.log(error);
@@ -37,12 +48,14 @@
             );
 
 
-        vm.applyForExam = function(predmet, studijskoLeto, datumIzvajanja, index){
+        vm.applyForExam = function(rok, index){
             data = {
-                "student": authentication.currentUser().id,
-                "predmet": predmet,
-                "studijskoLeto": studijskoLeto,
-                "datumIzvajanja": datumIzvajanja
+                "student": {
+                    "id": authentication.currentUser().id
+                },
+                "rok": {
+                    "id": rok
+                }
             };
             examService.postExamApplication(data)
                 .then(
@@ -50,7 +63,7 @@
                         console.log(response);
                         vm.exams[index].prijavljen = true;
                         //$('#dateInput').prop('disabled', 'disabled');
-                        vm.prijavljen[index] = true;
+                        vm.prijavljenId[index] = response.data.id;
                         vm.message = "Prijava na izpit je bila uspešna";
                         messageTimeout();
                     },
@@ -62,12 +75,14 @@
                 )
         };
 
-        vm.cancelExamApplication = function(predmet, studijskoLeto, datumIzvajanja, index){
-            data = {
-                "student": authentication.currentUser().id,
-                "predmet": predmet,
-                "studijskoLeto": studijskoLeto,
-                "datumIzvajanja": datumIzvajanja
+        vm.cancelExamApplication = function(id, index){
+            var data = {
+                "student": {
+                    "id": authentication.currentUser().id
+                },
+                "rok": {
+                    "id": id == null ? vm.prijavljenId[index] : id
+                }
             };
             examService.deleteExamApplication(data)
                 .then(
@@ -75,7 +90,7 @@
                         console.log(response);
                         vm.exams[index].prijavljen = false;
                         //$('#dateInput').prop('disabled', false);
-                        vm.prijavljen[index] = false;
+                        vm.prijavljenId[index] = null;
                         vm.message = "Odjava izpita je bila uspešna";
                         messageTimeout();
                     },

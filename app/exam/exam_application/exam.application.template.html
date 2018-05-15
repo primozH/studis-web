@@ -18,34 +18,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="x in vm.exams">
+                    <tr ng-repeat="x in vm.exams" ng-init="vm.prijavljenId[$index] = x.prijavljenId">
                         <td>{{x.predmet.naziv}}</td>
                         <td>{{x.predmet.sifra}}</td>
-                        <td ng-hide="true">
-                            <select ng-model="vm.prijavljen[$index]" name="prijavljen">
-                                <option ng-value="x.prijavljen"></option>
-                            </select>
-                            <select ng-model="vm.prijavljenDatum[$index]" name="datum">
-                                <option value="{{x.datum}}"></option>
-                            </select>
-                                <!--<td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>-->
                         <td>
-                            <!--<select ng-model="vm.examDate">
-                                <option value="roki" ng-repeat="roki.datum in x.roki"></option>
-                            </select>-->
-                            <select ng-disabled="vm.prijavljen[$index]" ng-options="(rok.datum | date:'dd. MM. y') for rok in x.roki track by rok.datum"
+                            <select ng-disabled="vm.prijavljenId[$index]" ng-options="(rok.datum | date:'dd. MM. y') for rok in x.roki track by rok.id"
                                     class="form-control" id="dateInput" ng-model="vm.exam[$index]">
                             </select>
                         </td>
                         <td>{{vm.exam[$index].izvajalec.priimek}} {{vm.exam[$index].izvajalec.ime}}</td>
                         <td>{{vm.exam[$index].prostor}}</td>
                         <td>
-                            <button type="button" class="btn btn-xs btn-primary" ng-hide="x.prijavljen"
-                                    ng-click="vm.applyForExam(x.predmet.sifra, vm.exam[$index].izvajanjePredmeta.studijskoLeto.id, vm.exam[$index].datum, $index)">
+                            <button type="button" class="btn btn-xs btn-primary" ng-hide="vm.prijavljenId[$index]"
+                                    ng-click="vm.applyForExam(vm.exam[$index].id, $index)">
                                 Prijavi se
                             </button>
-                            <button type="button" class="btn btn-xs btn-danger" ng-show="x.prijavljen"
-                                    ng-click="vm.cancelExamApplication(x.predmet.sifra, vm.exam[$index].izvajanjePredmeta.studijskoLeto.id, vm.exam[$index].datum, $index)">
+                            <button type="button" class="btn btn-xs btn-danger" ng-show="vm.prijavljenId[$index]"
+                                    ng-click="vm.cancelExamApplication(vm.exam[$index].id, $index)">
                                 Odjavi se
                             </button>
                         </td>
@@ -77,13 +66,13 @@
             </fieldset>
         </form>
         <br>
-        <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success alert-dismissible">
+        <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
             <p>{{vm.message}}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger alert-dismissible">
+        <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger">
             <p>{{vm.errorMsg}}</p>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>

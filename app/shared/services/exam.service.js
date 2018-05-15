@@ -38,7 +38,7 @@
 
         var postExam = function(data){
             console.log(data);
-            return $http.post("/api/v1/izpit/vnos-roka", data, {
+            return $http.post("/api/v1/izpit/rok", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
