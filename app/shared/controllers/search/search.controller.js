@@ -40,7 +40,7 @@
                 var trow = {"row":[i,temp.vpisnaStevilka,temp.ime,temp.priimek,temp.email,temp.telefonskaStevilka]};
                 tableRows.push(trow);
             }
-            izvozService.izvoziCSVPDF("Seznam iskanja", tableHeader, tableRows, tip);
+            izvozService.izvoziCSVPDF("Seznam iskanja", null, tableHeader, tableRows, tip);
         };
 
     }

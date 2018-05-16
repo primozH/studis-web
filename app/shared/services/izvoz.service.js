@@ -5,12 +5,16 @@
     function izvozService($http, $window, FileSaver, $sce) {
         var apiBase = "/api/v1";
 
-        var izvoziCSVPDF = function(ime, tableHeader, tableRows, tip) {
+        var izvoziCSVPDF = function(ime, metadata, tableHeader, tableRows, tip) {
             var podatki = {
                     "name": ime,
                     "documentType": "CSV",    
                     "tableHeader": tableHeader,
                     "tableRows": tableRows};
+
+            if (metadata != null) {
+                podatki.metadata = metadata;
+            }
 
             if (tip == 'pdf')
                 podatki.documentType = "PDF";
