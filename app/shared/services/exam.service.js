@@ -4,7 +4,7 @@
 
         var postExamApplication = function(data){
             console.log(data);
-            return $http.post("/api/v1/izpit/prijava", data, {
+            return $http.post("/api/v1/rok/prijava", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -13,7 +13,7 @@
 
         var deleteExamApplication = function(data){
             console.log(data);
-            return $http.post("/api/v1/izpit/odjava", data, {
+            return $http.post("/api/v1/rok/odjava", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -21,7 +21,7 @@
         };
 
         var getAvailableExams = function(){
-            return $http.get("/api/v1/izpit/rok?studijsko-leto=2018", {
+            return $http.get("/api/v1/rok?studijsko-leto=2018", {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -38,7 +38,7 @@
 
         var postExam = function(data){
             console.log(data);
-            return $http.post("/api/v1/izpit/rok", data, {
+            return $http.post("/api/v1/rok", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -53,8 +53,8 @@
             });
         };
 
-        var getAllRegisteredStudents = function(predmet, studijskoLeto, datum){
-            return $http.get("/api/v1/izpit/prijavljeni?predmet=" + predmet + "&studijsko-leto=" + studijskoLeto + "&datum=" + datum, {
+        var getAllRegisteredStudents = function(rokId){
+            return $http.get("/api/v1/rok/" + rokId + "prijavljeni", {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }

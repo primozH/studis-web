@@ -7,23 +7,30 @@
         vm.studenti = [];
         vm.predmetNaziv = $routeParams.nazivPredmeta;
         vm.predmetSifra = $routeParams.sifraPredmeta;
-        vm.leto = $routeParams.leto;
-
-        
 
         listEnrolledService.seznamStudentov($routeParams.leto, $routeParams.sifraPredmeta)
         .then(function (response) {
             vm.studenti = response;
+            if (vm.studenti.length > 0) {
+                vm.izvoz = true;
+                vm.leto = vm.studenti[0].studijskoLeto;
+            }
+
             (vm.studenti).sort(function(a,b){
                 return a.student.priimek.localeCompare(b.student.priimek, "cs-CS");
-            })
-            if (vm.studenti.length > 0)
-                vm.izvoz = true;
+            });
         }, function (err) {
             console.log(err);
         });
 
         vm.izvozi = function(tip) {
+            var metadata = {
+                "subject": {
+                    "sifra": vm.predmetSifra,
+                    "naziv": vm.predmetNaziv
+                },
+                "studyYear": vm.leto
+            },
             tableHeader = {"row":["Zaporedna številka","Vpisna številka","Priimek","Ime","Vrsta vpisa"]};
             tableRows = [];
 
@@ -32,7 +39,7 @@
                 var trow = {"row":[i,temp.student.vpisnaStevilka,temp.student.priimek,temp.student.ime,temp.nacinStudija.opis]};
                 tableRows.push(trow);
             }
-            izvozService.izvoziCSVPDF("Seznam vpisanih\n"+vm.predmetNaziv+" ("+vm.predmetSifra+") v letu "+vm.leto, tableHeader, tableRows, tip);
+            izvozService.izvoziCSVPDF("Seznam vpisanih", metadata, tableHeader, tableRows, tip);
         };
     }    
 
