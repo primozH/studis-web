@@ -125,8 +125,7 @@
             vm.subjectSelected = false;
             $("#roomInput").prop('value', '');
             $("#timeInput").prop('value', '');
-            $("#date").prop('value', '');
-
+            $("#izvajalec").prop('value', '');
         };
     }
 
