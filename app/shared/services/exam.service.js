@@ -29,7 +29,7 @@
         };
 
         var getExamsForSubject = function(predmet){
-            return $http.get("/api/v1/izpit/rok?studijsko-leto=2018&predmet=" + predmet, {
+            return $http.get("/api/v1/rok?studijsko-leto=2018&predmet=" + predmet, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }

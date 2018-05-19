@@ -27,7 +27,7 @@
                 </label>
                 <div class="input-group">
                     <select ng-options="(x.predmet.naziv +  ' (' + x.predmet.sifra + ')') for x in vm.subjects track by x.predmet.sifra"
-                            class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta"></select>
+                            class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta" ng-change="vm.reset()"></select>
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
                     </span>
@@ -68,7 +68,7 @@
         </select>
 
         <div class="input-group-text">
-            <input type="text" class="form-control" placeholder="prostor" ng-model="vm.examRoom">
+            <input type="text" class="form-control" placeholder="prostor" ng-model="vm.examRoom" id="roomInput">
         </div>
         <div id="dateInput" class="input-group date" data-provide="datepicker">
             <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>

@@ -120,6 +120,14 @@
                     }
                 )
         };
+
+        vm.reset = function(){
+            vm.subjectSelected = false;
+            $("#roomInput").prop('value', '');
+            $("#timeInput").prop('value', '');
+            $("#date").prop('value', '');
+
+        };
     }
 
     angular
