@@ -20,16 +20,17 @@
             });
         };
 
-        var getAvailableExams = function(){
-            return $http.get("/api/v1/rok?studijsko-leto=2018", {
+        var getAvailableExams = function(studijskoLeto){
+            return $http.get("/api/v1/rok?studijsko-leto=" + studijskoLeto, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
 
-        var getExamsForSubject = function(predmet){
-            return $http.get("/api/v1/rok?studijsko-leto=2018&predmet=" + predmet, {
+        var getExamsForSubjectYear = function(predmet, studijskoLeto){
+            console.log("/api/v1/rok?studijsko-leto=" + studijskoLeto + "&predmet=" + predmet);
+            return $http.get("/api/v1/rok?studijsko-leto=" + studijskoLeto + "&predmet=" + predmet, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -76,7 +77,7 @@
             deleteExamApplication: deleteExamApplication,
             getAvailableExams: getAvailableExams,
             postExam: postExam,
-            getExamsForSubject: getExamsForSubject,
+            getExamsForSubjectYear: getExamsForSubjectYear,
             getAllSubjects: getAllSubjects,
             getAllRegisteredStudents: getAllRegisteredStudents,
             getData: getData,

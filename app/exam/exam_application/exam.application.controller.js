@@ -24,7 +24,7 @@
             }, 5000);
         };
 
-        examService.getAvailableExams()
+        examService.getAvailableExams(2018)
             .then(
                 function success(response){
                     console.log(response);

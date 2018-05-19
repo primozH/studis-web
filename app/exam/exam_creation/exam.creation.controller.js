@@ -81,7 +81,7 @@
                 },
                "izvajanjePredmeta": {
                     "predmet": {"sifra": vm.izvajanjePredmeta.predmet.sifra},
-                    "studijskoLeto": {"id":2018}
+                    "studijskoLeto": {"id":vm.studijskoLeto}
                },
                 "datum": $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd'),
                 "cas": $("#timeInput").val() + ":00"
@@ -105,7 +105,7 @@
 
         vm.getExamsForSubject = function(){
             vm.exams = [];
-            examService.getExamsForSubject(vm.izvajanjePredmeta.predmet.sifra)
+            examService.getExamsForSubjectYear(vm.izvajanjePredmeta.predmet.sifra, vm.studijskoLeto)
                 .then(
                     function success(response){
                         console.log(response);
