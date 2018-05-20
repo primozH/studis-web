@@ -121,7 +121,9 @@
                 )
         };
 
-        vm.reset = function(){
+        vm.reset = function(yearReset){
+            if(yearReset)
+                vm.yearSelected = false;
             vm.subjectSelected = false;
             $("#roomInput").prop('value', '');
             $("#timeInput").prop('value', '');
