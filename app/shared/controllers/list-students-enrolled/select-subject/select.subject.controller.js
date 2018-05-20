@@ -41,7 +41,7 @@
                 var trow = {"row":[temp.predmet.sifra, temp.predmet.naziv, temp.studijskoLeto.studijskoLeto]};
                 tableRows.push(trow);
             }
-            izvozService.izvoziCSVPDF("Seznam predmetov", metadata, tableHeader, tableRows, tip);
+            izvozService.izvoziCSVPDF("Seznam predmetov", null, tableHeader, tableRows, tip);
         };
     }    
 
