@@ -34,6 +34,10 @@
                 <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
                     <a href="/#/seznamVpisanih"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Seznam vpisanih</a>
                 </li>
+                <!--NUMBER OF ENROLLED STUDENTS-->
+                <li ng-show="headvm.currentUser.tip == 'Referent'">
+                    <a href="/#/steviloVpisanih"><span class="glyphicon glyphicon-option-horizontal"></span>&nbsp;Število vpisanih</a>
+                </li>
                 <!--EXAM CREATION-->
                 <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
                     <a href="/#/novIzpitniRok"><span class="glyphicon glyphicon-calendar"></span> Nov izpitni rok</a>
