@@ -10,7 +10,7 @@
                 </label>
 
                 <div class="input-group">
-                    <select class="form-control" id="studijskoLeto" name="studijskoLeto" ng-model="vm.studijskoLeto">
+                    <select class="form-control" id="studijskoLeto" name="studijskoLeto" ng-model="vm.studijskoLeto" ng-change="vm.reset(true)">
                         <option value="2015">2015/2016</option>
                         <option value="2016">2016/2017</option>
                         <option value="2017">2017/2018</option>
@@ -27,7 +27,7 @@
                 </label>
                 <div class="input-group">
                     <select ng-options="(x.predmet.naziv +  ' (' + x.predmet.sifra + ')') for x in vm.subjects track by x.predmet.sifra"
-                            class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta" ng-change="vm.reset()"></select>
+                            class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta" ng-change="vm.reset(false)"></select>
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
                     </span>
@@ -37,7 +37,7 @@
     </form>
 
     <div ng-show="vm.subjectSelected">
-        <table class="table" align="center" id="dateTable">
+        <table class="table table-striped" align="center" id="dateTable">
             <thead class="thead-light">
             <tr>
                 <th scope="col">Predmet</th>
