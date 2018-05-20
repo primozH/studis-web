@@ -1,0 +1,71 @@
+<navigation></navigation>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div align="center"  class="col-md-8">
+    <h3>Število vpisanih</h3>
+    <br>
+
+    <h4>Leto:</h4>
+    <select class="form-control" ng-model="vm.leto">
+        <option value="2018">2018/2019</option>
+        <option value="2017">2017/2018</option>
+        <option value="2016">2016/2017</option>
+    </select>
+    <br>
+
+    <h4>Program:</h4>
+    <select class="form-control" ng-model="vm.program">
+        <option value="1000468">Računalništvo in informatika UNI-1.st</option>
+        <option value="1000407">Računalništvo in matematika UNI-1.st</option>
+        <option value="1000470">Računalništvo in informatika VS-1.st</option>
+        <option value="1000471">Računalništvo in infomatika MAG 2.st</option>
+        <option value="1000474">Računalništvo in informatika DR-3.st</option>
+    </select>
+    <br>
+
+    <h4>Letnik:</h4>
+    <select class="form-control" ng-model="vm.letnik">
+        <option value="1">1.</option>
+        <option value="2">2.</option>
+        <option ng-hide="vm.program==1000471" value="3">3.</option>
+    </select>
+    <br><br>
+
+    <button class="btn btn-primary" ng-click="vm.izpis_stevila_vpisanih()">izpiši število vpisanih</button><br><br>
+
+
+    <div class="row" ng-show="vm.prikazi_stevilo">
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Naziv predmeta</th>
+                <th scope="col">Število vpisanih</th>              
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in vm.vsi_predmeti">
+                <td>{{x.naziv}}</td>
+                <td>{{vm.stevilo_vsi_predmeti[$index]}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+   <div ng-show="vm.prikazi_stevilo" class="row">
+        <br><br>
+        <div class="col-xs-6 col-lg-6"></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
+    </div>
+
+
+
+
+  </div>
+
+  <div class="col-md-2"></div>
+</div>
+
+

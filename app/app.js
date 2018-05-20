@@ -87,6 +87,11 @@
                 controller: 'listStudentsCtrl',
                 controllerAs: "vm"
             })
+            .when('/steviloVpisanih', {
+                templateUrl: 'referent/stevilo-vpisanih/stevilo.vpisanih.template.html',
+                controller: 'numberEnrolledCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');
