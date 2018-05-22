@@ -53,7 +53,7 @@
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
                 <td>{{x.izvajalec.priimek}}, {{x.izvajalec.ime}}</td>
-                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas | date:'H:mm'}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas | removeSeconds}}</td>
                 <td>{{x.prostor}}</td>
                 <td>
                     <span style="cursor: pointer" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Uredi rok" ng-click="vm.prepareForExamUpdate(x)"></span>
@@ -112,7 +112,7 @@
                 <h4 class="modal-title">Izbris izpitnega roka</h4>
             </div>
             <div class="modal-body">
-                <p>Na ta izpitni rok je prijavljenih že x šudentov, ali ste prepričani, da ga želite izbrisati ?</p>
+                <p>Na ta izpitni rok je prijavljenih že {{vm.numOfApplicants}} šudentov, ali ste prepričani, da ga želite izbrisati ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" ng-click="vm.confirmRemoval()">Izbriši izpitni rok</button>
@@ -132,7 +132,7 @@
                 <h4 class="modal-title">Sprememba izpitnega roka</h4>
             </div>
             <div class="modal-body">
-                <p>Na ta izpitni rok je prijavljenih že x šudentov, ali ste prepričani, da ga želite spremeniti ?</p>
+                <p>Na ta izpitni rok je prijavljenih že {{vm.numOfApplicants}} šudentov, ali ste prepričani, da ga želite spremeniti ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" ng-click="vm.confirmUpdate()">Spremeni izpitni rok</button>

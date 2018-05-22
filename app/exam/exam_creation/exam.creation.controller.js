@@ -117,6 +117,7 @@
             //$("#izvajalec").prop('value', x.izvajalec.id).change();
             $('#dateInput').datepicker('setDate', $filter('date')(x.datum, 'dd/MM/y'));
             vm.editingExam = x;
+            vm.rokIdToUpdate = x.id;
         };
 
 
@@ -129,13 +130,25 @@
 
         vm.startUpdateProcess = function(){
             vm.confirmation = true;
-            var totalCount = 3;
-            if(totalCount > 0){
-                vm.confirmation = false;
-                $('#updateExamModal').modal('show');
-            }
-            else
-                vm.updateExam();
+            examService.getNumberOfApplicants(vm.rokIdToUpdate)
+                .then(
+                    function success(response){
+                        console.log(response);
+                        var numOfApplicants = response.headers("X-Total-Count");
+                        console.log("numOfApplicants");
+                        console.log(numOfApplicants);
+                        if(numOfApplicants > 0){
+                            vm.numOfApplicants = numOfApplicants;
+                            vm.confirmation = false;
+                            $('#updateExamModal').modal('show');
+                        }
+                        else
+                            vm.updateExam();
+                    },
+                    function error(error){
+                        console.log(error);
+                    }
+                );
         };
 
         $('#updateExamModal').on('hidden.bs.modal', function(){
@@ -192,16 +205,28 @@
         };
 
         vm.startRemovalProcess = function(rokId, idx){
-            vm.rokId = rokId;
+            vm.rokIdToRemove = rokId;
             vm.idx = idx;
             vm.confirmation = true;
-            var totalCount = 3;
-            if(totalCount > 0){
-                vm.confirmation = false;
-                $('#removeExamModal').modal('show');
-            }
-            else
-                vm.removeExam();
+            examService.getNumberOfApplicants(rokId)
+                .then(
+                    function success(response){
+                        console.log(response);
+                        var numOfApplicants = response.headers("X-Total-Count");
+                        console.log("numOfApplicants");
+                        console.log(numOfApplicants);
+                        if(totalCount > 0){
+                            vm.numOfApplicants = numOfApplicants;
+                            vm.confirmation = false;
+                            $('#removeExamModal').modal('show');
+                        }
+                        else
+                            vm.removeExam();
+                    },
+                    function error(error){
+                        console.log(error);
+                    }
+                );
         };
 
         $('#removeExamModal').on('hidden.bs.modal', function(){
@@ -210,7 +235,7 @@
         });
 
         vm.removeExam = function(){
-            examService.deleteExam(vm.rokId)
+            examService.deleteExam(vm.rokIdToRemove)
                 .then(
                     function success(response){
                         console.log(response);

@@ -99,7 +99,7 @@
 
 
         var getNumberOfApplicants = function(rokId){
-            return $http.get("/api/v1/izpit/rok/" + rokId + "/rezultati", {
+            return $http.get("/api/v1/izpit/rok/" + rokId + "/rezultati?count=true", {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -130,7 +130,8 @@
             getData: getData,
             setData: setData,
             getExamResults: getExamResults,
-            postExamResults: postExamResults
+            postExamResults: postExamResults,
+            getNumberOfApplicants: getNumberOfApplicants
         };
     };
 
