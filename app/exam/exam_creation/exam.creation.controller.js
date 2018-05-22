@@ -1,8 +1,8 @@
 (function() {
 
-    examCreationCtrl.$inject = ["examService", "authentication", "$timeout"];
+    examCreationCtrl.$inject = ["examService", "authentication", "$timeout", "$filter"];
 
-    function examCreationCtrl(examService, authentication, $timeout){
+    function examCreationCtrl(examService, authentication, $timeout, $filter){
         var vm = this;
 
         var messageTimer = null;
@@ -37,6 +37,9 @@
             donetext: 'Potrdi',
             default: ""
         });
+
+        //$('[data-toggle="tooltip"]').tooltip();
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
         var messageTimeout = function(){
             $timeout.cancel(messageTimer);
@@ -103,6 +106,79 @@
                 )
         };
 
+
+        vm.prepareForExamUpdate = function(x){
+            console.log("prepare for exam update");
+            console.log(x);
+            var time = x.cas.split(':')[0] + ":" + x.cas.split(':')[1];
+            vm.examRoom = x.prostor;
+            $("#timeInput").prop('value', time);
+            vm.izvajalec = x.izvajalec.id;
+            //$("#izvajalec").prop('value', x.izvajalec.id).change();
+            $('#dateInput').datepicker('setDate', $filter('date')(x.datum, 'dd/MM/y'));
+            vm.editingExam = x;
+        };
+
+
+        vm.updateExam = function(){
+            vm.editingExam.prostor = vm.examRoom;
+            vm.editingExam.cas = $("#timeInput").val() + ":00";
+            vm.editingExam.datum = $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd');
+
+            var izvajalec;
+            if(vm.currentUser.tip === 'Ucitelj')
+                izvajalec = vm.currentUser.id;
+            else
+                izvajalec = vm.izvajalec;
+
+            var data = {
+                "id": vm.editingExam.id,
+                "prostor": vm.examRoom,
+                "izvajalec": {
+                    "id": izvajalec
+                },
+                "izvajanjePredmeta": {
+                    "predmet": {"sifra": vm.izvajanjePredmeta.predmet.sifra},
+                    "studijskoLeto": {"id":vm.studijskoLeto}
+                },
+                "datum": vm.editingExam.datum,
+                "cas": vm.editingExam.cas
+            };
+            console.log(data);
+            examService.putExam(data)
+                .then(
+                    function success(response){
+                        console.log(response);
+                        vm.message = "Izpitni rok je bil uspešno posodobljen";
+                        messageTimeout();
+                    },
+                    function error(error){
+                        console.log(error);
+                        vm.errorMsg = "Pri posodabljanju izpitnega roka je prišlo do napake";
+                        errorMsgTimeout();
+                    }
+                )
+        };
+
+
+        vm.removeExam = function(rokId, idx){
+            examService.deleteExam(rokId)
+                .then(
+                    function success(response){
+                        console.log(response);
+                        vm.exams.splice(idx, 1);
+                        vm.message = "Izpitni rok je bil uspešno izbrisan";
+                        messageTimeout();
+                    },
+                    function error(error){
+                        console.log(error);
+                        vm.errorMsg = "Pri brisanju izpitnega roka je prišlo do napake";
+                        errorMsgTimeout();
+                    }
+                )
+        };
+
+
         vm.getExamsForSubject = function(){
             vm.exams = [];
             examService.getExamsForSubjectYear(vm.izvajanjePredmeta.predmet.sifra, vm.studijskoLeto)
@@ -128,6 +204,7 @@
             $("#roomInput").prop('value', '');
             $("#timeInput").prop('value', '');
             $("#izvajalec").prop('value', '');
+            $("#date").prop('value', '');
         };
     }
 
