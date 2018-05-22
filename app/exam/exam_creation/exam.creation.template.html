@@ -37,7 +37,7 @@
     </form>
 
     <div ng-show="vm.subjectSelected">
-        <table class="table table-striped" align="center" id="dateTable">
+        <table class="table table-hover" align="center" id="dateTable">
             <thead class="thead-light">
             <tr>
                 <th scope="col">Predmet</th>
@@ -45,6 +45,7 @@
                 <th scope="col">Izvajalec</th>
                 <th scope="col">Datum</th>
                 <th scope="col">Prostor</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -52,8 +53,12 @@
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
                 <td>{{x.izvajalec.priimek}}, {{x.izvajalec.ime}}</td>
-                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas | date:'H:mm'}}</td>
                 <td>{{x.prostor}}</td>
+                <td>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Uredi rok" ng-click="vm.prepareForExamUpdate(x)"></span>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Izbriši rok" ng-click="vm.removeExam(x.id, $index)"></span>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -86,6 +91,7 @@
 
         <br>
         <button type="button" class="btn btn-primary" ng-click="vm.createExam()">Ustvari nov izpitni rok</button>
+        <button type="button" class="btn btn-info" ng-click="vm.updateExam()">Posodobi izpitni rok</button>
         <br>
         <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
             <p>{{vm.message}}</p>

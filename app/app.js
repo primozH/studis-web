@@ -72,9 +72,9 @@
                 controller: 'enterResultsSelectCtrl',
                 controllerAs: "vm"
             })
-            .when('/vnosRezultatov/:predmet', {
+            .when('/vnosRezultatov/:rokId', {
                 templateUrl: 'exam/enter_results/enter.results.table.template.html',
-                controller: 'examCreationCtrl',
+                controller: 'enterResultsTableCtrl',
                 controllerAs: "vm"
             })
             .when('/seznamVpisanih', {

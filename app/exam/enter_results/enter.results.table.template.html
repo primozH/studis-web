@@ -11,7 +11,6 @@
                         <th scope="col">Ime</th>
                         <th scope="col">Priimek</th>
                         <th scope="col">Točke pisno</th>
-                        <th scope="col">Točke ustno</th>
                         <th scope="col">Končna ocena</th>
                         <th></th>
                     </tr>
@@ -27,11 +26,7 @@
                             </div>
                         </td>
                         <td>
-                            <input type="text" class="form-control input-sm" value="1" name="ocena_ustno" id="ocena_ustno">
-                        </td>
-                        <td>
-                            <div>
-                                <select class="selectpicker selectpicker-small" data-width="auto" id="ocena" name="ocena">
+                                <select class="selectpicker" id="ocena" name="ocena">
                                     <option>5</option>
                                     <option>6</option>
                                     <option>7</option>
@@ -39,7 +34,6 @@
                                     <option>9</option>
                                     <option>10</option>
                                 </select>
-                            </div>
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary small-button">Vrni prijavo</button>
@@ -47,7 +41,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <button type="submit" style="margin-left:1%" class="btn btn-primary">Shrani</button>
+                <button type="submit" class="btn btn-primary">Shrani</button>
             </fieldset>
         </form>
     </div>
