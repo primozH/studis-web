@@ -97,6 +97,16 @@
             });
         };
 
+
+        var getNumberOfApplicants = function(rokId){
+            return $http.get("/api/v1/izpit/rok/" + rokId + "/rezultati", {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+
         var data = {};
 
         var getData = function(){

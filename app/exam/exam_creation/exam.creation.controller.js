@@ -120,6 +120,29 @@
         };
 
 
+        <!--EXAM UPDATE-->
+
+        vm.confirmUpdate = function(){
+            vm.confirmation = true;
+            $('#updateExamModal').modal('hide');
+        };
+
+        vm.startUpdateProcess = function(){
+            vm.confirmation = true;
+            var totalCount = 3;
+            if(totalCount > 0){
+                vm.confirmation = false;
+                $('#updateExamModal').modal('show');
+            }
+            else
+                vm.updateExam();
+        };
+
+        $('#updateExamModal').on('hidden.bs.modal', function(){
+            if(vm.confirmation)
+                vm.updateExam();
+        });
+
         vm.updateExam = function(){
             vm.editingExam.prostor = vm.examRoom;
             vm.editingExam.cas = $("#timeInput").val() + ":00";
@@ -161,12 +184,37 @@
         };
 
 
-        vm.removeExam = function(rokId, idx){
-            examService.deleteExam(rokId)
+        <!--EXAM REMOVAL-->
+
+        vm.confirmRemoval = function(){
+          vm.confirmation = true;
+          $('#removeExamModal').modal('hide');
+        };
+
+        vm.startRemovalProcess = function(rokId, idx){
+            vm.rokId = rokId;
+            vm.idx = idx;
+            vm.confirmation = true;
+            var totalCount = 3;
+            if(totalCount > 0){
+                vm.confirmation = false;
+                $('#removeExamModal').modal('show');
+            }
+            else
+                vm.removeExam();
+        };
+
+        $('#removeExamModal').on('hidden.bs.modal', function(){
+            if(vm.confirmation)
+                vm.removeExam();
+        });
+
+        vm.removeExam = function(){
+            examService.deleteExam(vm.rokId)
                 .then(
                     function success(response){
                         console.log(response);
-                        vm.exams.splice(idx, 1);
+                        vm.exams.splice(vm.idx, 1);
                         vm.message = "Izpitni rok je bil uspešno izbrisan";
                         messageTimeout();
                     },
