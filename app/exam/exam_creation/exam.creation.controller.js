@@ -73,14 +73,12 @@
         vm.createExam = function(){
             var izvajalec;
             if(vm.currentUser.tip === 'Ucitelj')
-                izvajalec = vm.currentUser.id;
-            else
-                izvajalec = vm.izvajalec;
+                vm.izvajalec = vm.currentUser;
 
             var data = {
                 "prostor": vm.examRoom,
                 "izvajalec": {
-                    "id": izvajalec
+                    "id": vm.izvajalec.id
                 },
                "izvajanjePredmeta": {
                     "predmet": {"sifra": vm.izvajanjePredmeta.predmet.sifra},
@@ -107,13 +105,16 @@
         };
 
 
-        vm.prepareForExamUpdate = function(x){
+        vm.prepareForExamUpdate = function(x, idx){
+            vm.updateProcess = true;
+            vm.idx = idx;
+
             console.log("prepare for exam update");
             console.log(x);
             var time = x.cas.split(':')[0] + ":" + x.cas.split(':')[1];
             vm.examRoom = x.prostor;
             $("#timeInput").prop('value', time);
-            vm.izvajalec = x.izvajalec.id;
+            vm.izvajalec = x.izvajalec;
             //$("#izvajalec").prop('value', x.izvajalec.id).change();
             $('#dateInput').datepicker('setDate', $filter('date')(x.datum, 'dd/MM/y'));
             vm.editingExam = x;
@@ -161,17 +162,14 @@
             vm.editingExam.cas = $("#timeInput").val() + ":00";
             vm.editingExam.datum = $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd');
 
-            var izvajalec;
             if(vm.currentUser.tip === 'Ucitelj')
-                izvajalec = vm.currentUser.id;
-            else
-                izvajalec = vm.izvajalec;
+                vm.izvajalec = vm.currentUser;
 
             var data = {
                 "id": vm.editingExam.id,
                 "prostor": vm.examRoom,
                 "izvajalec": {
-                    "id": izvajalec
+                    "id": vm.izvajalec.id
                 },
                 "izvajanjePredmeta": {
                     "predmet": {"sifra": vm.izvajanjePredmeta.predmet.sifra},
@@ -185,12 +183,14 @@
                 .then(
                     function success(response){
                         console.log(response);
+                        vm.exams[vm.idx] = response.data;
                         vm.message = "Izpitni rok je bil uspešno posodobljen";
+                        vm.confirmation = false;
                         messageTimeout();
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri posodabljanju izpitnega roka je prišlo do napake";
+                        vm.errorMsg = "Pri posodabljanju izpitnega roka je prišlo do napake " + error.data.message;
                         errorMsgTimeout();
                     }
                 )
@@ -215,7 +215,7 @@
                         var numOfApplicants = response.headers("X-Total-Count");
                         console.log("numOfApplicants");
                         console.log(numOfApplicants);
-                        if(totalCount > 0){
+                        if(numOfApplicants > 0){
                             vm.numOfApplicants = numOfApplicants;
                             vm.confirmation = false;
                             $('#removeExamModal').modal('show');
@@ -245,7 +245,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri brisanju izpitnega roka je prišlo do napake";
+                        vm.errorMsg = "Pri brisanju izpitnega roka je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 )

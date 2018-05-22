@@ -56,16 +56,15 @@
                 <td>{{x.datum | date:'dd. MM. y'}} {{x.cas | removeSeconds}}</td>
                 <td>{{x.prostor}}</td>
                 <td>
-                    <span style="cursor: pointer" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Uredi rok" ng-click="vm.prepareForExamUpdate(x)"></span>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Uredi rok" ng-click="vm.prepareForExamUpdate(x, $index)"></span>
                     <span style="cursor: pointer" class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Izbriši rok" ng-click="vm.startRemovalProcess(x.id, $index)"></span>
                 </td>
             </tr>
             </tbody>
         </table>
 
-        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
+        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" ng-options="(x.priimek + ' ' + x.ime) for x in vm.nosilci track by x.id"  class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
             <option value="" selected disabled>---Izberi izvajalca---</option>
-            <option ng-repeat="x in vm.nosilci track by $index" ng-show="x.id" value="{{x.id}}">{{x.ime}} {{x.priimek}}</option>
             <!--<option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec2" value="{{vm.izvajanjePredmeta.nosilec2.id}}">{{vm.izvajanjePredmeta.nosilec2.ime}} {{vm.izvajanjePredmeta.nosilec2.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec3" value="{{vm.izvajanjePredmeta.nosilec3.id}}">{{vm.izvajanjePredmeta.nosilec3.ime}} {{vm.izvajanjePredmeta.nosilec3.priimek}}</option>
@@ -91,7 +90,7 @@
 
         <br>
         <button type="button" class="btn btn-primary" ng-click="vm.createExam()">Ustvari nov izpitni rok</button>
-        <button type="button" class="btn btn-info" ng-click="vm.startUpdateProcess()">Posodobi izpitni rok</button>
+        <button type="button" class="btn btn-info" ng-show="vm.updateProcess" ng-click="vm.startUpdateProcess()">Posodobi izpitni rok</button>
         <br>
         <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
             <p>{{vm.message}}</p>
