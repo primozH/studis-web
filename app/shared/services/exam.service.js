@@ -38,13 +38,31 @@
         };
 
         var postExam = function(data){
-            console.log(data);
             return $http.post("/api/v1/rok", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
+
+
+        var putExam = function(data){
+            return $http.put("/api/v1/rok", data, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+
+        var deleteExam = function(rokId){
+            return $http.delete("/api/v1/rok/" + rokId, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
 
         var getAllSubjects = function(studijskoLeto){
             return $http.get("/api/v1/predmet/izvajanje?studijsko-leto=" + studijskoLeto, {
@@ -55,12 +73,39 @@
         };
 
         var getAllRegisteredStudents = function(rokId){
-            return $http.get("/api/v1/rok/" + rokId + "prijavljeni", {
+            return $http.get("/api/v1/rok/" + rokId + "/prijavljeni", {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
+
+        var getExamResults = function(rokId){
+            return $http.get("/api/v1/izpit/rok/" + rokId + "/rezultati", {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+
+        var postExamResults = function(rokId, data){
+            return $http.post("/api/v1/izpit/rok/" + rokId + "/rezultati", data, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+
+        var getNumberOfApplicants = function(rokId){
+            return $http.get("/api/v1/izpit/rok/" + rokId + "/rezultati?count=true", {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
 
         var data = {};
 
@@ -77,11 +122,16 @@
             deleteExamApplication: deleteExamApplication,
             getAvailableExams: getAvailableExams,
             postExam: postExam,
+            putExam: putExam,
+            deleteExam: deleteExam,
             getExamsForSubjectYear: getExamsForSubjectYear,
             getAllSubjects: getAllSubjects,
             getAllRegisteredStudents: getAllRegisteredStudents,
             getData: getData,
-            setData: setData
+            setData: setData,
+            getExamResults: getExamResults,
+            postExamResults: postExamResults,
+            getNumberOfApplicants: getNumberOfApplicants
         };
     };
 
