@@ -25,6 +25,7 @@
         vm.potrdi = function(id) {
             potrdiVpisService.potrdi(id, 2018)
             .then(function (response) {
+                window.alert("vpis uspešno potrjen");
             }, function (err) {
                 console.log(err);
             });
