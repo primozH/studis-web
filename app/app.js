@@ -74,11 +74,6 @@
                 controller: 'examCreationCtrl',
                 controllerAs: "vm"
             })
-            .when('/vnosRezultatov', {
-                templateUrl: 'exam/enter_results/enter.results.select.template.html',
-                controller: 'enterResultsSelectCtrl',
-                controllerAs: "vm"
-            })
             .when('/vnosRezultatov/:rokId', {
                 templateUrl: 'exam/enter_results/enter.results.table.template.html',
                 controller: 'enterResultsTableCtrl',
