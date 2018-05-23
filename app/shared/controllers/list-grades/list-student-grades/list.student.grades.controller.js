@@ -10,11 +10,11 @@
             vm.studenti = response;
             console.log(response);
 
-             if (vm.studenti[0] && vm.studenti[0].predmet)
+             if (vm.studenti[0] && vm.studenti[0].prijavaRok.student)
                 vm.niprazno = true;
 
             (vm.studenti).sort(function(a,b){
-                return a.student.priimek.localeCompare(b.student.priimek, "cs-CS");
+                return a.prijavaRok.student.priimek.localeCompare(b.prijavaRok.student.priimek, "cs-CS");
             });
         }, function (err) {
             console.log(err);

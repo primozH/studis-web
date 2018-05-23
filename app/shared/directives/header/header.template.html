@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <!--STUDENT DATA-->
-                <li class="dropdown">
+                <li class="dropdown" ng-hide="headvm.currentUser.tip == 'Student'">
                     <a class="dropdown-toggle" type="button" data-toggle="dropdown">Študenti
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -44,7 +44,7 @@
                 </li>
 
                 <!--EXAM-->
-                <li class="dropdown">
+                <li class="dropdown" ng-hide="headvm.currentUser.tip == 'Student'">
                     <a class="dropdown-toggle" type="button" data-toggle="dropdown">Izpit
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">

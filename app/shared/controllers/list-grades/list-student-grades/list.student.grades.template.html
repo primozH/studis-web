@@ -22,12 +22,14 @@
             <tbody>
             <tr ng-repeat="x in vm.studenti">
                 <td>{{$index + 1}}</td>
-                <td>{{x.student.vpisnaStevilka}}</td>
-                <td>{{x.student.priimek}} {{x.student.ime}}</td>
+                <td>{{x.prijavaRok.student.vpisnaStevilka}}</td>
+                <td>{{x.prijavaRok.student.priimek}} {{x.prijavaRok.student.ime}}</td>
                 <td>{{x.prijavaRok.rok.izvajanjePredmeta.studijskoLeto.studijskoLeto}}</td>
-                <td>{{x.zapStPolaganja}}.</td>
+                <td ng-if="x.zapStPolaganja!=null">{{x.zapStPolaganja}}.</td>
+                <td ng-if="x.zapStPolaganja==null">1.</td>
                 <td>{{x.ocenaPisno}}</td>
-                <td>{{x.koncnaOcena}}</td>
+                <td ng-if="x.prijavaRok.brisana==false">{{x.koncnaOcena}}</td>
+                <td ng-if="x.prijavaRok.brisana==true">VP</td>
             </tr>
             </tbody>
         </table>
