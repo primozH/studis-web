@@ -23,9 +23,7 @@
                 }, function(err) {
                     return err;
                 })
-        };
-
-        
+        };        
 
         return {
             seznamRokov: seznamRokov,

@@ -9,12 +9,18 @@
         .then(function (response) {
             vm.studenti = response;
             console.log(response);
+
+             if (vm.studenti[0] && vm.studenti[0].predmet)
+                vm.niprazno = true;
+
             (vm.studenti).sort(function(a,b){
                 return a.student.priimek.localeCompare(b.student.priimek, "cs-CS");
             });
         }, function (err) {
             console.log(err);
         });
+
+       
 
         vm.izvozi = function(tip) {
             /*var metadata = {
