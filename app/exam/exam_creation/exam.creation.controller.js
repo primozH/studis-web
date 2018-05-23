@@ -1,8 +1,8 @@
 (function() {
 
-    examCreationCtrl.$inject = ["examService", "authentication", "$timeout", "$filter"];
+    examCreationCtrl.$inject = ["examService", "authentication", "$timeout", "$filter", "$location"];
 
-    function examCreationCtrl(examService, authentication, $timeout, $filter){
+    function examCreationCtrl(examService, authentication, $timeout, $filter, $location){
         var vm = this;
 
         var messageTimer = null;
@@ -281,6 +281,10 @@
 
         vm.filterNull = function(nosilec){
             return nosilec !== null;
+        };
+
+        vm.enterResults = function(rokId){
+            $location.path("/vnosRezultatov/" + rokId);
         };
 
     }
