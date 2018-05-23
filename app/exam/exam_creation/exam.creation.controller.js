@@ -71,7 +71,7 @@
         };
 
         vm.createExam = function(){
-            var izvajalec;
+            vm.updateProcess = false;
             if(vm.currentUser.tip === 'Ucitelj')
                 vm.izvajalec = vm.currentUser;
 
@@ -107,7 +107,7 @@
 
         vm.prepareForExamUpdate = function(x, idx){
             vm.updateProcess = true;
-            vm.idx = idx;
+            vm.idxToUpdate = idx;
 
             console.log("prepare for exam update");
             console.log(x);
@@ -136,8 +136,6 @@
                     function success(response){
                         console.log(response);
                         var numOfApplicants = response.headers("X-Total-Count");
-                        console.log("numOfApplicants");
-                        console.log(numOfApplicants);
                         if(numOfApplicants > 0){
                             vm.numOfApplicants = numOfApplicants;
                             vm.confirmation = false;
@@ -158,9 +156,9 @@
         });
 
         vm.updateExam = function(){
-            vm.editingExam.prostor = vm.examRoom;
-            vm.editingExam.cas = $("#timeInput").val() + ":00";
-            vm.editingExam.datum = $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd');
+            //vm.editingExam.prostor = vm.examRoom;
+            //vm.editingExam.cas = $("#timeInput").val() + ":00";
+            //vm.editingExam.datum = $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd');
 
             if(vm.currentUser.tip === 'Ucitelj')
                 vm.izvajalec = vm.currentUser;
@@ -175,22 +173,23 @@
                     "predmet": {"sifra": vm.izvajanjePredmeta.predmet.sifra},
                     "studijskoLeto": {"id":vm.studijskoLeto}
                 },
-                "datum": vm.editingExam.datum,
-                "cas": vm.editingExam.cas
+                "datum": $("#dateInput").data('datepicker').getFormattedDate('yyyy-mm-dd'),
+                "cas": $("#timeInput").val() + ":00"
             };
             console.log(data);
             examService.putExam(data)
                 .then(
                     function success(response){
                         console.log(response);
-                        vm.exams[vm.idx] = response.data;
+                        vm.updateProcess = false;
+                        vm.exams[vm.idxToUpdate] = response.data;
                         vm.message = "Izpitni rok je bil uspešno posodobljen";
                         vm.confirmation = false;
                         messageTimeout();
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri posodabljanju izpitnega roka je prišlo do napake " + error.data.message;
+                        vm.errorMsg = "Pri posodabljanju izpitnega roka je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 )
@@ -206,15 +205,13 @@
 
         vm.startRemovalProcess = function(rokId, idx){
             vm.rokIdToRemove = rokId;
-            vm.idx = idx;
+            //vm.idx = idx;
             vm.confirmation = true;
             examService.getNumberOfApplicants(rokId)
                 .then(
                     function success(response){
                         console.log(response);
                         var numOfApplicants = response.headers("X-Total-Count");
-                        console.log("numOfApplicants");
-                        console.log(numOfApplicants);
                         if(numOfApplicants > 0){
                             vm.numOfApplicants = numOfApplicants;
                             vm.confirmation = false;
@@ -235,6 +232,7 @@
         });
 
         vm.removeExam = function(){
+            vm.updateProcess = false;
             examService.deleteExam(vm.rokIdToRemove)
                 .then(
                     function success(response){
@@ -274,11 +272,17 @@
             if(yearReset)
                 vm.yearSelected = false;
             vm.subjectSelected = false;
+            vm.updateProcess = false;
             $("#roomInput").prop('value', '');
             $("#timeInput").prop('value', '');
             $("#izvajalec").prop('value', '');
             $("#date").prop('value', '');
         };
+
+        vm.filterNull = function(nosilec){
+            return nosilec !== null;
+        };
+
     }
 
     angular
