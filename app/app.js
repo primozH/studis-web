@@ -12,6 +12,13 @@
                 controller: 'examAppCtrl',
                 controllerAs: 'vm'
             })
+
+            .when('/student/zetoni', {
+                templateUrl: 'student/dashboard/student.dashboard.template.html',
+                controller: 'studentCtrl',
+                controllerAs: 'vm'
+            })
+
             .when('/student/:id/vpis', {
                 templateUrl: 'student/enrollment/student-data/student.data.template.html',
                 controller: 'vpisniList1Ctrl',
@@ -90,6 +97,16 @@
             .when('/steviloVpisanih', {
                 templateUrl: 'referent/stevilo-vpisanih/stevilo.vpisanih.template.html',
                 controller: 'numberEnrolledCtrl',
+                controllerAs: "vm"
+            })
+            .when('/seznamOcen', {
+                templateUrl: 'shared/controllers/list-grades/select-date/select.date.template.html',
+                controller: 'gradesDateCtrl',
+                controllerAs: "vm"
+            })
+            .when('/seznamOcen/:idRoka', {
+                templateUrl: 'shared/controllers/list-grades/list-student-grades/list.student.grades.template.html',
+                controller: 'gradesStudentsCtrl',
                 controllerAs: "vm"
             })
             .otherwise({redirectTo: '/prijava'});
