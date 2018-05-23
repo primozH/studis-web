@@ -8,8 +8,8 @@
                 controllerAs: 'vm'
             })
             .when('/student', {
-                templateUrl: 'exam/exam_application/exam.application.template.html',
-                controller: 'examAppCtrl',
+                templateUrl: 'student/dashboard/student.dashboard.template.html',
+                controller: 'studentCtrl',
                 controllerAs: 'vm'
             })
 

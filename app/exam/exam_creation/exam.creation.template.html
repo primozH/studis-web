@@ -53,19 +53,18 @@
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
                 <td>{{x.izvajalec.priimek}}, {{x.izvajalec.ime}}</td>
-                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas | date:'H:mm'}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas | removeSeconds}}</td>
                 <td>{{x.prostor}}</td>
                 <td>
-                    <span style="cursor: pointer" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Uredi rok" ng-click="vm.prepareForExamUpdate(x)"></span>
-                    <span style="cursor: pointer" class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Izbriši rok" ng-click="vm.removeExam(x.id, $index)"></span>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Uredi rok" ng-click="vm.prepareForExamUpdate(x, $index)"></span>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Izbriši rok" ng-click="vm.startRemovalProcess(x.id, $index)"></span>
                 </td>
             </tr>
             </tbody>
         </table>
 
-        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
+        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" ng-options="(x.priimek + ' ' + x.ime) for x in vm.nosilci track by x.id"  class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
             <option value="" selected disabled>---Izberi izvajalca---</option>
-            <option ng-repeat="x in vm.nosilci track by $index" ng-show="x.id" value="{{x.id}}">{{x.ime}} {{x.priimek}}</option>
             <!--<option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec2" value="{{vm.izvajanjePredmeta.nosilec2.id}}">{{vm.izvajanjePredmeta.nosilec2.ime}} {{vm.izvajanjePredmeta.nosilec2.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec3" value="{{vm.izvajanjePredmeta.nosilec3.id}}">{{vm.izvajanjePredmeta.nosilec3.ime}} {{vm.izvajanjePredmeta.nosilec3.priimek}}</option>
@@ -91,7 +90,7 @@
 
         <br>
         <button type="button" class="btn btn-primary" ng-click="vm.createExam()">Ustvari nov izpitni rok</button>
-        <button type="button" class="btn btn-info" ng-click="vm.updateExam()">Posodobi izpitni rok</button>
+        <button type="button" class="btn btn-info" ng-show="vm.updateProcess" ng-click="vm.startUpdateProcess()">Posodobi izpitni rok</button>
         <br>
         <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
             <p>{{vm.message}}</p>
@@ -102,4 +101,43 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div id="removeExamModal" class="modal fade">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Izbris izpitnega roka</h4>
+            </div>
+            <div class="modal-body">
+                <p>Na ta izpitni rok je prijavljenih že {{vm.numOfApplicants}} šudentov, ali ste prepričani, da ga želite izbrisati ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="vm.confirmRemoval()">Izbriši izpitni rok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="updateExamModal" class="modal fade">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sprememba izpitnega roka</h4>
+            </div>
+            <div class="modal-body">
+                <p>Na ta izpitni rok je prijavljenih že {{vm.numOfApplicants}} šudentov, ali ste prepričani, da ga želite spremeniti ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="vm.confirmUpdate()">Spremeni izpitni rok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+            </div>
+        </div>
+    </div>
+</div>
 
