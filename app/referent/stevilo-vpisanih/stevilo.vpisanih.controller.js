@@ -7,6 +7,8 @@
         vm.stevilo_vsi_predmeti = new Array(100).fill(0);
 
         vm.izpis_stevila_vpisanih = function() {
+            vm.stevilo_vsi_predmeti = new Array(100).fill(0);
+
             if (!vm.leto || !vm.program || !vm.letnik) {
                 console.log("vnesi vse podatke");
                 return;
