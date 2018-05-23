@@ -12,13 +12,6 @@
                 controller: 'studentCtrl',
                 controllerAs: 'vm'
             })
-
-            .when('/student/zetoni', {
-                templateUrl: 'student/dashboard/student.dashboard.template.html',
-                controller: 'studentCtrl',
-                controllerAs: 'vm'
-            })
-
             .when('/student/:id/vpis', {
                 templateUrl: 'student/enrollment/student-data/student.data.template.html',
                 controller: 'vpisniList1Ctrl',
