@@ -63,7 +63,7 @@
             </tbody>
         </table>
 
-        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" ng-options="(x.priimek + ' ' + x.ime) for x in vm.nosilci track by x.id"  class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
+        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" ng-options="(x.priimek + ' ' + x.ime) for x in vm.nosilci |filter:vm.filterNull track by x.id"  class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
             <option value="" selected disabled>---Izberi izvajalca---</option>
             <!--<option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
             <option ng-show="vm.izvajanjePredmeta.nosilec2" value="{{vm.izvajanjePredmeta.nosilec2.id}}">{{vm.izvajanjePredmeta.nosilec2.ime}} {{vm.izvajanjePredmeta.nosilec2.priimek}}</option>
