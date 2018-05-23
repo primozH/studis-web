@@ -109,6 +109,11 @@
                 controller: 'gradesStudentsCtrl',
                 controllerAs: "vm"
             })
+            .when('/potrdiVpis', {
+                templateUrl: 'referent/potrdi-vpis/potrdi.vpis.template.html',
+                controller: 'potrdiVpisCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');
