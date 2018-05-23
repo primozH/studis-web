@@ -7,6 +7,7 @@
                 <table class="table table-hover table-condensed">
                     <thead class="thead-light">
                     <tr>
+                        <th scope="col">Zaporedna številka</th>
                         <th scope="col">Vpisna številka</th>
                         <th scope="col">Ime</th>
                         <th scope="col">Priimek</th>
@@ -16,33 +17,40 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>63150001</td>
-                        <td>Janez</td>
-                        <td>Novak</td>
+                    <tr ng-repeat="x in vm.examApps">
+                        <td>{{$index + 1}}</td>
+                        <td>{{x.prijavaRok.student.vpisnaStevilka}}</td>
+                        <td>{{x.prijavaRok.student.ime}}</td>
+                        <td>{{x.prijavaRok.student.priimek}}</td>
                         <td>
                             <div>
-                                <input type="text" class="form-control input-sm" value="1" name="ocena_pisno" id="ocena_pisno">
+                                <input type="text" class="form-control input-sm" ng-model="x.ocenaPisno" name="ocenaPisno" id="ocenaPisno">
                             </div>
                         </td>
                         <td>
-                                <select class="selectpicker" id="ocena" name="ocena">
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                </select>
+                            <select style="height: 30px" class="form-control" id="ocena" name="ocena" ng-model="x.koncnaOcena" ng-options="grade for grade in vm.grades">
+                            </select>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary small-button">Vrni prijavo</button>
+                            <button type="button" class="btn btn-primary small-button" ng-click="vm.cancelExamApplication(x.prijavaRok.rok.id, x.prijavaRok.student.id, $index)">Vrni prijavo</button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <button type="submit" class="btn btn-primary">Shrani</button>
+                <button type="submit" class="btn btn-primary" ng-click="vm.postExamResults()">
+                    <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Shrani
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="vm.openGradesList()">
+                    <span class="fas fa-clipboard-list"></span>&nbsp;Seznam ocen
+                </button>
             </fieldset>
         </form>
+        <br>
+        <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
+            <p>{{vm.message}}</p>
+        </div>
+        <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger">
+            <p>{{vm.errorMsg}}</p>
+        </div>
     </div>
 </div>

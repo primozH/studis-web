@@ -183,13 +183,13 @@
                         console.log(response);
                         vm.updateProcess = false;
                         vm.exams[vm.idxToUpdate] = response.data;
-                        vm.message = "Izpitni rok je bil uspešno posodobljen";
+                        vm.message = "Izpitni rok je bil uspešno spremenjen";
                         vm.confirmation = false;
                         messageTimeout();
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri posodabljanju izpitnega roka je prišlo do napake: " + error.data.message;
+                        vm.errorMsg = "Pri spreminjanju izpitnega roka je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 )

@@ -69,7 +69,7 @@
                 controller: 'examAppCtrl',
                 controllerAs: "vm"
             })
-            .when('/novIzpitniRok', {
+            .when('/izpitniRok', {
                 templateUrl: 'exam/exam_creation/exam.creation.template.html',
                 controller: 'examCreationCtrl',
                 controllerAs: "vm"
