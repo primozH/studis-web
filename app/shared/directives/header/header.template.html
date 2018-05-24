@@ -52,6 +52,10 @@
                         <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
                             <a href="/#/novIzpitniRok"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Izpitni roki</a>
                         </li>
+                        <!--APPLY/CANCEL STUDENTS EXAM APPLICATION-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/prijavaStudentaNaIzpit"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Prijavi/odjavi študenta</a>
+                        </li>
                         <!--LIST OF REGISTERED STUDENTS WITH GRADES-->
                         <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
                             <a href="/#/seznamOcen"><span class="glyphicon glyphicon-sound-7-1"></span>&nbsp;Ocene prijavljenih</a>

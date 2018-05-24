@@ -102,6 +102,11 @@
                 controller: 'potrdiVpisCtrl',
                 controllerAs: "vm"
             })
+            .when('/prijavaStudentaNaIzpit', {
+                templateUrl: 'shared/controllers/apply-student-exam/apply.student.exam.template.html',
+                controller: 'applyStudentCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');
