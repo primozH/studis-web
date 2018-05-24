@@ -45,13 +45,24 @@
                     return err;
                 })
         };
+
+        var pdfPrikazi = function(id, leto) {
+            return $http.get(apiBase + "/student/"+id+"/potrdilo?studijsko-leto="+leto,
+                {headers:{'Authorization': 'Bearer ' + authentication.getToken()}, responseType: 'arraybuffer'})
+                .then(function(response) {
+                    return response;
+                }, function(err) {
+                    return err;
+                })
+        };
        
 
         return {
             seznamNepotrjenih: seznamNepotrjenih,
             potrdi: potrdi,
             pdfPotrdilo: pdfPotrdilo,
-            podrobnostiVpisa: podrobnostiVpisa
+            podrobnostiVpisa: podrobnostiVpisa,
+            pdfPrikazi: pdfPrikazi
         };
     }
 
