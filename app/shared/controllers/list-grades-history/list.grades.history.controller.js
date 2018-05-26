@@ -1,8 +1,8 @@
 (function() {
 
-    listGradeshistoryCtrl.$inject = ["gradesService", "$routeParams", "pdfService", "$templateCache", "$compile", "$timeout", "$scope"];
+    listGradeshistoryCtrl.$inject = ["gradesService", "$routeParams", "pdfService"];
 
-    function listGradeshistoryCtrl(gradesService, $routeParams, pdfService, $templateCache, $compile, $timeout, $scope) {
+    function listGradeshistoryCtrl(gradesService, $routeParams, pdfService) {
         var vm = this;
 
         vm.printAllBool = false;
@@ -30,8 +30,6 @@
         vm.createPdf = function() {
             vm.working = true;
             var doc = angular.element(document.getElementById("kartoteka").cloneNode(true));
-            // var linkFunction = $compile(doc);
-            // var result = linkFunction($scope);
 
             console.log(doc.html());
             pdfService.createPdf(doc.html())

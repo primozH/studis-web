@@ -2,6 +2,14 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+            <button type="button" class="btn btn-primary" ng-click="vm.printAllBool = true" ng-hide="vm.printAllBool">Vsa polaganja</button>
+            <button type="button" class="btn btn-primary" ng-click="vm.printAllBool = false" ng-show="vm.printAllBool">Zadnje polaganje</button>
+            <button class="btn btn-primary" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span></button>
+        </div>
+    </div>
+
+    <div class="row">
         <loader
                 working="vm.working"
                 disable-background="true">
@@ -13,10 +21,6 @@
                     <div style="text-align:center">
                         <h4>Pregled Opravljenih izpitov</h4>
                         <h4>{{vm.student.vpisnaStevilka}} {{vm.student.ime}} {{vm.student.priimek}}</h4>
-                        <br>
-                        <button type="button" class="btn btn-primary" ng-click="vm.printAll()" ng-hide="vm.printAllBool">Vsa polaganja</button>
-                        <button type="button" class="btn btn-primary" ng-click="vm.printOne()" ng-show="vm.printAllBool">Samo zadnje polaganje</button>
-                        <br>
                     </div>
                     <div ng-repeat="vrstica in vm.vrstice">
                         <div>
@@ -91,10 +95,5 @@
                 </div>
             </fieldset>
         </form>
-    </div>
-    <div class="row">
-        <div class="col-xs-1 col-xs-offset-11">
-            <button class="btn btn-primary btn-block" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span></button>
-        </div>
     </div>
 </div>
