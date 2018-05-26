@@ -96,7 +96,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri prijavi na izpit je prišlo do napake";
+                        vm.errorMsg = "Pri prijavi na izpit je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 )
@@ -123,7 +123,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri odjavi izpita je prišlo do napake";
+                        vm.errorMsg = "Pri odjavi izpita je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 )
