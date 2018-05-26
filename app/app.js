@@ -102,6 +102,11 @@
                 controller: 'potrdiVpisCtrl',
                 controllerAs: "vm"
             })
+            .when('/kartotecniList/:studentId', {
+                templateUrl: 'shared/controllers/list-grades-history/list.grades.history.template.html',
+                controller: 'listGradeshistoryCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');

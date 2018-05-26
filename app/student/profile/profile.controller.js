@@ -7,7 +7,11 @@
 
     function profileCtrl(searchProfile, $routeParams, $scope, $window, $location){
         vm = this;
-        console.log($routeParams.id);
+
+        vm.showGradesHistory = function(){
+            $location.path("/kartotecniList/" + $routeParams.id);
+        };
+
         searchProfile.getStudentById($routeParams.id)
             .then(
                 function success(response){
