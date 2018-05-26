@@ -22,6 +22,11 @@
                 controller: 'vpisniList2Ctrl',
                 controllerAs: 'vm'
             })
+            .when('/student/:id/kartotecniList', {
+                templateUrl: 'shared/controllers/list-grades-history/list.grades.history.template.html',
+                controller: 'listGradeshistoryCtrl',
+                controllerAs: 'vm'
+            })
             .when('/iskanje', {
                 templateUrl: "shared/controllers/search/search.html",
                 controller: "searchCtrl",
