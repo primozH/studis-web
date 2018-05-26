@@ -9,22 +9,25 @@
                     <h4>Pregled Opravljenih izpitov</h4>
                     <h4>{{vm.student.vpisnaStevilka}} {{vm.student.ime}} {{vm.student.priimek}}</h4>
                     <br>
+                    <button type="button" class="btn btn-primary" ng-click="vm.printAll()" ng-hide="vm.printAllBool">Vsa polaganja</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.printOne()" ng-show="vm.printAllBool">Samo zadnje polaganje</button>
+                    <br>
                 </div>
-                <div ng-repeat="row in vm.rows">
+                <div ng-repeat="vrstica in vm.vrstice">
                     <div>
                         <div style="display:inline-block">
                             <span>Študijsko leto: </span>
-                            <span>{{row.vpis.studijskoLeto.studijskoLeto}}</span>
+                            <span>{{vrstica.vpis.studijskoLeto.studijskoLeto}}</span>
                             <br>
                             <span>Letnik: </span>
-                            <span>{{row.vpis.letnik.letnik}}</span>
+                            <span>{{vrstica.vpis.letnik.letnik}}</span>
                         </div>
                         <div style="display:inline-block;margin-left:10%">
                             <span>Način: </span>
-                            <span>{{row.vpis.nacinStudija.opis}}</span>
+                            <span>{{vrstica.vpis.nacinStudija.opis}}</span>
                             <br>
                             <span>Vrsta vpisa: </span>
-                            <span>{{row.vpis.vrstaVpisa.vrstaVpisa}}</span>
+                            <span>{{vrstica.vpis.vrstaVpisa.vrstaVpisa}}</span>
                         </div>
                     </div>
                     <table class="table table-hover" align="center">
@@ -42,24 +45,42 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="grade in row.oceneZaPredmete">
+                        <tr ng-repeat="predmet in vrstica.predmeti">
                             <td>{{$index + 1}}</td>
-                            <td>{{grade.predmet.sifra}}</td>
-                            <td>{{grade.predmet.naziv}}</td>
-                            <td>{{grade.predmet.ects}}</td>
-                            <td>Viljan Mahnič</td>
-                            <td>{{grade.datum}}</td>
-                            <td>{{grade.koncnaOcena}}</td>
-                            <td>{{grade.stPolaganjaLeto}}</td>
+                            <td>{{predmet.predmet.sifra}}</td>
+                            <td>{{predmet.predmet.naziv}}</td>
+                            <td>{{predmet.predmet.ects}}</td>
+                            <td>{{predmet.nosilec1.ime}} {{predmet.nosilec1.priimek}}</td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].datum | date:'dd. MM. y'}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].koncnaOcena}}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].stPolaganjaLeto}}</td>
+                                    </tr>
+                                </table>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
                     <div>
                         <span>Skupno število kreditnih točk: </span>
-                        <span>{{row.kreditneTocke}}</span>
+                        <span>{{vrstica.kreditneTocke}}</span>
                         <br>
                         <span>Skupno povprečje: </span>
-                        <span>{{row.povprecnaOcena}}</span>
+                        <span>{{vrstica.povprecnaOcena}}</span>
                     </div>
                 </div>
             </div>
