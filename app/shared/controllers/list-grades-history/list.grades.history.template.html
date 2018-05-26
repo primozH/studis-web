@@ -1,77 +1,79 @@
 <navigation></navigation>
 
 <div class="container">
-    <div class="row" id="kartoteka">
-
-        <div>
-            <form class="form-horizontal">
-                <fieldset>
-                    <legend>Kartotečni list</legend>
-                    <div>
-                        <div style="text-align:center">
-                            <h4>Pregled Opravljenih izpitov</h4>
-                            <h4>{{vm.student.vpisnaStevilka}} {{vm.student.ime}} {{vm.student.priimek}}</h4>
-                            <br>
-                        </div>
-                        <div ng-repeat="row in vm.rows">
-                            <div>
-                                <div style="display:inline-block">
-                                    <span>Študijsko leto: </span>
-                                    <span>{{row.vpis.studijskoLeto.studijskoLeto}}</span>
-                                    <br>
-                                    <span>Letnik: </span>
-                                    <span>{{row.vpis.letnik.letnik}}</span>
-                                </div>
-                                <div style="display:inline-block;margin-left:10%">
-                                    <span>Način: </span>
-                                    <span>{{row.vpis.nacinStudija.opis}}</span>
-                                    <br>
-                                    <span>Vrsta vpisa: </span>
-                                    <span>{{row.vpis.vrstaVpisa.vrstaVpisa}}</span>
-                                </div>
-                            </div>
-                            <table class="table table-hover" align="center">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">Zaporedna številka</th>
-                                    <th scope="col">Šifra predmeta</th>
-                                    <th scope="col">Predmet</th>
-                                    <th scope="col">KT</th>
-                                    <th scope="col">Predavatelji</th>
-                                    <th scope="col">Datum</th>
-                                    <th scope="col">Ocena</th>
-                                    <th scope="col">Število polaganj</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="grade in row.oceneZaPredmete">
-                                    <td>{{$index + 1}}</td>
-                                    <td>{{grade.predmet.sifra}}</td>
-                                    <td>{{grade.predmet.naziv}}</td>
-                                    <td>{{grade.predmet.ects}}</td>
-                                    <td>Viljan Mahnič</td>
-                                    <td>{{grade.datum}}</td>
-                                    <td>{{grade.koncnaOcena}}</td>
-                                    <td>{{grade.stPolaganjaLeto}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div>
-                                <span>Skupno število kreditnih točk: </span>
-                                <span>{{row.kreditneTocke}}</span>
+    <div class="row" >
+        <loader
+                working="vm.working"
+                disable-background="true">
+        </loader>
+        <form class="form-horizontal" id="kartoteka">
+            <fieldset>
+                <legend>Kartotečni list</legend>
+                <div>
+                    <div class="text-center">
+                        <h4>Pregled opravljenih izpitov</h4>
+                        <h4>{{vm.student.vpisnaStevilka}} {{vm.student.ime}} {{vm.student.priimek}}</h4>
+                        <br>
+                    </div>
+                    <div ng-repeat="row in vm.rows">
+                        <div>
+                            <div style="display:inline-block">
+                                <span>Študijsko leto: </span>
+                                <span>{{row.vpis.studijskoLeto.studijskoLeto}}</span>
                                 <br>
-                                <span>Skupno povprečje: </span>
-                                <span>{{row.povprecnaOcena}}</span>
+                                <span>Letnik: </span>
+                                <span>{{row.vpis.letnik.letnik}}</span>
                             </div>
+                            <div style="display:inline-block;margin-left:10%">
+                                <span>Način: </span>
+                                <span>{{row.vpis.nacinStudija.opis}}</span>
+                                <br>
+                                <span>Vrsta vpisa: </span>
+                                <span>{{row.vpis.vrstaVpisa.vrstaVpisa}}</span>
+                            </div>
+                        </div>
+                        <table class="table table-hover" align="center">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Šifra predmeta</th>
+                                <th scope="col">Predmet</th>
+                                <th scope="col">KT</th>
+                                <th scope="col">Predavatelji</th>
+                                <th scope="col">Datum</th>
+                                <th scope="col">Ocena</th>
+                                <th scope="col">Število polaganj</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="grade in row.oceneZaPredmete">
+                                <td>{{$index + 1}}</td>
+                                <td>{{grade.predmet.sifra}}</td>
+                                <td>{{grade.predmet.naziv}}</td>
+                                <td>{{grade.predmet.ects}}</td>
+                                <td>Viljan Mahnič</td>
+                                <td>{{grade.datum}}</td>
+                                <td>{{grade.koncnaOcena}}</td>
+                                <td>{{grade.stPolaganjaLeto}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <span>Skupno število kreditnih točk: </span>
+                            <span>{{row.kreditneTocke}}</span>
+                            <br>
+                            <span>Skupno povprečje: </span>
+                            <span>{{row.povprecnaOcena}}</span>
                         </div>
                     </div>
-                </fieldset>
-            </form>
-        </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
-
     <div class="row">
-        <button ng-click="vm.createPdf()" class="btn btn-primary">Izvozi v PDF</button>
+        <div class="col-xs-1 col-xs-offset-11">
+            <button class="btn btn-primary btn-block" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span></button>
+        </div>
     </div>
 </div>

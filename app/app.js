@@ -22,11 +22,6 @@
                 controller: 'vpisniList2Ctrl',
                 controllerAs: 'vm'
             })
-            .when('/student/:id/kartotecniList', {
-                templateUrl: 'shared/controllers/list-grades-history/list.grades.history.template.html',
-                controller: 'listGradeshistoryCtrl',
-                controllerAs: 'vm'
-            })
             .when('/iskanje', {
                 templateUrl: "shared/controllers/search/search.html",
                 controller: "searchCtrl",
@@ -122,7 +117,7 @@
         $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver', 'ngLoader']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 })();
