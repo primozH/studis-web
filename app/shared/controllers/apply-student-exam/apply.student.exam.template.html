@@ -1,0 +1,53 @@
+<navigation></navigation>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div align="center"  class="col-md-8">
+    <h3>Prijava/odjava študentov na izpit</h3>
+    <br><br>
+
+    <select class="form-control" ng-change="vm.spremembaLeta()" ng-model="vm.leto" ng-init="2018">
+        <option value="2018">2018/2019</option>
+        <option value="2017">2017/2018</option>
+        <option value="2016">2016/2017</option>
+    </select>
+
+    <select ng-change="vm.spremembaPredmeta()" class="form-control" ng-show="vm.prikaziPredmete" ng-model="vm.predmet" ng-options="x as x.predmet.naziv for x in vm.predmeti"></select>
+    <br><br>
+    
+
+    <div class="row">
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Naziv predmeta</th>
+                <th scope="col">Datum roka</th>
+                <th scope="col">Ura roka</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat-start="x in vm.roki" ng-click="show[$index]=!show[$index];">
+				<td>{{x.izvajanjePredmeta.predmet.naziv}}({{x.izvajanjePredmeta.predmet.sifra}})</td>
+                <td>{{x.datum}}</td>
+                <td>{{x.cas}}</td>
+            </tr>
+            <tr ng-repeat-end ng-show="show[$index]">    
+			  <td>
+				<div class="row">
+				  <div class="col-sm-6"><input placeholder="vpisna številka" type="text" ng-model="vm.vpisna[$index]"><br></div>
+				  <div class="col-sm-3"><button class="form-control" ng-click="vm.prijavi($index)">prijavi</button></div>
+				  <div class="col-sm-3"><button class="form-control" ng-click="vm.odjavi($index)">odjavi</button></div>
+				</div>
+				<div class="row" align="left">
+					<p ng-model=vm.error[$index]>&nbsp;&nbsp; {{vm.error}}<p>
+				</div>
+			  </td>
+			</tr>
+            </tbody>
+        </table>
+    </div>
+
+  </div>
+
+  <div class="col-md-2"></div>
+</div>

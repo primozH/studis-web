@@ -1,22 +1,13 @@
 (function () {
 
-    potrdiVpisCtrl.$inject = ["$location", "$routeParams", "potrdiVpisService", "izvozService"];
+    potrdiVpisCtrl.$inject = ["$location", "$routeParams", "potrdiVpisService", "izvozService", "$sce"];
 
-    function potrdiVpisCtrl($location, $routeParams, potrdiVpisService, izvozService) {
+    function potrdiVpisCtrl($location, $routeParams, potrdiVpisService, izvozService, $sce) {
         var vm = this;
         
         potrdiVpisService.seznamNepotrjenih()
         .then(function (response) {
             vm.nepotrjeni = response;
-            
-            /*for (var i = 0; i < response.length; i++) {
-                potrdiVpisService.podrobnostiVpisa(vm.nepotrjeni[i].id)
-                .then(function (response2) {
-                    console.log(response2);
-                    //if (response2)
-                    //vm.program[i] = response2.studijskiProgram.naziv;
-                });
-            } //*/
         }, function (err) {
             console.log(err);
         });
@@ -25,7 +16,6 @@
         vm.potrdi = function(id) {
             potrdiVpisService.potrdi(id, 2018)
             .then(function (response) {
-                window.alert("vpis uspešno potrjen");
             }, function (err) {
                 console.log(err);
             });
@@ -34,6 +24,18 @@
         vm.pdfPotrdilo = function(id) {
             potrdiVpisService.pdfPotrdilo(id, 2018)
             .then(function (response) {
+            }, function (err) {
+                console.log(err);
+            });
+        }
+
+        vm.pdfPrikazi= function(id, leto) {
+            potrdiVpisService.pdfPrikazi(id, 2018)
+            .then(function (response) {
+                var file = new Blob([response.data], {type: 'application/pdf'});
+                var fileURL = URL.createObjectURL(file);
+                vm.content = $sce.trustAsResourceUrl(fileURL);
+
             }, function (err) {
                 console.log(err);
             });
