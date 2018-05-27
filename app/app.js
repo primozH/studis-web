@@ -62,7 +62,7 @@
                 controller: 'examAppCtrl',
                 controllerAs: "vm"
             })
-            .when('/novIzpitniRok', {
+            .when('/izpitniRok', {
                 templateUrl: 'exam/exam_creation/exam.creation.template.html',
                 controller: 'examCreationCtrl',
                 controllerAs: "vm"
@@ -102,6 +102,11 @@
                 controller: 'potrdiVpisCtrl',
                 controllerAs: "vm"
             })
+            .when('/kartotecniList/:studentId', {
+                templateUrl: 'shared/controllers/list-grades-history/list.grades.history.template.html',
+                controller: 'listGradeshistoryCtrl',
+                controllerAs: "vm"
+            })
             .when('/prijavaStudentaNaIzpit', {
                 templateUrl: 'shared/controllers/apply-student-exam/apply.student.exam.template.html',
                 controller: 'applyStudentCtrl',
@@ -112,7 +117,7 @@
         $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver', 'ngLoader']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 })();

@@ -11,7 +11,9 @@
         var vsebina_datoteke = null;
         //prikaže neuspešno uvožene
         vm.napaka_uvozeni_zapisi = false;
-        vm.file = null;
+        vm.file = {
+            name: "Izberi datoteko"
+        };
 
         vm.uploadFile = function(){
 

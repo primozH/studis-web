@@ -13,8 +13,8 @@
             $route.reload();
         };
 
-        headvm.showIndexForm = function(){
-            $location.path("/student/" + headvm.currentUser.id + "/indeks");
+        headvm.showGradesHistory = function(){
+            $location.path("/kartotecniList/" + headvm.currentUser.id);
         };
 
         headvm.showProfile = function() {

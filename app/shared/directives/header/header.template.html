@@ -50,7 +50,7 @@
                     <ul class="dropdown-menu">
                         <!--EXAM CREATION-->
                         <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
-                            <a href="/#/novIzpitniRok"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Izpitni roki</a>
+                            <a href="/#/izpitniRok"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Izpitni roki</a>
                         </li>
                         <!--APPLY/CANCEL STUDENTS EXAM APPLICATION-->
                         <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
@@ -68,7 +68,7 @@
                     <a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;Profil</a>
                 </li>
                 <!--INDEX-->
-                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showIndexForm()">
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showGradesHistory()">
                     <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Kartotečni list</a>
                 </li>
 
