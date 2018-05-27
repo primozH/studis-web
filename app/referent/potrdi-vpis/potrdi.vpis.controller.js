@@ -18,7 +18,7 @@
             .then(function (response) {
             }, function (err) {
                 console.log(err);
-            });
+            }); //*/
         };
 
         vm.pdfPotrdilo = function(id) {
@@ -29,13 +29,12 @@
             });
         }
 
-        vm.pdfPrikazi= function(id, leto) {
+        vm.pdfPrikazi= function(id, leto) {            
             potrdiVpisService.pdfPrikazi(id, 2018)
             .then(function (response) {
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
                 vm.content = $sce.trustAsResourceUrl(fileURL);
-
             }, function (err) {
                 console.log(err);
             });

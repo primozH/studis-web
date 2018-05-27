@@ -27,7 +27,7 @@
                 <td>{{x.studijskiProgram.naziv}}</td>
                 <td>{{x.letnik.letnik}}</td>
                 <td><button class="btn btn-primary btn-block" ng-hide="hide[$index]" ng-click="vm.potrdi(x.student.id);hide[$index]=true;show[$index] = true;">potrdi</td>
-                <td><button ng-show="show[$index]" ng-click="vm.pdfPotrdilo(x.student.id)" class="btn btn-default">pdf</button></td>
+                <td><button ng-show="show[$index]" ng-click="vm.pdfPotrdilo(x.student.id, '2018')" class="btn btn-default">pdf</button></td>
 
                 <td><button ng-show="show[$index]" ng-click="vm.pdfPrikazi(x.student.id, '2018')" class="btn btn-default">prikaži pdf</button></td>
             </tr>
