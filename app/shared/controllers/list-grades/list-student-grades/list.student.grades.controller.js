@@ -1,8 +1,8 @@
 (function () {
 
-    gradesStudentsCtrl.$inject = ["$location", "$routeParams", "gradesService", "izvozService"];
+    gradesStudentsCtrl.$inject = ["$location", "$routeParams", "gradesService", "izvozService", "examService"];
 
-    function gradesStudentsCtrl($location, $routeParams, gradesService, izvozService) {
+    function gradesStudentsCtrl($location, $routeParams, gradesService, izvozService, examService) {
         var vm = this;
 
         gradesService.seznamStudentov($routeParams.idRoka)
@@ -19,6 +19,9 @@
         }, function (err) {
             console.log(err);
         });
+
+
+
 
        
 
