@@ -2,10 +2,34 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-3 col-xs-offset-9">
-            <button type="button" class="btn btn-primary" ng-click="vm.printAllBool = true" ng-hide="vm.printAllBool">Vsa polaganja</button>
-            <button type="button" class="btn btn-primary" ng-click="vm.printAllBool = false" ng-show="vm.printAllBool">Zadnje polaganje</button>
-            <button class="btn btn-primary" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span></button>
+        <div class="col-xs-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span data-toggle="collapse" href="#collapseBody">
+                        <span><strong>Orodna vrstica</strong></span>
+                        <span class="glyphicon glyphicon-list pull-right"></span>
+                    </span>
+
+                </div>
+                <div class="panel-collapse collapse" id="collapseBody">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <md-switch class="md-primary" md-no-ink aria-label="podrobnosti" ng-model="vm.printAllBool" ng-change="vm.changePrintMsg()">
+                                    {{vm.printAllMsg}}
+                                </md-switch>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="btn btn-primary" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span></button>
+                                <span>Izvoz v PDF</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -6,13 +6,14 @@
         var vm = this;
 
         vm.printAllBool = false;
+        vm.printAllMsg = "Zadnje polaganja";
 
-        vm.printOne = function(){
-            vm.printAllBool = false;
-        };
-
-        vm.printAll = function(){
-            vm.printAllBool = true;
+        vm.changePrintMsg = function() {
+            if (vm.printAllBool) {
+                vm.printAllMsg = "Vsa polaganja";
+            } else {
+                vm.printAllMsg = "Zadnje polaganje";
+            }
         };
 
         gradesService.getGradesHistory($routeParams.studentId)

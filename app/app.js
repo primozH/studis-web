@@ -117,7 +117,7 @@
         $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver', 'ngLoader']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver', 'ngLoader', 'ngMaterial']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 })();
