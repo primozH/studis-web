@@ -47,7 +47,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri shranjevanju rezultatov je prišlo do napake";
+                        vm.errorMsg = "Pri shranjevanju rezultatov je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 );
@@ -72,7 +72,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri vračanju prijave je prišlo do napake";
+                        vm.errorMsg = "Pri vračanju prijave je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 )
