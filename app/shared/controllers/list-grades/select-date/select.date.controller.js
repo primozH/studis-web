@@ -7,17 +7,19 @@
         vm.predmeti = [];
 
 
-        gradesService.seznamRokov()
-        .then(function (response) {
-            vm.roki = response;
-            (vm.roki).sort(function(a,b){
-                return a.izvajanjePredmeta.predmet.naziv.localeCompare(b.izvajanjePredmeta.predmet.naziv ,"cs-CS");
-            });
-            console.log(response);
+        vm.spremembaLeta = function() {
+            gradesService.seznamRokov(vm.leto)
+            .then(function (response) {
+                vm.roki = response;
+                (vm.roki).sort(function(a,b){
+                    return a.izvajanjePredmeta.predmet.naziv.localeCompare(b.izvajanjePredmeta.predmet.naziv ,"cs-CS");
+                });
+                console.log(response);
 
-        }, function (err) {
-            console.log(err);
-        });
+            }, function (err) {
+                console.log(err);
+            });
+        }
 
 
         vm.prikaziOcene = function(idRoka) {

@@ -5,8 +5,8 @@
     function gradesService($http, $window, authentication) {
         var apiBase = "/api/v1";
 
-        var seznamRokov = function() {
-            return $http.get(apiBase + "/rok/vsi-roki?studijsko-leto=2018",
+        var seznamRokov = function(leto) {
+            return $http.get(apiBase + "/rok/vsi-roki?studijsko-leto="+leto,
                 {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
                 .then(function(response) {
                     return response.data;
