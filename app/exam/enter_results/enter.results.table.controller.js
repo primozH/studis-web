@@ -53,16 +53,8 @@
                 );
         };
 
-        vm.cancelExamApplication = function(rokId, studentId, idx){
-            var data = {
-                "student": {
-                    "id": studentId
-                },
-                "rok": {
-                    "id": rokId
-                }
-            };
-            examService.deleteExamApplication(data)
+        vm.returnApplication = function(rokId, studentId, idx){
+            examService.returnApplication(rokId, studentId)
                 .then(
                     function success(response){
                         console.log(response);
