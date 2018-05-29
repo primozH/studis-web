@@ -30,10 +30,6 @@
             console.log(err);
         });
 
-
-
-
-
        
 
         vm.izvozi = function(tip) {
@@ -53,8 +49,8 @@
                 tableRows.push(trow);
             }
             izvozService.izvoziCSVPDF("Seznam prijavljenih kandidatov z ocenami\nIzpitni rok "+
-                vm.studenti[0].prijavaRok.rok.izvajanjePredmeta.predmet.naziv+" "+
-                vm.studenti[0].prijavaRok.rok.datum, null, tableHeader, tableRows, tip);
+                vm.header.izvajanjePredmeta.predmet.naziv+"("+vm.header.izvajanjePredmeta.predmet.sifra+")\n"+
+                vm.header.datum + "  " + vm.header.cas, null, tableHeader, tableRows, tip);
         };
     }    
 
