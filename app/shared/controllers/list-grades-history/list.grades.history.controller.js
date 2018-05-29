@@ -47,3 +47,9 @@
         .module("studis")
         .controller("listGradeshistoryCtrl", listGradeshistoryCtrl);
 })();
+
+angular.module("studis").filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});
