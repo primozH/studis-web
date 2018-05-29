@@ -5,6 +5,16 @@
     function gradesStudentsCtrl($location, $routeParams, gradesService, izvozService, examService) {
         var vm = this;
 
+        gradesService.header($routeParams.idRoka)
+        .then(function (response) {
+            vm.header = response;
+            console.log(response);
+        }, function (err) {
+            console.log(err);
+        });
+
+
+
         gradesService.seznamStudentov($routeParams.idRoka)
         .then(function (response) {
             vm.studenti = response;
@@ -19,6 +29,7 @@
         }, function (err) {
             console.log(err);
         });
+
 
 
 
