@@ -20,6 +20,14 @@
             });
         };
 
+        var returnApplication = function(rokid, student) {
+            return $http.delete("/api/v1/izpit/rok/" + rokid + "/rezultati/" + student, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
         var getAvailableExams = function(studijskoLeto){
             return $http.get("/api/v1/rok?studijsko-leto=" + studijskoLeto, {
                 headers: {
@@ -120,6 +128,7 @@
         return{
             postExamApplication: postExamApplication,
             deleteExamApplication: deleteExamApplication,
+            returnApplication: returnApplication,
             getAvailableExams: getAvailableExams,
             postExam: postExam,
             putExam: putExam,

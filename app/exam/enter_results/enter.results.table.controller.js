@@ -53,16 +53,8 @@
                 );
         };
 
-        vm.cancelExamApplication = function(rokId, studentId, idx){
-            var data = {
-                "student": {
-                    "id": studentId
-                },
-                "rok": {
-                    "id": rokId
-                }
-            };
-            examService.deleteExamApplication(data)
+        vm.returnApplication = function(rokId, studentId, idx){
+            examService.returnApplication(rokId, studentId)
                 .then(
                     function success(response){
                         console.log(response);
@@ -72,7 +64,7 @@
                     },
                     function error(error){
                         console.log(error);
-                        vm.errorMsg = "Pri vračanju prijave je prišlo do napake";
+                        vm.errorMsg = "Pri vračanju prijave je prišlo do napake: " + error.data.message;
                         errorMsgTimeout();
                     }
                 )
