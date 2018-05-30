@@ -18,7 +18,7 @@
         vm.polaganjeLetos = [];
         vm.polaganjeSkupno = [];
         vm.checked = [];
-        vm.datum = [];
+        
 
         listEnrolledService.seznamStudentov($routeParams.leto, $routeParams.sifraPredmeta)
         .then(function (response) {
@@ -59,7 +59,7 @@
 
             else {
                 gradesService.vnesiOceno(vm.koncna[$index],vm.predmetSifra,vm.leto.id,
-                    vm.studenti[$index].student.vpisnaStevilka,vm.polaganjeLetos[$index],vm.polaganjeSkupno[$index],vm.datum[$index])
+                    vm.studenti[$index].student.vpisnaStevilka,vm.polaganjeLetos[$index],vm.polaganjeSkupno[$index],vm.datum)
                 .then(function (response) {
                     console.log(response);
                     if (response.status == 400) {
@@ -92,7 +92,7 @@
                     vm.idRok[$index] = response.data.rok.id;
                     vm.prijava[$index] = response.data;
                     vm.checked[$index] = true;
-                    vm.datum[$index] = new Date(response.data.rok.datum);
+                    vm.datum = new Date(response.data.rok.datum);
                 }
             });
         }

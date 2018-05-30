@@ -37,7 +37,13 @@
                 })
         };
         var vnesiOceno = function(koncna,predmetSifra,leto,vpisna,polaganjLetos,polaganjSkupno,datum) {
+            datum = datum + "";
+            var parts = datum.split(" ");
+            var months = {Jan: "01",Feb: "02",Mar: "03",Apr: "04",May: "05",Jun: "06",Jul: "07",Aug: "08",Sep: "09",Oct: "10",Nov: "11",Dec: "12"};
+            datum = parts[3]+"-"+months[parts[1]]+"-"+parts[2];
             console.log(datum);
+
+
             var podatki = {"koncnaOcena":koncna,
             "prijavaRok":{            
                 "rok":{
@@ -99,6 +105,19 @@
                 })
         };
 
+
+        var index = function(id) {
+            return $http.get(apiBase + "/izpit/"+id+"/opravljeni",
+                {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
+                .then(function(response) {
+                    return response;
+                }, function(err) {
+                    return err;
+                })
+        };
+
+
+
         return {
             seznamRokov: seznamRokov,
             seznamStudentov: seznamStudentov,
@@ -106,7 +125,8 @@
             header: header,
             vnesiOceno: vnesiOceno,
             vnesiOcenoID: vnesiOcenoID,
-            preveriCePrijava: preveriCePrijava
+            preveriCePrijava: preveriCePrijava,
+            index: index
         };
     }
 

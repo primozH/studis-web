@@ -14,7 +14,7 @@
         //{id: 2, tip: "Referent"}
 
         vm.oddajOceno = function() {
-            gradesService.vnesiOcenoID(vm.koncna,vm.idRok)
+            gradesService.index(51)
             .then(function (response) {
                 console.log(response);
                 
