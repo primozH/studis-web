@@ -47,6 +47,17 @@
                 });
         };
 
+        vm.createCsv = function() {
+            vm.working = true;
+
+            izvozService.izvoziCsvZaKartotecniList($routeParams.studentId, vm.printAllBool)
+                .then(function(data) {
+                    var file = new Blob([data], {type: "application/csv"});
+                    saveAs(file, "kartotecni-list.csv");
+                    vm.working = false;
+                })
+        }
+
     }
 
     angular

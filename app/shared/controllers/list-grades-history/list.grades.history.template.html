@@ -22,9 +22,13 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="col-xs-6">
                                 <button class="btn btn-primary" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span></button>
                                 <span>Izvoz v PDF</span>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn btn-primary" ng-click="vm.createCsv()"><span class="glyphicon glyphicon-save"></button>
+                                <span>Izvoz v CSV</span>
                             </div>
                         </div>
                     </div>
@@ -57,6 +61,8 @@
                                     <span>{{vrstica.vpis.letnik.letnik}}</span>
                                 </div>
                                 <div style="display:inline-block;margin-left:10%">
+                                    <span><strong>Smer: </strong>{{vrstica.vpis.studijskiProgram.naziv}}</span>
+                                    <br>
                                     <span><strong>Način vpisa: </strong></span>
                                     <span>{{vrstica.vpis.nacinStudija.opis}}</span>
                                     <br>

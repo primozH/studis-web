@@ -5,6 +5,15 @@
     function izvozService($http, $window, FileSaver, $sce) {
         var apiBase = "/api/v1";
 
+        var izvoziCsv = function(student, razsirjeno) {
+
+            return $http.get(apiBase + "/izvoz/kartoteka/" + student + "?expanded=", razsirjeno)
+                .then(function (response) {
+                    return response.data;
+                })
+
+        };
+
         var izvoziCSVPDF = function(ime, metadata, tableHeader, tableRows, tip) {
             var podatki = {
                     "name": ime,
@@ -31,7 +40,8 @@
 
         };
         return {
-            izvoziCSVPDF:izvoziCSVPDF
+            izvoziCSVPDF:izvoziCSVPDF,
+            izvoziCsvZaKartotecniList: izvoziCsv
         };
     }
 
