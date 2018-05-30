@@ -6,13 +6,19 @@
         var vm = this;
 
         vm.printAllBool = false;
+        vm.hidden = null;
+        vm.shown = {display: "none"};
         vm.printAllMsg = "Zadnje polaganja";
 
         vm.changePrintMsg = function() {
             if (vm.printAllBool) {
                 vm.printAllMsg = "Vsa polaganja";
+                vm.shown = null;
+                vm.hidden = {display: "none"};
             } else {
                 vm.printAllMsg = "Zadnje polaganje";
+                vm.shown = {display: "none"};
+                vm.hidden = null;
             }
         };
 
