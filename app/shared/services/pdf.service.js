@@ -10,7 +10,7 @@
             var fd = new FormData();
             fd.append('document_html', document);
             fd.append('encoding', null);
-            var uploadUrl = "http://api.pdflayer.com/api/convert?access_key=" + apikey + "&test=1" +
+            var uploadUrl = "http://api.pdflayer.com/api/convert?access_key=" + apikey +
                 "&css_url=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css";
 
             return $http.post(uploadUrl, fd, {
