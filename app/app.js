@@ -112,6 +112,11 @@
                 controller: 'applyStudentCtrl',
                 controllerAs: "vm"
             })
+            .when('/individualniVnosOcene', {
+                templateUrl: 'shared/controllers/input-grade/input.grade.template.html',
+                controller: 'inputGradeCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');

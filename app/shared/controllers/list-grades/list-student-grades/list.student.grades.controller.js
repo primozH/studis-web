@@ -40,12 +40,11 @@
             for (var i = 1; i <= vm.studenti.length; i++) {
                 var temp = vm.studenti[i-1].prijavaRok;
 
-                var koncna = "";
                 if (temp.brisana == true)
                     koncna = "VP";
                 var polaganje = "1.";
                 var trow = {"row":[i,temp.student.vpisnaStevilka,temp.student.priimek,temp.student.ime,temp.rok.izvajanjePredmeta.studijskoLeto.studijskoLeto,
-                polaganje, vm.studenti[i-1].ocenaPisno, koncna]};
+                polaganje, vm.studenti[i-1].ocenaPisno, vm.studenti[i-1].koncnaOcena]};
                 tableRows.push(trow);
             }
             izvozService.izvoziCSVPDF("Seznam prijavljenih kandidatov z ocenami\nIzpitni rok "+

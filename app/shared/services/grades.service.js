@@ -15,6 +15,51 @@
                 })
         };
 
+        var vnesiOcenoID = function(koncna,idRoka,predmetSifra,leto,vpisna) {
+            console.log("test11");
+            var podatki = {"koncnaOcena":koncna,
+            "prijavaRok":{
+                "id":idRoka,            
+                "rok":{
+                    "izvajanjePredmeta":{
+                        "predmet":{"sifra":predmetSifra},
+                        "studijskoLeto":{"id":leto}
+                    }
+                }, "student":{"vpisnaStevilka":vpisna}
+            }}
+
+            return $http.post(apiBase + "/izpit/koncna", podatki,
+                {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
+                .then(function(response) {
+                    return response;
+                }, function(err) {
+                    return err;
+                })
+        };
+        var vnesiOceno = function(koncna,predmetSifra,leto,vpisna,polaganjLetos,polaganjSkupno,datum) {
+            console.log("test12");
+            var podatki = {"koncnaOcena":koncna,
+            "prijavaRok":{            
+                "rok":{
+                    "izvajanjePredmeta":{
+                        "predmet":{"sifra":predmetSifra},
+                        "studijskoLeto":{"id":leto}
+                    }
+                }, "student":{"vpisnaStevilka":vpisna},
+                    "stPolaganjaLeto":polaganjLetos,
+                    "stPolaganjaSkupno":polaganjSkupno,
+                    "datum": datum
+            }}
+
+            return $http.post(apiBase + "/izpit/koncna", podatki,
+                {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
+                .then(function(response) {
+                    return response;
+                }, function(err) {
+                    return err;
+                })
+        };
+
         var seznamRokov = function(leto) {
             return $http.get(apiBase + "/rok/vsi-roki?studijsko-leto="+leto,
                 {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
@@ -47,7 +92,9 @@
             seznamRokov: seznamRokov,
             seznamStudentov: seznamStudentov,
             getGradesHistory: getGradesHistory,
-            header: header
+            header: header,
+            vnesiOceno: vnesiOceno,
+            vnesiOcenoID: vnesiOcenoID
         };
     }
 

@@ -5,7 +5,7 @@
     function gradesDateCtrl($location, $routeParams, gradesService, izvozService) {
         var vm = this;
         vm.predmeti = [];
-
+        //vm.prikaziTabelo = false;
 
         vm.spremembaLeta = function() {
             gradesService.seznamRokov(vm.leto)
@@ -14,6 +14,7 @@
                 (vm.roki).sort(function(a,b){
                     return a.izvajanjePredmeta.predmet.naziv.localeCompare(b.izvajanjePredmeta.predmet.naziv ,"cs-CS");
                 });
+                vm.prikaziTabelo = true;
                 console.log(response);
 
             }, function (err) {
