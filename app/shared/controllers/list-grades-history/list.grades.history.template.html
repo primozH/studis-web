@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-4">
+        <div class="col-xs-4 col-xs-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span data-toggle="collapse" href="#collapseBody">
@@ -27,7 +27,7 @@
                                 <span>Izvoz v PDF</span>
                             </div>
                             <div class="col-xs-6">
-                                <button class="btn btn-primary" ng-click="vm.createCsv()"><span class="glyphicon glyphicon-save"></button>
+                                <button class="btn btn-primary" ng-click="vm.createCsv()"><span class="glyphicon glyphicon-save"></span></button>
                                 <span>Izvoz v CSV</span>
                             </div>
                         </div>
@@ -42,101 +42,102 @@
                 working="vm.working"
                 disable-background="true">
         </loader>
-        <form class="form-horizontal" id="kartoteka">
-            <fieldset>
-                <legend style="text-align: center;">Kartotečni list</legend>
-                <div class="row">
-                    <div class="col-xs-10 col-xs-offset-1">
-                        <div style="text-align:center">
-                            <h4><strong>Pregled opravljenih izpitov</strong></h4>
-                            <h4>{{vm.student.vpisnaStevilka}} {{vm.student.ime}} {{vm.student.priimek}}</h4>
-                        </div>
-                        <div ng-repeat="vrstica in vm.vrstice">
-                            <div class="panel panel-default">
-                                <div style="display:inline-block">
-                                    <span><strong>Študijsko leto: </strong></span>
-                                    <span>{{vrstica.vpis.studijskoLeto.studijskoLeto}}</span>
-                                    <br>
-                                    <span><strong>Letnik: </strong></span>
-                                    <span>{{vrstica.vpis.letnik.letnik}}</span>
-                                </div>
-                                <div style="display:inline-block;margin-left:10%">
-                                    <span><strong>Smer: </strong>{{vrstica.vpis.studijskiProgram.naziv}}</span>
-                                    <br>
-                                    <span><strong>Način vpisa: </strong></span>
-                                    <span>{{vrstica.vpis.nacinStudija.opis}}</span>
-                                    <br>
-                                    <span><strong>Vrsta vpisa: </strong></span>
-                                    <span>{{vrstica.vpis.vrstaVpisa.vrstaVpisa}}</span>
-                                </div>
-                            </div>
-                            <table class="table table-hover" align="center">
-                                <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Šifra predmeta</th>
-                                    <th scope="col">Predmet</th>
-                                    <th scope="col">KT</th>
-                                    <th scope="col">Predavatelji</th>
-                                    <th scope="col">Datum</th>
-                                    <th scope="col">Ocena</th>
-                                    <th scope="col">Število polaganj</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="predmet in vrstica.predmeti">
-                                    <td>{{$index + 1}}</td>
-                                    <td>{{predmet.predmet.sifra}}</td>
-                                    <td>{{predmet.predmet.naziv}}</td>
-                                    <td>{{predmet.predmet.ects}}</td>
-                                    <td>{{predmet.nosilec1.ime}} {{predmet.nosilec1.priimek}}</td>
-                                    <td>
+        <div id="kartoteka">
 
-                                    <table>
-                                        <tr ng-style="vm.hidden">
-                                            <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
-                                        </tr>
-                                            <tr ng-style="vm.shown" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
-                                                <td>{{x.prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table>
-                                            <tr ng-style="vm.hidden">
-                                                <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].koncnaOcena}}</td>
-                                            </tr>
-                                            <tr ng-style="vm.shown" ng-show="vm.printAllBool" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
-                                                <td>{{x.koncnaOcena}}</td>
-                                            </tr>
-                                        </table>
-                                </td>
-                                    <td>
-                                        <table>
-                                            <tr  ng-style="vm.hidden">
-                                                <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].stPolaganjaLeto}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].stPolaganjaSkupno}}</td>
-                                            </tr>
-                                            <tr  ng-style="vm.shown" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
-                                                <td>{{x.stPolaganjaLeto}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.stPolaganjaSkupno}}</td>
-                                            </tr>
-                                        </table>
-                                </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="panel panel-default">
-                                <span><strong>Skupno število kreditnih točk: </strong></span>
-                                <span>{{vrstica.kreditneTocke}}</span>
-                                <br>
-                                <span><strong>Skupno povprečje: </strong></span>
-                                <span>{{vrstica.povprecnaOcena}}</span>
+            <form class="form-horizontal">
+                    <h3 style="text-align: center;">Kartotečni list</h3>
+                    <div class="row">
+                        <div class="col-xs-10 col-xs-offset-1">
+                            <div style="text-align:center">
+                                <h4><strong>Pregled opravljenih izpitov</strong></h4>
+                                <h4>{{vm.student.vpisnaStevilka}} {{vm.student.ime}} {{vm.student.priimek}}</h4>
                             </div>
-                            <hr/>
+                            <div ng-repeat="vrstica in vm.vrstice">
+                                <div class="panel panel-default">
+                                    <div style="display:inline-block">
+                                        <span><strong>Študijsko leto: </strong></span>
+                                        <span>{{vrstica.vpis.studijskoLeto.studijskoLeto}}</span>
+                                        <br>
+                                        <span><strong>Letnik: </strong></span>
+                                        <span>{{vrstica.vpis.letnik.letnik}}</span>
+                                    </div>
+                                    <div style="display:inline-block;margin-left:10%">
+                                        <span><strong>Smer: </strong>{{vrstica.vpis.studijskiProgram.naziv}}</span>
+                                        <br>
+                                        <span><strong>Način vpisa: </strong></span>
+                                        <span>{{vrstica.vpis.nacinStudija.opis}}</span>
+                                        <br>
+                                        <span><strong>Vrsta vpisa: </strong></span>
+                                        <span>{{vrstica.vpis.vrstaVpisa.vrstaVpisa}}</span>
+                                    </div>
+                                </div>
+                                <table class="table table-hover" align="center">
+                                    <thead class="thead-light" style="display: table-header-group">
+                                    <tr style="page-break-inside: avoid;">
+                                        <th scope="col">#</th>
+                                        <th scope="col">Šifra</th>
+                                        <th scope="col">Predmet</th>
+                                        <th scope="col">KT</th>
+                                        <th scope="col">Predavatelji</th>
+                                        <th scope="col">Datum</th>
+                                        <th scope="col">Ocena</th>
+                                        <th scope="col"># polaganj</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="predmet in vrstica.predmeti">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{predmet.predmet.sifra}}</td>
+                                        <td>{{predmet.predmet.naziv}}</td>
+                                        <td>{{predmet.predmet.ects}}</td>
+                                        <td>{{predmet.nosilec1.ime}} {{predmet.nosilec1.priimek}}</td>
+                                        <td>
+
+                                            <table>
+                                                <tr ng-style="vm.hidden">
+                                                    <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
+                                                </tr>
+                                                <tr ng-style="vm.shown" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
+                                                    <td>{{x.prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr ng-style="vm.hidden">
+                                                    <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].koncnaOcena}}</td>
+                                                </tr>
+                                                <tr ng-style="vm.shown" ng-show="vm.printAllBool" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
+                                                    <td>{{x.koncnaOcena}}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr  ng-style="vm.hidden">
+                                                    <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].stPolaganjaLeto}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].stPolaganjaSkupno}}</td>
+                                                </tr>
+                                                <tr  ng-style="vm.shown" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
+                                                    <td>{{x.stPolaganjaLeto}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.stPolaganjaSkupno}}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="panel panel-default">
+                                    <span><strong>Skupno število kreditnih točk: </strong></span>
+                                    <span>{{vrstica.kreditneTocke}}</span>
+                                    <br>
+                                    <span><strong>Skupno povprečje: </strong></span>
+                                    <span>{{vrstica.povprecnaOcena | number:2}}</span>
+                                </div>
+                                <hr/>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </fieldset>
-        </form>
+            </form>
+        </div>
     </div>
 </div>

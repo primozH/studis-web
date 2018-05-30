@@ -36,10 +36,21 @@
 
         vm.createPdf = function() {
             vm.working = true;
-            var doc = angular.element(document.getElementById("kartoteka").cloneNode(true));
 
-            console.log(doc.html());
-            pdfService.createPdf(doc.html())
+            var doc = document.getElementById("kartoteka").cloneNode(true);
+
+            var htm = "<html>" +
+                "<style>" +
+                "table {" +
+                " font-size: 9px;" +
+                "}" +
+                "thead { display: table-header-group }" +
+                "tfoot { display: table-row-group }" +
+                "tr { page-break-inside: avoid }" +
+                "</style>" +
+                "<body>" + doc.outerHTML + "</body></html>";
+            console.log(htm);
+            pdfService.createPdf(htm)
                 .then(function(data) {
                     var file = new Blob([data], {type: "application/pdf"});
                     saveAs(file, "kartotecni-list.pdf");
