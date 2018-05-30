@@ -1,12 +1,18 @@
 (function () {
 
-    listStudentsCtrl.$inject = ["$location", "$routeParams", "listEnrolledService", "izvozService"];
+    listStudentsCtrl.$inject = ["$location", "$routeParams", "listEnrolledService", "izvozService", "gradesService"];
 
-    function listStudentsCtrl($location, $routeParams, listEnrolledService, izvozService) {
+    function listStudentsCtrl($location, $routeParams, listEnrolledService, izvozService, gradesService) {
         var vm = this;
         vm.studenti = [];
         vm.predmetNaziv = $routeParams.nazivPredmeta;
         vm.predmetSifra = $routeParams.sifraPredmeta;
+        vm.idRok = -1;
+
+        vm.pokaziNapako = [];
+        vm.pokaziOk = [];
+        vm.napaka = [];
+        vm.ok = [];
 
         listEnrolledService.seznamStudentov($routeParams.leto, $routeParams.sifraPredmeta)
         .then(function (response) {
@@ -22,6 +28,73 @@
         }, function (err) {
             console.log(err);
         });
+
+        vm.oddajOceno = function(vpisna, $index) {
+            vm.pokaziNapako[$index] = false;
+            vm.pokaziOk[$index] = false;
+            if (vm.koncna < 5 || vm.koncna>10 || vm.polaganjeLetos > 3) return;
+            
+
+            if (vm.idRok != -1) {
+                gradesService.vnesiOcenoID(vm.koncna,vm.idRok,vm.predmetSifra,vm.leto.id,
+                    vpisna,vm.polaganjeLetos,vm.polaganjeSkupno,vm.datum)
+                .then(function (response) {
+                    console.log(response);
+                    if (response.status == 400) {
+                        vm.napaka[$index] = "napaka pri vnašanju ocene";
+                        vm.pokaziNapako[$index] = true;
+                    }
+                    else if (response.status == 200){
+                        vm.ok[$index] = "ocena uspešno shranjena";
+                        vm.pokaziOk[$index] = true;
+                    }
+                });
+            }
+
+            else {
+                gradesService.vnesiOceno(vm.koncna,vm.predmetSifra,vm.leto.id,vpisna)
+                .then(function (response) {
+                    console.log(response);
+                    if (response.status == 400) {
+                        vm.napaka[$index] = "napaka pri vnašanju ocene";
+                        vm.pokaziNapako[$index] = true;
+                    }
+                    else if (response.status == 200){
+                        vm.ok[$index] = "ocena uspešno shranjena";
+                        vm.pokaziOk[$index] = true;
+                    }
+                });
+            }
+        }
+
+        vm.preveriCePrijava = function($index) {
+            vm.pokaziNapako[$index] = false;
+            vm.pokaziOk[$index] = false;
+
+            //preveriš če obstaja prijava in v tem primeru izpolniš in zakleneš polja
+            /*vm.idRok = -1;
+            vm.polaganjeLetos = null;
+            vm.polaganjeSkupno = null;
+            vm.datum = new Date("2018-05-30");
+            vm.koncna = null;
+            vm.checked = false;
+            vm.skrijIdRok = true;
+            vm.pokaziNapako = false;
+            vm.pokaziOk = false;
+
+
+            gradesService.seznamRokov(vm.leto)
+            .then(function (response1) {
+                var roki = response1;
+                
+            }); //*/
+        }
+
+
+
+
+
+
 
         vm.izvozi = function(tip) {
             var metadata = {

@@ -42,6 +42,7 @@
 
                         gradesService.seznamStudentov(roki[i].id)
                         .then(function (response2) { //tuki so notri vsi študenti prijavljeni na ta rok
+                            response2.sort();
                             for (var j = 0; j < response2.length; j++) {
                                 if (response2[j].prijavaRok.student.vpisnaStevilka == vm.vpisna) {
                                     vm.idRok = response2[j].prijavaRok.id; //id ki ga pošljem na backend
