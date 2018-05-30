@@ -112,9 +112,9 @@
                 controller: 'applyStudentCtrl',
                 controllerAs: "vm"
             })
-            .when('/individualniVnosOcene', {
-                templateUrl: 'shared/controllers/input-grade/input.grade.template.html',
-                controller: 'inputGradeCtrl',
+            .when('/elektronskiIndex', {
+                templateUrl: 'shared/controllers/index/index.template.html',
+                controller: 'indexCtrl',
                 controllerAs: "vm"
             })
             .otherwise({redirectTo: '/prijava'});

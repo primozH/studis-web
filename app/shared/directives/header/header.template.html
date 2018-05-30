@@ -40,6 +40,10 @@
                         <li ng-show="headvm.currentUser.tip == 'Referent'">
                             <a href="/#/potrdiVpis"><span class="glyphicon glyphicon-ok"></span>&nbsp;Seznam vpisanih</a>
                         </li>
+                        <!--ELEKTRONSKI INDEX-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/elektronskiIndex"><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski index</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -70,6 +74,11 @@
                 <!--INDEX-->
                 <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showGradesHistory()">
                     <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Kartotečni list</a>
+                </li>
+
+                <!--ELEKTRONSKI INDEX-->
+                <li ng-show="headvm.currentUser.tip == 'Student'">
+                    <a href="/#/elektronskiIndex"><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski index</a>
                 </li>
 
                 <!--LOG OUT-->

@@ -7,12 +7,18 @@
         vm.studenti = [];
         vm.predmetNaziv = $routeParams.nazivPredmeta;
         vm.predmetSifra = $routeParams.sifraPredmeta;
-        vm.idRok = -1;
+        vm.idRok = [];
 
         vm.pokaziNapako = [];
         vm.pokaziOk = [];
         vm.napaka = [];
         vm.ok = [];
+        vm.prijava = [];
+        vm.koncna = [];
+        vm.polaganjeLetos = [];
+        vm.polaganjeSkupno = [];
+        vm.checked = [];
+        vm.datum = [];
 
         listEnrolledService.seznamStudentov($routeParams.leto, $routeParams.sifraPredmeta)
         .then(function (response) {
@@ -32,12 +38,12 @@
         vm.oddajOceno = function(vpisna, $index) {
             vm.pokaziNapako[$index] = false;
             vm.pokaziOk[$index] = false;
-            if (vm.koncna < 5 || vm.koncna>10 || vm.polaganjeLetos > 3) return;
+            if (vm.koncna[$index] < 5 || vm.koncna[$index]>10 || vm.polaganjeLetos[$index] > 3) return;
             
 
-            if (vm.idRok != -1) {
-                gradesService.vnesiOcenoID(vm.koncna,vm.idRok,vm.predmetSifra,vm.leto.id,
-                    vpisna,vm.polaganjeLetos,vm.polaganjeSkupno,vm.datum)
+            if (vm.idRok[$index] != -1) {                
+                gradesService.vnesiOcenoID(vm.koncna[$index],vm.idRok[$index],vm.predmetSifra,vm.leto.id,
+                    vm.studenti[$index].student.vpisnaStevilka)
                 .then(function (response) {
                     console.log(response);
                     if (response.status == 400) {
@@ -52,7 +58,8 @@
             }
 
             else {
-                gradesService.vnesiOceno(vm.koncna,vm.predmetSifra,vm.leto.id,vpisna)
+                gradesService.vnesiOceno(vm.koncna[$index],vm.predmetSifra,vm.leto.id,
+                    vm.studenti[$index].student.vpisnaStevilka,vm.polaganjeLetos[$index],vm.polaganjeSkupno[$index],vm.datum[$index])
                 .then(function (response) {
                     console.log(response);
                     if (response.status == 400) {
@@ -72,22 +79,22 @@
             vm.pokaziOk[$index] = false;
 
             //preveriš če obstaja prijava in v tem primeru izpolniš in zakleneš polja
-            /*vm.idRok = -1;
-            vm.polaganjeLetos = null;
-            vm.polaganjeSkupno = null;
-            vm.datum = new Date("2018-05-30");
-            vm.koncna = null;
-            vm.checked = false;
-            vm.skrijIdRok = true;
-            vm.pokaziNapako = false;
-            vm.pokaziOk = false;
 
-
-            gradesService.seznamRokov(vm.leto)
-            .then(function (response1) {
-                var roki = response1;
-                
-            }); //*/
+            gradesService.preveriCePrijava(vm.predmetSifra, vm.studenti[$index].student.id)
+            .then(function (response) {                
+                console.log(response.data);
+                //prijava ne obstaja
+                if (response.data == []) {
+                    vm.idRok[$index] = -1;
+                }
+                //prijava obstaja
+                else {
+                    vm.idRok[$index] = response.data.rok.id;
+                    vm.prijava[$index] = response.data;
+                    vm.checked[$index] = true;
+                    vm.datum[$index] = new Date(response.data.rok.datum);
+                }
+            });
         }
 
 

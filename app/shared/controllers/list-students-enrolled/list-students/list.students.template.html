@@ -32,24 +32,31 @@
             <tr ng-repeat-end ng-show="show[$index]">    
               <td colspan="2">
                 <div class="row">
-                  <div class="col-md-4">Zaporedna št. polaganja letos:</div>
-                  <div class="col-md-8"><input ng-disabled="vm.checked" class="form-control" type="number" ng-model="vm.polaganjeLetos" min="1" max="3"></div>
+                  <div ng-show="vm.checked[$index]">Prijava obstaja<br><br></div>
+                  <div ng-hide="vm.checked[$index]">Prijava ne obstaja<br><br></div>
                 </div>
 
-                <div class="row">
-                  <div class="col-md-4">Zaporedna št. polaganja skupno:</div>
-                  <div class="col-md-8"><input ng-disabled="vm.checked" class="form-control" type="number" ng-model="vm.polaganjeSkupno" min="1"></div>
+                <div class="row" ng-hide="vm.checked[$index]">
+                  <div class="col-md-4">Zaporedna št. polaganja letos:</div>
+                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.polaganjeLetos[$index]" min="1" max="3"></div>
                 </div>
+
+                <div class="row" ng-hide="vm.checked[$index]">
+                  <div class="col-md-4">Zaporedna št. polaganja skupno:</div>
+                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.polaganjeSkupno[$index]" min="1"></div>
+                </div>
+
+                
 
                 <div class="row">
                   <div class="col-md-4">Datum:</div>
-                  <div class="col-md-8"><input ng-disabled="vm.checked" class="form-control" type="date" ng-model="vm.datum" max="2018-05-31"></div>
+                  <div class="col-md-8"><input ng-disabled="vm.checked[$index]" class="form-control" type="date" ng-model="vm.datum[$index]" max="2018-05-31"></div>
                 </div>
               </td>
               <td colspan="3">
                 <div class="row">
                   <div class="col-md-4">Končna ocena:</div>
-                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.koncna" min="5" max="10"></div>
+                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.koncna[$index]" min="5" max="10"></div>
                 </div>
                 <div class="row"><p class="col-md-3"></p>
                   <button ng-click="vm.oddajOceno(x.student.vpisnaStevilka, $index)" class="btn btn-primary btn-block col-md-6">Potrdi</button>

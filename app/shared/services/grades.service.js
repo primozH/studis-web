@@ -16,7 +16,7 @@
         };
 
         var vnesiOcenoID = function(koncna,idRoka,predmetSifra,leto,vpisna) {
-            console.log("test11");
+            console.log(idRoka);
             var podatki = {"koncnaOcena":koncna,
             "prijavaRok":{
                 "id":idRoka,            
@@ -37,7 +37,7 @@
                 })
         };
         var vnesiOceno = function(koncna,predmetSifra,leto,vpisna,polaganjLetos,polaganjSkupno,datum) {
-            console.log("test12");
+            console.log(polaganjLetos);
             var podatki = {"koncnaOcena":koncna,
             "prijavaRok":{            
                 "rok":{
@@ -45,7 +45,7 @@
                         "predmet":{"sifra":predmetSifra},
                         "studijskoLeto":{"id":leto}
                     }
-                }, "student":{"vpisnaStevilka":vpisna},
+                }, "student":{"vpisnaStevilka":vpisna}},
                     "stPolaganjaLeto":polaganjLetos,
                     "stPolaganjaSkupno":polaganjSkupno,
                     "datum": datum
@@ -88,13 +88,25 @@
             });
         };
 
+
+        var preveriCePrijava = function(predmet, student) {
+            return $http.get(apiBase + "/rok/prijava/"+predmet+"/"+student,
+                {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
+                .then(function(response) {
+                    return response;
+                }, function(err) {
+                    return err;
+                })
+        };
+
         return {
             seznamRokov: seznamRokov,
             seznamStudentov: seznamStudentov,
             getGradesHistory: getGradesHistory,
             header: header,
             vnesiOceno: vnesiOceno,
-            vnesiOcenoID: vnesiOcenoID
+            vnesiOcenoID: vnesiOcenoID,
+            preveriCePrijava: preveriCePrijava
         };
     }
 
