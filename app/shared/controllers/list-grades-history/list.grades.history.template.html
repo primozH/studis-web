@@ -87,22 +87,31 @@
                                     <td>{{predmet.nosilec1.ime}} {{predmet.nosilec1.priimek}}</td>
                                     <td>
                                         <table>
-                                            <tr>
-                                                <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].datum | date:'dd. MM. y'}}</td>
+                                            <tr ng-hide="vm.printAllBool">
+                                                <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
+                                            </tr>
+                                            <tr ng-show="vm.printAllBool" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
+                                                <td>{{x.prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
                                             </tr>
                                         </table>
                                     </td>
                                     <td>
                                         <table>
-                                            <tr>
+                                            <tr ng-hide="vm.printAllBool">
                                                 <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].koncnaOcena}}</td>
                                             </tr>
+                                            <tr ng-show="vm.printAllBool" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
+                                                <td>{{x.koncnaOcena}}</td>
+                                            </tr>
                                         </table>
                                     </td>
                                     <td>
                                         <table>
-                                            <tr>
+                                            <tr ng-hide="vm.printAllBool">
                                                 <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].stPolaganjaLeto}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].stPolaganjaSkupno}}</td>
+                                            </tr>
+                                            <tr ng-show="vm.printAllBool" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
+                                                <td>{{x.stPolaganjaLeto}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.stPolaganjaSkupno}}</td>
                                             </tr>
                                         </table>
                                     </td>
