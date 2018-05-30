@@ -37,7 +37,7 @@
                 })
         };
         var vnesiOceno = function(koncna,predmetSifra,leto,vpisna,polaganjLetos,polaganjSkupno,datum) {
-            console.log(polaganjLetos);
+            console.log(datum);
             var podatki = {"koncnaOcena":koncna,
             "prijavaRok":{            
                 "rok":{
@@ -49,7 +49,7 @@
                     "stPolaganjaLeto":polaganjLetos,
                     "stPolaganjaSkupno":polaganjSkupno,
                     "datum": datum
-            }}
+            }
 
             return $http.post(apiBase + "/izpit/koncna", podatki,
                 {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
