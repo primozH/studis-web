@@ -1,8 +1,8 @@
 (function() {
 
-    listGradeshistoryCtrl.$inject = ["gradesService", "$routeParams", "pdfService"];
+    listGradeshistoryCtrl.$inject = ["gradesService", "$routeParams", "pdfService", "izvozService"];
 
-    function listGradeshistoryCtrl(gradesService, $routeParams, pdfService) {
+    function listGradeshistoryCtrl(gradesService, $routeParams, pdfService, izvozService) {
         var vm = this;
 
         vm.printAllBool = false;
