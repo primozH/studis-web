@@ -39,9 +39,51 @@
             })
 
         };
+
+        var izvoziIndex = function(rows1) {
+            var podatki = [    
+                    {
+                        "name": "Test",
+                        "documentType": "PDF",
+                        "indexMetadata": {
+                            "student": {
+                                "ime":"Marjan",
+                                "priimek":"Bodlaj",
+                                "vpisnaStevilka":12412414
+                            }
+                        },
+                        "tableRows": rows1
+                   },
+                   
+                   {
+                        "tableRows": rows2
+                   },
+                   
+                   {
+                        "tableRows": [
+                            {
+                                "row": ["8", "7.5", "27.5"]
+                            }
+                        ]
+                   }
+                   
+                ];
+                
+            
+            $http.post(apiBase + "/izvoz/index", podatki, {responseType: 'arraybuffer'}).then(function(response) {
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                var file = new Blob([response.data], {type: 'application/pdf'});
+                a.href = window.URL.createObjectURL(file);
+                a.download = "izvoz.pdf";
+                a.click();                        
+            })
+
+        };
         return {
             izvoziCSVPDF:izvoziCSVPDF,
-            izvoziCsvZaKartotecniList: izvoziCsv
+            izvoziCsvZaKartotecniList: izvoziCsv,
+            izvoziIndex: izvoziIndex
         };
     }
 

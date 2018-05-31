@@ -85,14 +85,12 @@
         vm.izvozi = function(tip) {
             tableHeader = {"row":["Zaporedna številka","Šifra","Predmet","Datum","Opravljanje","KT","Ocena"]};
             tableRows = [];
-
+            //del za CSV
             for (var i = 0; i < vm.opravljeni.length; i++) {
                 var x = vm.opravljeni[i];
-                console.log(vm.opravljeni);
                 var trow = {"row":[i,x.predmet.sifra,x.predmet.naziv,x.datum,x.stPolaganjaSkupno,x.predmet.ects,x.koncnaOcena]};
                 tableRows.push(trow);
             }
-
             tableRows.push({"row":[" "," "," "," "," "," "," "]});
             tableRows.push({"row":["Študijsko leto","Število opravljenih izpitov","Kreditne točke","Skupno povprečje"," "," "," "]});
             for (var i = 0; i < vm.response.length; i++) {
@@ -100,13 +98,33 @@
                 var trow = {"row":[x.studijskoLeto.studijskoLeto,x.steviloOpravljenihPredmetov,x.kreditneTocke,x.skupnoPovprecje," "," "," "]};
                 tableRows.push(trow);
             }
-
             tableRows.push({"row":[" "," "," "," "," "," "," "]});
             tableRows.push({"row":["Število opravljenih izpitov","Kreditne točke","Skupno povprečje"," "," "," "," "]});
 
             tableRows.push({"row":[vm.skupnoIzpitov,vm.skupnoKreditov,vm.skupnoPovprecje," "," "," "," "]});
-            //vm.skupnoIzpitov,vm.skupnoKreditov,vm.skupnoPovprecje
-            izvozService.izvoziCSVPDF("Elektronski index", null, tableHeader, tableRows, tip);
+            //del za CSV
+
+            //del za PDF
+            tableRows1 = [];
+            for (var i = 0; i < vm.opravljeni.length; i++) {
+                var x = vm.opravljeni[i];
+                var trow = {"row":[i+1,x.predmet.sifra,x.predmet.naziv,x.datum,x.stPolaganjaSkupno,x.predmet.ects,x.koncnaOcena]};
+                tableRows1.push(trow);
+            }
+            tableRows2 = [];
+            for (var i = 0; i < vm.response.length; i++) {
+                var x = vm.response[i];
+                var trow = {"row":[i+1,x.studijskoLeto.studijskoLeto,x.steviloOpravljenihPredmetov,x.kreditneTocke,x.skupnoPovprecje]};
+                tableRows2.push(trow);
+            }
+            //del za PDF
+
+            
+            
+            if (tip == "csv")
+                izvozService.izvoziCSVPDF("Elektronski index", null, tableHeader, tableRows, tip);
+            if (tip == "pdf")
+                izvozService.izvoziIndex(tableRows1, tableRows2);
         };
     }    
 
