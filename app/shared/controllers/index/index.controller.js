@@ -4,11 +4,9 @@
 
     function indexCtrl($location, $routeParams, gradesService, izvozService, authentication) {
         var vm = this;
-        vm.predmeti = [];
         vm.idRok = -1;
         vm.today = new Date().getDate();
         vm.povprecneOcene = [];
-        vm.izpiti = [];
 
         vm.opravljeni = [];
         vm.skupnoIzpitov = 0;
@@ -17,6 +15,12 @@
 
 
         var posodobiIndex = function(idStudenta) {
+            vm.povprecneOcene = [];
+            vm.opravljeni = [];
+            vm.skupnoIzpitov = 0;
+            vm.skupnoKreditov = 0;
+            vm.skupnoPovprecje = 0; 
+
             gradesService.index(idStudenta)
             .then(function (response) {
                 vm.response = response.data;
@@ -51,6 +55,13 @@
             posodobiIndex(idStudenta);
             vm.pokaziIndex = true;
             vm.pokaziNapako = false;
+
+            
+
+            gradesService.dataIzID(vm.curUser.id)
+            .then(function (response) {
+                vm.studentData = response;                          
+            });
         }
         else if (vm.curUser.tip == "Referent" || vm.curUser.tip == "Ucitelj"){
             vm.pokaziIndex = false;
@@ -68,14 +79,15 @@
 
             gradesService.idIzVpisne(vm.vpisnaInput)
             .then(function (response) {
-                if (response == -1) {
+                vm.studentData = response;
+                if (response.id == -1) {
                     vm.napaka = "študent z dano vpisno številko ne obstaja";
                     vm.pokaziNapako = true;
                     vm.pokaziIndex = false;
                     return;
                 }
                 vm.pokaziNapako = false;
-                posodobiIndex(response);
+                posodobiIndex(response.id);
                           
             });
         }
@@ -88,7 +100,7 @@
             //del za CSV
             for (var i = 0; i < vm.opravljeni.length; i++) {
                 var x = vm.opravljeni[i];
-                var trow = {"row":[i,x.predmet.sifra,x.predmet.naziv,x.datum,x.stPolaganjaSkupno,x.predmet.ects,x.koncnaOcena]};
+                var trow = {"row":[i+1,x.predmet.sifra,x.predmet.naziv,x.datum,x.stPolaganjaSkupno,x.predmet.ects,x.koncnaOcena]};
                 tableRows.push(trow);
             }
             tableRows.push({"row":[" "," "," "," "," "," "," "]});
@@ -106,17 +118,19 @@
 
             //del za PDF
             tableRows1 = [];
+            tableRows2 = [];
+            tableRows3 = [];
             for (var i = 0; i < vm.opravljeni.length; i++) {
                 var x = vm.opravljeni[i];
                 var trow = {"row":[i+1,x.predmet.sifra,x.predmet.naziv,x.datum,x.stPolaganjaSkupno,x.predmet.ects,x.koncnaOcena]};
                 tableRows1.push(trow);
             }
-            tableRows2 = [];
             for (var i = 0; i < vm.response.length; i++) {
                 var x = vm.response[i];
                 var trow = {"row":[i+1,x.studijskoLeto.studijskoLeto,x.steviloOpravljenihPredmetov,x.kreditneTocke,x.skupnoPovprecje]};
                 tableRows2.push(trow);
             }
+            tableRows3.push({"row":[vm.skupnoIzpitov,vm.skupnoKreditov,vm.skupnoPovprecje]});
             //del za PDF
 
             
@@ -124,7 +138,8 @@
             if (tip == "csv")
                 izvozService.izvoziCSVPDF("Elektronski index", null, tableHeader, tableRows, tip);
             if (tip == "pdf")
-                izvozService.izvoziIndex(tableRows1, tableRows2);
+                izvozService.izvoziIndex(vm.studentData.ime,vm.studentData.priimek,
+                vm.studentData.vpisnaStevilka, tableRows1, tableRows2, tableRows3);
         };
     }    
 

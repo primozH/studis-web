@@ -121,9 +121,18 @@
                 .then(function(response) {
                     for (var i = 0; i < response.data.length; i++) {
                         if (response.data[i].vpisnaStevilka == vpisna)
-                            return response.data[i].id;
+                            return response.data[i]; //vrnem celga studenta
                     }
                     return -1;
+                }, function(err) {
+                    return err;
+                })
+        };
+
+        var dataIzID = function(id) {
+            return $http.get(apiBase + "/student/"+id)
+                .then(function(response) {
+                    return response.data;
                 }, function(err) {
                     return err;
                 })
@@ -140,7 +149,8 @@
             vnesiOcenoID: vnesiOcenoID,
             preveriCePrijava: preveriCePrijava,
             index: index,
-            idIzVpisne: idIzVpisne
+            idIzVpisne: idIzVpisne,
+            dataIzID: dataIzID
         };
     }
 

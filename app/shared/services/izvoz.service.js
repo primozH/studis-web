@@ -40,16 +40,16 @@
 
         };
 
-        var izvoziIndex = function(rows1, rows2) {
+        var izvoziIndex = function(ime, priimek, vpisna, rows1, rows2, rows3) {
             var podatki = [    
                     {
                         "name": "Test",
                         "documentType": "PDF",
                         "indexMetadata": {
                             "student": {
-                                "ime":"Marjan",
-                                "priimek":"Bodlaj",
-                                "vpisnaStevilka":12412414
+                                "ime":ime,
+                                "priimek":priimek,
+                                "vpisnaStevilka":vpisna
                             }
                         },
                         "tableRows": rows1
@@ -60,11 +60,7 @@
                    },
                    
                    {
-                        "tableRows": [
-                            {
-                                "row": ["8", "7.5", "27.5"]
-                            }
-                        ]
+                        "tableRows": rows3
                    }
                    
                 ];
