@@ -20,6 +20,15 @@
             gradesService.index(idStudenta)
             .then(function (response) {
                 vm.response = response.data;
+
+                if (response.data.message == "Študent nima opravljenih izpitov") {
+                    vm.pokaziIndex = false;
+                    vm.pokaziNapako = true;
+                    vm.napaka = response.data.message;
+                    return;
+                }
+                vm.pokaziIndex = true;
+
                 for (var i = 0; i < vm.response.length; i++){
                     vm.opravljeni = vm.opravljeni.concat(vm.response[i].opravljeniPredmeti);
                     vm.skupnoIzpitov += vm.response[i].opravljeniPredmeti.length;
@@ -41,6 +50,7 @@
             idStudenta = vm.curUser.id;
             posodobiIndex(idStudenta);
             vm.pokaziIndex = true;
+            vm.pokaziNapako = false;
         }
         else if (vm.curUser.tip == "Referent" || vm.curUser.tip == "Ucitelj"){
             vm.pokaziIndex = false;
@@ -52,6 +62,7 @@
             if (!vm.vpisnaInput){
                 vm.napaka = "prosim vnesi vpisno številko"
                 vm.pokaziNapako = true;
+                vm.pokaziIndex = false;
                 return;
             }
 
@@ -60,11 +71,12 @@
                 if (response == -1) {
                     vm.napaka = "študent z dano vpisno številko ne obstaja";
                     vm.pokaziNapako = true;
+                    vm.pokaziIndex = false;
                     return;
                 }
                 vm.pokaziNapako = false;
                 posodobiIndex(response);
-                vm.pokaziIndex = true;           
+                          
             });
         }
 

@@ -10,11 +10,14 @@
       <input class="form-control" type="text" ng-model="vm.vpisnaInput" placeholder="vpisna številka študenta" ><br>
       
       <button class="form-control btn btn-primary" ng-click="vm.indexGledeNaVpisno()">Prikaži index</button><br>
-      <div ng-show="vm.pokaziNapako" class="alert alert-danger row">
-        <p style="display:inline-block">{{vm.napaka}}</p>
-      </div><br><br>
+      <br><br>
     </div>
 
+    <div ng-show="vm.pokaziNapako" class="alert alert-danger row">
+      <p style="display:inline-block">{{vm.napaka}}</p>
+    </div>
+
+      
     <div ng-show="vm.pokaziIndex">
     <div class="row">
       <table class="table table-hover">
