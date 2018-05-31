@@ -116,6 +116,19 @@
                 })
         };
 
+        var idIzVpisne = function(vpisna) {
+            return $http.get(apiBase + "/student")
+                .then(function(response) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        if (response.data[i].vpisnaStevilka == vpisna)
+                            return response.data[i].id;
+                    }
+                    return -1;
+                }, function(err) {
+                    return err;
+                })
+        };
+
 
 
         return {
@@ -126,7 +139,8 @@
             vnesiOceno: vnesiOceno,
             vnesiOcenoID: vnesiOcenoID,
             preveriCePrijava: preveriCePrijava,
-            index: index
+            index: index,
+            idIzVpisne: idIzVpisne
         };
     }
 
