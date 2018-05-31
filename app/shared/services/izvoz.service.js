@@ -40,7 +40,7 @@
 
         };
 
-        var izvoziIndex = function(rows1) {
+        var izvoziIndex = function(rows1, rows2) {
             var podatki = [    
                     {
                         "name": "Test",
