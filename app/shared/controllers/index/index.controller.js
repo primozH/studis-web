@@ -40,6 +40,7 @@
         if (vm.curUser.tip == "Student") {
             idStudenta = vm.curUser.id;
             posodobiIndex(idStudenta);
+            vm.pokaziIndex = true;
         }
         else if (vm.curUser.tip == "Referent" || vm.curUser.tip == "Ucitelj"){
             vm.pokaziIndex = false;
