@@ -42,6 +42,8 @@
                         vm.skupnoPovprecje += vm.response[i].opravljeniPredmeti[j].koncnaOcena;
                     }
                 }
+                console.log("vm.opravljeni[0]");
+                console.log(vm.opravljeni[0]);
                 vm.skupnoPovprecje = (vm.skupnoPovprecje / vm.skupnoIzpitov).toFixed(2);               
             }); 
         }

@@ -26,6 +26,7 @@
             <th scope="col"></th>
             <th scope="col">Šifra</th>
             <th scope="col">Predmet</th>
+            <th scope="col">Izpraševalci</th>
             <th scope="col">Datum</th>
             <th scope="col">Opravljanje</th>
             <th scope="col">KT</th>
@@ -37,6 +38,7 @@
             <td>{{$index + 1}}</td>
             <td>{{x.predmet.sifra}}</td>
             <td>{{x.predmet.naziv}}</td>
+            <td>{{x.prijavaRok.rok.izvajalec.ime}}&nbsp;{{x.prijavaRok.rok.izvajalec.priimek}}</td>
             <td>{{x.datum}}</td>
             <td>{{x.stPolaganjaSkupno}}</td>
             <td>{{x.predmet.ects}}</td>
