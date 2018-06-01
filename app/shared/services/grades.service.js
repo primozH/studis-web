@@ -16,16 +16,26 @@
         };
 
         var vnesiOcenoID = function(koncna,idRoka,predmetSifra,leto,vpisna) {
-            var podatki = {"koncnaOcena":koncna,
-            "prijavaRok":{
-                "id":idRoka,            
-                "rok":{
-                    "izvajanjePredmeta":{
-                        "predmet":{"sifra":predmetSifra},
-                        "studijskoLeto":{"id":leto}
-                    }
-                }, "student":{"vpisnaStevilka":vpisna}
-            }}
+            console.log("testiranje.......");
+            var podatki = {
+    "koncnaOcena":koncna,
+    "prijavaRok":{
+        "id":"164",
+        "rok":{
+            "izvajanjePredmeta":{
+                "predmet":{
+                    "sifra":predmetSifra
+                },
+                "studijskoLeto":{
+                    "id":2018
+                }
+            }
+        },
+        "student":{
+            "vpisnaStevilka":vpisna
+        }
+    }
+};
 
             return $http.post(apiBase + "/izpit/koncna", podatki,
                 {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
