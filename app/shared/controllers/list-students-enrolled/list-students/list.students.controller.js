@@ -94,7 +94,7 @@
                 }
                 //prijava obstaja
                 else {
-                    vm.idRok[$index] = response.data.rok.id;
+                    vm.idRok[$index] = response.data.id;
                     console.log("ble");
                     console.log(vm.idRok[$index]);
                     vm.prijava[$index] = response.data;

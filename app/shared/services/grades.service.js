@@ -20,7 +20,7 @@
             var podatki ={
     "koncnaOcena":koncna,
     "prijavaRok":{
-        "id":"164",
+        "id":idRoka,
         "rok":{
             "izvajanjePredmeta":{
                 "predmet":{
