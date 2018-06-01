@@ -95,6 +95,8 @@
                 //prijava obstaja
                 else {
                     vm.idRok[$index] = response.data.rok.id;
+                    console.log("ble");
+                    console.log(vm.idRok[$index]);
                     vm.prijava[$index] = response.data;
                     vm.checked[$index] = true;
                     vm.datum = new Date(response.data.rok.datum);
