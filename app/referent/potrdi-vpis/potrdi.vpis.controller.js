@@ -13,24 +13,24 @@
         });
 
 
-        vm.potrdi = function(id) {
-            potrdiVpisService.potrdi(id, 2018)
+        vm.potrdi = function(id, leto) {
+            potrdiVpisService.potrdi(id, leto)
             .then(function (response) {
             }, function (err) {
                 console.log(err);
             }); //*/
         };
 
-        vm.pdfPotrdilo = function(id) {
-            potrdiVpisService.pdfPotrdilo(id, 2018)
+        vm.pdfPotrdilo = function(id, leto) {
+            potrdiVpisService.pdfPotrdilo(id, leto)
             .then(function (response) {
             }, function (err) {
                 console.log(err);
             });
-        }
+        };
 
         vm.pdfPrikazi= function(id, leto) {            
-            potrdiVpisService.pdfPrikazi(id, 2018)
+            potrdiVpisService.pdfPrikazi(id, leto)
             .then(function (response) {
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
@@ -38,7 +38,7 @@
             }, function (err) {
                 console.log(err);
             });
-        }
+        };
         
         vm.izvozi = function(tip) {
             tableHeader = {"row":["Naziv predmeta","Število vpisanih"]};

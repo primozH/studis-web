@@ -33,7 +33,7 @@
                 controllerAs: "vm"
             })
             .when('/referent', {
-                templateUrl: 'referent/referentka.html',
+                templateUrl: 'referent/referent.template.html',
                 controller: 'ReferentkaCtrl',
                 controllerAs: "vm"
             })
