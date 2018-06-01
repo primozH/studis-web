@@ -80,10 +80,14 @@
             gradesService.idIzVpisne(vm.vpisnaInput)
             .then(function (response) {
                 vm.studentData = response;
-                if (response.id == -1) {
+                console.log("ne obstaja...");
+                console.log(response);
+                if (!response.id) {
                     vm.napaka = "študent z dano vpisno številko ne obstaja";
                     vm.pokaziNapako = true;
                     vm.pokaziIndex = false;
+
+                    console.log("vpisna številka ne obstaja");
                     return;
                 }
                 vm.pokaziNapako = false;
