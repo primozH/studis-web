@@ -83,10 +83,10 @@
                                         <td>
                                             <table>
                                                 <tr ng-style="vm.hidden">
-                                                    <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
+                                                    <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].datum | date:'dd. MM. y'}}</td>
                                                 </tr>
                                                 <tr ng-style="vm.shown" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
-                                                    <td>{{x.prijavaRok.rok.datum | date:'dd. MM. y'}}</td>
+                                                    <td>{{x.datum | date:'dd. MM. y'}}</td>
                                                 </tr>
                                             </table>
                                         </td>
