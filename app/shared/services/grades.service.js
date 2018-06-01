@@ -17,7 +17,7 @@
 
         var vnesiOcenoID = function(koncna,idRoka,predmetSifra,leto,vpisna) {
             console.log("testiranje.......");
-            var podatki = {
+            var podatki ={
     "koncnaOcena":koncna,
     "prijavaRok":{
         "id":"164",
@@ -27,15 +27,15 @@
                     "sifra":predmetSifra
                 },
                 "studijskoLeto":{
-                    "id":2018
+                    "id":leto
                 }
             }
         },
         "student":{
             "vpisnaStevilka":vpisna
         }
-    }
-};
+    }};
+
 
             return $http.post(apiBase + "/izpit/koncna", podatki,
                 {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
@@ -64,7 +64,7 @@
                     "stPolaganjaLeto":polaganjLetos,
                     "stPolaganjaSkupno":polaganjSkupno,
                     "datum": datum
-            }
+            };
 
             return $http.post(apiBase + "/izpit/koncna", podatki,
                 {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
