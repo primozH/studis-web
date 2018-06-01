@@ -16,7 +16,6 @@
         };
 
         var vnesiOcenoID = function(koncna,idRoka,predmetSifra,leto,vpisna) {
-            console.log(idRoka);
             var podatki = {"koncnaOcena":koncna,
             "prijavaRok":{
                 "id":idRoka,            

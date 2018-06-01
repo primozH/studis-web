@@ -40,9 +40,14 @@
             vm.pokaziOk[$index] = false;
             if (vm.koncna[$index] < 5 || vm.koncna[$index]>10 || vm.polaganjeLetos[$index] > 3) return;
             
+            if ((vm.idRok[$index] == -1)&&(vm.polaganjeLetos > vm.polaganjeSkupno)) {
+                vm.pokaziNapako[$index] = true;
+                vm.napaka[$index] = "napaka v številu polaganj";
+                return;
+            }
 
             if (vm.idRok[$index] != -1) {                
-                gradesService.vnesiOcenoID(vm.koncna[$index],vm.idRok[$index],vm.predmetSifra,vm.leto.id,
+                gradesService.vnesiOcenoID(vm.koncna[$index],vm.idRok[$index],vm.predmetSifra,$routeParams.leto,
                     vm.studenti[$index].student.vpisnaStevilka)
                 .then(function (response) {
                     console.log(response);
@@ -58,7 +63,7 @@
             }
 
             else {
-                gradesService.vnesiOceno(vm.koncna[$index],vm.predmetSifra,vm.leto.id,
+                gradesService.vnesiOceno(vm.koncna[$index],vm.predmetSifra,$routeParams.leto,
                     vm.studenti[$index].student.vpisnaStevilka,vm.polaganjeLetos[$index],vm.polaganjeSkupno[$index],vm.datum)
                 .then(function (response) {
                     console.log(response);
