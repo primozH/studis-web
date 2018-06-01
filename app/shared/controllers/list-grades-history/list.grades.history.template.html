@@ -3,37 +3,15 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-4 col-xs-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span data-toggle="collapse" href="#collapseBody">
-                        <span><strong>Orodna vrstica</strong></span>
-                        <span class="glyphicon glyphicon-list pull-right"></span>
-                    </span>
-
-                </div>
-                <div class="panel-collapse collapse" id="collapseBody">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <md-switch class="md-primary" md-no-ink aria-label="podrobnosti" ng-model="vm.printAllBool" ng-change="vm.changePrintMsg()">
-                                    {{vm.printAllMsg}}
-                                </md-switch>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <button class="btn btn-primary" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span></button>
-                                <span>Izvoz v PDF</span>
-                            </div>
-                            <div class="col-xs-6">
-                                <button class="btn btn-primary" ng-click="vm.createCsv()"><span class="glyphicon glyphicon-save"></span></button>
-                                <span>Izvoz v CSV</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <md-switch class="md-primary" md-no-ink aria-label="podrobnosti" ng-model="vm.printAllBool" ng-change="vm.changePrintMsg()">
+                {{vm.printAllMsg}}
+            </md-switch>
+        </div>
+        <div class="col-xs-1 col-xs-offset-4">
+            <button class="btn btn-primary btn-block" ng-click="vm.createPdf()"><span class="glyphicon glyphicon-save"></span>&nbsp;PDF</button>
+        </div>
+        <div class="col-xs-1">
+            <button class="btn btn-primary btn-block" ng-click="vm.createCsv()"><span class="glyphicon glyphicon-save"></span>&nbsp;CSV</button>
         </div>
     </div>
 
@@ -78,7 +56,7 @@
                                         <th scope="col">Šifra</th>
                                         <th scope="col">Predmet</th>
                                         <th scope="col">KT</th>
-                                        <th scope="col">Predavatelji</th>
+                                        <th scope="col">Izpraševalec</th>
                                         <th scope="col">Datum</th>
                                         <th scope="col">Ocena</th>
                                         <th scope="col"># polaganj</th>
@@ -91,9 +69,18 @@
                                         <td>{{predmet.predmet.sifra}}</td>
                                         <td>{{predmet.predmet.naziv}}</td>
                                         <td>{{predmet.predmet.ects}}</td>
-                                        <td>{{predmet.nosilec1.ime}} {{predmet.nosilec1.priimek}}</td>
                                         <td>
-
+                                            <table>
+                                                <tr ng-style="vm.hidden">
+                                                    <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].izprasevalec.priimek}}
+                                                    {{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].izprasevalec.ime}}</td>
+                                                </tr>
+                                                <tr ng-style="vm.shown" ng-repeat="x in vrstica.oceneZaPredmete[predmet.predmet.sifra] | reverse">
+                                                    <td>{{x.izprasevalec.priimek}} {{x.izprasevalec.ime}}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
                                             <table>
                                                 <tr ng-style="vm.hidden">
                                                     <td>{{vrstica.oceneZaPredmete[predmet.predmet.sifra][0].prijavaRok.rok.datum | date:'dd. MM. y'}}</td>

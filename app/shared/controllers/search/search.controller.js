@@ -1,22 +1,26 @@
-
+(function() {
     angular
         .module('studis')
         .controller('searchCtrl', searchCtrl);
 
-    function searchCtrl($location, searchProfile, izvozService, $scope, $window){
+    function searchCtrl($location, searchProfile, izvozService){
         var vm = this;
 
-        vm.executeSearch = function(query){
-            searchProfile.getSearchRes(query).then(
+        vm.query = searchProfile.getSearchFilter();
+
+        vm.executeSearch = function(){
+            if (vm.query == null) {
+                return;
+            }
+            searchProfile.getSearchRes(vm.query).then(
                 function success(response){
-                    //console.log("response in searchController:");
-                    //console.log(response);
                     if(response !== undefined) {
                         vm.searchRes = response.data;
-                        $scope.emptyRes = response.data.length === 0;
+                        vm.emptyRes = response.data.length === 0;
                         if (response.data.length > 0) {
-                            $scope.izvoz = true;
-                            //console.log("test izvoz");
+                            vm.izvoz = true;
+                        } else {
+                            vm.izvoz = false;
                         }
                     }
                 },
@@ -24,8 +28,9 @@
                     console.log(error);
                 }
             );
-            $scope.query = null;
         };
+
+        vm.executeSearch();
 
         vm.openProfile = function(id){
             $location.path("/profil/" + id);
@@ -44,3 +49,4 @@
         };
 
     }
+})();
