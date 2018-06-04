@@ -26,7 +26,7 @@
         $("#dateInput").datepicker({
             format: 'dd/mm/yyyy',
             autoclose: true,
-            // startDate: '+2d',
+            startDate: '+2d',
             daysOfWeekDisabled:[0,6],
             language: 'sl',
             todayBtn: true,
