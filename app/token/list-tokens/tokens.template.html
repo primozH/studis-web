@@ -17,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-click="vm.openToken(x.student.id, x.vrstaVpisa.sifraVpisa)" ng-repeat="x in vm.tokens">
+            <tr ng-click="vm.openToken(x.id)" ng-repeat="x in vm.tokens">
                 <td>{{$index + 1}}</td>
                 <td>{{x.student.vpisnaStevilka}}</td>
                 <td>{{x.student.ime}}</td>
@@ -72,10 +72,10 @@
             <div class="modal-body">
                 <p>Vnesite vpisno številko</p>
                 <label for="vpisnaStevilkaZaNovZeton">Vpisna številka</label>
-                <input type="text" id="vpisnaStevilkaZaNovZeton" ng-model="novaVpisnaStevilka">
+                <input type="text" id="vpisnaStevilkaZaNovZeton" ng-model="vm.vpisnaStevilka">
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="vm.createToken(novaVpisnaStevilka)">Ustvari žeton</button>
+                <button class="btn btn-primary" ng-click="vm.createToken()">Ustvari žeton</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
             </div>
         </div>

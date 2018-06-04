@@ -1,17 +1,41 @@
 (function () {
 
-    potrdiVpisCtrl.$inject = ["$location", "$routeParams", "potrdiVpisService", "izvozService", "$sce"];
+    potrdiVpisCtrl.$inject = ["$location", "$routeParams", "potrdiVpisService", "izvozService"];
 
-    function potrdiVpisCtrl($location, $routeParams, potrdiVpisService, izvozService, $sce) {
+    function potrdiVpisCtrl($location, $routeParams, potrdiVpisService, izvozService) {
         var vm = this;
-        
-        potrdiVpisService.seznamNepotrjenih()
-        .then(function (response) {
-            vm.nepotrjeni = response;
-        }, function (err) {
-            console.log(err);
-        });
+        vm.vpisani = true;
+        vm.leto = 2017;
+        vm.letnik = 1;
+        vm.vpisaniMsg = "Vpisani";
 
+        vm.prikaziNevpisane = function() {
+            potrdiVpisService.seznamNepotrjenih()
+                .then(function (response) {
+                    vm.nepotrjeni = response;
+                }, function (err) {
+                    console.log(err);
+                });
+        };
+        
+        vm.prikaziVpisane = function() {
+            potrdiVpisService.seznamVpisanihLetnik(vm.leto, vm.letnik)
+                .then(function (response) {
+                    vm.potrjeni = response;
+                }, function (err) {
+                    console.log(err);
+                })
+        };
+
+        vm.preklop = function() {
+            if (vm.vpisani) {
+                vm.vpisaniMsg = "Vpisani";
+            }
+            else {
+                vm.prikaziNevpisane();
+                vm.vpisaniMsg = "Nevpisani";
+            }
+        };
 
         vm.potrdi = function(id, leto) {
             potrdiVpisService.potrdi(id, leto)
@@ -29,15 +53,8 @@
             });
         };
 
-        vm.pdfPrikazi= function(id, leto) {            
-            potrdiVpisService.pdfPrikazi(id, leto)
-            .then(function (response) {
-                var file = new Blob([response.data], {type: 'application/pdf'});
-                var fileURL = URL.createObjectURL(file);
-                vm.content = $sce.trustAsResourceUrl(fileURL);
-            }, function (err) {
-                console.log(err);
-            });
+        vm.naStudenta = function(id) {
+            $location.path("/profil/" + id);
         };
         
         vm.izvozi = function(tip) {

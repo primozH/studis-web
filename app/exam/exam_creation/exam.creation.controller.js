@@ -26,7 +26,7 @@
         $("#dateInput").datepicker({
             format: 'dd/mm/yyyy',
             autoclose: true,
-            startDate: '+2d',
+            // startDate: '+2d',
             daysOfWeekDisabled:[0,6],
             language: 'sl',
             todayBtn: true,
@@ -205,7 +205,7 @@
 
         vm.startRemovalProcess = function(rokId, idx){
             vm.rokIdToRemove = rokId;
-            //vm.idx = idx;
+            vm.idx = idx;
             vm.confirmation = true;
             examService.getNumberOfApplicants(rokId)
                 .then(

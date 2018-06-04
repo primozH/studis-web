@@ -4,33 +4,33 @@
 
         var token;
 
-        var getToken = function(id, vrstaVpisa){
-            return $http.get("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
+        var getTokensForStudent = function(student, izkoriscen) {
+            return $http.get("/api/v1/zeton/student/" + student + "?izkoriscen=" + izkoriscen)
+                .then(function (response) {
+                    return response.data;
+                })
         };
 
-        var deleteToken = function(id, vrstaVpisa){
-            return $http.delete("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa);
+        var getToken = function(id){
+            return $http.get("/api/v1/zeton/" + id);
         };
 
-        var putToken = function(id, vrstaVpisa, data){
+        var deleteToken = function(id){
+            return $http.delete("/api/v1/zeton/" + id);
+        };
+
+        var putToken = function(id, data){
             console.log("data to send");
-            console.log(data);;
-            return $http.put("/api/v1/zeton/" + id + "?vrsta-vpisa=" + vrstaVpisa, data);
+            console.log(data);
+            return $http.put("/api/v1/zeton/" + id, data);
         };
 
-        var getTokens = function(id, izkoriscen){
-            var path = "/api/v1/zeton";
-            if (id != null) {
-                path += "/" + id;
-                if (izkoriscen != null) {
-                    path += "?izkoriscen=" + izkoriscen;
-                }
-            }
-            return $http.get(path);
+        var getTokens = function(izkoriscen){
+            return $http.get("/api/v1/zeton?izkoriscen=" + izkoriscen);
         };
 
         var postToken = function(id){
-            return $http.post("/api/v1/zeton/" + id);
+            return $http.post("/api/v1/zeton/student/" + id);
         };
 
         var message = null;
@@ -62,6 +62,7 @@
             putToken: putToken,
             getToken: getToken,
             getTokens: getTokens,
+            getTokensForStudent: getTokensForStudent,
             deleteToken: deleteToken,
             setMessage: setMessage,
             getMessage: getMessage,

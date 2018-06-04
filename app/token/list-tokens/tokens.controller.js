@@ -26,12 +26,12 @@ function tokensCtrl(tokenService, $location, searchProfile, izvozService, $timeo
             }
         );
 
-    vm.openToken = function(id, vrstaVpisa){
-        $location.path("/zeton/" + id + "/" + vrstaVpisa);
+    vm.openToken = function(id){
+        $location.path("/zeton/" + id);
     };
 
-    vm.createToken = function(vpisnaStevilka){
-        searchProfile.getStudent(vpisnaStevilka)
+    vm.createToken = function(){
+        searchProfile.getStudent(vm.vpisnaStevilka)
             .then(
                 function success(response){
                     console.log(response.data[0]);
@@ -42,7 +42,7 @@ function tokensCtrl(tokenService, $location, searchProfile, izvozService, $timeo
                                 console.log("create token response");
                                 console.log(response);
                                 $('#createTokenModal').modal('hide');
-                                $location.path("/zeton/" + student.id + "/" + response.data.vrstaVpisa.sifraVpisa);
+                                $location.path("/zeton/" + response.data.id);
                             },
                             function error(error){
                                 console.log(error);

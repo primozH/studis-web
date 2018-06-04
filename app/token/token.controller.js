@@ -7,7 +7,7 @@
 
         vm.errorMsg = null;
 
-        tokenService.getToken($routeParams.id, $routeParams.vrstaVpisa)
+        tokenService.getToken($routeParams.id)
             .then(
                 function success(response){
                     vm.token = response.data;
@@ -36,7 +36,7 @@
             );
 
         vm.removeToken = function(){
-            tokenService.deleteToken($routeParams.id, $routeParams.vrstaVpisa)
+            tokenService.deleteToken($routeParams.id)
                 .then(
                     function success(response){
                         console.log(response);
@@ -53,6 +53,7 @@
 
         vm.updateToken = function(){
             var formData = {
+                id: $routeParams.id,
                 "vrstaVpisa":{
                     "sifraVpisa": document.getElementById('vrsta_vpisa').value
                 },
@@ -75,7 +76,7 @@
             };
             console.log("form data");
             console.log(formData);
-            tokenService.putToken($routeParams.id, $routeParams.vrstaVpisa, formData)
+            tokenService.putToken($routeParams.id, formData)
                 .then(
                     function success(response){
                         console.log(response);

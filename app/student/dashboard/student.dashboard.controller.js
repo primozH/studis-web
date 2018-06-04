@@ -16,10 +16,10 @@
                 console.log(err);
             });
 
-        tokenService.getTokens(authentication.currentUser().id, false)
+        tokenService.getTokensForStudent(authentication.currentUser().id, false)
             .then(function (response) {
                 console.log(response);
-                vm.zetoni = response.data;
+                vm.zetoni = response;
             }, function (err) {
                 console.log(err);
             });

@@ -5,6 +5,15 @@
     function potrdiVpisService($http, $window, authentication) {
         var apiBase = "/api/v1";
 
+        var seznamVpisanihLetnik = function(leto, letnik) {
+            return $http.get(apiBase + "/student/vpis/leto/" + leto + "/letnik/" + letnik)
+                .then(function (response) {
+                    return response.data;
+                }, function (err) {
+                    return err;
+                })
+        };
+
         var seznamNepotrjenih = function() {
             return $http.get(apiBase + "/student/vrni-nepotrjene-vpise",
                 {headers:{'Authorization': 'Bearer ' + authentication.getToken()}})
@@ -62,7 +71,8 @@
             potrdi: potrdi,
             pdfPotrdilo: pdfPotrdilo,
             podrobnostiVpisa: podrobnostiVpisa,
-            pdfPrikazi: pdfPrikazi
+            pdfPrikazi: pdfPrikazi,
+            seznamVpisanihLetnik: seznamVpisanihLetnik
         };
     }
 

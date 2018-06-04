@@ -6,18 +6,18 @@
             <legend>Izpitni rok</legend>
             <div class="form-group">
                 <div class="col-xs-6">
-                    <label class="control-label col-sm-2" for="studijskoLeto">
+                    <label class="control-label col-sm-3" for="studijskoLeto">
                         Študijsko leto
                     </label>
                     <div class="input-group">
                         <select class="form-control" id="studijskoLeto" name="studijskoLeto" ng-model="vm.studijskoLeto" ng-change="vm.reset(true)">
-                            <option value="2018">2018/2019</option>
                             <option value="2017">2017/2018</option>
                             <option value="2016">2016/2017</option>
                             <option value="2015">2015/2016</option>
+                            <option value="2014">2014/2015</option>
                         </select>
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary" ng-click="vm.getSubjectsForYear()">Izberi študijsko leto</button>
+                            <button type="button" class="btn btn-primary" ng-click="vm.getSubjectsForYear()">Potrdi</button>
                         </span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                         <select ng-options="(x.predmet.naziv +  ' (' + x.predmet.sifra + ')') for x in vm.subjects track by x.predmet.sifra"
                                 class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta" ng-change="vm.reset(false)"></select>
                         <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
+                            <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Potrdi</button>
                         </span>
                     </div>
                 </div>

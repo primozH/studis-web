@@ -1,56 +1,108 @@
 <navigation></navigation>
 
-<div class="row">
-  <div class="col-md-2"></div>
-  <div align="center"  class="col-md-8">
-    <h3>Potrjevanje vpisov</h3>
-    <br>   
-
+<div class="container">
 
     <div class="row">
-        <table class="table table-hover">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Ime in Priimek</th>
-                <th scope="col">Vpisna številka</th>
-                <th scope="col">Program</th>
-                <th scope="col">Letnik</th>
-                <th scope="col">Potrdi zadnji vpis</th>
-                <th scope="col">Potrdilo o vpisu</th>
-                <th scope="col">Prikaz potrdila</th>          
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="x in vm.nepotrjeni">
-                <td>{{$index + 1}}</td>
-                <td>{{x.student.ime}} {{x.student.priimek}}</td>
-                <td>{{x.student.vpisnaStevilka}}</td>
-                <td>{{x.studijskiProgram.naziv}}</td>
-                <td>{{x.letnik.letnik}}</td>
-                <td><button class="btn btn-primary btn-block" ng-hide="hide[$index]" ng-click="vm.potrdi(x.student.id, x.studijskoLeto.id);hide[$index]=true;show[$index] = true;">Potrdi</td>
-                <td><button ng-show="show[$index]" ng-click="vm.pdfPotrdilo(x.student.id, x.studijskoLeto.id)" class="btn btn-default">pdf</button></td>
-
-                <td><button ng-show="show[$index]" ng-click="vm.pdfPrikazi(x.student.id, x.studijskoLeto.id)" class="btn btn-default">prikaži pdf</button></td>
-            </tr>
-            </tbody>
-        </table>
+        <div align="center"  class="col-md-12">
+            <h3>Potrjevanje vpisov</h3>
+        </div>
     </div>
-    <embed ng-src="{{vm.content}}" style="width:50vw;height:50vh;"></embed>
-
-    <div ng-show="vm.prikazi_stevilo" class="row">
-        <br><br>
-        <div class="col-xs-6 col-lg-6"></div>
-        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
-        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-1">
+            <md-switch class="md-primary" md-no-ink aria-label="podrobnosti" ng-model="vm.vpisani" ng-change="vm.preklop()">
+                {{vm.vpisaniMsg}}
+            </md-switch>
+        </div>
     </div>
 
+    <div class="row" ng-show="vm.vpisani">
+        <div class="col-xs-5 col-xs-offset-1">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label>Študijsko leto</label>
+                    <select ng-model="vm.leto" class="form-control">
+                        <option value="2017">2017/2018</option>
+                        <option value="2016">2016/2017</option>
+                        <option value="2015">2015/2016</option>
+                        <option value="2014">2014/2015</option>
+                        <option value="2013">2013/2014</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Letnik</label>
+                    <select ng-model="vm.letnik" class="form-control">
+                        <option value="1">1. letnik</option>
+                        <option value="2">2. letnik</option>
+                        <option value="3">3. letnik</option>
+                    </select>
+                </div>
+                <button ng-click="vm.prikaziVpisane()" class="btn btn-primary">Išči</button>
+            </form>
+        </div>
+    </div>
 
+    <div class="row">
 
+        <div class="col-xs-10 col-xs-offset-1" ng-show="vm.vpisani">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Priimek in ime</th>
+                    <th scope="col">Vpisna številka</th>
+                    <th scope="col">Program</th>
+                    <th scope="col">Letnik</th>
+                    <th scope="col">Potrdilo o vpisu</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in vm.potrjeni">
+                    <td>{{$index + 1}}</td>
+                    <td><a ng-click="vm.naStudenta(x.student.id)">{{x.student.priimek}} {{x.student.ime}}</a></td>
+                    <td>{{x.student.vpisnaStevilka}}</td>
+                    <td>{{x.studijskiProgram.naziv}}</td>
+                    <td>{{x.letnik.letnik}}</td>
+                    <td><button ng-click="vm.pdfPotrdilo(x.student.id, x.studijskoLeto.id)" class="btn btn-primary">pdf</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-  </div>
+        <div class="col-xs-10 col-xs-offset-1" ng-hide="vm.vpisani">
+            <table class="table table-hover">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Priimek in ime</th>
+                    <th scope="col">Vpisna številka</th>
+                    <th scope="col">Program</th>
+                    <th scope="col">Letnik</th>
+                    <th scope="col">Potrdi zadnji vpis</th>
+                    <th scope="col">Potrdilo o vpisu</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="x in vm.nepotrjeni">
+                    <td>{{$index + 1}}</td>
+                    <td>{{x.student.priimek}} {{x.student.ime}}</td>
+                    <td>{{x.student.vpisnaStevilka}}</td>
+                    <td>{{x.studijskiProgram.naziv}}</td>
+                    <td>{{x.letnik.letnik}}</td>
+                    <td><button class="btn btn-primary btn-block" ng-hide="hide[$index]" ng-click="vm.potrdi(x.student.id, x.studijskoLeto.id);hide[$index]=true;show[$index] = true;">Potrdi</button></td>
+                    <td><button ng-show="show[$index]" ng-click="vm.pdfPotrdilo(x.student.id, x.studijskoLeto.id)" class="btn btn-default">pdf</button></td>
 
-  <div class="col-md-2"></div>
+                </tr>
+                </tbody>
+
+            </table>
+            <div ng-show="vm.prikazi_stevilo">
+                <br><br>
+                <div class="col-xs-6 col-lg-6"></div>
+                <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
+                <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

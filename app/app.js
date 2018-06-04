@@ -47,8 +47,8 @@
                 controller: 'UciteljCtrl',
                 controllerAs: "vm"
             })
-            .when('/zeton/:id/:vrstaVpisa', {
-                templateUrl: 'token/token.html',
+            .when('/zeton/:id/', {
+                templateUrl: 'token/token.template.html',
                 controller: 'tokenCtrl',
                 controllerAs: "vm"
             })
