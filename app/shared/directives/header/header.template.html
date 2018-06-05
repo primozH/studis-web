@@ -40,10 +40,10 @@
                         <li ng-show="headvm.currentUser.tip == 'Referent'">
                             <a href="/#/potrdiVpis"><span class="glyphicon glyphicon-ok"></span>&nbsp;Potrjevanje vpisov</a>
                         </li>
-                        <!--ELEKTRONSKI INDEX-->
+                        <!--ELEKTRONSKI INDEX
                         <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
-                            <a href="/#/elektronskiIndex"><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski indeks</a>
-                        </li>
+                            <a href="/#/elektronskiIndex"><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski index</a>
+                        </li>-->
                     </ul>
                 </li>
 
@@ -71,14 +71,14 @@
                 <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showProfile()">
                     <a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;Profil</a>
                 </li>
-                <!--INDEX-->
+                <!--LIST GRADES HISTORY-->
                 <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showGradesHistory()">
                     <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Kartotečni list</a>
                 </li>
 
                 <!--ELEKTRONSKI INDEX-->
-                <li ng-show="headvm.currentUser.tip == 'Student'">
-                    <a href="/#/elektronskiIndex"><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski index</a>
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showIndex()">
+                    <a href=""><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski indeks</a>
                 </li>
 
                 <!--LOG OUT-->

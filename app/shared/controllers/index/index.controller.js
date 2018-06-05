@@ -1,8 +1,8 @@
 (function () {
 
-    indexCtrl.$inject = ["$location", "$routeParams", "gradesService", "izvozService", "authentication"];
+    indexCtrl.$inject = ["$location", "$routeParams", "gradesService", "izvozService", "authentication", "searchProfile"];
 
-    function indexCtrl($location, $routeParams, gradesService, izvozService, authentication) {
+    function indexCtrl($location, $routeParams, gradesService, izvozService, authentication, searchProfile){
         var vm = this;
         vm.idRok = -1;
         vm.today = new Date().getDate();
@@ -46,9 +46,9 @@
                 console.log(vm.opravljeni[0]);
                 vm.skupnoPovprecje = (vm.skupnoPovprecje / vm.skupnoIzpitov).toFixed(2);               
             }); 
-        }
+        };
 
-
+/*
         vm.curUser = authentication.currentUser();
         //{id: 2, tip: "Referent"}
         var idStudenta = 63;
@@ -58,7 +58,6 @@
             vm.pokaziIndex = true;
             vm.pokaziNapako = false;
 
-            
 
             gradesService.dataIzID(vm.curUser.id)
             .then(function (response) {
@@ -68,18 +67,21 @@
         else if (vm.curUser.tip == "Referent" || vm.curUser.tip == "Ucitelj"){
             vm.pokaziIndex = false;
         }
+*/
 
-       
-
-        vm.indexGledeNaVpisno = function() {
-            if (!vm.vpisnaInput){
-                vm.napaka = "prosim vnesi vpisno številko"
-                vm.pokaziNapako = true;
-                vm.pokaziIndex = false;
-                return;
-            }
-
-            gradesService.idIzVpisne(vm.vpisnaInput)
+        searchProfile.getStudentById($routeParams.studentId)
+            .then(
+                function success(response) {
+                    console.log(response);
+                    vm.studentData = response.data;
+                    posodobiIndex($routeParams.studentId);
+                },
+                function error(error){
+                    console.log(error);
+                }
+            );
+/*
+        gradesService.idIzVpisne(vm.vpisnaInput)
             .then(function (response) {
                 vm.studentData = response;
                 console.log("ne obstaja...");
@@ -94,10 +96,8 @@
                 }
                 vm.pokaziNapako = false;
                 posodobiIndex(response.id);
-                          
             });
-        }
-
+*/
         
 
         vm.izvozi = function(tip) {

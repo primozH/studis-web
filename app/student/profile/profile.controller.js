@@ -12,6 +12,10 @@
             $location.path("/kartotecniList/" + $routeParams.id);
         };
 
+        vm.showIndex = function(){
+            $location.path("/elektronskiIndeks/" + $routeParams.id);
+        };
+
         searchProfile.getStudentById($routeParams.id)
             .then(
                 function success(response){

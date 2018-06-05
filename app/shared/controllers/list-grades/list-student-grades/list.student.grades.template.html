@@ -4,9 +4,8 @@
   <div class="col-md-2"></div>
   <div align="center"  class="col-md-8">
     <h3>Seznam prijavljenih in ocene</h3>
-    testni izpis 2
     {{vm.header.izvajanjePredmeta.predmet.naziv}}({{vm.header.izvajanjePredmeta.predmet.sifra}})<br>
-    Izpitni rok: {{vm.header.datum}} {{vm.header.cas}}
+    Izpitni rok: {{vm.header.datum | date:'dd. MM. y'}} {{vm.header.cas | removeSeconds}}
     <br><br>
 
     <div class="row">

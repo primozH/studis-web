@@ -40,7 +40,11 @@
             });
 
 
-        }
+        };
+
+        vm.reset = function(){
+            vm.prikazi_stevilo = false;
+        };
         
         vm.izvozi = function(tip) {
             tableHeader = {"row":["Naziv predmeta","Število vpisanih"]};

@@ -4,21 +4,14 @@
   <div class="col-md-2"></div>
   <div align="center" class="col-md-8">
     <h3>Elektronski index</h3>
-    <br><br>
-
-    <div ng-show="vm.curUser.tip == 'Referent' || vm.curUser.tip == 'Ucitelj'">
-      <input class="form-control" type="text" ng-model="vm.vpisnaInput" placeholder="vpisna številka študenta" ><br>
-      
-      <button class="form-control btn btn-primary" ng-click="vm.indexGledeNaVpisno()">Prikaži index</button><br>
+      <h3>{{vm.studentData.vpisnaStevilka}} {{vm.studentData.ime}} {{vm.studentData.priimek}}</h3>
       <br><br>
-    </div>
-
     <div ng-show="vm.pokaziNapako" class="alert alert-danger row">
       <p style="display:inline-block">{{vm.napaka}}</p>
     </div>
 
 
-    <div ng-show="vm.pokaziIndex">
+    <div>
     <div class="row">
       <table class="table table-hover">
         <thead class="thead-light">
@@ -39,7 +32,7 @@
             <td>{{x.predmet.sifra}}</td>
             <td>{{x.predmet.naziv}}</td>
             <td>{{x.prijavaRok.rok.izvajalec.ime}}&nbsp;{{x.prijavaRok.rok.izvajalec.priimek}}</td>
-            <td>{{x.datum}}</td>
+            <td>{{x.datum | date:'dd. MM. y'}}</td>
             <td>{{x.stPolaganjaSkupno}}</td>
             <td>{{x.predmet.ects}}</td>
             <td>{{x.koncnaOcena}}</td>

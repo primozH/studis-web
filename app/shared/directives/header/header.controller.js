@@ -17,6 +17,10 @@
             $location.path("/kartotecniList/" + headvm.currentUser.id);
         };
 
+        headvm.showIndex = function(){
+            $location.path("/elektronskiIndeks/" + headvm.currentUser.id);
+        };
+
         headvm.showProfile = function() {
             $location.path("/profil/" + headvm.currentUser.id);
         }
