@@ -7,7 +7,7 @@
     <br>
 
     <h4>Leto:</h4>
-    <select class="form-control" ng-model="vm.leto">
+    <select class="form-control" ng-model="vm.leto" ng-change="vm.reset()">
         <option value="2018">2018/2019</option>
         <option value="2017">2017/2018</option>
         <option value="2016">2016/2017</option>
@@ -15,7 +15,7 @@
     <br>
 
     <h4>Program:</h4>
-    <select class="form-control" ng-model="vm.program">
+    <select class="form-control" ng-model="vm.program" ng-change="vm.reset()">
         <option value="1000468">Računalništvo in informatika UNI-1.st</option>
         <option value="1000407">Računalništvo in matematika UNI-1.st</option>
         <option value="1000470">Računalništvo in informatika VS-1.st</option>
@@ -25,7 +25,7 @@
     <br>
 
     <h4>Letnik:</h4>
-    <select class="form-control" ng-model="vm.letnik">
+    <select class="form-control" ng-model="vm.letnik" ng-change="vm.reset()">
         <option value="1">1.</option>
         <option value="2">2.</option>
         <option ng-hide="vm.program==1000471" value="3">3.</option>

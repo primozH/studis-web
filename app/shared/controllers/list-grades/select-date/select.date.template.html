@@ -30,8 +30,8 @@
                 <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajalec.ime}} {{x.izvajalec.priimek}}</td>
-                <td>{{x.datum}}</td>
-                <td>{{x.cas}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}}</td>
+                <td>{{x.cas | removeSeconds}}</td>
                 <td>{{x.prostor}}</td>
             </tr>
             </tbody>

@@ -58,10 +58,8 @@
                     vm.exams = response.data;
                     angular.forEach(vm.exams, function(exam, key) {
                         var prijavljenRok = exam.prijavljenId;
-                        console.log(exam);
                         if (prijavljenRok != null) {
                             angular.forEach(exam.roki, function(rok) {
-                                console.log(rok);
                                 if (rok.id == prijavljenRok) {
                                     vm.exam[key] = rok;
                                 }

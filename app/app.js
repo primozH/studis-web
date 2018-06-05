@@ -112,7 +112,7 @@
                 controller: 'applyStudentCtrl',
                 controllerAs: "vm"
             })
-            .when('/elektronskiIndex', {
+            .when('/elektronskiIndeks/:studentId', {
                 templateUrl: 'shared/controllers/index/index.template.html',
                 controller: 'indexCtrl',
                 controllerAs: "vm"
