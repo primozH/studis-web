@@ -38,17 +38,17 @@
 
                 <div class="row" ng-hide="vm.checked[$index]">
                   <div class="col-md-4">Zaporedna št. polaganja letos:</div>
-                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.polaganjeLetos[$index]" min="1" max="3"></div>
+                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.polaganjeLetos[$index]"></div>
                 </div>
 
                 <div class="row" ng-hide="vm.checked[$index]">
                   <div class="col-md-4">Zaporedna št. polaganja skupno:</div>
-                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.polaganjeSkupno[$index]" min="1"></div>
+                  <div class="col-md-8"><input class="form-control" type="number" ng-model="vm.polaganjeSkupno[$index]"></div>
                 </div>                
 
                 <div class="row">
                   <div class="col-md-4">Datum:</div>
-                  <div class="col-md-8"><input ng-disabled="vm.checked[$index]" class="form-control" type="date" ng-model="vm.datum" max="2018-06-01"></div>
+                  <div class="col-md-8"><input ng-disabled="vm.checked[$index]" class="form-control" type="date" ng-model="vm.datum"  max="{{vm.dateToday | date:'dd-MM-yyy'}}"></div>
                   
                 </div>
               </td>

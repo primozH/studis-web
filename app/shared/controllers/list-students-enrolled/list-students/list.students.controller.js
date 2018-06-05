@@ -18,6 +18,8 @@
         vm.polaganjeLetos = [];
         vm.polaganjeSkupno = [];
         vm.checked = [];
+
+        vm.dateToday = new Date();
         
 
         listEnrolledService.seznamStudentov($routeParams.leto, $routeParams.sifraPredmeta)
@@ -38,9 +40,16 @@
         vm.oddajOceno = function(vpisna, $index) {
             vm.pokaziNapako[$index] = false;
             vm.pokaziOk[$index] = false;
-            if (vm.koncna[$index] < 5 || vm.koncna[$index]>10 || vm.polaganjeLetos[$index] > 3) return;
+            if (vm.koncna[$index] < 5 || vm.koncna[$index]>10) {
+                vm.pokaziNapako[$index] = true;
+                vm.napaka[$index] = "napaka v končni oceni";
+                return;
+            }
             
-            if ((vm.idRok[$index] == -1)&&(vm.polaganjeLetos > vm.polaganjeSkupno)) {
+
+            console.log("bla"+vm.polaganjeLetos[$index]+" "+vm.polaganjeSkupno[$index]);
+            if ((vm.idRok[$index]==-1)&&(vm.polaganjeLetos[$index] > vm.polaganjeSkupno[$index] 
+                || vm.polaganjeLetos[$index]<1 || vm.polaganjeSkupno[$index]<1)) {
                 vm.pokaziNapako[$index] = true;
                 vm.napaka[$index] = "napaka v številu polaganj";
                 return;
