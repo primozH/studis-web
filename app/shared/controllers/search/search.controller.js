@@ -7,6 +7,12 @@
         var vm = this;
 
         vm.query = searchProfile.getSearchFilter();
+        vm.naStran = 15;
+
+        vm.menjavaStrani = function() {
+            console.log(vm.trenutnaStran);
+            vm.searchRes = vm.allSearchResults.slice((vm.trenutnaStran- 1) * vm.naStran, vm.trenutnaStran * vm.naStran);
+        };
 
         vm.executeSearch = function(){
             if (vm.query == null) {
@@ -15,8 +21,10 @@
             searchProfile.getSearchRes(vm.query).then(
                 function success(response){
                     if(response !== undefined) {
-                        vm.searchRes = response.data;
-                        vm.emptyRes = response.data.length === 0;
+                        vm.skupaj = response.data.length;
+                        vm.allSearchResults = response.data;
+                        vm.trenutnaStran = 1;
+                        vm.menjavaStrani();
                         if (response.data.length > 0) {
                             vm.izvoz = true;
                         } else {
@@ -40,8 +48,8 @@
             tableHeader = {"row":["Zaporedna številka","Vpisna številka","Ime","Priimek","E-pošta","Telefon"]};
             tableRows = [];
 
-            for (var i = 1; i <= vm.searchRes.length; i++) {
-                var temp = vm.searchRes[i-1];
+            for (var i = 1; i <= vm.allSearchResults.length; i++) {
+                var temp = vm.allSearchResults[i-1];
                 var trow = {"row":[i,temp.vpisnaStevilka,temp.ime,temp.priimek,temp.email,temp.telefonskaStevilka]};
                 tableRows.push(trow);
             }

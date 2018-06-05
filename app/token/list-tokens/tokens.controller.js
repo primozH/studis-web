@@ -8,23 +8,32 @@ function tokensCtrl(tokenService, $location, searchProfile, izvozService, $timeo
 
     vm.message = tokenService.getMessage();
     vm.errorMsg = null;
+    vm.naStran = 15;
 
     $timeout(function(){
         vm.message = null;
         tokenService.setMessage(null);
     }, 4000);
 
+    vm.menjavaStrani = function() {
+        console.log(vm.trenutnaStran);
+        vm.tokens = vm.allTokens.slice((vm.trenutnaStran- 1) * vm.naStran, vm.trenutnaStran * vm.naStran);
+    };
+
     tokenService.getTokens()
         .then(
             function success(response){
-                vm.tokens = response.data;
-                console.log("response in list-tokens controller:");
-                console.log(vm.tokens);
+                vm.skupaj = response.data.length;
+                vm.allTokens = response.data;
+                vm.trenutnaStran = 1;
+                vm.menjavaStrani();
             },
             function error(error){
                 console.log(error);
             }
         );
+
+
 
     vm.openToken = function(id){
         $location.path("/zeton/" + id);
@@ -62,13 +71,13 @@ function tokensCtrl(tokenService, $location, searchProfile, izvozService, $timeo
         "Študijski program","Letnik","Vrsta vpisa","Način študija","Oblika študija"]};
         tableRows = [];
 
-        console.log(vm.tokens[0]);
-        for (var i = 1; i <= vm.tokens.length; i++) {
-            var temp = vm.tokens[i-1];
+        console.log(vm.allTokens[0]);
+        for (var i = 1; i <= vm.allTokens.length; i++) {
+            var temp = vm.allTokens[i-1];
             var trow = {"row":[i,temp.student.vpisnaStevilka,temp.student.ime,temp.student.priimek,temp.studijskiProgram.naziv,
             temp.letnik.letnik,temp.vrstaVpisa.vrstaVpisa,temp.nacinStudija.opis,temp.oblikaStudija.opis]};
             tableRows.push(trow);
         } 
-        izvozService.izvoziCSVPDF("Žetoni", tableHeader, tableRows, tip);
+        izvozService.izvoziCSVPDF("Žetoni", null, tableHeader, tableRows, tip);
     };
 }

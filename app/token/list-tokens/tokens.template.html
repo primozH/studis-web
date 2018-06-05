@@ -18,7 +18,7 @@
             </thead>
             <tbody>
             <tr ng-click="vm.openToken(x.id)" ng-repeat="x in vm.tokens">
-                <td>{{$index + 1}}</td>
+                <td>{{($index + 1) + (vm.trenutnaStran-1) * vm.naStran}}</td>
                 <td>{{x.student.vpisnaStevilka}}</td>
                 <td>{{x.student.ime}}</td>
                 <td>{{x.student.priimek}}</td>
@@ -30,6 +30,13 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3" align="center">
+            <ul uib-pagination total-items="vm.skupaj" ng-model="vm.trenutnaStran" max-size="vm.naStran" class="pagination-sm"
+                boundary-links="true" rotate="false" next-text="Naprej" ng-change="vm.menjavaStrani()" first-text="Prva" previous-text="Nazaj"
+                last-text="Zadnja" items-per-page="vm.naStran"></ul>
+        </div>
     </div>
     
 

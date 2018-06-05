@@ -58,20 +58,20 @@
         };
         
         vm.izvozi = function(tip) {
-            tableHeader = {"row":["Naziv predmeta","Število vpisanih"]};
-            tableRows = [];
+            var tableHeader = {"row":["Zaporedna številka","Priimek", "Ime", "Vpisna številka", "Program", "Letnik"]};
+            var tableRows = [];
 
-            for (var i = 0; i < vm.vsi_predmeti.length; i++) {
-                var trow = {"row":[vm.vsi_predmeti[i].naziv, vm.stevilo_vsi_predmeti[i]]};
+            for (var i = 1; i <= vm.potrjeni.length; i++) {
+                var temp = vm.potrjeni[i-1];
+                var trow = {"row":[i,temp.student.priimek,temp.student.ime,temp.student.vpisnaStevilka,temp.studijskiProgram.naziv,
+                        temp.letnik.letnik]};
                 tableRows.push(trow);
             }
-            var program_naziv = null;
-            if (vm.program == 1000468) program_naziv="Računalništvo in informatika UNI-1.st";
-            else if (vm.program == 1000407) program_naziv="Računalništvo in matematika UNI-1.st";
-            else if (vm.program == 1000470) program_naziv="Računalništvo in informatika VS-1.st";
-            else if (vm.program == 1000471) "Računalništvo in infomatika MAG 2.st";
-            else if (vm.program == 1000474) program_naziv="Računalništvo in informatika DR-3.st";
-            izvozService.izvoziCSVPDF("Seznam vpisanih\n v letu "+vm.leto+" v program "+program_naziv+" "+vm.letnik+". letnik",null, tableHeader, tableRows, tip);
+            izvozService.izvoziCSVPDF("Seznam vpisanih", {
+                yearOfStudy: vm.potrjeni[0].letnik,
+                studyYear: vm.potrjeni[0].studijskoLeto
+                }, tableHeader, tableRows, tip);
+
         };
     }    
 
