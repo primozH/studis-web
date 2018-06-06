@@ -36,7 +36,7 @@
             </tbody>
         </table>
 
-        <div class="row" ng-hide="vm.allTokens.length == 0">
+        <div class="row" ng-hide="vm.skupaj == 0">
             <div class="col-xs-6 col-xs-offset-3">
                 <ul uib-pagination total-items="vm.skupaj" ng-model="vm.trenutnaStran" max-size="vm.naStran" class="pagination-sm"
                     boundary-links="true" rotate="false" next-text="Naprej" ng-change="vm.menjavaStrani()" first-text="Prva" previous-text="Nazaj"

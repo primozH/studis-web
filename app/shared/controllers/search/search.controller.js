@@ -8,6 +8,7 @@
 
         vm.query = searchProfile.getSearchFilter();
         vm.naStran = 15;
+        vm.skupaj = 0;
 
         vm.menjavaStrani = function() {
             console.log(vm.trenutnaStran);
