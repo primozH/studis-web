@@ -1,46 +1,58 @@
 <navigation></navigation>
+<div class="container">
 
-<div class="row">
-  <div class="col-md-2"></div>
-  <div align="center"  class="col-md-8">
-    <h3>Seznam ocen prijavljenih kandidatov</h3>
-    <br><br>
-
-    <h4>Izberi leto:</h4>
-    <select class="form-control" ng-change="vm.spremembaLeta()" ng-model="vm.leto">
-        <option value="2018">2018/2019</option>
-        <option value="2017">2017/2018</option>
-        <option value="2016">2016/2017</option>
-    </select><br><br>
-
-    <div class="row" ng-show="vm.prikaziTabelo">
-        <table class="table table-hover">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">Šifra predmeta</th>
-                <th scope="col">Ime predmeta</th>
-                <th scope="col">Izpraševalci</th>
-                <th scope="col">Datum roka</th>
-                <th scope="col">Ura roka</th>
-                <th scope="col">Prostor</th>   
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-click="vm.prikaziOcene(x.id)" ng-repeat="x in vm.roki">
-                <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
-                <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
-                <td>{{x.izvajalec.ime}} {{x.izvajalec.priimek}}</td>
-                <td>{{x.datum | date:'dd. MM. y'}}</td>
-                <td>{{x.cas | removeSeconds}}</td>
-                <td>{{x.prostor}}</td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h3>Seznam ocen</h3>
+        </div>
     </div>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label>Študijsko leto</label>
+                    <select class="form-control" ng-change="vm.spremembaLeta()" ng-model="vm.leto">
+                        <option value="2017">2017/2018</option>
+                        <option value="2016">2016/2017</option>
+                        <option value="2015">2015/2016</option>
+                        <option value="2014">2014/2015</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
 
-  </div>
+        <div align="center"  class="col-xs-10 col-xs-offset-1">
 
-  <div class="col-md-2"></div>
+            <div class="row" ng-show="vm.prikaziTabelo">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Šifra predmeta</th>
+                        <th scope="col">Ime predmeta</th>
+                        <th scope="col">Izpraševalci</th>
+                        <th scope="col">Datum roka</th>
+                        <th scope="col">Ura roka</th>
+                        <th scope="col">Prostor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-click="vm.prikaziOcene(x.id)" ng-repeat="x in vm.roki">
+                        <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
+                        <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
+                        <td>{{x.izvajalec.ime}} {{x.izvajalec.priimek}}</td>
+                        <td>{{x.datum | date:'dd. MM. y'}}</td>
+                        <td>{{x.cas | removeSeconds}}</td>
+                        <td>{{x.prostor}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
 

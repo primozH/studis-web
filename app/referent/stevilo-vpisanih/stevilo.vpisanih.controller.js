@@ -22,6 +22,9 @@
                 vm.vsi_predmeti = response1;
                 
                 numberEnrolledService.vsiVpisani(vm.leto, vm.program, vm.letnik).then(function (response2) {
+                    vm.metadataLeto = response2[0][0].studijskoLeto;
+                    vm.metadataStudijskiProgram = response2[0][0].studijskiProgram;
+                    vm.metadataLetnik = response2[0][0].letnik;
                     for (var z=0; z<vm.vsi_predmeti.length;z++) {
                         for (i=0; i<response2.length; i++) {
                             if (response2[i][0].predmet.naziv == vm.vsi_predmeti[z].naziv)
@@ -60,7 +63,13 @@
             else if (vm.program == 1000470) program_naziv="Računalništvo in informatika VS-1.st";
             else if (vm.program == 1000471) "Računalništvo in infomatika MAG 2.st";
             else if (vm.program == 1000474) program_naziv="Računalništvo in informatika DR-3.st";
-            izvozService.izvoziCSVPDF("Seznam vpisanih\n v letu "+vm.leto+" v program "+program_naziv+" "+vm.letnik+". letnik",null, tableHeader, tableRows, tip);
+
+            var metadata = {
+                studyYear: vm.metadataLeto,
+                yearOfStudy: vm.metadataLetnik,
+                studyProgramme: vm.metadataStudijskiProgram
+            };
+            izvozService.izvoziCSVPDF("Seznam vpisanih", metadata, tableHeader, tableRows, tip);
         };
     }    
 
