@@ -1,0 +1,102 @@
+<navigation></navigation>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div align="center" class="col-md-8">
+    <h3>Elektronski indeks</h3>
+      <h3>{{vm.studentData.vpisnaStevilka}} {{vm.studentData.ime}} {{vm.studentData.priimek}}</h3>
+      <br><br>
+    <div ng-show="vm.pokaziNapako" class="alert alert-danger row">
+      <p style="display:inline-block">{{vm.napaka}}</p>
+    </div>
+
+
+    <div>
+    <div class="row">
+      <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Šifra</th>
+            <th scope="col">Predmet</th>
+            <th scope="col">Izpraševalci</th>
+            <th scope="col">Datum</th>
+            <th scope="col">Opravljanje</th>
+            <th scope="col">KT</th>
+            <th scope="col">Ocena</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in vm.opravljeni">
+            <td>{{$index + 1}}</td>
+            <td>{{x.predmet.sifra}}</td>
+            <td>{{x.predmet.naziv}}</td>
+            <td>{{x.prijavaRok.rok.izvajalec.ime}}&nbsp;{{x.prijavaRok.rok.izvajalec.priimek}}</td>
+            <td>{{x.datum | date:'dd. MM. y'}}</td>
+            <td>{{x.stPolaganjaSkupno}}</td>
+            <td>{{x.predmet.ects}}</td>
+            <td>{{x.koncnaOcena}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+    <h4 align="left" >Povprečne ocene po študijskih letih</h4>
+    <div class="row">
+      <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Študijsko leto</th>
+            <th scope="col">Število opravljenih izpitov</th>
+            <th scope="col">Kreditne točke</th>
+            <th scope="col">Skupno povprečje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="x in vm.response">
+            <td>{{x.studijskoLeto.studijskoLeto}}</td>
+            <td>{{x.steviloOpravljenihPredmetov}}</td>
+            <td>{{x.kreditneTocke}}</td>
+            <td>{{x.skupnoPovprecje}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+    <h4 align="left">Skupna povprečna ocena</h4>
+    <div class="row">
+      <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Število opravljenih izpitov</th>
+            <th scope="col">Kreditne točke</th>
+            <th scope="col">Skupno povprečje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{vm.skupnoIzpitov}}</td>
+            <td>{{vm.skupnoKreditov}}</td>
+            <td>{{vm.skupnoPovprecje}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="row">
+        <br><br>
+        <div class="col-xs-6 col-lg-6"></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
+    </div>
+    </div>
+  </div>
+
+  <div class="col-md-2"></div>
+</div>
+
+

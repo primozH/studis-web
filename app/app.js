@@ -8,8 +8,8 @@
                 controllerAs: 'vm'
             })
             .when('/student', {
-                templateUrl: 'exam/exam_application/exam.application.template.html',
-                controller: 'examAppCtrl',
+                templateUrl: 'student/dashboard/student.dashboard.template.html',
+                controller: 'studentCtrl',
                 controllerAs: 'vm'
             })
             .when('/student/:id/vpis', {
@@ -33,7 +33,7 @@
                 controllerAs: "vm"
             })
             .when('/referent', {
-                templateUrl: 'referent/referentka.html',
+                templateUrl: 'referent/referent.template.html',
                 controller: 'ReferentkaCtrl',
                 controllerAs: "vm"
             })
@@ -47,8 +47,8 @@
                 controller: 'UciteljCtrl',
                 controllerAs: "vm"
             })
-            .when('/zeton/:id/:vrstaVpisa', {
-                templateUrl: 'token/token.html',
+            .when('/zeton/:id/', {
+                templateUrl: 'token/token.template.html',
                 controller: 'tokenCtrl',
                 controllerAs: "vm"
             })
@@ -62,19 +62,14 @@
                 controller: 'examAppCtrl',
                 controllerAs: "vm"
             })
-            .when('/novIzpitniRok', {
+            .when('/izpitniRok', {
                 templateUrl: 'exam/exam_creation/exam.creation.template.html',
                 controller: 'examCreationCtrl',
                 controllerAs: "vm"
             })
-            .when('/vnosRezultatov', {
-                templateUrl: 'exam/enter_results/enter.results.select.template.html',
-                controller: 'enterResultsSelectCtrl',
-                controllerAs: "vm"
-            })
-            .when('/vnosRezultatov/:predmet', {
+            .when('/vnosRezultatov/:rokId', {
                 templateUrl: 'exam/enter_results/enter.results.table.template.html',
-                controller: 'examCreationCtrl',
+                controller: 'enterResultsTableCtrl',
                 controllerAs: "vm"
             })
             .when('/seznamVpisanih', {
@@ -87,12 +82,47 @@
                 controller: 'listStudentsCtrl',
                 controllerAs: "vm"
             })
+            .when('/steviloVpisanih', {
+                templateUrl: 'referent/stevilo-vpisanih/stevilo.vpisanih.template.html',
+                controller: 'numberEnrolledCtrl',
+                controllerAs: "vm"
+            })
+            .when('/seznamOcen', {
+                templateUrl: 'shared/controllers/list-grades/select-date/select.date.template.html',
+                controller: 'gradesDateCtrl',
+                controllerAs: "vm"
+            })
+            .when('/seznamOcen/:idRoka', {
+                templateUrl: 'shared/controllers/list-grades/list-student-grades/list.student.grades.template.html',
+                controller: 'gradesStudentsCtrl',
+                controllerAs: "vm"
+            })
+            .when('/potrdiVpis', {
+                templateUrl: 'referent/potrdi-vpis/potrdi.vpis.template.html',
+                controller: 'potrdiVpisCtrl',
+                controllerAs: "vm"
+            })
+            .when('/kartotecniList/:studentId', {
+                templateUrl: 'shared/controllers/list-grades-history/list.grades.history.template.html',
+                controller: 'listGradeshistoryCtrl',
+                controllerAs: "vm"
+            })
+            .when('/prijavaStudentaNaIzpit', {
+                templateUrl: 'shared/controllers/apply-student-exam/apply.student.exam.template.html',
+                controller: 'applyStudentCtrl',
+                controllerAs: "vm"
+            })
+            .when('/elektronskiIndeks/:studentId', {
+                templateUrl: 'shared/controllers/index/index.template.html',
+                controller: 'indexCtrl',
+                controllerAs: "vm"
+            })
             .otherwise({redirectTo: '/prijava'});
 
         $locationProvider.hashPrefix('');
     }
 
-    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver']);
+    var app = angular.module('studis', ['ngRoute', 'ui.bootstrap', 'ngFileUpload', 'ngFileSaver', 'ngLoader', 'ngMaterial']);
 
     app.config(["$routeProvider", "$locationProvider", settings]);
 })();

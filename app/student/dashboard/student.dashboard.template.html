@@ -1,21 +1,78 @@
 <navigation></navigation>
 
 <!--Prijavljen je student-->
-<div class="row">
-  <div class="col-md-2"></div>
-  <div align="center"  class="col-md-8">
-    <div ng-show="vm.zetoni">
-      <div class="alert alert-info" ng-repeat="zeton in vm.zetoni">
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div align="center"  class="col-md-8">
+      <div ng-show="vm.zetoni">
+        <div class="alert alert-info" ng-repeat="zeton in vm.zetoni">
         <span>Imaš neizkoriščen žeton za vpis.
           <strong><a class="alert-link" ng-click="vm.useToken(zeton)">{{zeton.vrstaVpisa.vrstaVpisa}}!</a></strong>
         </span>
+        </div>
+      </div>
+
+      <legend>{{vm.student.ime}} {{vm.student.priimek}} ({{vm.student.vpisnaStevilka}})</legend>
+
+      <div>
+        <div class="col-md-2"></div>
       </div>
     </div>
-
-    <legend>{{vm.student.ime}} {{vm.student.priimek}} ({{vm.student.vpisnaStevilka}})</legend>
-
-  <div>
-  <div class="col-md-2"></div>
   </div>
+
+  <!-- Izpitni roki -->
+  <div class="row">
+    <form>
+      <fieldset>
+        <legend>Razpisani izpitni roki</legend>
+        <div style="max-height:55vh;overflow-y:scroll">
+          <table class="table table-hover table-condensed examApp">
+            <thead>
+            <tr>
+              <th scope="col">Predmet</th>
+              <th scope="col">Šifra predmeta</th>
+              <th scope="col">Datum</th>
+              <th scope="col">Izvajalec</th>
+              <th scope="col">Prostor</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in vm.exams" ng-init="vm.prijavljenId[$index] = x.prijavljenId">
+              <td>{{x.predmet.naziv}}</td>
+              <td>{{x.predmet.sifra}}</td>
+              <td>
+                <select ng-disabled="vm.prijavljenId[$index]" ng-options="(rok.datum | date:'dd. MM. y') for rok in x.roki track by rok.id"
+                        class="form-control" id="dateInput" ng-model="vm.exam[$index]">
+                </select>
+              </td>
+              <td>{{vm.exam[$index].izvajalec.priimek}} {{vm.exam[$index].izvajalec.ime}}</td>
+              <td>{{vm.exam[$index].prostor}}</td>
+              <td>
+                <button type="button" class="btn btn-xs btn-primary" ng-hide="vm.prijavljenId[$index]"
+                        ng-click="vm.applyForExam(vm.exam[$index].id, $index)">
+                  Prijavi se
+                </button>
+                <button type="button" class="btn btn-xs btn-danger" ng-show="vm.prijavljenId[$index]"
+                        ng-click="vm.cancelExamApplication(vm.exam[$index].id, $index)">
+                  Odjavi se
+                </button>
+              </td>
+            </tr>
+            </td>
+            </tbody>
+          </table>
+        </div>
+      </fieldset>
+    </form>
+    <br>
+    <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
+      <p>{{vm.message}}</p>
+    </div>
+    <div ng-show="vm.errorMsg" style="display:inline-flex" class="alert alert-danger">
+      <p>{{vm.errorMsg}}</p>
+    </div>
   </div>
 </div>

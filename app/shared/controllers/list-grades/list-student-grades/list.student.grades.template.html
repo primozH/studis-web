@@ -1,0 +1,52 @@
+<navigation></navigation>
+
+<div class="row">
+  <div class="col-md-2"></div>
+  <div align="center"  class="col-md-8">
+    <h3>Seznam prijavljenih in ocene</h3>
+    {{vm.header.izvajanjePredmeta.predmet.naziv}}({{vm.header.izvajanjePredmeta.predmet.sifra}})<br>
+    Izpitni rok: {{vm.header.datum | date:'dd. MM. y'}} {{vm.header.cas | removeSeconds}}
+    <br><br>
+
+    <div class="row">
+        <table class="table table-hover">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Zaporedna številka</th>
+                <th scope="col">Vpisna številka</th>
+                <th scope="col">Priimek in Ime</th>
+                <th scope="col">Študijsko leto</th>
+                <th scope="col">Polaganje</th>
+                <th scope="col">Ocena pisno</th>
+                <th scope="col">Končna ocena/VP</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in vm.studenti">
+                <td>{{$index + 1}}</td>
+                <td>{{x.prijavaRok.student.vpisnaStevilka}}</td>
+                <td>{{x.prijavaRok.student.priimek}} {{x.prijavaRok.student.ime}}</td>
+                <td>{{x.prijavaRok.rok.izvajanjePredmeta.studijskoLeto.studijskoLeto}}</td>
+                <td ng-if="x.zapStPolaganja!=null">{{x.zapStPolaganja}}.</td>
+                <td ng-if="x.zapStPolaganja==null">1.</td>
+                <td>{{x.ocenaPisno}}</td>
+                <td ng-if="x.prijavaRok.brisana==false">{{x.koncnaOcena}}</td>
+                <td ng-if="x.prijavaRok.brisana==true">VP</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row" ng-show="vm.niprazno">
+        <br><br>
+        <div class="col-xs-6 col-lg-6"></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
+        <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
+    </div>
+
+  </div>
+
+  <div class="col-md-2"></div>
+</div>
+
+

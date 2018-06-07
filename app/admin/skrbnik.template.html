@@ -9,10 +9,9 @@
           <h3 align="center">Uvoz podatkov o študentih</h3>
 
 
-          <label class="btn btn-info btn-file">Izberi datoteko
+          <label class="btn btn-info btn-file">{{vm.file.name}}
           <input type="file" name="file" ngf-select ng-model="vm.file" style="display: none;"/>
           </label>
-          <label ng-show="vm.file">{{vm.file.name}}</label>
           </div>
           <button class="btn btn-info" ng-click="vm.uploadFile()">Uvozi kandidate</button>
         </form>
@@ -30,7 +29,7 @@
               <th>
                 <div>
                   {{zapis.ime}} {{zapis.priimek}} (id: {{zapis.id}})<br>
-                  uporabniško ime: {{zapis.uporabniskoIme}}<br>
+                  e-pošta: {{zapis.email}}<br>
                   vpisna številka: {{zapis.vpisnaStevilka}}<br>
                   študijski program: {{zapis.studijskiProgram.naziv}}<br>
                   geslo: {{zapis.gesloPlain}}<br>

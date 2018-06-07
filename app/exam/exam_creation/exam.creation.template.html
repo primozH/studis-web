@@ -3,41 +3,43 @@
 <div class="container">
     <form class="form-horizontal">
         <fieldset>
-            <legend>Ustvarjanje novega izpitnega roka</legend>
+            <legend>Izpitni rok</legend>
             <div class="form-group">
-                <label class="control-label col-sm-2" for="studijskoLeto">
-                    Študijsko leto
-                </label>
-
-                <div class="input-group">
-                    <select class="form-control" id="studijskoLeto" name="studijskoLeto" ng-model="vm.studijskoLeto">
-                        <option value="2015">2015/2016</option>
-                        <option value="2016">2016/2017</option>
-                        <option value="2017">2017/2018</option>
-                        <option value="2018">2018/2019</option>
-                    </select>
-                    <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary" ng-click="vm.getSubjectsForYear()">Izberi študijsko leto</button>
-                    </span>
+                <div class="col-xs-6">
+                    <label class="control-label col-sm-3" for="studijskoLeto">
+                        Študijsko leto
+                    </label>
+                    <div class="input-group">
+                        <select class="form-control" id="studijskoLeto" name="studijskoLeto" ng-model="vm.studijskoLeto" ng-change="vm.reset(true)">
+                            <option value="2017">2017/2018</option>
+                            <option value="2016">2016/2017</option>
+                            <option value="2015">2015/2016</option>
+                            <option value="2014">2014/2015</option>
+                        </select>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" ng-click="vm.getSubjectsForYear()">Potrdi</button>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" ng-show="vm.yearSelected">
-                <label class="control-label col-sm-2" for="predmet">
-                    Predmet
-                </label>
-                <div class="input-group">
-                    <select ng-options="(x.predmet.naziv +  ' (' + x.predmet.sifra + ')') for x in vm.subjects track by x.predmet.sifra"
-                            class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta"></select>
-                    <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Izberi predmet</button>
-                    </span>
+
+                <div class="col-xs-6" ng-show="vm.yearSelected">
+                    <label class="control-label col-sm-2" for="predmet">
+                        Predmet
+                    </label>
+                    <div class="input-group">
+                        <select ng-options="(x.predmet.naziv +  ' (' + x.predmet.sifra + ')') for x in vm.subjects track by x.predmet.sifra"
+                                class="form-control" id="predmet" ng-model="vm.izvajanjePredmeta" ng-change="vm.reset(false)"></select>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" ng-click="vm.getExamsForSubject()">Potrdi</button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </fieldset>
     </form>
 
     <div ng-show="vm.subjectSelected">
-        <table class="table" align="center" id="dateTable">
+        <table class="table table-hover" align="center" id="dateTable">
             <thead class="thead-light">
             <tr>
                 <th scope="col">Predmet</th>
@@ -45,6 +47,7 @@
                 <th scope="col">Izvajalec</th>
                 <th scope="col">Datum</th>
                 <th scope="col">Prostor</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -52,20 +55,26 @@
                 <td>{{x.izvajanjePredmeta.predmet.naziv}}</td>
                 <td>{{x.izvajanjePredmeta.predmet.sifra}}</td>
                 <td>{{x.izvajalec.priimek}}, {{x.izvajalec.ime}}</td>
-                <td>{{x.datum | date:'dd. MM. y'}} {{x.time}}</td>
+                <td>{{x.datum | date:'dd. MM. y'}} {{x.cas | removeSeconds}}</td>
                 <td>{{x.prostor}}</td>
+                <td>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-pencil" data-toggle="tooltip"
+                          data-placement="top" title="Uredi rok" ng-click="vm.prepareForExamUpdate(x, $index)"></span>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-trash" data-toggle="tooltip"
+                          data-placement="top" title="Izbriši rok" ng-click="vm.startRemovalProcess(x.id, $index)"></span>
+                    <span style="cursor: pointer" class="glyphicon glyphicon-list-alt" data-toggle="tooltip"
+                          data-placement="top" title="Vnos ocen" ng-click="vm.enterResults(x.id)"></span>
+                </td>
             </tr>
             </tbody>
         </table>
 
-        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
-            <option ng-show="vm.izvajanjePredmeta.nosilec1" value="{{vm.izvajanjePredmeta.nosilec1.id}}">{{vm.izvajanjePredmeta.nosilec1.ime}} {{vm.izvajanjePredmeta.nosilec1.priimek}}</option>
-            <option ng-show="vm.izvajanjePredmeta.nosilec2" value="{{vm.izvajanjePredmeta.nosilec2.id}}">{{vm.izvajanjePredmeta.nosilec2.ime}} {{vm.izvajanjePredmeta.nosilec2.priimek}}</option>
-            <option ng-show="vm.izvajanjePredmeta.nosilec3" value="{{vm.izvajanjePredmeta.nosilec3.id}}">{{vm.izvajanjePredmeta.nosilec3.ime}} {{vm.izvajanjePredmeta.nosilec3.priimek}}</option>
+        <select ng-hide="vm.currentUser.tip == 'Ucitelj'" ng-options="(x.priimek + ' ' + x.ime) for x in vm.nosilci |filter:vm.filterNull track by x.id"  class="form-control" id="izvajalec" name="izvajalec" ng-model="vm.izvajalec">
+            <option value="" selected disabled>---Izberi izvajalca---</option>
         </select>
 
         <div class="input-group-text">
-            <input type="text" class="form-control" placeholder="prostor" ng-model="vm.examRoom">
+            <input type="text" class="form-control" placeholder="prostor" ng-model="vm.examRoom" id="roomInput">
         </div>
         <div id="dateInput" class="input-group date" data-provide="datepicker">
             <input class="form-control" id="date" name="date" placeholder="DD/MM/YYYY" type="text"/>
@@ -83,6 +92,7 @@
 
         <br>
         <button type="button" class="btn btn-primary" ng-click="vm.createExam()">Ustvari nov izpitni rok</button>
+        <button type="button" class="btn btn-info" ng-show="vm.updateProcess" ng-click="vm.startUpdateProcess()">Posodobi izpitni rok</button>
         <br>
         <div ng-show="vm.message" style="display:inline-flex" class="alert alert-success">
             <p>{{vm.message}}</p>
@@ -93,4 +103,51 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div id="removeExamModal" class="modal fade">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Izbris izpitnega roka</h4>
+            </div>
+            <div class="modal-body">
+                <p>Pozor!<br>
+                    Število prijavljenih študentov na izpitni rok: {{vm.numOfApplicants}}
+                    <br>
+                    Želite nadaljevati?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" ng-click="vm.confirmRemoval()">Izbriši izpitni rok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="updateExamModal" class="modal fade">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sprememba izpitnega roka</h4>
+            </div>
+            <div class="modal-body">
+                <p>Pozor!<br>
+                    Število prijavljenih študentov na izpitni rok: {{vm.numOfApplicants}}
+                <br>
+                    Želite nadaljevati?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="vm.confirmUpdate()">Spremeni izpitni rok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
+            </div>
+        </div>
+    </div>
+</div>
 

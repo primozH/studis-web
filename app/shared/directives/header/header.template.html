@@ -14,34 +14,78 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+
+                <!--STUDENT DATA-->
+                <li class="dropdown" ng-hide="headvm.currentUser.tip == 'Student'">
+                    <a class="dropdown-toggle" type="button" data-toggle="dropdown">Študenti
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <!--SEARCH-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/iskanje"><span class="glyphicon glyphicon-search"></span>&nbsp;Iskanje</a>
+                        </li>
+                        <!--TOKEN-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent'">
+                            <a href="/#/zeton"><span class="fas fa-dot-circle"></span>&nbsp;Žetoni</a>
+                        </li>
+                        <!--NUMBER OF ENROLLED STUDENTS-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent'">
+                            <a href="/#/steviloVpisanih"><span class="glyphicon glyphicon-option-horizontal"></span>&nbsp;Število vpisanih</a>
+                        </li>
+                        <!--LIST ENROLLED STUDENTS-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/seznamVpisanih"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Seznam vpisanih v predmete</a>
+                        </li>
+                        <!--CONFIRM ENROLLMENT-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent'">
+                            <a href="/#/potrdiVpis"><span class="glyphicon glyphicon-ok"></span>&nbsp;Potrjevanje vpisov</a>
+                        </li>
+                        <!--ELEKTRONSKI INDEX
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/elektronskiIndex"><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski index</a>
+                        </li>-->
+                    </ul>
+                </li>
+
+                <!--EXAM-->
+                <li class="dropdown" ng-hide="headvm.currentUser.tip == 'Student'">
+                    <a class="dropdown-toggle" type="button" data-toggle="dropdown">Izpit
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <!--EXAM CREATION-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/izpitniRok"><span class="glyphicon glyphicon-calendar"></span>&nbsp;Izpitni roki</a>
+                        </li>
+                        <!--APPLY/CANCEL STUDENTS EXAM APPLICATION-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/prijavaStudentaNaIzpit"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Prijavi/odjavi študenta</a>
+                        </li>
+                        <!--LIST OF REGISTERED STUDENTS WITH GRADES-->
+                        <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
+                            <a href="/#/seznamOcen"><span class="glyphicon glyphicon-sound-7-1"></span>&nbsp;Ocene prijavljenih</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!--PROFILE-->
                 <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showProfile()">
                     <a href=""><span class="glyphicon glyphicon-user"></span>&nbsp;Profil</a>
                 </li>
-                <!--INDEX-->
-                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showIndexForm()">
-                    <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Indeks</a>
+                <!--LIST GRADES HISTORY-->
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showGradesHistory()">
+                    <a href=""><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Kartotečni list</a>
                 </li>
-                <!--SEARCH-->
-                <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
-                    <a href="/#/iskanje"><span class="glyphicon glyphicon-search"></span>&nbsp;Iskanje</a>
+
+                <!--ELEKTRONSKI INDEX-->
+                <li ng-show="headvm.currentUser.tip == 'Student'" ng-click="headvm.showIndex()">
+                    <a href=""><span class="glyphicon glyphicon-floppy-saved"></span>&nbsp;Elektronski indeks</a>
                 </li>
-                <!--TOKEN-->
-                <li ng-show="headvm.currentUser.tip == 'Referent'">
-                    <a href="/#/zeton"><span class="fas fa-dot-circle"></span>&nbsp;Žetoni</a>
-                </li>
-                <!--LIST ENROLLED STUDENTS-->
-                <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
-                    <a href="/#/seznamVpisanih"><span class="glyphicon glyphicon-th-list"></span>&nbsp;Seznam vpisanih</a>
-                </li>
-                <!--EXAM CREATION-->
-                <li ng-show="headvm.currentUser.tip == 'Referent' || headvm.currentUser.tip == 'Ucitelj'">
-                    <a href="/#/novIzpitniRok"><span class="glyphicon glyphicon-calendar"></span> Nov izpitni rok</a>
-                </li>
+
                 <!--LOG OUT-->
                 <li ng-show="headvm.isLogged" ng-click="headvm.logout()">
                     <a href="" ><span class="glyphicon glyphicon-log-out"></span>&nbsp;Odjava</a>
                 </li>
+
             </ul>
         </div>
     </div>

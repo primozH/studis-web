@@ -7,7 +7,7 @@
         var promise;
 
         vm.loginData = {
-            uporabniskoIme: "",
+            email: "",
             geslo: ""
         };
 

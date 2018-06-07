@@ -4,7 +4,7 @@
 
         var postExamApplication = function(data){
             console.log(data);
-            return $http.post("/api/v1/izpit/prijava", data, {
+            return $http.post("/api/v1/rok/prijava", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -13,23 +13,32 @@
 
         var deleteExamApplication = function(data){
             console.log(data);
-            return $http.post("/api/v1/izpit/odjava", data, {
+            return $http.post("/api/v1/rok/odjava", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
 
-        var getAvailableExams = function(){
-            return $http.get("/api/v1/izpit/rok?studijsko-leto=2018", {
+        var returnApplication = function(rokid, student) {
+            return $http.delete("/api/v1/izpit/rok/" + rokid + "/rezultati/" + student, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
 
-        var getExamsForSubject = function(predmet){
-            return $http.get("/api/v1/izpit/rok?studijsko-leto=2018&predmet=" + predmet, {
+        var getAvailableExams = function(studijskoLeto){
+            return $http.get("/api/v1/rok?studijsko-leto=" + studijskoLeto, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+        var getExamsForSubjectYear = function(predmet, studijskoLeto){
+            console.log("/api/v1/rok?studijsko-leto=" + studijskoLeto + "&predmet=" + predmet);
+            return $http.get("/api/v1/rok?studijsko-leto=" + studijskoLeto + "&predmet=" + predmet, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
@@ -37,13 +46,31 @@
         };
 
         var postExam = function(data){
-            console.log(data);
-            return $http.post("/api/v1/izpit/vnos-roka", data, {
+            return $http.post("/api/v1/rok", data, {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
+
+
+        var putExam = function(data){
+            return $http.put("/api/v1/rok", data, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+
+        var deleteExam = function(rokId){
+            return $http.delete("/api/v1/rok/" + rokId, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
 
         var getAllSubjects = function(studijskoLeto){
             return $http.get("/api/v1/predmet/izvajanje?studijsko-leto=" + studijskoLeto, {
@@ -53,13 +80,40 @@
             });
         };
 
-        var getAllRegisteredStudents = function(predmet, studijskoLeto, datum){
-            return $http.get("/api/v1/izpit/prijavljeni?predmet=" + predmet + "&studijsko-leto=" + studijskoLeto + "&datum=" + datum, {
+        var getAllRegisteredStudents = function(rokId){
+            return $http.get("/api/v1/rok/" + rokId + "/prijavljeni", {
                 headers: {
                     Authorization: 'Bearer ' + authentication.getToken()
                 }
             });
         };
+
+        var getExamResults = function(rokId){
+            return $http.get("/api/v1/izpit/rok/" + rokId + "/rezultati", {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+
+        var postExamResults = function(rokId, data){
+            return $http.post("/api/v1/izpit/rok/" + rokId + "/rezultati", data, {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
+
+        var getNumberOfApplicants = function(rokId){
+            return $http.get("/api/v1/izpit/rok/" + rokId + "/rezultati?count=true", {
+                headers: {
+                    Authorization: 'Bearer ' + authentication.getToken()
+                }
+            });
+        };
+
 
         var data = {};
 
@@ -74,13 +128,19 @@
         return{
             postExamApplication: postExamApplication,
             deleteExamApplication: deleteExamApplication,
+            returnApplication: returnApplication,
             getAvailableExams: getAvailableExams,
             postExam: postExam,
-            getExamsForSubject: getExamsForSubject,
+            putExam: putExam,
+            deleteExam: deleteExam,
+            getExamsForSubjectYear: getExamsForSubjectYear,
             getAllSubjects: getAllSubjects,
             getAllRegisteredStudents: getAllRegisteredStudents,
             getData: getData,
-            setData: setData
+            setData: setData,
+            getExamResults: getExamResults,
+            postExamResults: postExamResults,
+            getNumberOfApplicants: getNumberOfApplicants
         };
     };
 

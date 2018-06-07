@@ -5,7 +5,7 @@
         <table class="table table-hover">
             <thead class="thead-light">
             <tr>
-                <th scope="col">Zaporedna številka</th>
+                <th scope="col">#</th>
                 <th scope="col">Vpisna številka</th>
                 <th scope="col">Ime</th>
                 <th scope="col">Priimek</th>
@@ -17,8 +17,8 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-click="vm.openToken(x.student.id, x.vrstaVpisa.sifraVpisa)" ng-repeat="x in vm.tokens">
-                <td>{{$index + 1}}</td>
+            <tr ng-click="vm.openToken(x.id)" ng-repeat="x in vm.tokens">
+                <td>{{($index + 1) + (vm.trenutnaStran-1) * vm.naStran}}</td>
                 <td>{{x.student.vpisnaStevilka}}</td>
                 <td>{{x.student.ime}}</td>
                 <td>{{x.student.priimek}}</td>
@@ -31,6 +31,13 @@
             </tbody>
         </table>
     </div>
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3" align="center">
+            <ul uib-pagination total-items="vm.skupaj" ng-model="vm.trenutnaStran" max-size="vm.naStran" class="pagination-sm"
+                boundary-links="true" rotate="false" next-text="Naprej" ng-change="vm.menjavaStrani()" first-text="Prva" previous-text="Nazaj"
+                last-text="Zadnja" items-per-page="vm.naStran"></ul>
+        </div>
+    </div>
     
 
     <div class="row">
@@ -41,10 +48,7 @@
 
         <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('csv')">izvozi v CSV</button></div>
         <div class="col-xs-3 col-lg-3"><button class="btn btn-default btn-block" ng-click="vm.izvozi('pdf')">izvozi v PDF</button></div>
-    </div><br><br>
-
-
-    <br>
+    </div><br>
     <div ng-show="vm.message" style="display:inline-flex;margin:1%" class="alert alert-success alert-dismissible">
         <p>{{vm.message}}</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -72,10 +76,10 @@
             <div class="modal-body">
                 <p>Vnesite vpisno številko</p>
                 <label for="vpisnaStevilkaZaNovZeton">Vpisna številka</label>
-                <input type="text" id="vpisnaStevilkaZaNovZeton" ng-model="novaVpisnaStevilka">
+                <input type="text" id="vpisnaStevilkaZaNovZeton" ng-model="vm.vpisnaStevilka">
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="vm.createToken(novaVpisnaStevilka)">Ustvari žeton</button>
+                <button class="btn btn-primary" ng-click="vm.createToken()">Ustvari žeton</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Zapri</button>
             </div>
         </div>

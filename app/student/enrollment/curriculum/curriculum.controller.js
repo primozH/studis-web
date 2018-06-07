@@ -41,7 +41,7 @@
                 return;
             }
             var vpis = {
-                zeton: vm.token
+                zeton: vm.token.id
             };
 
             if (vm.token.letnik.letnik == 2) {
